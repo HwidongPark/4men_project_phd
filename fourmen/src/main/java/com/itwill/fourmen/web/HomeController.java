@@ -11,7 +11,7 @@ public class HomeController {
 
     @GetMapping("/")
     public String home() {
-        log.debug("home()");
+    	log.debug("home()");
         
         return "home"; // view(JSP)의 경로를 리턴
     }
