@@ -1,0 +1,122 @@
+@charset "UTF-8";
+/* CSS초기화 */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+body {
+    line-height: 1;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+
+/* 내 CSS 코드 시작 */
+
+/* 검색에 관한 CSS */
+.search-container {
+    width: 75%;
+    margin: 5rem auto;
+}
+
+#search-form {
+    text-align: center;
+}
+
+#search-detail-container {
+    display: block;
+    text-align: right;
+}
+
+/* 검색 카테고리 펼치기 */
+.expand {
+    display: none;
+    overflow: hidden;
+}
+
+/* 검색 가격 관련 */
+.price-range-container {
+    margin: 1em 0;
+}
+
+.price-range {
+    width: 104px;
+    border-radius: 0.5em;
+}
+
+/* 검색키워드 및 버튼 */
+.search-keyword {
+    width: 50%;
+    border-radius: 0.5em;
+}
+
+
+/* 메인 시작 CSS */
+main {
+    width: 75%;
+    margin: 2rem auto;
+}
+
+/* 매물 리스트 */
+.list-container {
+    margin-top: 1em;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    width: 100%;
+}
+
+.listed-item-container {
+    width: 95%;
+    height: auto;
+    margin-bottom: 1em;
+}
+
+.item-image-container {
+    text-align: center;
+}
+
+.item-image-container img {
+    width: 80%;
+    height: auto;
+}
+
+.item-info-container > p {
+    margin: 1em 0 0.5em 0;
+    text-align: center;
+}
+
+
