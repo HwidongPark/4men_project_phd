@@ -12,11 +12,11 @@ footer {
     align-items: center;
 }
 
-.links {
+.footer-links {
     justify-content: center;
 }
 
-.links a {
+.footer-links a {
     text-decoration: none;
     margin: 0 0.5em;
     color: black;
@@ -27,7 +27,7 @@ footer {
 }
 
 /* hover효과 */
-.links a:hover {
+.footer-links a:hover {
     text-decoration: underline;
 
     color: #086cb3;

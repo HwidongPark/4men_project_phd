@@ -16,7 +16,32 @@ public class HomeController {
         return "home"; // view(JSP)의 경로를 리턴
     }
     
+    
+    @GetMapping("/artist")
+    public void artist() {
+    	log.debug("artist()");
+    }
+    
+    @GetMapping("/exhibition")
+    public void exhibition() {
+    	log.debug("exhibition()");
+    }
+    
+    @GetMapping("/forum")
+    public void forum() {
+    	log.debug("forum()");
+    }
+    
+    @GetMapping("/market")
+    public void market() {
+    	log.debug("market()");
+    }
+    
+    
 }// HomeController
+
+
+
 
 
 // @Component (super) <-- @Controller, @Service , @Repository (sub)
