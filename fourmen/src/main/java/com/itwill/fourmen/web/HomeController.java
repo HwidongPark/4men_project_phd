@@ -32,9 +32,17 @@ public class HomeController {
     	log.debug("forum()");
     }
     
+    // TODO: 나중에 컨트롤러 만들어서 다시 매핑해야함.. 걍 프론트 하려고 이 짓함
     @GetMapping("/market")
     public void market() {
     	log.debug("market()");
+    }
+    
+    @GetMapping("/market/detail")
+    public String marketDetail() {
+    	log.debug("marketDetail()");
+    	
+    	return "/market/detail";
     }
     
     
