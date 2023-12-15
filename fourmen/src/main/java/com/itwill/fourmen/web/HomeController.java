@@ -36,6 +36,7 @@ public class HomeController {
     	log.debug("forum()");
     }
     
+
     @GetMapping("/exhibition")
     public void exhibition(Model model) {
     	log.debug("exhibition()");
@@ -50,10 +51,19 @@ public class HomeController {
     	log.debug("market()");
     }
     
+
+    @GetMapping("/market/detail")
+    public String marketDetail() {
+    	log.debug("marketDetail()");
+    	
+    	return "/market/detail";
+    }
+    
     @GetMapping("/admin")
     public void admin() {
     	log.debug("forum()");
     }
+
     
 }
 // HomeController
