@@ -1,0 +1,61 @@
+@charset "UTF-8";
+/* pagination.css */
+/* 페이지네이션 부분 스타일을 작성한 css */
+
+.pagination {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin: 0 20px;
+}
+
+.pagination .page-link {
+    border: none;
+    color: #A4A4A4;
+    background-color: transparent;
+    border: none;
+}
+
+.pagination .page-item {
+    border: none;
+    color: #A4A4A4;
+    background-color: transparent;
+    font-weight: bold;
+    border: none;
+}
+
+.pagination .page-link:focus,
+.pagination .page-item:focus,
+.pagination .page-link:hover,
+.pagination .page-item:hover,
+.pagenation .page-link:active,
+.pagination .page-item:active {
+    color: black;
+    font-weight: 900;
+    font-size: 105%;
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+/* 페이지네이션 <, <<, >, >> (이미지) 크기 */
+#pagination-img {
+    width: 13px; height: 20px; border: none;
+}
+
+/* 페이지네이션 <, <<, >, >> (이미지) 요소의 여백 */
+.pagination .page-item .page-link-img {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+/* 페이지네이션 숫자 여백 */
+.pagination .page-item .page-link {
+    margin-left: 2px; margin-right: 2px
+}
+
+/* ** 페이지네이션 클릭시 밑줄 생성하는 코드 **
+.pagination .page-item .page-link:focus {
+    border-bottom: black 1.5px solid;
+}
+*/
