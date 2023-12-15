@@ -38,7 +38,7 @@ public class HomeController {
     
     @GetMapping("/admin")
     public void admin() {
-    	log.debug("forum()");
+    	log.debug("admin()");
     }
     
 }

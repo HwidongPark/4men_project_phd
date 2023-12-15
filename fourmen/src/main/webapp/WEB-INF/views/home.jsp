@@ -12,9 +12,10 @@
 	rel="stylesheet"
 	integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
 	crossorigin="anonymous">
-<link rel="stylesheet" href="css/header.css">
-<link rel="stylesheet" href="css/forum.css">
-<link rel="stylesheet" href="css/footer.css">
+
+<!-- css 파일 적용 -->
+<link rel="stylesheet" href="/css/header.css">
+<link rel="stylesheet" href="/css/footer.css">
 
 </head>
 
@@ -22,6 +23,15 @@
     
     <!-- 헤더 파일 include -->
     <%@ include file="fragments/navigation.jspf"%>
+    
+    <!-- 웹페이지 상단 헤더 아래 부분 -->
+    <div id="underheader-div">
+        <div class="container" id="underheadrcontainer">
+            <h2 class="commondesign">
+                artists archive
+            </h2>
+        </div>
+    </div>
     
     <!-- Carousel 사진들 추가 -->
     <div id="carousel" class="carousel slide w-75">
