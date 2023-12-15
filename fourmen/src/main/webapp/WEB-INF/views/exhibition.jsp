@@ -113,12 +113,11 @@ table {
 	}
 
 	#search-form select {
-    width: 10%;
     border-radius: 0.5em;
 	}
 
 	#search-keyword {
-    width: 20%;
+    width: 50%;
     margin: 0 0.5em;
     margin-right: 0.8em;
     height: 100%;
@@ -166,6 +165,18 @@ table {
    	.date-select{
    	 margin: 1px;
    	}
+   	.all-select{
+   	display: flex;
+   	flex-direction: column;
+   	align-item: center;
+   	}
+   	
+   	.date-select {
+   		text-align: center;
+   	}
+   	.text-select{
+   		text-align: center;
+   	}
 
 </style>	
 </head>
@@ -175,6 +186,7 @@ table {
 		 <main class="w-75 m-auto">
 		<c:url var="exhibitionSearch" value="/exhibitionSearch" />
     	<form action="${exhibitionSearch}" method="get" id="search-form">
+    	<div class="all-select">
     	<div class="date-select">
     	<label for="date">
   		<input type="date"
@@ -191,6 +203,7 @@ table {
          value="2023-12-01">
 		</label>
 		</div>
+		<div class="text-select">
         <select name="category" id="selectCategory">
             <option value="title">전시회</option>
             <option value="length">전시기간</option>
@@ -202,6 +215,8 @@ table {
                 <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
             </svg>
         </button>
+        </div>
+        </div>
     </form>
     
         <!-- 각 메뉴들의 내용을 간략하게 보여줌 -->
