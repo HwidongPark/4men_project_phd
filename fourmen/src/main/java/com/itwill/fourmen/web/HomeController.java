@@ -16,10 +16,14 @@ public class HomeController {
         return "home"; // view(JSP)의 경로를 리턴
     }
     
-    
     @GetMapping("/artist")
     public void artist() {
     	log.debug("artist()");
+    }
+    
+    @GetMapping("/forum/freeboard")
+    public void forum() {
+    	log.debug("forum()");
     }
     
     @GetMapping("/exhibition")
@@ -27,21 +31,16 @@ public class HomeController {
     	log.debug("exhibition()");
     }
     
-    @GetMapping("/forum")
-    public void forum() {
-    	log.debug("forum()");
-    }
-    
     @GetMapping("/market")
     public void market() {
     	log.debug("market()");
     }
     
+    @GetMapping("/admin")
+    public void admin() {
+    	log.debug("forum()");
+    }
     
-}// HomeController
-
-
-
-
-
+}
+// HomeController
 // @Component (super) <-- @Controller, @Service , @Repository (sub)

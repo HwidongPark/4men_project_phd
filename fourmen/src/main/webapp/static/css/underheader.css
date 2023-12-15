@@ -1,0 +1,37 @@
+@charset "UTF-8";
+/* underheader.css */
+/* header 아래에 각 페이지들에 공통으로 들어가는 부분의 스타일을 작성한 css */
+
+.underheader {
+    padding: 3.75rem 0 6.25rem 0;
+}
+
+.underheader .underheadercontainer {
+    position: relative;
+    margin: 0 auto;
+}
+
+h2.commondesign {
+    position: relative;
+    font-weight: 400;
+    font-size: 3.0rem;
+    color: #BDBDBD;
+    margin: 0;
+    padding: 0;
+}
+
+h2.commondesign::before {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: -19.5rem;
+    margin-top: 0.0625rem;
+    width: 17.125rem;
+    height: 3px;
+    background: #BDBDBD;
+    content: '';
+}
+
+#underheader-div {
+    padding: 3.75rem 0 3.75rem 0;
+}
