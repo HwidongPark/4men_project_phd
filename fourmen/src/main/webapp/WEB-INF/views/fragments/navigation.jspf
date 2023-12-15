@@ -26,10 +26,8 @@
 
 <nav class="my-2 p-2 header-nav">
     <div class="logo-container">
-
-        <a href="/fourmen/" class="logo">
-            <!-- <img class="logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHfSci5VGhQleIUe4noi8399niPqyDr3fDlQ&usqp=CAU" alt="4men_logo"/> -->
-            Fourmen
+        <a href="/fourmen/" class="logo">            
+            <img class="logo" src="/fourmen/logo/logo01.png">
         </a>
     </div>
     
@@ -50,11 +48,16 @@
             <li class="nav-each-btn-list">
                 <a href="admin" class="nav-button">ADMIN</a>
             </li>
+            <button class="nav-collapse-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+                    </svg>
+            </button>
         </ul>
     </div>
     
     <!-- header-nav 오른쪽에 위치한 div -->
-    <div class="header-right-container" style="flex: 1;"></div>
+    <div class="header-right-container"></div>
     
 </nav>
 
