@@ -83,7 +83,7 @@
                     <div class="item-image-container">
                         <div class="image-size-controller">
                             <a href="/fourmen/market/detail">
-                                <img src="https://images.tennis.com/image/private/t_q-best/tenniscom-prd/a34ajom83aptn8iwwodh.jpg">
+                                <img src="https://d2u3dcdbebyaiu.cloudfront.net/uploads/atch_img/199/4505fe625e5f44691c05aaadf0c7be5d_res.jpeg">
                             </a>
                         </div>
                     </div>
@@ -213,7 +213,7 @@
                     <div class="item-image-container">
                         <div class="image-size-controller">
                             <a href="#">
-                                <img src="https://images.tennis.com/image/private/t_q-best/tenniscom-prd/a34ajom83aptn8iwwodh.jpg">
+                                <img src="https://d2u3dcdbebyaiu.cloudfront.net/uploads/atch_img/199/4505fe625e5f44691c05aaadf0c7be5d_res.jpeg">
                             </a>
                         </div>
                     </div>

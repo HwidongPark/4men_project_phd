@@ -5,24 +5,222 @@ h1 {
 	font-weight: 600;
 }
 
-.product-container {
-	margin-top: 1em;
+h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+b {
+    font-weight: 700;
+}
+
+
+em {
+    font-style: italic;
+}
+
+
+/* 가장 상단의 미술작품과 대략적 설명 부분 */
+section.product-container {
+    width: 85%;
+    /* min-width: 1016px; */
+	margin: 1em auto 2em auto;
 	display: grid;
-	grid-template-columns: 6fr 4fr;
+	grid-template-columns: 3fr 2fr;
 }
 
+/* 상단의 큰 사진 컨테이너 */
 .photo-container {
-	width: 100;
-	margin-right:1em;
-	background-color: yellow;
-	
-}
-
-.product-container {
 	width: 100%;
-	background-color: lightgray;
+	margin-right:1em;
 }
 
 .product-container img {
 	width: 100%;
+}
+
+/* 간단한 설명 부분 */
+.product-description {
+    text-align: right;
+    width: 85%;
+    margin: 0 0 2em auto;
+}
+
+#product-title {
+    text-align: left;
+    margin-top: 0;
+}
+
+.year-dimension-description {
+    font-weight: 300;
+    font-size: 0.8em;
+    color: darkgray;
+}
+
+.product-description hr {
+    margin: 2em auto;
+    width: 100%;
+}
+
+
+#product-price {
+    font-size: 1.5em;
+    margin-bottom: 2em;
+}
+
+/* 판매자(예술가) 간략 설명 */
+#artist {
+    margin: 2em 0 1em 0;
+}
+
+#artist-name {
+    text-decoration: none;
+    display: inline-block;
+    color: darkgray;
+    font-size: 1.5em;
+    margin-bottom: 0.5em;
+}
+
+#artist-bio {
+    text-align: left;
+    line-height: 20px;
+    font-size: 0.9em;
+    overflow: hidden;
+    
+    
+}
+
+.btn-read-more {
+    border: none;
+    background: none;
+    color: blue;
+    padding: 0;
+    display: none;
+    
+}
+
+/* 버튼 둥글게 만드는 CSS */
+.btn-rounded {
+    width: 100%;
+    height: 40px;
+    border-radius: 20px;
+}
+
+
+/* 아래 설명부분 */
+.product-detail-description {    
+    width: 85%;
+    /* min-width:1016px; */
+    margin: 0 auto 0 auto;
+}
+
+
+
+.product-detail-description h2 {
+    margin-bottom: 1em;
+}
+
+.product-detail-description > div > p {
+    line-height: 24px;
+}
+
+@media (max-width: 1040px) {
+    
+    
+    body {
+        font-size: 14px;
+    }
+    
+    h1 {
+        font-size: 1.5rem;
+    }
+    
+    h2 {
+        font-size: 1.2rem;
+    }
+    
+    section.product-container {
+        display: flex;
+        flex-direction: column;
+        align-item: center;
+        min-width: unset;
+    }
+    
+    .photo-container {
+        width: 100%;
+        
+    }
+    
+    .photo-container img {
+        width: 100%;
+    }
+    
+    
+    /* 간략한 설명, 가격 등 */
+    .product-description {
+        width: 100%;
+        text-align: center;
+        margin: 1em auto;
+    }
+    
+    
+    
+    #product-title {
+        text-align: center;
+        margin-top: 0;
+    }
+    
+    .year-dimension-description {
+        margin-top: 0.3em;
+        text-align: right;
+        font-weight: 300;
+        font-size: 0.8em;
+        color: darkgray;
+    }
+    
+    .product-description hr {
+        margin: 1em auto;
+        width: 100%;
+    }
+    
+    
+    #product-price {
+        font-size: 1.2em;
+        margin-bottom: 1em;
+        text-align: right;
+    }
+    
+    
+    /* 판매자(예술가) 간략 설명 */
+    #artist {
+        margin: 1.5em 0 1em 0;
+    }
+    
+    #artist-name {
+        display: block;
+        font-size: 1.2em;
+        text-align: left;
+        margin-bottom: 1em;
+        gap: 0;
+    }
+    
+    /* 버튼 둥글게 만드는 CSS */
+    .btn-rounded {
+        height: 30px;
+        border-radius: 15px;
+        font-size: 0.9em;
+        width: 60%;
+    }
+    
+    
+    /* 아래 설명 부분 */
+    .product-detail-description {    
+    min-width: unset;
+    margin: 0 auto 0 auto;
+    }
+    
+    
+    
+    
+    
 }

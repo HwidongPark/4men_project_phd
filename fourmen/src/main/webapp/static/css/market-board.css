@@ -111,7 +111,11 @@ main {
 	color: black;
 }
 
-.list-item-category-title:hover {
+.list-item-category-title h2 {
+    display: inline-block;
+}
+
+.list-item-category-title h2:hover {
 	text-decoration: underline;
 	transform: rotate(-3deg);
 	transition: all 0.3s;
@@ -133,14 +137,13 @@ main {
 
 .item-image-container {
 	width: 100%;
-	background-color: blue;
     text-align: center;
     
-    /* 테스트 */
 	height: 0;
 	padding-bottom: 110%;
 	position: relative;
-	overflow: hidden''
+	overflow: hidden;
+    
 }
 
 .item-image-container img {
@@ -175,3 +178,22 @@ main {
 }
 
 
+/* 반응형 1040px 밑에서 */
+@media (max-width: 1040px) {
+    
+    .list-container {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+           
+}
+
+@media (max-width: 840px) {
+    body {
+        font-size: 14px;
+    }
+    
+    .list-container {
+        grid-template-columns: 1fr 1fr;
+    }
+          
+}
