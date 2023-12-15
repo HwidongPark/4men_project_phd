@@ -86,7 +86,7 @@
         <!-- 훈련과정 간략하게 보여줌 -->
         <div>
             <h2 class="sample-trainings">전시회 정보</h2>
-            <div class="row row-col-xs-1 row-cols-sm-2 row-cols-md-3 g-3">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                 <div class="col">
                     <div class="card">
                         <img src="https://t1.daumcdn.net/cfile/tistory/9906804C5FB7337315" class="card-img-top" alt="...">
