@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- POSTS 테이블에서 CRUD에 필요한 SQL 문장들을 선언 -->
+<mapper namespace="com.itwill.fourmen.repository.ExhibitionDao">
+ 	
+ 	<select id="selectAll">
+ 		select * from TEST order by STARTDATE
+ 	</select>
+ 	
+ 	<select id="search">
+ 	<bind name="searchKeyword" value="'%'+keyword+'%'" />
+ 	select * from TEST
+ 	<where>
+ 		<choose>
+ 			<when test='category.equals("title")'>
+ 				upper(NAME) like upper(#{searchKeyword})
+ 			</when>
+ 			<when test='category.equals("location")'>
+ 				upper(LOCATION) like upper(#{searchKeyword})
+ 			</when>
+ 		</choose>
+ 	</where> 
+ 	order by STARTDATE 
+ 	</select>
+</mapper>
