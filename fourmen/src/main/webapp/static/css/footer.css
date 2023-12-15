@@ -1,7 +1,15 @@
+#wrap{
+	/* footer의 상위 즉 main tag 의 id가 'wrap' */
+	min-height: calc(100vh - 10rem); /* footer 높이를 빼준다. */
+}
+
 footer {
+	height: 10rem;
     margin-top: 5rem;
     padding-bottom: 5rem;
-    background-color: #edf2f4;
+
+    background-color: white;
+
 }
 
 .footer-links-container {
@@ -29,6 +37,5 @@ footer {
 /* hover효과 */
 .footer-links a:hover {
     text-decoration: underline;
-
-    color: #086cb3;
+    color: white;
 }

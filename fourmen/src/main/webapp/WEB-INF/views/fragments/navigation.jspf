@@ -2,45 +2,59 @@
     pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c"  uri="jakarta.tags.core"%>
 
+<div>
+    <nav>
+        <ul class="nav-btn-users">
+            <li class="nav-each-btn-user">
+                <a href="login" class="nav-button-user">LOGIN</a>
+            </li>
+            <li class="nav-each-btn-user">
+                <a href="logout" class="nav-button-user">LOGOUT</a>
+            </li>
+            <li class="nav-each-btn-user">
+                <a href="signup" class="nav-button-user">SIGN UP</a>
+            </li>
+            <li class="nav-each-btn-user">
+                <a href="mypage" class="nav-button-user">MY PAGE</a>
+            </li>
+            <li class="nav-each-btn-user">
+                <a href="notice" class="nav-button-user">NOTICE</a>
+            </li>
+        </ul>
+    </nav>
+</div>
 
-<nav class="header-nav">
+<nav class="my-2 p-2 header-nav">
     <div class="logo-container">
-        <a href="/fourmen" class="logo">
+
+        <a href="/fourmen/" class="logo">
             <!-- <img class="logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHfSci5VGhQleIUe4noi8399niPqyDr3fDlQ&usqp=CAU" alt="4men_logo"/> -->
             Fourmen
         </a>
     </div>
-
-    <ul class="nav-btn-lists nav-lists-hide">
-        <li class="nav-each-btn-list">
-            <a href="artist" class="nav-button">인기 아티스트</a>
-        </li>
-        <li class="nav-each-btn-list">
-            <a href="exhibition" class="nav-button">전시회</a>
-        </li>
-        <li class="nav-each-btn-list">
-            <a href="forum" class="nav-button">토론 게시판</a>
-        </li>
-        <li>
-            <a href="/fourmen/market" class="nav-button">예술 장터</a>
-        </li>
-        <li class="nav-each-btn-list">
-            <a href="admin" class="nav-button">관리자</a>
-        </li>
-    </ul>
-
-    <ul class="nav-btn-lists nav-lists-hide">
-        <li class="nav-each-btn-list">
-            <a href="#" class="nav-button">로그인</a>
-        </li>
-        <li class="nav-each-btn-list">
-            <a href="#" class="nav-button">회원가입</a>
-        </li>
-    </ul>
-
-    <button class="nav-collapse-btn">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
-            </svg>
-    </button>
+    
+    <div class="list-container">
+        <ul class="nav-btn-lists">
+            <li class="nav-each-btn-list">
+                <a href="artist" class="nav-button">ARTISTS</a>
+            </li>
+            <li class="nav-each-btn-list">
+                <a href="forum/freeboard" class="nav-button">FORUM</a>
+            </li>
+            <li class="nav-each-btn-list">
+                <a href="market" class="nav-button">MARKET</a>
+            </li>
+            <li class="nav-each-btn-list">
+                <a href="exhibition" class="nav-button">EXHIBITION</a>
+            </li>
+            <li class="nav-each-btn-list">
+                <a href="admin" class="nav-button">ADMIN</a>
+            </li>
+        </ul>
+    </div>
+    
+    <!-- header-nav 오른쪽에 위치한 div -->
+    <div class="header-right-container" style="flex: 1;"></div>
+    
 </nav>
+

@@ -1,4 +1,4 @@
-/* CSS초기화 */
+/* CSS 초기화 */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -19,7 +19,8 @@ time, mark, audio, video {
 	font: inherit;
 	vertical-align: baseline;
 }
-/* HTML5 display-role reset for older browsers */
+
+/* HTML5 display-role reset for older browsers (CSS 초기화) */
 article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {
 	display: block;
@@ -43,126 +44,115 @@ table {
 	border-spacing: 0;
 }
 
-
-
 /* 이 밑부터 진짜 CSS */
 /* ***** nav를 포함한 해더. (부트스트랩X)***** */
 .header-nav {
     display: flex;
     flex-wrap: nowrap;
-    justify-content: space-between;
     align-items: center;
     padding: 1rem 0;
     /* height: 5.5rem; */
-    
-    background-color: rgba(223, 223, 223, 0.753);
-
+ 	border-top: 1.5px gray solid;
     border-bottom: 1px gray solid;
+
 }
 
-/* collapse버튼 */
+/* collapse 버튼 */
 .nav-collapse-btn {
     display: none;
     border: none;
     background-color: transparent;
 }
 
-/* 로고 이미지 및 문구 */
-.logo-container {
-    margin-left: 0.5rem;
-}
-
+/* 로고 이미지 */
 .logo {
     text-decoration: none;
-    font-size: 2em;
-    color: black;    
+    color: black;
+    width: 280px;
+    height: 70px;
+    padding-left: 17px;
+    padding-top: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 /* nav 메뉴 관련 클래스 */
 .nav-btn-lists {
     display: flex;
     justify-content: center;
-    align-items: center;
     flex-wrap: nowrap;
-    margin: 0;
 }
 
-.nav-each-btn-list > a {
+/* 메뉴 관련 */
+/* 헤더 메뉴 부분 */
+.nav-each-btn-list a {
     display: inline-block;
-    font-size: 1em;
+    font-size: 1.225rem;
     padding: 0.7rem;    
+    text-decoration: none;
+    color: black;
+    margin-left: 8px;
+    margin-right: 8px;
+}
+
+/* 회원 정보 관련 부분(로그인, 회원가입, 로그아웃, 마이페이지, 공지사항) */
+.nav-each-btn-user a {
+    display: inline-block;
+    font-size: 0.875rem;
+    padding: 0.7rem;
     text-decoration: none;
     color: black;
 }
 
 .nav-button:hover {
-    text-decoration: underline;
+    font-size: 110%;
     color:rgba(131, 131, 131, 0.753);
 }
 
+.nav-button:active {
+    font-size: 90%;
+    color: rgba(131, 131, 131, 0.753);
+}
 
-/* 반응형 디자인 768px 밑에서*/
-@media (max-width: 768px) {
-        /* ***** nav를 포함한 해더. (부트스트랩X)***** */
+.nav-button-user:hover {
+    font-size: 90%;
+    color:rgba(131, 131, 131, 0.753);
+}
+
+.nav-btn-users {
+    display: flex;
+    justify-content: right;
+    flex-wrap: nowrap;
+    padding-right: 20px;
+}
+
+/* 미디어 쿼리 */
+@media only screen and (max-width: 600px) {
+    /* 여기에 반응형 스타일 추가 */
     .header-nav {
-        display: flex;
         flex-direction: column;
-        justify-content: space-between;
-        align-items: center;
-        padding: 1rem 0;
-        height: auto;
-        background-color: rgba(223, 223, 223, 0.753);
-        border-bottom: 1px gray solid;
+        align-items: stretch;
     }
 
-    /* 로고 이미지 및 문구 */
-    .logo-container {
-        width: 100%;
-        align-items: flex-start;
-        margin-left: 0.5rem;
-    }
-    .logo {
-        align-items: flex-start;
-        text-decoration: none;
-        
-        font-size: 1.7em;
-        color: black;    
-    }
-
-
-    /* Collapse 버튼 */
     .nav-collapse-btn {
         display: block;
-        position: absolute;
-        right: 16px;
-        border: none;
-        background-color: transparent;
     }
 
-    /* 메뉴 nav관련 */
+    .logo {
+        width: 100px;
+        height: 50px;
+        padding: 5px;
+    }
+
     .nav-btn-lists {
-        display: flex;
         flex-direction: column;
-        align-items: center;
-        flex-wrap: nowrap;
     }
 
-    /* 클래스를 토글해서 보였다가 안보였다가 만들 예정 */
-    .nav-lists-hide {
-        display: none;
-        transition: 1s;
+    .nav-each-btn-list a {
+        padding: 0.5rem;
     }
 
-    .nav-each-btn-list > a {
-        display: inline-block;
-        font-size: 1em;
-        padding: 0.7rem;    
-        text-decoration: none;
-        color: black;
-    }
-
-    .nav-button:hover {
-        text-decoration: underline;
-        color:rgba(131, 131, 131, 0.753);
+    .nav-btn-users {
+        justify-content: center;
     }
 }
