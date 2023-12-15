@@ -26,34 +26,34 @@
 
 <nav class="my-2 p-2 header-nav">
     <div class="logo-container">
-        <a href="/fourmen/" class="logo">            
-            <img class="logo" src="/fourmen/logo/logo01.png">
-        </a>
+            <a href="/fourmen/" class="logo">            
+                <img class="logo" src="/fourmen/logo/logo01.png">
+            </a>
     </div>
     
-    <div class="list-container">
-        <ul class="nav-btn-lists">
+    <div class="nav-list-container">
+        <ul class="nav-btn-lists nav-lists-hide">
             <li class="nav-each-btn-list">
-                <a href="artist" class="nav-button">ARTISTS</a>
+                <a href="/fourmen/artist" class="nav-button">ARTISTS</a>
             </li>
             <li class="nav-each-btn-list">
-                <a href="forum/freeboard" class="nav-button">FORUM</a>
+                <a href="/fourmen/forum/freeboard" class="nav-button">FORUM</a>
             </li>
             <li class="nav-each-btn-list">
-                <a href="market" class="nav-button">MARKET</a>
+                <a href="/fourmen/market" class="nav-button">MARKET</a>
             </li>
             <li class="nav-each-btn-list">
-                <a href="exhibition" class="nav-button">EXHIBITION</a>
+                <a href="/fourmen/exhibition" class="nav-button">EXHIBITION</a>
             </li>
             <li class="nav-each-btn-list">
-                <a href="admin" class="nav-button">ADMIN</a>
+                <a href="/fourmen/admin" class="nav-button">ADMIN</a>
             </li>
-            <button class="nav-collapse-btn">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
-                    </svg>
-            </button>
         </ul>
+        <button class="nav-collapse-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+                </svg>
+        </button>
     </div>
     
     <!-- header-nav 오른쪽에 위치한 div -->

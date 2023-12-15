@@ -97,7 +97,7 @@ table {
 /* 헤더 메뉴 부분 */
 .nav-each-btn-list a {
     display: inline-block;
-    font-size: 1.1rem;
+    font-size: 0.9rem;
     padding: 0.7rem;    
     text-decoration: none;
     color: black;
@@ -142,25 +142,46 @@ table {
     .header-nav {
         flex-direction: column;
         align-items: start;
-        height: 3.5rem;
+        /* height: 3.5rem; */
+        height: auto;
     }
-    
-    .logo-container {
-        justify-content: start;
-    }
-    
+
+	
+	.logo {
+		display:inline-block;
+		height: 3.5rem;
+		display: block;
+		position: relative;
+		left: -30px;
+	}
+	
+    .logo img{
+		object-fit: contain;
+		display: block;
+	}
     
     .nav-collapse-btn {
         display: block;
         position: absolute;
         right: 10px;
-        top: 12px;
+        top: 1.3rem;
         
     }
     
+    .nav-list-container {
+		width: 100%;
+	}
+    
     .nav-btn-lists {
-        display: block;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
+    
+    /* 토글버튼 누를 시 nav-items 보여줌 */
+    .nav-lists-hide {
+		display: none;
+	}
     
 
     .nav-btn-lists {
@@ -169,9 +190,15 @@ table {
 
     .nav-each-btn-list a {
         padding: 0.5rem;
+        font-size: 0.8rem;
     }
 
     .nav-btn-users {
         justify-content: center;
     }
+    
+    .nav-each-btn-user {
+		font-size: 0.8rem;
+	}
+    
 }
