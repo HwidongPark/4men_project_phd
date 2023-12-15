@@ -16,8 +16,23 @@
 <link rel="stylesheet" href="css/header.css">
 
 <link rel="stylesheet" href="css/footer.css">
-
+<link rel="stylesheet" href="css/underheader.css">
 <style>
+
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+body{
+
+  font-family: 'Pretendard-Regular';
+
+}
+
+
 div#artist_container {
 
 	margin: 0 auto;
@@ -72,6 +87,14 @@ div#artist {
 <body>
 	<!-- 네비게이션 -->
 	<%@ include file="fragments/navigation.jspf"%>
+
+	<div id="underheader-div">
+		<div class="container" id="underheadrcontainer">
+			<h2 class="commondesign">ARTIST</h2>
+		</div>
+	</div>
+
+
 	<div id="works" class="my-5 container-fluid w-75">
 		<div id = "artist_container">
 			<a href="artist/artist_details">
