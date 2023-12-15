@@ -44,11 +44,6 @@ public class HomeController {
     	log.debug("exhibition={}",exhibition);
     	model.addAttribute("exhibition",exhibition);
     }
-       
-    @GetMapping("/forum")
-    public void forum() {
-    	log.debug("forum()");
-    }
     
     @GetMapping("/market")
     public void market() {
