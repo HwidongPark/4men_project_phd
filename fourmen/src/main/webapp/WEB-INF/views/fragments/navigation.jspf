@@ -24,10 +24,11 @@
     </nav>
 </div>
 
-<nav class="header-nav">
-    <div class="logo-container" style="flex: 1;">
-        <a href="#" class="logo">
-            <img class="logo" src="../logo/logo01.png" alt="4men_logo"/>
+<nav class="my-2 p-2 header-nav">
+    <div class="logo-container">
+        <a href="/fourmen/" class="logo">
+            <!-- <img class="logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHfSci5VGhQleIUe4noi8399niPqyDr3fDlQ&usqp=CAU" alt="4men_logo"/> -->
+            Fourmen
         </a>
     </div>
     
