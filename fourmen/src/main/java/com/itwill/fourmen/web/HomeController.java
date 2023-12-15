@@ -16,7 +16,6 @@ public class HomeController {
         return "home"; // view(JSP)의 경로를 리턴
     }
     
-    
     @GetMapping("/artist")
     public void artist() {
     	log.debug("artist()");

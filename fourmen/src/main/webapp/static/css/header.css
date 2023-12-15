@@ -54,9 +54,7 @@ table {
     align-items: center;
     padding: 1rem 0;
     /* height: 5.5rem; */
-    
-    background-color: rgba(223, 223, 223, 0.753);
-
+ 	border-top: 1.5px gray solid;
     border-bottom: 1px gray solid;
 }
 
