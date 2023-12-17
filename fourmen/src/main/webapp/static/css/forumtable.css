@@ -8,10 +8,13 @@ table {
 
 /* 번호, 제목, 작성자, 작성일, 조회 테이블의 행(thead) */
 .table thead tr {
-    padding: 10px 0 15px 0;
     vertical-align: middle;
     text-align: center;
     border-bottom: 3px solid #BDBDBD;
+}
+
+.table thead tr th {
+    padding-bottom: 12px;
 }
 
 /* 실제 내용이 들어가는 테이블의 행(tbody) */

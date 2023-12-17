@@ -50,11 +50,10 @@ table {
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
-    padding: 1rem 0;
-    /* height: 5.5rem; */
- 	border-top: 1.5px gray solid;
-    border-bottom: 1px gray solid;
-
+    padding: 0.5rem 0;
+    background-color: rgb(255, 255, 255);
+    border-bottom: 3px #BDBDBD solid;
+    border-top: 3px #BDBDBD solid;
 }
 
 /* collapse 버튼 */
@@ -68,12 +67,12 @@ table {
 .logo {
     text-decoration: none;
     color: black;
-    width: 280px;
-    height: 70px;
+    width: 250px;
+    height: 55px;
     padding-left: 17px;
     padding-top: 5px;
-    margin-top: 5px;
-    margin-bottom: 5px;
+    margin-top: 1px;
+    margin-bottom: 1px;
 }
 
 /* nav 메뉴 관련 클래스 */
@@ -105,17 +104,17 @@ table {
 }
 
 .nav-button:hover {
-    font-size: 110%;
+    font-size: 1.225rem;
     color:rgba(131, 131, 131, 0.753);
 }
 
 .nav-button:active {
-    font-size: 90%;
+    font-size: 100%;
     color: rgba(131, 131, 131, 0.753);
 }
 
 .nav-button-user:hover {
-    font-size: 90%;
+    font-size: 0.875rem;
     color:rgba(131, 131, 131, 0.753);
 }
 

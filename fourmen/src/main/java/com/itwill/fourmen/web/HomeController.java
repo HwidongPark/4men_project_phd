@@ -22,7 +22,6 @@ public class HomeController {
     @GetMapping("/")
     public String home() {
     	log.debug("home()");
-        
         return "home"; // view(JSP)의 경로를 리턴
     }
     
@@ -31,12 +30,11 @@ public class HomeController {
     	log.debug("artist()");
     }
     
-    @GetMapping("/forum/freeboard")
+    @GetMapping("/forum")
     public void forum() {
     	log.debug("forum()");
     }
     
-
     @GetMapping("/exhibition")
     public void exhibition(Model model) {
     	log.debug("exhibition()");
@@ -51,11 +49,9 @@ public class HomeController {
     	log.debug("market()");
     }
     
-
     @GetMapping("/market/detail")
     public String marketDetail() {
     	log.debug("marketDetail()");
-    	
     	return "/market/detail";
     }
     
@@ -63,7 +59,6 @@ public class HomeController {
     public void admin() {
     	log.debug("admin()");
     }
-
     
 }
 // HomeController

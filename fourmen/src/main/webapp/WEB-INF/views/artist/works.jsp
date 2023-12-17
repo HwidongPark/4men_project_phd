@@ -14,6 +14,7 @@
 	crossorigin="anonymous">
 <link rel="stylesheet" href="../css/header.css">
 <link rel="stylesheet" href="../css/footer.css">
+<link rel="stylesheet" href="../css/underhead.css">
 <style>
 @font-face {
     font-family: 'Pretendard-Regular';
@@ -60,9 +61,18 @@ html {
 }
 </style>
 </head>
-<body>
 	<%@ include file="../fragments/navigation.jspf"%>
-
+<body>
+    
+    <!-- 웹페이지 상단 헤더 아래 부분 -->
+    <div id="underheader-div">
+        <div class="container" id="underheadrcontainer">
+            <h2 class="commondesign">
+                artists detail
+            </h2>
+        </div>
+    </div>
+    
 	<div id="works" class="my-5 container-fluid container-xl w-75">
 
 		<div class="card border-0">
