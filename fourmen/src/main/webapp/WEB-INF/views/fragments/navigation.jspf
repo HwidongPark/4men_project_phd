@@ -26,27 +26,27 @@
 
 <nav class="header-nav">
     <div class="logo-container" style="flex: 1;">
-        <a href="#" class="logo">
+        <a href="http://localhost:8081/fourmen/" class="logo">
             <img class="logo" src="../logo/logo01.png" alt="4men_logo"/>
         </a>
     </div>
     
-    <div class="list-container">
+    <div class="header-list-container">
         <ul class="nav-btn-lists">
             <li class="nav-each-btn-list">
-                <a href="artist" class="nav-button">ARTISTS</a>
+                <a href="#" class="nav-button">ARTISTS</a>
             </li>
             <li class="nav-each-btn-list">
-                <a href="forum/freeboard" class="nav-button">FORUM</a>
+                <a href="#" class="nav-button">MARKET</a>
             </li>
             <li class="nav-each-btn-list">
-                <a href="market" class="nav-button">MARKET</a>
+                <a href="#" class="nav-button">EXHIBITION</a>
             </li>
             <li class="nav-each-btn-list">
-                <a href="exhibition" class="nav-button">EXHIBITION</a>
+                <a href="#" class="nav-button">FORUM</a>
             </li>
             <li class="nav-each-btn-list">
-                <a href="admin" class="nav-button">ADMIN</a>
+                <a href="#" class="nav-button">ADMIN</a>
             </li>
         </ul>
     </div>

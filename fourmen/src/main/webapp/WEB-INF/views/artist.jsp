@@ -76,7 +76,7 @@ div#artist {
     <div id="underheader-div">
         <div class="container" id="underheadrcontainer">
             <h2 class="commondesign">
-                artists
+                ARTISTS
             </h2>
         </div>
     </div>

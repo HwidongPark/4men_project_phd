@@ -45,15 +45,15 @@
         </div>
         <div class="carousel-inner">
           <div class="carousel-item active img-size-control">
-            <img src="picture/Vincent_van_Gogh.jpg"
+            <img src="picture/반고흐01.jpg"
              class="d-block w-100 carousel-img-size" alt="...">
           </div>
           <div class="carousel-item img-size-control">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSc3zBDYtml5oZ3HMDqdE20b6FPsKPpZ1LkHg&usqp=CAU" 
+            <img src="picture/반고흐02.jpg"
             class="d-block w-100 carousel-img-size" alt="...">
           </div>
           <div class="carousel-item img-size-control">
-            <img src="https://tvstore-phinf.pstatic.net/20210914_191/1631614821883lmWOm_JPEG/00020.jpg"
+            <img src="picture/르누아르01.jpg"
              class="d-block w-100 carousel-img-size" alt="...">
           </div>
         </div>

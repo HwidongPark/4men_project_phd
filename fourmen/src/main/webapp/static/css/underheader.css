@@ -3,11 +3,11 @@
 /* header 아래에 각 페이지들에 공통으로 들어가는 부분의 스타일을 작성한 css */
 
 h2.commondesign {
-    position: relative;
+    position: absolute;
     font-weight: 300;
     font-size: 3.0rem;
-    color: #A4A4A4;
-    margin: 0;
+    color: #6E6E6E;
+    margin-left: 5rem;
     padding: 0;
 }
 
@@ -19,7 +19,7 @@ h2.commondesign::before {
     margin-top: 0.0625rem;
     width: 17.125rem;
     height: 3px;
-    background: #A4A4A4;
+    background: #6E6E6E;
     content: '';
 }
 

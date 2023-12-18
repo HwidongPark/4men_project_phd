@@ -13,12 +13,25 @@
         <!-- css 파일 적용 -->
         <link rel="stylesheet" href="css/header.css">
 		<link rel="stylesheet" href="css/footer.css">
+		<link rel="stylesheet" href="css/underheader.css">
         <link rel="stylesheet" href="css/market-board.css">
         
 	</head>
 	
+    <!-- 헤더 파일 include -->
+    <%@include file="fragments/navigation.jspf" %>
+    
+    <!-- body 시작점 -->
 	<body>
-		<%@include file="fragments/navigation.jspf" %>
+        <!-- 웹페이지 상단 헤더 아래 부분 -->
+        <div id="underheader-div">
+            <div class="container" id="underheadrcontainer">
+                <h2 class="commondesign">
+                    MARKET
+                </h2>
+            </div>
+        </div>
+        
         
         <section role="search" class="search-container">
             <form id="search-form">
