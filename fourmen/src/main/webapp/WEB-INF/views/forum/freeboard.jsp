@@ -16,11 +16,12 @@
 <!-- css 파일 적용 -->
 <link rel="stylesheet" href="../css/header.css">
 <link rel="stylesheet" href="../css/footer.css">
-<link rel="stylesheet" href="../css/forumtable.css">
+<link rel="stylesheet" href="../css/forum-table.css">
 <link rel="stylesheet" href="../css/underheader.css">
 <link rel="stylesheet" href="../css/pagenation.css">
 <link rel="stylesheet" href="../css/forum-search-area.css">
 <link rel="stylesheet" href="../css/forum-kategorie-area.css">
+<link rel="stylesheet" href="../css/forum-create-new-post.css">
 
 </head>
 
@@ -47,13 +48,16 @@
         <div class="forum-kategorie">
             <ul class="forum-kategorie-board-lists">
                 <li class="forum-kategorie-board">
-                    <a href="#">자유게시판</a>
+                    <a href="freeboard">자유게시판</a>
                 </li>
                 <li class="forum-kategorie-board">
-                    <a href="#">후기게시판</a>
+                    <a href="queryboard">Q&A</a>
                 </li>
                 <li class="forum-kategorie-board">
-                    <a href="#">질문게시판</a>
+                    <a href="faqboard">FAQ</a>
+                </li>
+                <li class="forum-kategorie-board">
+                    <a href="noticeboard">NOTICE</a>
                 </li>
             </ul>
         </div>
@@ -85,7 +89,7 @@
     </section>
     
     <!-- board-list-content 게시판 글 리스트 테이블 -->
-    <section class="freeboard-list" style="padding: 3.5rem 18.5rem 2.5rem 18.5rem;">
+    <section class="freeboard-list" style="padding: 3.5rem 18.5rem 0rem 18.5rem;">
      <table class="table">
         <colgroup>
             <col style="width: 9%;">
@@ -177,7 +181,24 @@
         </tbody>
     </table>
     </section>
-        
+    
+    <!-- 새글 작성 -->
+    <div class="new-post-div">
+        <nav class="new-post-nav">
+            <ul class="new-post-ul">
+                <li id="new-post-li-one" class="new-post-li">
+                    <a href="../">HOME</a>
+                </li>
+                <li id="new-post-li-two" class="new-post-li">
+                    <a href="../map">MAP</a>
+                </li>
+                <li id="new-post-li-three" class="new-post-li">
+                    <a href="create">NEW POST</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    
     <!-- 게시판 글 페이지네이션(pagination)-->
         <div>
             <nav aria-label="Page navigation">

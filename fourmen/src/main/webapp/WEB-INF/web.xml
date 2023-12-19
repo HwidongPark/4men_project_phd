@@ -43,4 +43,14 @@
     <servlet-name>ForumController</servlet-name>
     <url-pattern>/ForumController</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>freeboard</display-name>
+    <servlet-name>freeboard</servlet-name>
+    <jsp-file>/WEB-INF/views/forum/freeboard.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>freeboard</servlet-name>
+    <url-pattern>/freeboard</url-pattern>
+  </servlet-mapping>
 </web-app>

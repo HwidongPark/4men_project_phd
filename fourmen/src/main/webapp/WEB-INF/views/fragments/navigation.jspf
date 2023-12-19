@@ -27,23 +27,23 @@
 <nav class="header-nav">
     <div class="logo-container" style="flex: 1;">
         <a href="http://localhost:8081/fourmen/" class="logo">
-            <img class="logo" src="../logo/logo01.png" alt="4men_logo"/>
+            <img class="logo" src="C:/Users/haneul_lover/itwill_first_teamproject_resources/logo/logo01.png" alt="4men_logo"/>
         </a>
     </div>
     
     <div class="header-list-container">
         <ul class="nav-btn-lists">
             <li class="nav-each-btn-list">
-                <a href="#" class="nav-button">ARTISTS</a>
+                <a href="./artist" class="nav-button">ARTISTS</a>
             </li>
             <li class="nav-each-btn-list">
-                <a href="#" class="nav-button">MARKET</a>
+                <a href="./market" class="nav-button">MARKET</a>
             </li>
             <li class="nav-each-btn-list">
-                <a href="#" class="nav-button">EXHIBITION</a>
+                <a href="./exhibition" class="nav-button">EXHIBITION</a>
             </li>
             <li class="nav-each-btn-list">
-                <a href="#" class="nav-button">FORUM</a>
+                <a href="./forum/freeboard" class="nav-button">FORUM</a>
             </li>
             <li class="nav-each-btn-list">
                 <a href="#" class="nav-button">ADMIN</a>

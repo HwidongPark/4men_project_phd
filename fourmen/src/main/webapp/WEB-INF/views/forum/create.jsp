@@ -16,12 +16,11 @@
 <!-- css 파일 적용 -->
 <link rel="stylesheet" href="../css/header.css">
 <link rel="stylesheet" href="../css/footer.css">
-<link rel="stylesheet" href="../css/forum-table.css">
+<link rel="stylesheet" href="../css/forumtable.css">
 <link rel="stylesheet" href="../css/underheader.css">
 <link rel="stylesheet" href="../css/pagenation.css">
 <link rel="stylesheet" href="../css/forum-search-area.css">
 <link rel="stylesheet" href="../css/forum-kategorie-area.css">
-<link rel="stylesheet" href="../css/forum-create-new-post.css">
 
 </head>
 
@@ -89,7 +88,7 @@
     </section>
     
     <!-- board-list-content 게시판 글 리스트 테이블 -->
-    <section class="freeboard-list" style="padding: 3.5rem 18.5rem 0rem 18.5rem;">
+    <section class="freeboard-list" style="padding: 3.5rem 18.5rem 2.5rem 18.5rem;">
      <table class="table">
         <colgroup>
             <col style="width: 9%;">
@@ -181,50 +180,17 @@
         </tbody>
     </table>
     </section>
-        
-    <!-- 게시판 글 페이지네이션(pagination)-->
-        <div>
-            <nav aria-label="Page navigation">
-                <ul class="pagination">
-                    <li class="page-item">
-                        <a class="page-link-img" href="#" aria-label="first page">
-                            <img id="pagination-img" alt="first page" src="../pagination/pagination01.png">
-                        </a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link-img" href="#" aria-label="previous">
-                            <img id="pagination-img" alt="previous page" src="../pagination/pagination02.png">
-                        </a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">1</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">2</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">3</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">4</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">5</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link-img" href="#" aria-label="next">
-                            <img id="pagination-img" alt="next page" src="../pagination/pagination03.png">
-                        </a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link-img" href="#" aria-label="last page">
-                            <img id="pagination-img" alt="last page" src="../pagination/pagination04.png">
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-
+    
+    <div style="display: flex;">
+        <nav style="padding-bottom: 2rem;">
+            <ul>
+                <li>
+                리스트...
+                </li>
+            </ul>
+        </nav>
+    </div>
+    
     </main>
     
     <!-- 푸터 파일 include -->

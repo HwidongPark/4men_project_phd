@@ -15,11 +15,11 @@ h2.commondesign::before {
     display: block;
     position: absolute;
     top: 50%;
-    left: -19.5rem;
+    left: -19.5in;
     margin-top: 0.0625rem;
-    width: 17.125rem;
-    height: 3px;
-    background: #6E6E6E;
+    width: 19.125in;
+    height: 2.7px;
+    background: #848484;
     content: '';
 }
 

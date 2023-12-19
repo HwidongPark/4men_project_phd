@@ -19,7 +19,6 @@
 
 <style>
 div#artist_container {
-
 	margin: 0 auto;
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
