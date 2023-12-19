@@ -4,5 +4,23 @@
     "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.itwill.fourmen.repository.MarketDao">
- 
+    <insert id="insertMarketPost" parameterType="Market">
+        insert into market (userid, title, description_kor, price, year_created, painting_size)
+        values ('cirche', #{title}, #{descriptionKor}, #{price}, #{yearCreated}, #{paintingSize})
+    </insert>
+    <select id="getWorkId" resultType="long">
+        SELECT max(workid) FROM market
+    </select>
+    
+    <insert id="insertWorkImage">
+        INSERT INTO work_images (workid, category, original_file_name, saved_file_name) VALUES (#{workId}, 'market', #{originalFileName}, #{savedFileName})
+    </insert>
+    
+    <select id="readMarketPosts" resultType="Market">
+        SELECT * FROM market ORDER BY workid DESC
+    </select>
+    
+    <select id="readWorkImagesofPost" resultType="WorkImage">
+        SELECT * FROM work_images WHERE workid= #{workId}
+    </select>
 </mapper>

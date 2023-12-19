@@ -18,8 +18,8 @@
             <div class="justify-content-center">
                 <form action="/fourmen/market/create" method="post" enctype="multipart/form-data">
                     <label>제목: </label>
-                    <input type="text" name="title" class="form-control" placeholder="제목" autofocus>
-                    <div>
+                    <input type="text" name="title" class="form-control mb-3" placeholder="제목" autofocus>
+                    <div class="my-2">
                         <span class="market-upload-photos">
                             <label>사진 첨부:</label>
                             <input type="file" name="files">
@@ -27,11 +27,18 @@
                         <!-- +누를때마다 파일첨부 하나씩 추가.. 최대 20개 -->
                         <button class="market-create-add-phooto" type="button">+</button><br>
                     </div>
-                    <textarea name="description"  class="form-control" rows="20"></textarea>
-                    
+                    <textarea name="description"  class="form-control my-2" rows="20"></textarea>
+                    <label>가격:</label>
+                    <input type="number" name="price" class="form-control mb-2">
+                    <label>창작 연도:</label>
+                    <input type="number" name="yearCreated" class="form-control mb-2"/>
+                    <label>작품 사이즈:</label><br>
+                    <div class="mb-2">
+                        폭: <input type="number" name="width"> cm 높이: <input type="number" name="height"> cm 두께: <input type="number" name="depth"> cm<br>
+                    </div>
                     <!-- TODO: 유저아이디 일단 적는데 나중에 지울거임 -->
                     <label>유저아이디:</label>
-                    <input type="text" name="userId" class="form-control">
+                    <input type="text" name="userId" class="form-control mb-2">
                     
                     <button class="market-create-cancel btn btn-outline-secondary" type="button">취소</button>
                     <input type="submit" value="작성" class="btn btn-outline-success">

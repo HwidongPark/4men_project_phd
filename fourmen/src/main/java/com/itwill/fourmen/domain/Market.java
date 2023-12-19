@@ -10,7 +10,8 @@ import lombok.Data;
 public class Market {
 
 	Long workId;
-	Long userId;
+	String userId;
+	String title;
 	String descriptionKor;
 	String descriptionEng;
 	Integer price;
@@ -19,7 +20,7 @@ public class Market {
 	String isSold;
 	Long buyerId;
 	LocalDateTime createdTime;
-	int views;
-	int likes;
-
+	Long views;
+	Long likes;
+	
 }
