@@ -23,6 +23,11 @@ public class MarketPostDto {
 	private LocalDateTime createdTime;
 	private Long views;
 	private Long likes;
+	private Integer price;
+	private Integer yearCreated;
+	private String paintingSize;
+	private String isSold;
+	private String buyerId;
 	
 	
 }

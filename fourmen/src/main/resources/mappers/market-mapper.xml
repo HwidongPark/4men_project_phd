@@ -20,6 +20,10 @@
         SELECT * FROM market ORDER BY workid DESC
     </select>
     
+    <select id="readMarketPost" resultType="Market">
+        SELECT * FROM market WHERE workid = #{ workId }
+    </select>
+    
     <select id="readWorkImagesofPost" resultType="WorkImage">
         SELECT * FROM work_images WHERE workid= #{workId}
     </select>

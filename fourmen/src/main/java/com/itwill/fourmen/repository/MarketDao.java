@@ -18,7 +18,12 @@ public interface MarketDao {
 	// 마켓 모든 글 + 사진 읽어오기
 	List<Market> readMarketPosts();
 	
+	// 특정 마켓 포스트 정보 가져오기
+	Market readMarketPost(Long workId);
+	
 	// 해당 포스트마다 매칭되는 이미지 가져오기
 	List<WorkImage> readWorkImagesofPost(Market market);
+	
+
 	
 }

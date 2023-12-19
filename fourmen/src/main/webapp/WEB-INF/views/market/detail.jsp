@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>    
 <!DOCTYPE html>
 <html>
 	<head>
@@ -22,46 +23,42 @@
 		
         <section class="product-container">
             
-            
-            <!-- 사진 실험 -->
+            <!-- JSTL로 사진 대체 -->
             <div id="market-photo-container" class="photo-container">
                 <div class="carousel-outer-container">
                     <button id="prev-slide" class="material-symbols-outlined slide-button">chevron_left</button>
                     <div class="carousel-images-container">
                         <div class="carousel-images-wrapper">
-                            <div class="carousel-each-image">
-                                <img src="https://m.picturemall.co.kr/web/product/big/202011/9c418fbb88f4aa60a9780c7c871378db.jpg" class="carousel-image" alt="...">
-                            </div>
-                            <div class="carousel-each-image">
-                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTN55lIKqWaNpSb2A66vQf9u9mY2t9n8P_YYJnPDRykMA&s" class="carousel-image" alt="...">
-                            </div>
-                            <div class="carousel-each-image">
-                                <img src="https://gyeongju.go.kr/upload/content/thumb/20200629/5C0BDECC3C194164B77CB7115606F0C8.jpg" class="carousel-image" alt="...">
-                            </div>
+                            <c:forEach var="postImage" items="${ marketPost.workImages }">
+                                <div class="carousel-each-image">
+                                    <img src="/fourmen/uploads/${ postImage.savedFileName }" class="carousel-image" alt="...">
+                                </div>
+                            </c:forEach>                       
                         </div>
                     </div>
                     <button id="next-slide" class="material-symbols-outlined slide-button">chevron_right</button>
                 </div>
-                
+                <!-- 작은사진 -->
                 <div class="image-slider-container">
                     <div class="image-slide-wrapper">
-                        <img class="image-slide-item" src="https://m.picturemall.co.kr/web/product/big/202011/9c418fbb88f4aa60a9780c7c871378db.jpg" alt="123">
-                        <img class="image-slide-item" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTN55lIKqWaNpSb2A66vQf9u9mY2t9n8P_YYJnPDRykMA&s" alt="123">
-                        <img class="image-slide-item" src="https://gyeongju.go.kr/upload/content/thumb/20200629/5C0BDECC3C194164B77CB7115606F0C8.jpg" alt="123">
+                        <c:forEach var="postImage" items="${ marketPost.workImages }">
+                            <img class="image-slide-item" src="/fourmen/uploads/${ postImage.savedFileName }" alt="123">
+                        </c:forEach>
                     </div>
                 </div>
             </div>
             
+            
             <div class="product-description">
-                <h1 id="product-title">마이크를 든 단단히 화가난 할아버지</h1>
-                <div id="production-year" class="year-dimension-description"><em>(2002)</em></div>
-                <div id="product-dimension" class="year-dimension-description"><em>20.3 x 20.3 x 5.1 cm</em></div>
+                <h1 id="product-title">${ marketPost.title }</h1>
+                <div id="production-year" class="year-dimension-description"><em>(${ marketPost.yearCreated })</em></div>
+                <div id="product-dimension" class="year-dimension-description"><em>${ marketPost.paintingSize }</em></div>
                 <hr>
-                <div id="product-price"><b>50,000원</b></div>
+                <div id="product-price"><b>${ marketPost.price }</b></div>
                 <hr>
                 <div id="seller-description">
                      <div id="artist">
-                        <em><a href="#" id="artist-name">익명의 예술가</a></em>
+                        <em><a href="#" id="artist-name">${ marketPost.userId }</a></em>
                         <div id="artist-bio">
                             저는 어렸을때부터 코끼리 그림을 그렸던 예술가입니다. 저의 작품은 매우 질이 좋습니다. 저의 그림실력은 뛰어납니다.
                             지금이 저의 작품을 살 절호의 기회입니다. 지금 저의 작품은 비록 5만원이지만, 훗날 사람들이 저의 진가를 알아보고 가격이 뛸 것이라 생각합니다.
@@ -107,26 +104,7 @@
             </div>
             <div>
                 <p>
-                    이 작품은 테니스 경기 도중 찍힌 사진입니다. 마이크를 든 아저씨가 매우 화가 났습니다.
-                    아주 절묘한 타이밍에 아저씨의 모습을 포착하여 매우 기쁩니다.
-                    
-                    아저씨는 테니스 경기의 심판으로 밝혀졌습니다. 아저씨 좋은 사진을 주셔서 감사합니다.
-                                        이 작품은 테니스 경기 도중 찍힌 사진입니다. 마이크를 든 아저씨가 매우 화가 났습니다.
-                    아주 절묘한 타이밍에 아저씨의 모습을 포착하여 매우 기쁩니다.
-                    
-                    아저씨는 테니스 경기의 심판으로 밝혀졌습니다. 아저씨 좋은 사진을 주셔서 감사합니다.
-                                        이 작품은 테니스 경기 도중 찍힌 사진입니다. 마이크를 든 아저씨가 매우 화가 났습니다.
-                    아주 절묘한 타이밍에 아저씨의 모습을 포착하여 매우 기쁩니다.
-                    
-                    아저씨는 테니스 경기의 심판으로 밝혀졌습니다. 아저씨 좋은 사진을 주셔서 감사합니다.
-                                        이 작품은 테니스 경기 도중 찍힌 사진입니다. 마이크를 든 아저씨가 매우 화가 났습니다.
-                    아주 절묘한 타이밍에 아저씨의 모습을 포착하여 매우 기쁩니다.
-                    
-                    아저씨는 테니스 경기의 심판으로 밝혀졌습니다. 아저씨 좋은 사진을 주셔서 감사합니다.
-                                        이 작품은 테니스 경기 도중 찍힌 사진입니다. 마이크를 든 아저씨가 매우 화가 났습니다.
-                    아주 절묘한 타이밍에 아저씨의 모습을 포착하여 매우 기쁩니다.
-                    
-                    아저씨는 테니스 경기의 심판으로 밝혀졌습니다. 아저씨 좋은 사진을 주셔서 감사합니다.                    
+                    ${ marketPost.descriptionKor }                
                 </p>
             </div>
         </section>

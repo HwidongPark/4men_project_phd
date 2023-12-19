@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwill.dto.MarketCreateDto;
 import com.itwill.dto.MarketPostDto;
@@ -45,8 +46,12 @@ public class MarketController {
 	}
 	
 	@GetMapping("/detail")
-	public void detail() {
-		log.debug("detail() GET");
+	public void detail(@RequestParam Long workid, Model model) {
+		log.debug("detail(workId={}) GET", workid);
+		MarketPostDto marketPost = marketService.readMarketPost(workid);
+		log.debug("marketPostDto = {}", marketPost);
+		
+		model.addAttribute("marketPost", marketPost);
 	}
 	
 	@GetMapping("/create")

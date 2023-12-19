@@ -79,6 +79,10 @@ public class MarketService {
 	}
 	
 	// 포스트 목록 읽어옴
+	/**
+	 * 전체 포스트의 목록, 해당 포스트에 따른 사진의 목록을 읽어와서 MarketPostDto의 리스트를 리턴
+	 * @return
+	 */
 	public List<MarketPostDto> readMarketPosts() {
 		log.debug("readMarketPosts()");
 		List<Market> marketPosts = marketDao.readMarketPosts();
@@ -96,7 +100,11 @@ public class MarketService {
 							.workId(marketPost.getWorkId())
 							.title(marketPost.getTitle())
 							.descriptionKor(marketPost.getDescriptionKor())
+							.price(marketPost.getPrice())
+							.yearCreated(marketPost.getYearCreated())
+							.paintingSize(marketPost.getPaintingSize())
 							.createdTime(marketPost.getCreatedTime())
+							.isSold(marketPost.getIsSold())
 							.views(marketPost.getViews())
 							.likes(marketPost.getLikes())
 							.workImages(workImages)
@@ -109,5 +117,34 @@ public class MarketService {
 		return marketPostsWithImages;
 	}
 	
+	
+	
+	public MarketPostDto readMarketPost(Long workId) {
+		log.debug("readMarketPost(workId={})", workId);
+		
+		Market marketPost = marketDao.readMarketPost(workId);
+		log.debug("읽어온 마켓포스트 = {}", marketPost);
+		
+		List<WorkImage> workImages = marketDao.readWorkImagesofPost(marketPost);
+		log.debug("읽어온 마켓포스트의 이미지 리스트 = {}", workImages);
+		
+		MarketPostDto marketPostWithImages = MarketPostDto.builder()
+							.workId(marketPost.getWorkId())
+							.userId(marketPost.getUserId())
+							.title(marketPost.getTitle())
+							.descriptionKor(marketPost.getDescriptionKor())
+							.price(marketPost.getPrice())
+							.yearCreated(marketPost.getYearCreated())
+							.paintingSize(marketPost.getPaintingSize())
+							.isSold(marketPost.getIsSold())
+							.createdTime(marketPost.getCreatedTime())
+							.views(marketPost.getViews())
+							.likes(marketPost.getLikes())
+							.workImages(workImages)
+							.build();
+		
+		return marketPostWithImages;							
+		
+	}
 	
 }
