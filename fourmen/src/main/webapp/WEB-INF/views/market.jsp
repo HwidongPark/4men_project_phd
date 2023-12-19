@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>    
 <!DOCTYPE html>
 <html>
 	<head>
@@ -72,8 +73,12 @@
             </form>
         </section>
         
-        
         <main>
+            <!-- 글 작성 버튼 -->
+            <div class="market-create-btn-container">
+                <c:url var="createMarketPost" value="/market/create" />
+                <button class="btn btn-outline-success">글 작성</button>
+            </div>
             <div class="list-item-category-title">
                 <h2><a href="#">인기 리스트</a></h2>
             </div>
@@ -342,7 +347,7 @@
 		 integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
 		  crossorigin="anonymous"></script>
         
-        <script src="js/market.js"></script>
+        <script src="js/market/market-board.js"></script>
           
         <script src="js/header.js"></script>
   </body>

@@ -9,6 +9,8 @@
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" 
 		integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
 		 crossorigin="anonymous">
+         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
          
          <link rel="stylesheet" href="../css/header.css">
          <link rel="stylesheet" href="../css/market-detail.css">
@@ -18,9 +20,35 @@
 	<body>
 		<%@ include file="../fragments/navigation.jspf" %>
 		
-		<section class="product-container">
-            <div class="photo-container">
-                <img src="https://m.picturemall.co.kr/web/product/big/202011/9c418fbb88f4aa60a9780c7c871378db.jpg">
+        <section class="product-container">
+            
+            <!-- 사진 실험 -->
+            <div id="market-photo-container" class="photo-container">
+                <div class="carousel-outer-container">
+                    <button id="prev-slide" class="material-symbols-outlined slide-button">chevron_left</button>
+                    <div class="carousel-images-container">
+                        <div class="carousel-images-wrapper">
+                            <div class="carousel-each-image">
+                                <img src="https://m.picturemall.co.kr/web/product/big/202011/9c418fbb88f4aa60a9780c7c871378db.jpg" class="carousel-image" alt="...">
+                            </div>
+                            <div class="carousel-each-image">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTN55lIKqWaNpSb2A66vQf9u9mY2t9n8P_YYJnPDRykMA&s" class="carousel-image" alt="...">
+                            </div>
+                            <div class="carousel-each-image">
+                                <img src="https://gyeongju.go.kr/upload/content/thumb/20200629/5C0BDECC3C194164B77CB7115606F0C8.jpg" class="carousel-image" alt="...">
+                            </div>
+                        </div>
+                    </div>
+                    <button id="next-slide" class="material-symbols-outlined slide-button">chevron_right</button>
+                </div>
+                
+                <div class="image-slider-container">
+                    <div class="image-slide-wrapper">
+                        <img class="image-slide-item" src="https://m.picturemall.co.kr/web/product/big/202011/9c418fbb88f4aa60a9780c7c871378db.jpg" alt="123">
+                        <img class="image-slide-item" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTN55lIKqWaNpSb2A66vQf9u9mY2t9n8P_YYJnPDRykMA&s" alt="123">
+                        <img class="image-slide-item" src="https://gyeongju.go.kr/upload/content/thumb/20200629/5C0BDECC3C194164B77CB7115606F0C8.jpg" alt="123">
+                    </div>
+                </div>
             </div>
             
             <div class="product-description">
@@ -60,15 +88,14 @@
                             저의 작품은 2013년 당시의 비트코인과 같습니다. 저의 페이지에 들어와서 포트폴리오를 확인해보세요
                         </div>
                         <button class="btn-read-more">Read More</button> 
-                    </div>
-                    
-                     
+                    </div> 
                 </div>
                 <div class="text-center">
                     <button class="btn btn-secondary my-1 btn-rounded">쪽지 보내기</button><br>            
                     <button class="btn btn-danger btn-rounded">찜하기</button>                    
                 </div>
             </div>
+
         </section>
         
         <!-- 작품 설명 -->
@@ -112,6 +139,7 @@
 		
         <script src="../js/line-control.js"></script>
         <script src="../js/header.js"></script>
+        <script src="../js/market/market-detail.js"></script>
         
 	</body>
 	</html>

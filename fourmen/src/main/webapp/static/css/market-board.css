@@ -100,6 +100,16 @@ main {
     margin: 2rem auto;
 }
 
+.market-create-btn-container {
+	display: flex;
+	justify-content: flex-end;
+}
+
+div.market-create-btn-container button {
+	margin-right: 2%;
+}
+
+
 /* 인기 매물, 최신 매물 h2제목 */
 .list-item-category-title {
 	text-align: center;
