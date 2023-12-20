@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- NOTICE_BOARD 테이블에서 CRUD에 필요한 SQL 문장들을 선언 -->
+<mapper namespace="com.itwill.fourmen.repository.NoticeDao">
+    <select id="selectOrderByNoticeNumDesc" resultType="Notice">
+        select * from NOTICE_BOARD order by NOTICE_NUM desc
+    </select>
+</mapper>

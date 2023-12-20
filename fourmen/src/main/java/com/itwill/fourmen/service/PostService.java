@@ -22,8 +22,8 @@ public class PostService {
 	// 자유게시판 글 목록 보여주기...
 	public List<PostListItemDto> read() {
 		log.debug("read()");
-		// postDao의 메서드를 호출해서 포스트 목록을 리턴받고, 컨트롤러에게 리턴.
-		List<Post> list = postDao.selectOrderByIdDesc(); //-> DB에서 가져오는 데이터 타입은 Post 타입.
+		// postDao의 메서드를 호출해서 포스트(자유게시판) 목록을 리턴받고, 컨트롤러에게 리턴.
+		List<Post> list = postDao.selectOrderByPostNumDesc(); //-> DB에서 가져오는 데이터 타입은 Post 타입.
 		log.debug("자유게시판 포스트 목록 개수 = {}", list.size());
 		
 		return list.stream()
@@ -33,6 +33,15 @@ public class PostService {
 				.toList();
 	}
 	
-	
+	// 자유게시판 선택한 글 상세내용 보여주기...
+	public Post detail(Long id) { // 전달받은 id 값에 해당하는 포스트를 리턴하므로 Post 타입 사용.
+		log.debug("freeboard-detail(id={})", id);
+		
+		// 리포지토리 계층의 메서드를 호출해서 DB 테이블에서 해당 아이디의 포스트 상세내용을 검색.
+		Post post = postDao.selectByPostId(id);
+		log.debug("freeboard-detail:{}", post);
+		
+		return post;
+	}
 	
 }

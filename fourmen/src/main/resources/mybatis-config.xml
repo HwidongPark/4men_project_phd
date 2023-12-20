@@ -7,5 +7,8 @@
 <configuration>
     <typeAliases>
         <typeAlias type="com.itwill.fourmen.domain.Post" alias="Post"/>
+        <typeAlias type="com.itwill.fourmen.domain.Notice" alias="Notice"/>
+        <typeAlias type="com.itwill.fourmen.domain.Faq" alias="Faq"/>
+        <typeAlias type="com.itwill.fourmen.domain.Qna" alias="Qna"/>
     </typeAliases>
 </configuration>

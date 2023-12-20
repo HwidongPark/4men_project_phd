@@ -118,10 +118,10 @@
                     <td>${p.post_num}</td>
                     <td></td>
                     <td id="table-td" style="text-align: left;">
-                        <c:url var="freeboard_postDetailsPage" value="/forum/freeboard_details">
+                        <c:url var="freeboard_postDetailPage" value="/forum/freeboard-detail">
                             <c:param name="post_id" value="${p.post_id}" />
                         </c:url>
-                        <a href="${freeboard_postDetailsPage}">${p.post_title}</a>
+                        <a href="${freeboard_postDetailPage}">${p.post_title}</a>
                     </td>
                     <td>${p.userid}</td>
                     <td>${p.post_created_time}</td>

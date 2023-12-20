@@ -1,7 +1,6 @@
 package com.itwill.fourmen.dto.post;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 import com.itwill.fourmen.domain.Post;
 

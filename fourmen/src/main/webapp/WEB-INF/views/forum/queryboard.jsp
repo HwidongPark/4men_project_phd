@@ -90,98 +90,65 @@
     
     <!-- board-list-content 게시판 글 리스트 테이블 -->
     <section class="freeboard-list" style="padding: 3.5rem 18.5rem 0rem 18.5rem;">
-     <table class="table">
-        <colgroup>
-            <col style="width: 9%;">
-            <col>
-            <col style="width: 10%;">
-            <col style="width: 12%;">
-            <col style="width: 10%;">
-        </colgroup>
-        <thead>
-        <tr>
-            <th>번호</th>
-            <th>제목</th>
-            <th>작성자</th>
-            <th>작성일</th>
-            <th>조회</th>
-        </tr>
-        </thead>
-        <tbody class="table-group-divider">
-        <tr>
-            <td>1</td>
-            <td id="table-td" style="text-align: left;">제목1</td>
-            <td>작성자1</td>
-            <td>2023-12-13</td>
-            <td>1</td>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td id="table-td" style="text-align: left">제목1</td>
-            <td>작성자1</td>
-            <td>2023-12-13</td>
-            <td>1</td>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td id="table-td" style="text-align: left">제목1</td>
-            <td>작성자1</td>
-            <td>2023-12-13</td>
-            <td>1</td>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td id="table-td" style="text-align: left">제목1</td>
-            <td>작성자1</td>
-            <td>2023-12-13</td>
-            <td>1</td>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td id="table-td" style="text-align: left">제목1</td>
-            <td>작성자1</td>
-            <td>2023-12-13</td>
-            <td>1</td>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td style="text-align: left">제목1</td>
-            <td>작성자1</td>
-            <td>2023-12-13</td>
-            <td>1</td>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td style="text-align: left">제목1</td>
-            <td>작성자1</td>
-            <td>2023-12-13</td>
-            <td>1</td>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td style="text-align: left">제목1</td>
-            <td>작성자1</td>
-            <td>2023-12-13</td>
-            <td>1</td>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td style="text-align: left">제목1</td>
-            <td>작성자1</td>
-            <td>2023-12-13</td>
-            <td>1</td>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td style="text-align: left">제목1</td>
-            <td>작성자1</td>
-            <td>2023-12-13</td>
-            <td>1</td>
-        </tr>
-        </tbody>
-    </table>
+        <table class="table">
+            <colgroup>
+                <col style="width: 100px;">
+                <col style="width: 10px;">
+                <col style="width: auto;">
+                <col style="width: 10%;">
+                <col style="width: 15%;">
+                <col style="width: 10%;">
+            </colgroup>
+            <thead>
+            <tr>
+                <th>번호</th>
+                <th></th>
+                <th>제목</th>
+                <th>작성자</th>
+                <th>작성일</th>
+                <th>조회</th>
+            </tr>
+            </thead>
+            <tbody class="table-group-divider">
+            <c:forEach var="q" items="${queryboard_posts}">
+            <!-- var: 변수(리스트 값을 저장) / items: 리스트 -->
+            <!-- PostController.java에서 전달된 데이터 사용 (리스트의 이름이 items에 들어가야 함)
+            -> model.addAttribute("freeboard_posts", list); //-> 뷰에 전달되는 데이터. -->
+                <tr>
+                    <td>${q.qna_num}</td>
+                    <td></td>
+                    <td id="table-td" style="text-align: left;">
+                        <c:url var="queryboard_queryDetailPage" value="/forum/queryboard-detail">
+                            <c:param name="qna_id" value="${q.qna_id}" />
+                        </c:url>
+                        <a href="${queryboard_queryDetailPage}">${q.qna_title}</a>
+                    </td>
+                    <td>${q.userid}</td>
+                    <td>${q.qna_created_time}</td>
+                    <td>${q.qna_view_count}</td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
     </section>
-        
+    
+    <!-- 새글 작성 내비게이션(HOME / MAP / NEW POST) -->
+    <div class="new-post-div">
+        <nav class="new-post-nav">
+            <ul class="new-post-ul">
+                <li id="new-post-li-one" class="new-post-li">
+                    <a href="../">HOME</a>
+                </li>
+                <li id="new-post-li-two" class="new-post-li">
+                    <a href="map">MAP</a>    
+                </li>
+                <li id="new-post-li-three" class="new-post-li">
+                    <a href="freeboard-create">NEW POST</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    
     <!-- 게시판 글 페이지네이션(pagination)-->
         <div>
             <nav aria-label="Page navigation">
