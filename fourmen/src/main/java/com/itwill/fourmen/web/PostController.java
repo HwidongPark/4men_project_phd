@@ -46,18 +46,18 @@ public class PostController {
 		log.debug("queryboard()");
 	}
 	
-	@GetMapping("/FAQboard")
-	public void FAQboard(Model FAQboardModel) {
+	@GetMapping("/faqboard")
+	public void FAQboard(Model faqboardModel) {
 		//-> 디스패쳐 서블릿에게 뷰에 전달할 데이터를 저장할 모델 객체를 요청해서 받음.
 		// model: 데이터를 담는 그릇 역할, map 구조로 저장됨, key와 value로 구성.
-		log.debug("FAQboard()");
+		log.debug("faqboard()");
 	}
 	
-	@GetMapping("/notice") 
-		public void notice(Model noticeModel) {
+	@GetMapping("/noticeboard") 
+		public void notice(Model noticeboardModel) {
 		//-> 디스패쳐 서블릿에게 뷰에 전달할 데이터를 저장할 모델 객체를 요청해서 받음.
 		// model: 데이터를 담는 그릇 역할, map 구조로 저장됨, key와 value로 구성.
-		log.debug("notice()");
+		log.debug("noticeboard()");
 	}
 	
 	
