@@ -1,5 +1,7 @@
 package com.itwill.fourmen.domain;
 
+import com.itwill.dto.MarketPostDto;
+
 import lombok.Builder;
 import lombok.Data;
 
@@ -11,6 +13,5 @@ public class WorkImage {
 	String category;
 	String originalFileName;
 	String savedFileName;
-	
 	
 }

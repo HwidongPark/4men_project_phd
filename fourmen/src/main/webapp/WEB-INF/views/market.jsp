@@ -118,20 +118,20 @@
                     <div class="listed-item-container">
                         <div class="item-image-container">
                             <div class="image-size-controller">
-                                <c:url var="marketPostLink"
-                                    value="/market/detail">
-                                    <c:param name="workid"
-                                        value="${ popularMarketPost.workId }" />
+                                <c:url var="marketPostLink" value="/market/detail">
+                                    <c:param name="workid" value="${ popularMarketPost.workId }" />
                                 </c:url>
-                                <a href="${ marketPostLink }"> <img
-                                    src="/fourmen/uploads/${ popularMarketPost.workImages.get(0).savedFileName }">
+                                <a href="${ marketPostLink }">
+                                    <img src="/fourmen/uploads/${ popularMarketPost.workImages.get(0).savedFileName }">
                                 </a>
                             </div>
                         </div>
+                        
                         <!-- 아이템 제목, 가격, 업로드 일자 등 -->
                         <div class="item-info-container">
                             <!-- 제목, 조회수, 좋아요 포함 -->
                             <div class="market-item-title my-2">
+                            <!-- TODO: 여기 못오고 있음 -->
                                 <div>
                                     <a href="${ marketPostLink }"><b>${ popularMarketPost.title }</b></a>
                                 </div>

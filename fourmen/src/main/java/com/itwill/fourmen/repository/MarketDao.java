@@ -43,4 +43,20 @@ public interface MarketDao {
 	// 검색
 	List<Market> searchPosts(MarketSearchDto dto);
 	
+	// 게시글 삭제
+	int deleteMarketPost(Long workId);
+	
+	// work_Images테이블에서 행 삭제
+	int deleteWorkImages(Long workId);
+	
+	// 이미지 하나 삭제
+	int deleteImage(Long imgId);
+	
+	// 특정 이미지 가져오기
+	 WorkImage readImage (Long imgId); 
+	
+	 
+	 // 포스트 글 수정
+	 int updateMarketPost(Market market);
+	 
 }

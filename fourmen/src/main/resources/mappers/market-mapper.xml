@@ -98,4 +98,32 @@
         </where>
     </select>
     
+    <delete id="deleteMarketPost">
+        DELETE FROM market WHERE workid = #{ workId }
+    </delete>
+    
+    <delete id="deleteWorkImages">
+        DELETE FROM work_images WHERE workid = #{ workId }
+    </delete>
+    
+    <delete id="deleteImage">
+        DELETE FROM work_images WHERE imgid = #{ imgId }
+    </delete>
+    
+    <select id="readImage" resultType="WorkImage">
+        SELECT * FROM work_images WHERE imgid = #{ imgId }
+    </select>
+    
+    <update id="updateMarketPost">
+        UPDATE market
+            SET
+        title = #{title},
+        description_kor = #{descriptionKor},
+        price = #{price},
+        year_created = #{yearCreated},
+        painting_size = #{paintingSize}
+            WHERE
+        workid = #{workId}
+    </update>
+    
 </mapper>

@@ -6,10 +6,13 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.itwill.dto.MarketCreateDto;
 import com.itwill.dto.MarketPostDto;
@@ -21,6 +24,7 @@ import com.itwill.fourmen.service.MarketService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import oracle.jdbc.proxy.annotation.GetDelegate;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -208,5 +212,50 @@ public class MarketController {
 		
 		return "/market/list";
 	}
+	
+	
+	/**
+	 * 게시글 삭제하는 컨트롤러 메서드.
+	 * 데이터베이스에서 행 삭제 및 로컬 이미지파일 삭제함
+	 * @param workid
+	 * @param request
+	 * @return
+	 */
+	
+	@PostMapping("/delete")
+	public String delete(@RequestParam(name = "workid") Long workid, HttpServletRequest request) {
+		log.debug("delete(workid={})", workid);
+		
+		String sDirectory = request.getServletContext().getRealPath("/static/uploads");
+		
+		int result = marketService.deleteMarketPost(workid, sDirectory);
+		log.debug("컨트롤러에서 삭제결과={}", result);
+		
+		return "redirect:/market";
+		
+	}
+	
+	// 이건 그냥 업데이트 페이지를 띄워주는 컨트롤러 메서드
+	@PostMapping("/update")
+	public void update(Long workid, Model model) {
+		log.debug("update(workId={}) POST", workid);
+		MarketPostDto marketPost = marketService.readMarketPost(workid);
+		log.debug("marketPostDto = {}", marketPost);
+				
+		model.addAttribute("marketPost", marketPost);
+	}
+	
+	
+	// 이건 업데이트를 수행하는 컨트롤러 메서드
+	@PostMapping("/modify")
+	public String modify(MarketCreateDto dto, HttpServletRequest request) throws IllegalStateException, IOException {
+		log.debug("modify(MarketCreateDto={})", dto);
+		String sDirectory = request.getServletContext().getRealPath("/static/uploads");
+		int result = marketService.updateMarketPost(dto, sDirectory);
+		log.debug("업데이트 결과={}", result);
+		
+		return String.format("redirect:/market/detail?workid=%d", dto.getWorkId());
+	}
+	
 	
 }    // MarketController 클래스 끝

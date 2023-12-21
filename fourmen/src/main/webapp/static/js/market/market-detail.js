@@ -13,7 +13,14 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // 슬라이드 사진들
     const imageSlideItems = document.querySelectorAll('.image-slide-item');
-
+    
+    // 삭제버튼
+    const btnMarketDelete = document.querySelector('#market-btn-delete');
+    const btnMarketUpdate = document.querySelector('#market-btn-update');
+    
+    // workId
+    const workId = document.querySelector('#workId');
+    console.log(workid.innerText);
     // 사진 리스트 폭 초기화
     const numOfPhotos = carouselImages.length;
     console.log(numOfPhotos);
@@ -130,8 +137,13 @@ document.addEventListener('DOMContentLoaded', function() {
     	carouselImageContainer.scrollTo({left: scrollbarPosition * scrollMaxWidth, behavior: 'smooth'});
 		// console.log("크기 변하는 중");
 	})
+        
+  
     
-
-
+    
+    btnMarketUpdate.addEventListener('click', () => {
+        
+    });
+    
 
 })

@@ -10,10 +10,14 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.itwill.dto.MarketCreateDto;
 import com.itwill.dto.MarketPostDto;
+import com.itwill.dto.MarketPostRestDto;
 import com.itwill.dto.MarketSearchDto;
 import com.itwill.dto.PagingDto;
 import com.itwill.fourmen.domain.Market;
@@ -322,6 +326,120 @@ public class MarketService {
 		
 		return marketPostsWithImages;
 		
+	}
+	
+	/**
+	 * 게시글 삭제.. 데이터베이스의 row와 local file 모두 삭제함
+	 * @param workId
+	 * @param sDirectory
+	 * @return
+	 */
+	public int deleteMarketPost(Long workId, String sDirectory) {
+		int result = 0;
+		
+		log.debug("deleteMarketPost(workId={}, sDirectory={})", workId, sDirectory);
+		Market market = Market.builder().workId(workId).build();
+		
+		List<WorkImage> workImages = marketDao.readWorkImagesofPost(market);
+		log.debug("workImages={}", workImages);
+		for(WorkImage workImage : workImages) {
+			File file = new File(sDirectory + File.separator + workImage.getSavedFileName());
+			boolean isDeleted = file.delete();
+			log.debug("is Deleted? = ", isDeleted);
+		}
+		
+		// 테이블에서 삭제
+		result += marketDao.deleteMarketPost(workId);
+		result += marketDao.deleteWorkImages(workId);
+		
+		log.debug("result={}", result);
+		
+		return result;
+	}
+	
+	
+	// TODO: 시간 남으면 좀 더 좋은방법 구상
+	/**
+	 * 특정 포스트에 대한 REST정보 가저옴.. 
+	 * @return
+	 */
+	public MarketPostRestDto readMarketRestPost(Long workId) {
+		log.debug("readMarketRestPost(workId={})", workId);
+		
+		Market marketPost = marketDao.readMarketPost(workId);
+		log.debug("읽어온 마켓포스트 = {}", marketPost);
+		
+		List<WorkImage> workImages = marketDao.readWorkImagesofPost(marketPost);
+		log.debug("읽어온 마켓포스트의 이미지 리스트 = {}", workImages);
+		
+		MarketPostRestDto marketPostWithImages =MarketPostRestDto.fromEntity(marketPost, workImages);
+		
+		return marketPostWithImages;							
+	}
+	
+	
+	/**
+	 * 게시글 수정할 때 사진삭제하는 경우 호출하는 서비스 메서드
+	 */
+	public Integer deleteImage(Long imgId, String sDirectory) {
+		log.debug("deleteImage(imgId={}, sDirectory={})", imgId, sDirectory);
+		
+		// 로컬 이미지 파일 먼저 삭제
+		WorkImage workImage = marketDao.readImage(imgId);
+		log.debug("workImage={}", workImage);
+		
+		File file = new File(sDirectory + File.separator + workImage.getSavedFileName());
+		boolean isDeleted = file.delete();
+		log.debug("is Deleted? = ", isDeleted);
+		
+		
+		// 데이터베이스에서 이미지 삭제
+		int result = marketDao.deleteImage(imgId);
+		log.debug("image delete result={}", result);
+		
+		
+		return result;
+	}
+	
+	public Integer updateMarketPost(MarketCreateDto dto, String sDirectory) throws IllegalStateException, IOException {
+		log.debug("updateMarketPost(MarketCreateDto={})", dto);
+		
+		// 글 수정
+		log.debug("update Market = {}", dto.toEntity());
+		int result = marketDao.updateMarketPost(dto.toEntity());
+		log.debug("result after post={}", result);
+		
+		// 이미지 수정
+		List<MultipartFile> files = dto.getFiles();
+		for (MultipartFile file : files) {
+			
+			if (!file.isEmpty()) {
+				String originalFileName = file.getOriginalFilename();				
+				log.debug("originalFileName={}", originalFileName);
+				
+				// 확장자 구함
+				String extension = originalFileName.substring(originalFileName.lastIndexOf("."));
+				log.debug("확장자={}", extension);
+				
+				// 새로운 파일 이름 구함
+				String savedFileName = new SimpleDateFormat("yyyyMMddHHmmssSSS").format(new Date()) + extension;
+				log.debug("새 파일 이름={}", savedFileName);
+				
+				
+				String absolutePath = sDirectory + File.separator + savedFileName;
+				log.debug("파일절대경로={}", absolutePath);
+				file.transferTo(new File(absolutePath));
+				
+				WorkImage workImage = WorkImage.builder().workId(dto.getWorkId()).originalFileName(originalFileName)
+						.savedFileName(savedFileName).build();
+				
+				marketDao.insertWorkImage(workImage);
+				
+			}
+			
+		}
+		
+		return result;
 	}
 	
 	

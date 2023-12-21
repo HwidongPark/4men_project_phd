@@ -110,8 +110,16 @@
         </section>
         <!-- 수정 삭제 버튼 -->
         <div class="container text-right my-3 d-grid gap-2 d-md-flex justify-content-md-end market-btn-container">
-            <button id="market-btn-delete" class="btn btn-outline-danger mr-2">삭제</button>
-            <button id="market-btn-delete" class="btn btn-outline-primary">수정</button>
+            
+            <form action="/fourmen/market/delete" method="post">
+                <input id="workid" name="workid" class="d-none" type="text" value="${ marketPost.workId }">                     
+                <input type="submit" value="삭제" id="market-btn-delete" class="btn btn-outline-danger mr-2"/>
+            </form>
+            
+            <form action="/fourmen/market/update" method="post">
+                <input id="workid" name="workid" class="d-none" type="text" value="${ marketPost.workId }">
+                <button id="market-btn-update" class="btn btn-outline-primary">수정</button>
+            </form>
         </div>
         
         <%@ include file="../fragments/footer.jspf" %>
@@ -120,9 +128,11 @@
 		  integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
 		   crossorigin="anonymous"></script>
 		
+        
+        <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
         <script src="../js/line-control.js"></script>
         <script src="../js/header.js"></script>
         <script src="../js/market/market-detail.js"></script>
-        
+                
 	</body>
 	</html>
