@@ -108,7 +108,11 @@
                 </p>
             </div>
         </section>
-        
+        <!-- 수정 삭제 버튼 -->
+        <div class="container text-right my-3 d-grid gap-2 d-md-flex justify-content-md-end market-btn-container">
+            <button id="market-btn-delete" class="btn btn-outline-danger mr-2">삭제</button>
+            <button id="market-btn-delete" class="btn btn-outline-primary">수정</button>
+        </div>
         
         <%@ include file="../fragments/footer.jspf" %>
         

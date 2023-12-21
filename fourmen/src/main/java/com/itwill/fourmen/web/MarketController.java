@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwill.dto.MarketCreateDto;
 import com.itwill.dto.MarketPostDto;
+import com.itwill.dto.MarketSearchDto;
+import com.itwill.dto.PagingDto;
 import com.itwill.fourmen.domain.Market;
 import com.itwill.fourmen.service.MarketService;
 
@@ -28,32 +30,102 @@ public class MarketController {
 	
 	private final MarketService marketService;	
 	
+//	/**
+//	 * 마켓 메인페이지로 이동하는 컨트롤러 메서드
+//	 * @param model
+//	 * @param request
+//	 */
+//	@GetMapping("")
+//	public void market(Model model, HttpServletRequest request) {
+//		int numOfPopularMarketPosts = 0;
+//		
+//		List<MarketPostDto> marketPosts = marketService.readMarketPosts();	// 최신글 읽어
+//		log.debug("market(postLists={}) GET", marketPosts);
+//		
+//		// TODO: 인기글 8개 읽어옴
+//		if (marketPosts.size() < 8) {
+//			numOfPopularMarketPosts = marketPosts.size();
+//		} else {
+//			numOfPopularMarketPosts = 8;
+//		}
+//		List<MarketPostDto> popularMarketPosts = marketService.readPopularMarketPosts(numOfPopularMarketPosts);
+//		log.debug("popularMarketPosts={}", popularMarketPosts);
+//		
+//		String sDirectory = request.getServletContext().getRealPath("/static/uploads");
+//		log.debug("sDirectory={}", sDirectory);
+//		// market의 게시글 리스트를 뷰로 전달
+//		model.addAttribute("marketPosts", marketPosts);	// 최신글들을 전달..
+//		// TODO: 인기글 8개 전달
+//		model.addAttribute("popularMarketPosts", popularMarketPosts);
+//		model.addAttribute("sDirectory", sDirectory);
+//		model.addAttribute("fileSeparator", File.separator);
+//		
+//	}
 	
+	
+	/**
+	 * 마켓 메인페이지로 이동하는 컨트롤러 메서드.. 페이징 처리함
+	 * @param model
+	 * @param request
+	 */
 	@GetMapping("")
-	public void market(Model model, HttpServletRequest request) {
-		List<MarketPostDto> marketPosts = marketService.readMarketPosts();
-		log.debug("market(postLists={}) GET", marketPosts);
+	public void market(@RequestParam(name = "page", required = false, defaultValue = "1") int page, Model model, HttpServletRequest request) {
+		log.debug("market(page={})", page);
+		
+		int numOfPopularMarketPosts = 0;	// 인기글 개수 초기화.. 최대 8개로 제한할거임
+		
+		// 해당 페이지의 포스트들만 가져옴
+		List<MarketPostDto> pagedMarketPosts = marketService.readPagedMarketPosts(page);
+		log.debug("pagedMarketPosts={}", pagedMarketPosts);
+		
+		PagingDto pagingDto = marketService.paging(page);	// 페이지처리할 dto받아옴
+		log.debug("pagingDto={}", pagingDto);
+		
+		int totNumPosts = marketService.countTotNumber();	// 전체 포스트 개수 가져옴
+		// 인기글 8개 읽어옴.. 예는 전체 포스트에서 가져온거 사용,,
+		if (totNumPosts < 8) {
+			numOfPopularMarketPosts = totNumPosts;
+		} else {
+			numOfPopularMarketPosts = 8;
+		}
+		List<MarketPostDto> popularMarketPosts = marketService.readPopularMarketPosts(numOfPopularMarketPosts);	// 인기포스트 가져옴(서비스호출)
+		log.debug("popularMarketPosts={}", popularMarketPosts);
 		
 		String sDirectory = request.getServletContext().getRealPath("/static/uploads");
 		log.debug("sDirectory={}", sDirectory);
-		log.debug("fileSeparator={}", File.separator);
 		// market의 게시글 리스트를 뷰로 전달
-		model.addAttribute("marketPosts", marketPosts);
+		// TODO:  변수이름 다시 생각.. 그냥 가도 되기는 함.
+		model.addAttribute("marketPosts", pagedMarketPosts);	// 최신글들을 전달..
+		model.addAttribute("pagingDto", pagingDto);	// 아래 페이징 처리할 dto전달
+		// TODO: 인기글 8개 전달
+		model.addAttribute("page", page);
+		model.addAttribute("popularMarketPosts", popularMarketPosts);
 		model.addAttribute("sDirectory", sDirectory);
 		model.addAttribute("fileSeparator", File.separator);
 		
-		
 	}
 	
+	
+	/**
+	 * 마켓 게시글 상세보기 컨트롤러 메서드
+	 * @param workid
+	 * @param model
+	 */
 	@GetMapping("/detail")
 	public void detail(@RequestParam Long workid, Model model) {
 		log.debug("detail(workId={}) GET", workid);
 		MarketPostDto marketPost = marketService.readMarketPost(workid);
 		log.debug("marketPostDto = {}", marketPost);
 		
+		marketService.addView(workid);
+		
 		model.addAttribute("marketPost", marketPost);
 	}
 	
+	
+	/**
+	 * 마켓 글 작성 컨트롤러 메서드
+	 */
 	@GetMapping("/create")
 	public void create() {
 		log.debug("create() GET");
@@ -70,5 +142,71 @@ public class MarketController {
 		
 		return "redirect:/market";	// TODO: 일단 이렇게하고 서비스에서 파일전송되는지 확인해보자.
 	}
-
-}
+	
+	
+	/**
+	 * 마켓 최신글 게시판으로 보내는 컨트롤러 메서드
+	 * @param model
+	 * @param request
+	 * @return
+	 */
+	@GetMapping("/recent")
+	public String marketRecentList(Model model, HttpServletRequest request) {
+		List<MarketPostDto> marketPosts = marketService.readMarketPosts();
+		log.debug("marketRecentList(postLists={}) GET", marketPosts);
+		
+		String sDirectory = request.getServletContext().getRealPath("/static/uploads");
+		log.debug("sDirectory={}", sDirectory);
+		// market의 게시글 리스트를 뷰로 전달
+		model.addAttribute("marketPosts", marketPosts);
+		model.addAttribute("sDirectory", sDirectory);
+		model.addAttribute("fileSeparator", File.separator);
+		model.addAttribute("pageTitle", "최신 장터 목록");
+		
+		
+		return "/market/list";
+	}
+	
+	/**
+	 * 마켓 인기글 게시판으로 보내는 컨트롤러 메서드.
+	 * 최대 20개의 게시물만 보여주도록 해놓음
+	 * @param model
+	 * @param request
+	 * @return
+	 */
+	@GetMapping("/popular")
+	public String marketPopularList(Model model, HttpServletRequest request) {
+		// TODO: 서비스, DAO만들기.. 밥먹고나서
+		List<MarketPostDto> marketPosts = marketService.readPopularMarketPosts();
+		log.debug("marketPopularList(marketPosts={})", marketPosts);
+		
+		String sDirectory = request.getServletContext().getRealPath("/static/uploads");
+		log.debug("sDirectory={}", sDirectory);
+		
+		model.addAttribute("marketPosts", marketPosts);
+		model.addAttribute("sDirectory", sDirectory);
+		model.addAttribute("fileSeparator", File.separator);
+		model.addAttribute("pageTitle", "인기 장터 목록");
+		
+		return "/market/list";
+	}
+	
+	
+	@GetMapping("/search")
+	public String search(Model model, MarketSearchDto dto,HttpServletRequest request) {
+		log.debug("search(dto={})", dto);
+		
+		List<MarketPostDto> marketPosts = marketService.searchPosts(dto);
+		log.debug("searchedMarketPosts = {}", marketPosts);
+		
+		String sDirectory = request.getServletContext().getRealPath("/static/uploads");
+		
+		model.addAttribute("marketPosts", marketPosts);
+		model.addAttribute("sDirectory", sDirectory);
+		model.addAttribute("fileSeparator", File.separator);
+		model.addAttribute("pageTitle", "검색 결과");
+		
+		return "/market/list";
+	}
+	
+}    // MarketController 클래스 끝

@@ -22,13 +22,11 @@
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-<link rel="stylesheet" href="/fourmen/css/pagenation.css">
-
 
 </head>
 
 <body>
-    <%@include file="fragments/navigation.jspf"%>
+    <%@include file="../fragments/navigation.jspf"%>
 
     <section role="search" class="search-container">
         <c:url var="searchPage" value="/market/search"/>
@@ -105,76 +103,14 @@
             <c:url var="createMarketPost" value="/market/create" />
             <button class="btn btn-outline-success">글 작성</button>
         </div>
+        
+        <!-- 게시판 -->
         <div class="list-item-category-title">
             <h2>
-                <c:url var="popularMarketList" value="/market/popular"/>
-                <a href="${ popularMarketList }">인기 리스트</a>
+                ${ pageTitle }
             </h2>
         </div>
-        <div class="list-container">
-            <!-- JSTL의 for문으로 인기글 8개만 보여줌 -->
-            <c:if test="${ not empty popularMarketPosts }">
-                <c:forEach var="popularMarketPost" items="${ popularMarketPosts }">
-                    <div class="listed-item-container">
-                        <div class="item-image-container">
-                            <div class="image-size-controller">
-                                <c:url var="marketPostLink"
-                                    value="/market/detail">
-                                    <c:param name="workid"
-                                        value="${ popularMarketPost.workId }" />
-                                </c:url>
-                                <a href="${ marketPostLink }"> <img
-                                    src="/fourmen/uploads/${ popularMarketPost.workImages.get(0).savedFileName }">
-                                </a>
-                            </div>
-                        </div>
-                        <!-- 아이템 제목, 가격, 업로드 일자 등 -->
-                        <div class="item-info-container">
-                            <!-- 제목, 조회수, 좋아요 포함 -->
-                            <div class="market-item-title my-2">
-                                <div>
-                                    <a href="${ marketPostLink }"><b>${ popularMarketPost.title }</b></a>
-                                </div>
-                            </div>
 
-                            <!-- 가격 -->
-                            <div class="market-price-views-likes-container">
-                                <div class="market-item-price">
-                                    <fmt:formatNumber type="number" maxFractionDigits="2" value="${popularMarketPost.price }" />원
-                                </div>
-                                <div class="market-views-and-likes">
-                                      <!-- 조회수 -->
-                                    <span class="material-symbols-outlined">
-                                        visibility
-                                    </span>
-                                    ${ popularMarketPost.views }
-                                    <!-- 좋아요(찜) -->
-                                    <span class="material-symbols-outlined">
-                                        favorite
-                                    </span>
-                                    ${ popularMarketPost.likes }
-                                </div>                                
-                            </div>
-                            <c:if
-                                test="${ not empty popularMarketPost.isSold }">
-                                <div class="is-sold">
-                                    <b>거래 완료</b>
-                                </div>
-                            </c:if>
-                        </div>
-                    </div>
-                </c:forEach>
-            </c:if>
-        </div>
-
-        <!-- 인기 목록 끝 최신목록 시작 -->
-
-        <div class="list-item-category-title">
-            <h2>
-                <c:url var="recentMarketList" value="/market/recent"/>
-                <a href="${ recentMarketList }">최신 리스트</a>
-            </h2>
-        </div>
         <div class="list-container">
             <!-- JSTL로 포스트 적용... -->
             <c:if test="${ not empty marketPosts }">
@@ -182,9 +118,10 @@
                     <div class="listed-item-container">
                         <div class="item-image-container">
                             <div class="image-size-controller">
-                                <c:url var="marketPostLink" value="/market/detail">
-                                    <c:param name="workid" value="${ marketPost.workId }" />
-                                    <c:param name="page" value="${ page }" />
+                                <c:url var="marketPostLink"
+                                    value="/market/detail">
+                                    <c:param name="workid"
+                                        value="${ marketPost.workId }" />
                                 </c:url>
                                 <a href="${ marketPostLink }"> <img
                                     src="/fourmen/uploads/${ marketPost.workImages.get(0).savedFileName }">
@@ -230,82 +167,9 @@
             </c:if>
         </div>
     </main>
-    
-    
-    <!-- 게시판 글 페이지네이션(pagination)-->
-    <div>
-        <nav aria-label="Page navigation">            
-            <ul class="pagination">
-                <!-- 이전, 처음 페이지 -->
-                <li class="page-item">
-                    <c:url var="firstPage" value="/market" />
-                    <a class="page-link-img" href="${ firstPage }" aria-label="first page">
-                        <img id="pagination-img" alt="first page" src="/fourmen/pagination/pagination01.png">
-                    </a>
-                </li>
-                <c:choose>
-                    <c:when  test="${ page le 1 }">
-                        <li class="page-item">
-                            <span class="page-link-img" aria-label="previous">
-                                <img id="pagination-img" alt="previous page" src="/fourmen/pagination/pagination02.png">
-                            </span>
-                        </li>
-                    </c:when>
-                    <c:otherwise>
-                        <li class="page-item">
-                            <c:url var="prevPage" value="/market">
-                                <c:param name="page" value="${ page - 1 }"/>
-                            </c:url>
-                            <a class="page-link-img" href="${prevPage }" aria-label="previous">
-                                <img id="pagination-img" alt="previous page" src="/fourmen/pagination/pagination02.png">
-                            </a>
-                        </li>
-                    </c:otherwise>
-                </c:choose>
-                
-                <!-- 필요한만큼만 페이지 보여줌 -->
-                <c:forEach var="pageNum" begin="${ pagingDto.startPage }" end="${ pagingDto.endPage }" step="1">
-                    <li class="page-item">
-                        <c:url var="moveToPage" value="/market">
-                            <c:param name="page" value="${ pageNum }"/>
-                        </c:url>
-                        <a class="page-link" href="${ moveToPage }">${ pageNum }</a>
-                    </li>
-                </c:forEach>
-                
-                <!-- 다음 마지막 페이지 -->
-                <c:choose>
-                    <c:when test="${ page ge pagingDto.totNumPages }">
-                        <li class="page-item">
-                            <span class="page-link-img" aria-label="next">
-                                <img id="pagination-img" alt="next page" src="/fourmen/pagination/pagination03.png">
-                            </span>
-                        </li>
-                    </c:when>
-                    <c:otherwise>
-                        <c:url var="nextPage" value="/market">
-                            <c:param name="page" value="${ page + 1 }"></c:param>
-                        </c:url>
-                        <a class="page-link-img" href="${ nextPage }" aria-label="next">
-                            <img id="pagination-img" alt="next page" src="/fourmen/pagination/pagination03.png">
-                        </a>
-                    </c:otherwise>
-                </c:choose>
-                <c:url var="lastPage" value="/market">
-                    <c:param name="page" value="${ pagingDto.totNumPages }"/>
-                </c:url>
-                <li class="page-item">
-                    <a class="page-link-img" href="${ lastPage }" aria-label="last page">
-                        <img id="pagination-img" alt="last page" src="/fourmen/pagination/pagination04.png">
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </div>
-    
-    
 
-    <%@ include file="fragments/footer.jspf"%>
+
+    <%@ include file="../fragments/footer.jspf"%>
 
     <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"

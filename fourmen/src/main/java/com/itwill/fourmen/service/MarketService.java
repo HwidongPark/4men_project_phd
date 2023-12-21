@@ -5,13 +5,17 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.itwill.dto.MarketCreateDto;
 import com.itwill.dto.MarketPostDto;
+import com.itwill.dto.MarketSearchDto;
+import com.itwill.dto.PagingDto;
 import com.itwill.fourmen.domain.Market;
 import com.itwill.fourmen.domain.WorkImage;
 import com.itwill.fourmen.repository.MarketDao;
@@ -25,6 +29,9 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class MarketService {
 	private final MarketDao marketDao;
+	
+	private int postsPerPage = 2;
+	private int pagesShownInBar = 3;
 	
 	/**
 	 * 포스트 작성하는 메서드. market테이블과 work_images테이블에 데이터 insert
@@ -118,7 +125,140 @@ public class MarketService {
 	}
 	
 	
+	// TODO: 페이징처리 서비스 완료하기
+	public List<MarketPostDto> readPagedMarketPosts(int page) {
+		log.debug("readPagedMarketPosts(page={})", page);
+		
+		Map<String, Integer> paging = new HashMap<>();
+		paging.put("startPage", (page - 1) * postsPerPage);
+		paging.put("postsPerPage", postsPerPage);
+		
+		List<Market> pagedMarketPosts = marketDao.readPagedMarketPosts(paging);
+		log.debug("pagedMarketPosts={}", pagedMarketPosts);
+		
+		List<MarketPostDto> marketPostsWithImages = new ArrayList<>();
+		for (Market pagedMarketPost : pagedMarketPosts) {
+			List<WorkImage> workImages = marketDao.readWorkImagesofPost(pagedMarketPost);
+			log.debug("Images of the post={}", workImages);
+			
+			MarketPostDto marketPostWithImage = MarketPostDto.fromEntity(pagedMarketPost, workImages);
+			marketPostsWithImages.add(marketPostWithImage);
+		}
+		log.debug("marketPostsWithImages={}", marketPostsWithImages);
+		
+		
+		return marketPostsWithImages;
+	}
 	
+	/**
+	 * 시작페이지, 끝페이지, 마지막 페이지 등 포함한 PagingDto를 반환
+	 * @param page
+	 * @return
+	 */
+	public PagingDto paging(int page) {
+		int totNumPosts = marketDao.countTotNumber();
+		int startPage = (int) Math.ceil( ((double) page / pagesShownInBar) - 1 ) * pagesShownInBar + 1 ;
+	
+		int totNumPages = (int) Math.ceil((double) totNumPosts / postsPerPage);	// 총 페이지 개수
+		int endPage = 0;
+		if ((startPage + pagesShownInBar - 1) >= totNumPages) {
+			endPage = totNumPages;
+		} else {
+			endPage = startPage + pagesShownInBar - 1;
+		};
+		
+		PagingDto pagingDto = PagingDto.builder().startPage(startPage).endPage(endPage).totNumPages(totNumPages).pagesShownInBar(pagesShownInBar).build();
+		
+		return pagingDto;
+	}
+	
+	
+	/**
+	 * 전체 포스트 개수 구함
+	 * @return
+	 */
+	public Integer countTotNumber() {
+		Integer result = marketDao.countTotNumber();
+		
+		if (result == null) {
+			result = 0;
+		}
+		
+		return result;
+	}
+	
+	
+	/**
+	 * 인기 포스트의 목록, 해당 포스트에 따른 사진의 목록을 읽어와서 MarketPostDto의 리스트를 리턴
+	 * @return
+	 */
+	public List<MarketPostDto> readPopularMarketPosts() {
+		log.debug("readPopularMarketPosts()");
+		List<Market> marketPosts = marketDao.readPopularMarketPosts();
+		log.debug("readMarketPosts(postLists={})", marketPosts);
+		log.debug("가져온 게시물 개수 = {}", marketPosts.size());
+		
+		List<MarketPostDto> marketPostsWithImages = new ArrayList<>();
+		
+		for (Market marketPost : marketPosts) {
+			// 해당 게시글 이미지 읽어옴
+			List<WorkImage> workImages = marketDao.readWorkImagesofPost(marketPost);
+			log.debug("Images of the post={}", workImages);
+			// DTO생성해서 리스트 추가
+			MarketPostDto marketPostWithImage = MarketPostDto.builder()
+							.userId(marketPost.getUserId())
+							.workId(marketPost.getWorkId())
+							.title(marketPost.getTitle())
+							.descriptionKor(marketPost.getDescriptionKor())
+							.price(marketPost.getPrice())
+							.yearCreated(marketPost.getYearCreated())
+							.paintingSize(marketPost.getPaintingSize())
+							.createdTime(marketPost.getCreatedTime())
+							.isSold(marketPost.getIsSold())
+							.views(marketPost.getViews())
+							.likes(marketPost.getLikes())
+							.workImages(workImages)
+							.build();
+			log.debug("marketPostWithImage={}", marketPostWithImage);
+			
+			marketPostsWithImages.add(marketPostWithImage);
+		}
+		
+		return marketPostsWithImages;
+	}
+	
+	/**
+	 * 받고싶은 인기 포스트개수를 아규먼트로 받아서, 그 개수만큼의 상위 인기게시물을 리턴
+	 * @param numOfPosts
+	 * @return
+	 */
+	public List<MarketPostDto> readPopularMarketPosts(int numOfPosts) {
+		log.debug("readPopularMarketPosts()");
+		List<Market> marketPosts = marketDao.readPopularMarketPosts();
+		log.debug("readPopularMarketPosts(postLists={})", marketPosts);
+		log.debug("가져온 게시물 개수 = {}", marketPosts.size());
+		
+		List<MarketPostDto> marketPostsWithImages = new ArrayList<>();
+		
+		for (int i = 0; i < numOfPosts; i++) {
+			// 해당 게시글 이미지 읽어옴
+			List<WorkImage> workImages = marketDao.readWorkImagesofPost(marketPosts.get(i));
+			log.debug("Images of the post={}", workImages);
+			// DTO생성해서 리스트 추가
+			MarketPostDto marketPostWithImage = MarketPostDto.fromEntity(marketPosts.get(i), workImages);
+			log.debug("popularMarketPostWithImage={}", marketPostWithImage);
+			
+			marketPostsWithImages.add(marketPostWithImage);
+		}
+		
+		return marketPostsWithImages;
+	}
+	
+	/**
+	 * 특정 포스트를 읽어옴. 
+	 * @param workId
+	 * @return 해당 마켓포스트에 대한 정보와 이미지를 가지고 있는 객체를 반환
+	 */
 	public MarketPostDto readMarketPost(Long workId) {
 		log.debug("readMarketPost(workId={})", workId);
 		
@@ -145,6 +285,44 @@ public class MarketService {
 		
 		return marketPostWithImages;							
 		
+	}	// readMarketPost()끝
+	
+	/**
+	 * 유저가 해당 마켓 게시글의 상세보기를 클릭할 시 조회수 증가
+	 * @param workId
+	 * @return 조회수 증가 성공 시 1, 실패시 0
+	 */
+	public int addView(Long workId) {
+		log.debug("addView(workId={})", workId);
+		
+		int result = marketDao.addView(workId);
+		log.debug("addView결과={}", result);
+		
+		return result;
 	}
 	
-}
+	
+	public List<MarketPostDto> searchPosts(MarketSearchDto searchDto) {
+		log.debug("searchPosts(searchDto={})", searchDto);
+		
+		List<Market> marketPosts = marketDao.searchPosts(searchDto);
+		
+		List<MarketPostDto> marketPostsWithImages = new ArrayList<>();
+		
+		for (Market marketPost : marketPosts) {
+			// 해당 게시글 이미지 읽어옴
+			List<WorkImage> workImages = marketDao.readWorkImagesofPost(marketPost);
+			log.debug("Images of the searchPost={}", workImages);
+			// DTO생성해서 리스트 추가
+			MarketPostDto marketPostWithImage = MarketPostDto.fromEntity(marketPost, workImages);
+			log.debug("(search)marketPostWithImage={}", marketPostWithImage);
+			
+			marketPostsWithImages.add(marketPostWithImage);
+		}
+		
+		return marketPostsWithImages;
+		
+	}
+	
+	
+}	// MarketService 클래스 끝

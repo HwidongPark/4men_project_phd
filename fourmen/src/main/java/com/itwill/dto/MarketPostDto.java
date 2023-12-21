@@ -3,6 +3,7 @@ package com.itwill.dto;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.itwill.fourmen.domain.Market;
 import com.itwill.fourmen.domain.WorkImage;
 
 import lombok.Builder;
@@ -29,5 +30,23 @@ public class MarketPostDto {
 	private String isSold;
 	private String buyerId;
 	
+	
+	public static MarketPostDto fromEntity(Market market, List<WorkImage> workImages) {
+		
+		return MarketPostDto.builder()
+				.userId(market.getUserId())
+				.workId(market.getWorkId())
+				.title(market.getTitle())
+				.descriptionKor(market.getDescriptionKor())
+				.price(market.getPrice())
+				.yearCreated(market.getYearCreated())
+				.paintingSize(market.getPaintingSize())
+				.createdTime(market.getCreatedTime())
+				.isSold(market.getIsSold())
+				.views(market.getViews())
+				.likes(market.getLikes())
+				.workImages(workImages)
+				.build();		
+	}
 	
 }

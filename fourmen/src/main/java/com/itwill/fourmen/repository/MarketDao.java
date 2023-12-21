@@ -1,8 +1,10 @@
 package com.itwill.fourmen.repository;
 
 import java.util.List;
+import java.util.Map;
 
 import com.itwill.dto.MarketPostDto;
+import com.itwill.dto.MarketSearchDto;
 import com.itwill.fourmen.domain.Market;
 import com.itwill.fourmen.domain.WorkImage;
 
@@ -10,13 +12,24 @@ public interface MarketDao {
 	
 	// 마켓 글 삽입
 	int insertMarketPost(Market market);
+	
 	// 포스트 아이디 찾아오기
 	Long getWorkId();
+	
 	// 마켓 사진 삽입
 	int insertWorkImage(WorkImage workImage);
 	
-	// 마켓 모든 글 + 사진 읽어오기
+	// 마켓 모든 글 읽어오기
 	List<Market> readMarketPosts();
+	
+	// 전체 포스트 개수 읽어오기
+	Integer countTotNumber();
+	
+	// TODO: 페이징처리한 글 읽어오기
+	List<Market> readPagedMarketPosts(Map<String, Integer> paging);
+	
+	// 마켓 인기글 읽어오기
+	List<Market> readPopularMarketPosts();
 	
 	// 특정 마켓 포스트 정보 가져오기
 	Market readMarketPost(Long workId);
@@ -24,6 +37,10 @@ public interface MarketDao {
 	// 해당 포스트마다 매칭되는 이미지 가져오기
 	List<WorkImage> readWorkImagesofPost(Market market);
 	
-
+	// 해당 포스트 조회시 조회수 증가
+	int addView(Long workId);
+	
+	// 검색
+	List<Market> searchPosts(MarketSearchDto dto);
 	
 }

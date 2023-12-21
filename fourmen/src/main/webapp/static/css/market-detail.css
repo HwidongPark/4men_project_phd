@@ -223,6 +223,14 @@ section.product-container {
     line-height: 24px;
 }
 
+
+/* 삭제, 수정 버튼관련  */
+.market-btn-container {
+    width: 85%;
+    text-align: right;
+}
+
+
 @media (max-width: 1040px) {
     
     
