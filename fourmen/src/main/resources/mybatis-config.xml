@@ -6,5 +6,13 @@
 <!-- MyBatis3 프레임워크 설정 -->
 <configuration>
 
+	<typeAliases>
+		<typeAlias type="com.itwill.fourmen.domain.Artist"
+			alias = "Artist" />
+		<typeAlias type="com.itwill.fourmen.domain.Artist_Works"
+			alias = "Artist_Works"/>
+		<typeAlias type="com.itwill.fourmen.domain.Artist_Works_Img"
+			alias = "Artist_Works_Img"/>	
+	</typeAliases>
 
 </configuration>

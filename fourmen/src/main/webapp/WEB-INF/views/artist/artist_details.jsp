@@ -47,73 +47,65 @@ div#details {
 
 	<div id="details" class="my-5 container-fluid w-75">
 
-
+		<!-- 페이지 상단 아티스트 사진 및 소개 -->
 		<div class="card mb-3 border-0" style="max-width: 100%;">
 			<div class="row g-0">
 				<div class="col-md-6">
-					<img src="../images/char/VanGogh.png"
-						class="img-fluid rounded-0" alt="Van Gogh">
+					<img id="artist_img" src="../images/char/${artist.artist_img}" onerror="this.onerror=null; this.src='../images/char/default_user.png'" class="img-fluid rounded-0" alt="${artist.userid}"/>
 				</div>
 				<div class="col-md-6">
 					<div class="card-body">
-						<h5 class="fs-1 card-title text-success fw-bolder">Vincent Willem van Gogh</h5>
-						<p class="fs-5 card-text">네덜란드의 화가로서 일반적으로 서양 미술사상 가장 위대한 화가 중 한
-							사람으로 여겨진다. 그는 자신의 작품 전부(900여 점의 그림들과 1100여 점의 습작들)를 정신질환(측두엽
-							기능장애로 추측됨)을 앓고 자살을 감행하기 전의 단지 10년 동안에 만들어냈다. 그는 살아있는 동안 거의 성공을
-							거두지 못하고 사후에 비로소 알려졌는데, 특히 1901년 3월 17일 파리에서 71점의 그림을 전시한 이후 명성을
-							얻게 되었다.</p> <br><br>
+						<h5 id="userid" class="fs-1 card-title text-success fw-bolder">${artist.userid}</h5>
+						<p id="artist_bio_kor" class="fs-5 card-text">${artist.artist_bio_kor}</p> <br><br>
 						<p class="fs-5 card-text">
-							<small class="text-body-secondary">Dutch
-								Post-Impressionist painter who is among the most famous and
-								influential figures in the history of Western art. In just over
-								a decade he created approximately 2100 artworks, including
-								around 860 oil paintings, most of them in the last two years of
-								his life. They include landscapes, still lifes, portraits and
-								self-portraits, and are characterised by bold, symbolic colours,
-								and dramatic, impulsive and highly expressive brushwork that
-								contributed to the foundations of modern art. Only one of his
-								paintings was known by name to have been sold during his
-								lifetime. Van Gogh became famous after his suicide at age 37,
-								which followed years of poverty and mental illness.</small>
+							<small id="artist_bio_eng" class="text-body-secondary">${artist.artist_bio_eng}</small>
 						</p>
 					</div>
 				</div>
 			</div>
 		</div>
 
+		<!-- 페이지 하단 작품 리스트 -->
 		<div class="mt-4">
 			<table class="table table-striped fs-5">
 				<thead>
 					<tr>
-						<th class="col-2" >#</th>
+						<th class="col-2" >작품번호</th>
 						<th class="col-7" >작품제목</th>
 						<th class="col-3" >등록일자</th>
 					</tr>
 				</thead>
 				<tbody class="table-group-divider">
-					<tr>
-						<th scope="row">1</th>
-						<td><a href="works">자화상</a></td>
-						<td>#</td>
-					</tr>
-					<tr>
-						<th scope="row">2</th>
-						<td><a href="works">자화상</a></td>
-						<td>#</td>
-					</tr>
-					<tr>
-						<th scope="row">3</th>
-						<td><a href="works">자화상</a></td>
-						<td>#</td>
-					</tr>
-					<tr>
-						<th scope="row">4</th>
-						<td><a href="works">자화상</a></td>
-						<td>#</td>
-					</tr>
+					<c:forEach var="w" items="${worksList}">
+						<tr>
+							<th scope="row">${w.worksid}</th>
+							<td>
+								<c:url var="worksPage" value="/artist/artist_works">
+									<c:param name="worksid" value="${w.worksid}" />
+								</c:url>
+								<a href="${worksPage}">${w.title}</a>
+							</td>
+							<td>${w.getFormattedCreatedDate()}</td>
+						</tr>
+					</c:forEach>
 				</tbody>
 			</table>
 		</div>
+		
+		<!-- 페이지 최하단 로그인한 아티스트만 소개글 및 사진 수정 & 작품 추가 및 삭제/수정 버튼 -->
+		<div class = "mt-4 card-footer d-grid gap-2 d-md-flex justify-content-md-end">
+			<!-- 수정 버튼 -->
+			<c:url var = "ArtistModifyPage" value = "/artist/artist_modify">
+				<c:param name = "userid" value = "${artist.userid}" />
+			</c:url>
+			<a href="${ArtistModifyPage}" class="btn btn-outline-dark me-md-2">수정</a>
+			<!-- 작품 추가 버튼 -->
+			<c:url var = "WorksAddPage" value = "/artist/artist_worksadd">
+				<c:param name = "userid" value = "${works.userid}" />
+			</c:url>
+			<a href="${WorksAddPage}" class="btn btn-outline-dark">작품 추가</a>
+		</div>
+
 	</div>
 
 	<%@ include file="../fragments/footer.jspf"%>
