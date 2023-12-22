@@ -66,6 +66,11 @@ html {
 	<div id="works" class="my-5 container-fluid container-xl w-75">
 
 		<div class="card border-0">
+			<div class = "card-text d-none">
+				<input id = "worksid" name = "worksid" class = "card-text" value = "${artist_works.worksid}" />
+				<input id = "userid" name = "userid" class = "card-text" value = "${artist_works.userid}" />
+			</div>
+		
 			<div id="Works_Title" class="card-text">
 				<p id="title" class="card-text">${artist_works.title}</p>
 			</div>
@@ -79,9 +84,15 @@ html {
 		</div>
 		
 		<div class = "card border-0 rounded-0">
-			<c:forEach var = "wi" items = "${worksImgList}">
-				<img class="card-img mb-5 rounded-0" src = "../images/works/${wi.original_file}" onerror="this.onerror=null; this.src='../images/works/default_works.png'" alt="test_works_img"/>
-			</c:forEach>
+			<c:if test = "${empty worksImgList}">
+					<img class="card-img mb-5 rounded-0" src = "../images/works/default_works.png"/>
+			</c:if>
+			
+			<c:if test = "${not empty worksImgList}">
+				<c:forEach var = "wi" items = "${worksImgList}">
+					<img class="card-img mb-5 rounded-0" src = "../images/works/${wi.saved_file}" onerror="this.src='../images/works/default_works.png'" alt="test_works_img"/>
+				</c:forEach>
+			</c:if>
 		</div>
 	</div>
 
@@ -118,6 +129,17 @@ html {
 				onclick="window.scrollTo(0,0);">위로 가기</button>
 
 		</div>
+		
+		<div class = "mt-4 card-footer d-grid gap-2 d-md-flex justify-content-md-end">
+			<!-- 수정 버튼 -->
+			<c:url var = "worksModifyPage" value = "/artist/works_modify">
+				<c:param name = "worksid" value = "${artist_works.worksid}" />
+			</c:url>
+			<a href="${worksModifyPage}" class="btn btn-outline-dark me-md-2">작품 수정</a>
+			<!-- 작품 추가 버튼 -->
+			
+			<button class="btn btn-outline-dark" id="btnDelete">작품 삭제</button>
+		</div>
 
 	</div>
 
@@ -128,6 +150,7 @@ html {
 		integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
 		crossorigin="anonymous"></script>
 	<script src="../js/works-comments.js"></script>
+	<script src="../js/works-modify.js"></script>
 
 </body>
 </html>

@@ -4,10 +4,14 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.itwill.fourmen.domain.Artist;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 public class ArtistUpdateDto {
 

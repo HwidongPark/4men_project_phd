@@ -1,12 +1,18 @@
 package com.itwill.fourmen.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.itwill.fourmen.domain.Artist;
 import com.itwill.fourmen.domain.Artist_Works;
 import com.itwill.fourmen.domain.Artist_Works_Img;
+import com.itwill.fourmen.dto.artist.ArtistAddWorksDto;
+import com.itwill.fourmen.dto.artist.ArtistAddWorksImgDto;
 import com.itwill.fourmen.dto.artist.ArtistListItemDto;
 import com.itwill.fourmen.dto.artist.ArtistUpdateDto;
 import com.itwill.fourmen.dto.artist.ArtistWorksImgListItemDto;
@@ -82,11 +88,89 @@ public class ArtistService {
 	}
 	
 	// artist_details에서 개인 소개글과 사진을 업데이트 하기 위함...
-	public int updateArtist(ArtistUpdateDto dto) {
+	public void updateArtist(ArtistUpdateDto dto, String sDirectory) throws IllegalStateException, IOException {
 		log.debug("ArtistService updateArtist()");
 		log.debug("ArtistService updateArtist DTO = {}", dto);
+		log.debug("ArtistService updateArtist sDirectory = {}", sDirectory);
 		
-		int result = artistDao.updateArtist(dto.toEntity());
+		Artist artist = artistDao.selectByUserid(dto.getUserid());
+		log.debug("ArtistService updateArtist Artist artist_img = {}", artist.getArtist_img());
+		
+		MultipartFile file = dto.getUpload_file();
+		
+		if(!file.isEmpty()) {
+			String originalFileName = file.getOriginalFilename();
+			log.debug("originalFileName = {}",originalFileName);
+			
+			// 확장자....!
+			String fileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
+			log.debug("fileExtension = {}", fileExtension);
+			
+			// 새로운 파일 이름...!
+			String artist_img = UUID.randomUUID().toString() + fileExtension;
+			
+			String absolutePath = sDirectory + File.separator + artist_img;
+			log.debug("absolutePath = {}", absolutePath);
+			file.transferTo(new File(absolutePath));
+			
+			dto.setArtist_img(artist_img);
+			
+			artistDao.updateArtist(dto.toEntity());
+			
+			log.debug("UPLOAD SUCCESS....!");
+		} else if (file.isEmpty()) {
+			
+			Artist newArtist = Artist.builder().userid(dto.getUserid()).artist_bio_kor(dto.getArtist_bio_kor()).artist_bio_eng(dto.getArtist_bio_eng()).build();
+			
+			artistDao.deleteArtistProfileImg(newArtist);
+		}
+	}
+	
+	public void addWorks(ArtistAddWorksDto dto) {
+		log.debug("ArtistService addWorks");
+		log.debug("ArtistService addWorks dto = {}", dto);
+		
+		artistDao.createWorks(dto.toEntity());
+	}
+	
+	// 작품 별 이미지를 넣는 작업
+	public void insertWorksImg(ArtistAddWorksImgDto dto, String sDirectory) throws IllegalStateException, IOException {
+		log.debug("ArtistService insertWorksImg");
+		log.debug("ArtistService insertWorksImg dto = {}", dto);
+		log.debug("ArtistService insertWorksImg sDirectory = {}", sDirectory);
+		
+		List<MultipartFile> files = dto.getOriginal_file();
+		
+		for(MultipartFile file : files) {
+			
+			if(!file.isEmpty()) {
+				String origninalFileName = file.getOriginalFilename();
+				
+				String fileExtension = origninalFileName.substring(origninalFileName.lastIndexOf("."));
+				
+				String savedFile = UUID.randomUUID().toString() + fileExtension;
+				
+				String absolutePath = sDirectory + File.separator + savedFile;
+				
+				file.transferTo(new File(absolutePath));
+				
+				Artist_Works_Img artist_Works_Img = Artist_Works_Img.builder()
+						.worksid(dto.getWorksid())
+						.category(dto.getCategory())
+						.original_file(origninalFileName)
+						.saved_file(savedFile)
+						.build();
+				
+				artistDao.createWorksImg(artist_Works_Img);
+			}
+		}
+	}
+	
+	public int deleteWorks(String worksid) {
+		log.debug("ArtistService deleteWorks()");
+		log.debug("ArtistService deleteWorks worksid = {}", worksid);
+		
+		int result =  artistDao.deleteWorks(worksid);
 		
 		return result;
 	}

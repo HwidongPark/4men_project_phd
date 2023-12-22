@@ -51,7 +51,8 @@ div#details {
 		<div class="card mb-3 border-0" style="max-width: 100%;">
 			<div class="row g-0">
 				<div class="col-md-6">
-					<img id="artist_img" src="../images/char/${artist.artist_img}" onerror="this.onerror=null; this.src='../images/char/default_user.png'" class="img-fluid rounded-0" alt="${artist.userid}"/>
+					<img id="artist_img" src="../images/char/${artist.artist_img}" 
+				  onerror="this.src='../images/char/default_user.png'" class="img-fluid rounded-0" alt="${artist.userid}"/>
 				</div>
 				<div class="col-md-6">
 					<div class="card-body">
@@ -100,8 +101,8 @@ div#details {
 			</c:url>
 			<a href="${ArtistModifyPage}" class="btn btn-outline-dark me-md-2">수정</a>
 			<!-- 작품 추가 버튼 -->
-			<c:url var = "WorksAddPage" value = "/artist/artist_worksadd">
-				<c:param name = "userid" value = "${works.userid}" />
+			<c:url var = "WorksAddPage" value = "/artist/artist_add_works">
+				<c:param name = "userid" value = "${artist.userid}" />
 			</c:url>
 			<a href="${WorksAddPage}" class="btn btn-outline-dark">작품 추가</a>
 		</div>

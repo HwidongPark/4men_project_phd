@@ -19,4 +19,13 @@ public interface ArtistDao {
 	List<Artist_Works_Img> selectWorksImgByWorksid(String worksid);
 	
 	int updateArtist(Artist artist);
+	
+	int deleteArtistProfileImg(Artist artist);
+	
+	int createWorks(Artist_Works artist_Works);
+	
+	int createWorksImg(Artist_Works_Img artist_Works_Img);
+	
+	int deleteWorks(String worksid);
+	
 }
