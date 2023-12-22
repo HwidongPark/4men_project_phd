@@ -6,7 +6,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.itwill.fourmen.domain.Artist;
 import com.itwill.fourmen.domain.Exhibition;
+import com.itwill.fourmen.dto.artist.ArtistListItemDto;
+import com.itwill.fourmen.service.ArtistService;
 import com.itwill.fourmen.service.ExhibitionService;
 
 import lombok.RequiredArgsConstructor;
@@ -18,6 +21,7 @@ import lombok.extern.slf4j.Slf4j;
 public class HomeController {
 	
 	private final ExhibitionService exhibitionService;
+	private final ArtistService artistService;
 	
     @GetMapping("/")
     public String home() {
@@ -26,8 +30,13 @@ public class HomeController {
     }
     
     @GetMapping("/artist")
-    public void artist() {
+    public void artist(Model model) {
     	log.debug("artist()");
+    	
+    	List<ArtistListItemDto> artists = artistService.read();
+    	log.debug("Artist = {} " ,artists);
+    	model.addAttribute("artistList", artists);
+    	
     }
     
     @GetMapping("/forum")
@@ -44,16 +53,17 @@ public class HomeController {
     	model.addAttribute("exhibition",exhibition);
     }
     
-    @GetMapping("/market")
-    public void market() {
-    	log.debug("market()");
-    }
+//    @GetMapping("/market")
+//    public void market() {
+//    	log.debug("market()");
+//    }
     
-    @GetMapping("/market/detail")
-    public String marketDetail() {
-    	log.debug("marketDetail()");
-    	return "/market/detail";
-    }
+//    @GetMapping("/market/detail")
+//    public String marketDetail() {
+//    	log.debug("marketDetail()");
+//    	
+//    	return "/market/detail";
+//    }
     
     @GetMapping("/admin")
     public void admin() {

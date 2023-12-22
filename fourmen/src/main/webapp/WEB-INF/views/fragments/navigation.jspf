@@ -24,6 +24,7 @@
     </nav>
 </div>
 
+
 <nav class="header-nav">
     <div class="logo-container" style="flex: 1;">
         <a href="http://localhost:8081/fourmen/" class="logo">
@@ -49,9 +50,14 @@
                 <a href="#" class="nav-button">ADMIN</a>
             </li>
         </ul>
+        <button class="nav-collapse-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+                </svg>
+        </button>
     </div>
     
     <!-- header-nav 오른쪽에 위치한 div -->
-    <div class="header-right-container" style="flex: 1;"></div>
+    <div class="header-right-container"></div>
     
 </nav>

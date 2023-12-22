@@ -35,7 +35,8 @@
         <property name="suffix" value=".jsp"></property>
     </bean>
     
-    <!-- mutipartResolver를 사용하기 위한 Beans 설정 -->
+
+    <!-- multipartResolver를 사용하기 위한 Bean설정.. 얘를 통해 요청된 파일을 multipartFile 인터페이스로 받아올 수 있음 -->
     <bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver"></bean> 
     
 
