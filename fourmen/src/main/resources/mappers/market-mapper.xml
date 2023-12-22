@@ -9,13 +9,13 @@
         values ('cirche', #{title}, #{descriptionKor}, #{price}, #{yearCreated, jdbcType=INTEGER}, #{paintingSize, jdbcType=VARCHAR})
     </insert>
     <select id="getWorkId" resultType="long">
-        SELECT max(workid) FROM market
+        SELECT max(worksid) FROM market
     </select>
     
     <select id="readPagedMarketPosts" resultType="Market">
         SELECT *
         FROM market
-        ORDER BY workid DESC
+        ORDER BY worksid DESC
         OFFSET #{ startingPost } ROWS FETCH NEXT #{ postsPerPage } ROWS ONLY
     </select>
     
@@ -26,15 +26,15 @@
     
     
     <insert id="insertWorkImage">
-        INSERT INTO work_images (workid, category, original_file_name, saved_file_name) VALUES (#{workId}, 'market', #{originalFileName}, #{savedFileName})
+        INSERT INTO work_images (worksid, category, original_file, saved_file) VALUES (#{workId}, 'market', #{originalFileName}, #{savedFileName})
     </insert>
     
     <select id="readMarketPosts" resultType="Market">
-        SELECT * FROM market ORDER BY workid DESC
+        SELECT * FROM market ORDER BY worksid DESC
     </select>
     
     <select id="readMarketPost" resultType="Market">
-        SELECT * FROM market WHERE workid = #{ workId }
+        SELECT * FROM market WHERE worksid = #{ workId }
     </select>
     
     <select id="readPopularMarketPosts" resultType="Market">
@@ -49,12 +49,12 @@
     
     
     <select id="readWorkImagesofPost" resultType="WorkImage">
-        SELECT * FROM work_images WHERE workid= #{workId}
+        SELECT * FROM work_images WHERE worksid= #{workId}
     </select>
     
     
     <update id="addView">
-        UPDATE market SET views = views + 1 WHERE workid = ${ workId }
+        UPDATE market SET views = views + 1 WHERE worksid = ${ workId }
     </update>
     
     
@@ -94,7 +94,7 @@
                 AND PRICE &lt;= #{ maxPrice }
             </if>
         </where>
-        ORDER BY workid DESC
+        ORDER BY worksid DESC
         OFFSET #{ startingPost } ROWS FETCH NEXT #{ postsPerPage } ROWS ONLY
     </select>
     
@@ -139,11 +139,11 @@
     
     
     <delete id="deleteMarketPost">
-        DELETE FROM market WHERE workid = #{ workId }
+        DELETE FROM market WHERE worksid = #{ workId }
     </delete>
     
     <delete id="deleteWorkImages">
-        DELETE FROM work_images WHERE workid = #{ workId }
+        DELETE FROM work_images WHERE worksid = #{ workId }
     </delete>
     
     <delete id="deleteImage">
@@ -163,7 +163,7 @@
         year_created = #{yearCreated},
         painting_size = #{paintingSize}
             WHERE
-        workid = #{workId}
+        worksid = #{workId}
     </update>
     
 </mapper>
