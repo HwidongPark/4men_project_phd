@@ -88,17 +88,37 @@ h2 {
 }
 
 /* 검색키워드 및 버튼 */
+.market-search-category-keyword select {
+    border-radius: 0.5em;
+    margin-right: 1em;
+    width: 15%;
+}
+
 .search-keyword {
     width: 50%;
     border-radius: 0.5em;
 }
 
+.market-search-category-keyword #btnSearch {
+    background-color: transparent;
+    border: none;
+}
 
 /* 메인 시작 CSS */
 main {
     width: 75%;
     margin: 2rem auto;
 }
+
+.market-create-btn-container {
+	display: flex;
+	justify-content: flex-end;
+}
+
+div.market-create-btn-container button {
+	margin-right: 2%;
+}
+
 
 /* 인기 매물, 최신 매물 h2제목 */
 .list-item-category-title {
@@ -130,11 +150,15 @@ main {
 }
 
 .listed-item-container {
+    
+    width: 100%;
+    
     height: auto;
     margin-bottom: 1em;
     padding: 5%;
 }
 
+/* 매물리스트 이미지에 관해서. */
 .item-image-container {
 	width: 100%;
     text-align: center;
@@ -164,7 +188,59 @@ main {
     
 }
 
+.item-info-container {
+    width: 100%;
+}
 
+.item-info-container .market-item-title {
+    width: 100%;
+}
+
+.item-info-container .market-item-title div {
+    display: inline-block;
+    width: 100%;
+    height: 1em;
+    position: relative;
+}
+
+.item-info-container .market-item-title a {
+    position: absolute;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;   
+}
+
+
+/* 매물 기타설명에 관해서 */
+
+.market-price-views-likes-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.market-price-views-likes-container {
+    flex: 7;
+}
+
+.market-price-views-likes-container .market-views-and-likes {
+    flex: 3;
+    text-align: right;
+    font-size: 0.9em;
+    color: #6c757d;
+    
+    /* 이 div안의 아이템들을 중앙정렬 */
+    vertical-align: center;
+}
+
+.market-price-views-likes-container span.material-symbols-outlined {
+    font-size: 0.9em;
+    color: #6c757d;
+}
+
+.market-item-price {
+    font-size: inherit;
+}
 
 .item-info-container > p {
     margin: 0.5em 0 0 0;
@@ -195,5 +271,28 @@ main {
     .list-container {
         grid-template-columns: 1fr 1fr;
     }
-          
+    
+    .market-item-title b{
+        font-size: 1em;
+    }
+    
+    .market-price-views-likes-container .market-item-price {
+        font-size: 0.9em;
+    }
+    
+    .market-price-views-likes-container .market-views-and-likes {
+    font-size: 0.7em;    
+    }
+      
+}
+
+@media (max-width: 576px) {
+
+    .market-item-title b{
+        font-size: 0.8em;
+    }
+    
+    .market-price-views-likes-container .market-item-price {
+        font-size: 0.7em;
+    }
 }

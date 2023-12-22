@@ -12,16 +12,29 @@
 	rel="stylesheet"
 	integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
 	crossorigin="anonymous">
+
+<!-- css 파일 적용 -->
+<link rel="stylesheet" href="css/app.css">
 <link rel="stylesheet" href="css/header.css">
-<link rel="stylesheet" href="css/forum.css">
 <link rel="stylesheet" href="css/footer.css">
+<link rel="stylesheet" href="css/homeunderheader.css">
 
 </head>
 
+<!-- body 시작점 -->
 <body>
     
     <!-- 헤더 파일 include -->
     <%@ include file="fragments/navigation.jspf"%>
+    
+    <!-- 웹페이지 상단 헤더 아래 부분 -->
+    <div id="underheader-div">
+        <div class="container" id="underheadrcontainer">
+            <h2 class="commondesign">
+            <!-- 홈페이지 헤더와 캐로셀 사이의 여백 만들기 -->
+            </h2>
+        </div>
+    </div>
     
     <!-- Carousel 사진들 추가 -->
     <div id="carousel" class="carousel slide w-100">
@@ -32,15 +45,18 @@
         </div>
         <div class="carousel-inner">
           <div class="carousel-item active img-size-control">
-            <img src="imagemain/main01.jpg"
+
+
+            <img src="picture/반고흐01.jpg"
              class="d-block w-100 carousel-img-size" alt="...">
           </div>
           <div class="carousel-item img-size-control">
-            <img src="imagemain/main02.jpg" 
+            <img src="picture/반고흐02.jpg"
             class="d-block w-100 carousel-img-size" alt="...">
           </div>
           <div class="carousel-item img-size-control">
-            <img src="imagemain/main031.jpg"
+            <img src="picture/르누아르01.jpg"
+
              class="d-block w-100 carousel-img-size" alt="...">
           </div>
         </div>

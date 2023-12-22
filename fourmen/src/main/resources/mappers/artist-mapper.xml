@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- POSTS 테이블에서 CRUD에 필요한 SQL 문장들을 선언 -->
+<mapper namespace = "com.itwill.fourmen.repository.ArtistDao">
+
+	<select id = "selectOrderByUseridDesc" resultType = "Artist">
+		select * from A_ARTIST order by USERID desc
+	</select>
+	
+	<select id = "selectByUserid" resultType = "Artist">
+		select * from A_ARTIST where USERID = #{userid}
+	</select>
+	
+	<select id = "selectWorksByUserid" resultType = "Artist_Works">
+		select * from A_WORKS where USERID = #{userid} order by WORKSID desc
+	</select>
+	
+	<select id = "selectByWorksid" resultType = "Artist_Works">
+		select * from A_WORKS where WORKSID = #{worksid}
+	</select>
+	
+	<select id = "selectWorksImgByWorksid" resultType = "Artist_Works_Img">
+		select * from A_WORKS_IMG where WORKSID = #{worksid}
+	</select>
+	
+	<update id = "updateArtist">
+		update A_ARTIST set ARTIST_BIO_KOR = #{artist_bio_kor}, ARTIST_BIO_ENG = #{artist_bio_eng}, ARTIST_IMG = #{artist_img} where USERID = #{userid}
+	</update>
+	
+	<update id = "deleteArtistProfileImg">
+		update A_ARTIST set ARTIST_BIO_KOR = #{artist_bio_kor}, ARTIST_BIO_ENG = #{artist_bio_eng}, ARTIST_IMG = NULL where USERID = #{userid}
+	</update>
+	
+	<insert id = "createWorks">
+		insert into A_WORKS (USERID, WORKSID, TITLE, CONTENT_KOR, CONTENT_ENG) values (#{userid}, #{worksid}, #{title}, #{content_kor}, #{content_eng})
+	</insert>
+	
+	<insert id = "createWorksImg">
+		insert into A_WORKS_IMG (WORKSID, CATEGORY, ORIGINAL_FILE, SAVED_FILE) values (#{worksid}, #{category}, #{original_file}, #{saved_file})
+	</insert>
+	
+	<delete id="deleteWorks">
+		delete from A_WORKS where WORKSID = #{worksid}
+	</delete>
+</mapper>

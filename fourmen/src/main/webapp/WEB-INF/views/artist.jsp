@@ -14,12 +14,26 @@
 	crossorigin="anonymous">
 
 <link rel="stylesheet" href="css/header.css">
-
 <link rel="stylesheet" href="css/footer.css">
+<link rel="stylesheet" href="css/underheader.css">
 
 <style>
-div#artist_container {
 
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+body{
+
+  font-family: 'Pretendard-Regular';
+
+}
+
+
+div#artist_container {
 	margin: 0 auto;
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -31,13 +45,11 @@ div#artist {
 	grid-auto-rows: 200px;
 }
 
-
 .card .card-img {
     width: 100%; /* 이미지 너비 100%로 설정 */
     height: 100%; /* 이미지 높이 100%로 설정 */
     object-fit: cover; /* 이미지 비율 유지하면서 카드에 맞춰 잘립니다 */
 }
-
 
 .card .card-img-overlay {
     visibility: hidden;
@@ -64,124 +76,42 @@ div#artist {
 .card .card-img-overlay h5 {
     color: white; /* 텍스트의 색상을 흰색으로 변경 */
 }
-
-
 </style>
 
 </head>
+
+<!-- 네비게이션 -->
+<%@ include file="fragments/navigation.jspf"%>
+
+<!-- body 시작점 -->
 <body>
-	<!-- 네비게이션 -->
-	<%@ include file="fragments/navigation.jspf"%>
+
+    
+    <!-- 웹페이지 상단 헤더 아래 부분 -->
+    <div id="underheader-div">
+        <div class="container" id="underheadrcontainer">
+            <h2 class="commondesign">
+                ARTISTS
+            </h2>
+        </div>
+    </div>
+    
+
 	<div id="works" class="my-5 container-fluid w-75">
 		<div id = "artist_container">
-			<a href="artist/artist_details">
-				<div class="card text-bg-light">
-					<img src="images/char/VanGogh.png" 
-					class="card-img" alt="van_Gogh" />
-					<div class="card-img-overlay">
-						<h5 class="card-title fs-2">Van Gogh</h5>
+			<c:forEach var="a" items="${artistList}">
+				<c:url var="artist_details" value="/artist/artist_details">
+					<c:param name="userid" value="${a.userid}"/>
+				</c:url>
+				<a href="${artist_details}">
+					<div class="card text-bg-light">
+						<img src="images/char/${a.artist_img}" onerror="this.onerror=null; this.src='images/char/default_user.png'" class="card-img" alt="test_user"/>
+						<div class="card-img-overlay">
+							<h5 class="card-title fs-2">${a.userid}</h5>
+						</div>
 					</div>
-				</div>
-			</a>
-			<a href="artist/artist_details">
-				<div class="card text-bg-light">
-					<img src="images/char/ClaudeMonet.png" 
-					class="card-img" alt="van_Gogh" />
-					<div class="card-img-overlay">
-						<h5 class="card-title fs-2">Claude Monet</h5>
-					</div>
-				</div>
-			</a>
-			<a href="artist/artist_details">
-				<div class="card text-bg-light">
-					<img src="images/char/PabloPicasso.png" 
-					class="card-img" alt="van_Gogh" />
-					<div class="card-img-overlay">
-						<h5 class="card-title fs-2">Pablo Picasso</h5>
-					</div>
-				</div>
-			</a>
-			<a href="artist/artist_details">
-				<div class="card text-bg-light">
-					<img src="images/char/SalvadorDali.png" 
-					class="card-img" alt="van_Gogh" />
-					<div class="card-img-overlay">
-						<h5 class="card-title fs-2">Salvador Dali</h5>
-					</div>
-				</div>
-			</a>
-			<a href="artist/artist_details">
-				<div class="card text-bg-light">
-					<img src="images/char/VanGogh.png" 
-					class="card-img" alt="van_Gogh" />
-					<div class="card-img-overlay">
-						<h5 class="card-title fs-2">Van Gogh</h5>
-					</div>
-				</div>
-			</a>
-			<a href="artist/artist_details">
-				<div class="card text-bg-light">
-					<img src="images/char/ClaudeMonet.png" 
-					class="card-img" alt="van_Gogh" />
-					<div class="card-img-overlay">
-						<h5 class="card-title fs-2">Claude Monet</h5>
-					</div>
-				</div>
-			</a>
-			<a href="artist/artist_details">
-				<div class="card text-bg-light">
-					<img src="images/char/PabloPicasso.png" 
-					class="card-img" alt="van_Gogh" />
-					<div class="card-img-overlay">
-						<h5 class="card-title fs-2">Pablo Picasso</h5>
-					</div>
-				</div>
-			</a>
-			<a href="artist/artist_details">
-				<div class="card text-bg-light">
-					<img src="images/char/SalvadorDali.png" 
-					class="card-img" alt="van_Gogh" />
-					<div class="card-img-overlay">
-						<h5 class="card-title fs-2">Salvador Dali</h5>
-					</div>
-				</div>
-			</a>
-			<a href="artist/artist_details">
-				<div class="card text-bg-light">
-					<img src="images/char/VanGogh.png" 
-					class="card-img" alt="van_Gogh" />
-					<div class="card-img-overlay">
-						<h5 class="card-title fs-2">Van Gogh</h5>
-					</div>
-				</div>
-			</a>
-			<a href="artist/artist_details">
-				<div class="card text-bg-light">
-					<img src="images/char/ClaudeMonet.png" 
-					class="card-img" alt="van_Gogh" />
-					<div class="card-img-overlay">
-						<h5 class="card-title fs-2">Claude Monet</h5>
-					</div>
-				</div>
-			</a>
-			<a href="artist/artist_details">
-				<div class="card text-bg-light">
-					<img src="images/char/PabloPicasso.png" 
-					class="card-img" alt="van_Gogh" />
-					<div class="card-img-overlay">
-						<h5 class="card-title fs-2">Pablo Picasso</h5>
-					</div>
-				</div>
-			</a>
-			<a href="artist/artist_details">
-				<div class="card text-bg-light">
-					<img src="images/char/SalvadorDali.png" 
-					class="card-img" alt="van_Gogh" />
-					<div class="card-img-overlay">
-						<h5 class="card-title fs-2">Salvador Dali</h5>
-					</div>
-				</div>
-			</a>
+				</a>
+			</c:forEach>	
 		</div>
 	</div>	
 	<%@ include file="fragments/footer.jspf" %>

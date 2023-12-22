@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+
 import com.itwill.fourmen.board.Criteria;
 import com.itwill.fourmen.board.PageMaker;
 import com.itwill.fourmen.board.SearchCriteria;
@@ -22,6 +23,12 @@ import com.itwill.fourmen.domain.Exhibition;
 import com.itwill.fourmen.domain.User;
 import com.itwill.fourmen.dto.user.UserSignInDto;
 import com.itwill.fourmen.dto.user.UserSignUpDto;
+
+import com.itwill.fourmen.domain.Artist;
+
+import com.itwill.fourmen.dto.artist.ArtistListItemDto;
+import com.itwill.fourmen.service.ArtistService;
+
 import com.itwill.fourmen.service.ExhibitionService;
 import com.itwill.fourmen.service.UserService;
 
@@ -35,25 +42,33 @@ import lombok.extern.slf4j.Slf4j;
 public class HomeController {
 	
 	private final ExhibitionService exhibitionService;
+
 	private final UserService userservice;
+
+	private final ArtistService artistService;
+
 	
     @GetMapping("/")
     public String home() {
     	log.debug("home()");
-        
         return "home"; // view(JSP)의 경로를 리턴
     }
     
     @GetMapping("/artist")
-    public void artist() {
+    public void artist(Model model) {
     	log.debug("artist()");
+    	
+    	List<ArtistListItemDto> artists = artistService.read();
+    	log.debug("Artist = {} " ,artists);
+    	model.addAttribute("artistList", artists);
+    	
     }
     
-    @GetMapping("/forum/freeboard")
+    @GetMapping("/forum")
     public void forum() {
     	log.debug("forum()");
     }
-    
+
 
     @RequestMapping(value = "/exhibition", method = RequestMethod.GET)
 	public String list(Model model, @ModelAttribute("scri") SearchCriteria scri) throws Exception{
@@ -70,23 +85,23 @@ public class HomeController {
 		return "/exhibition";
 		
 	}
-    
-    @GetMapping("/market")
-    public void market() {
-    	log.debug("market()");
-    }
-    
 
-    @GetMapping("/market/detail")
-    public String marketDetail() {
-    	log.debug("marketDetail()");
-    	
-    	return "/market/detail";
-    }
+    
+//    @GetMapping("/market")
+//    public void market() {
+//    	log.debug("market()");
+//    }
+    
+//    @GetMapping("/market/detail")
+//    public String marketDetail() {
+//    	log.debug("marketDetail()");
+//    	
+//    	return "/market/detail";
+//    }
     
     @GetMapping("/admin")
     public void admin() {
-    	log.debug("forum()");
+    	log.debug("admin()");
     }
     
     @GetMapping("/signup")
