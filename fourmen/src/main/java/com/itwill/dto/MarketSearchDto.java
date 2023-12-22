@@ -10,4 +10,7 @@ public class MarketSearchDto {
 	private String maxPrice;
 	private String searchCategory;
 	private String keyword;
+	private Integer page;
+	private Integer StartingPost;
+	private Integer postsPerPage;
 }

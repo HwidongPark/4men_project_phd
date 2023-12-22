@@ -24,7 +24,7 @@
                 <form action="/fourmen/market/modify" method="post" enctype="multipart/form-data" id="market-post-update-form">
                     <input id="workid" name="workId" value="${ marketPost.workId }" type="hidden">
                     <label class="mb-2">제목: </label>
-                    <input type="text" name="title" class="form-control mb-3" placeholder="제목" value="${ marketPost.title }" autofocus>
+                    <input type="text" name="title" class="form-control mb-3" placeholder="제목" value="${ marketPost.title }" autofocus required>
                     <div>                        
                         <ul>
                             <c:forEach var="workImage" items="${ marketPost.workImages }">
@@ -41,14 +41,15 @@
                         <!-- +누를때마다 파일첨부 하나씩 추가.. 최대 20개 -->
                         <button class="market-create-add-phooto" type="button">+</button><br>                       
                     </div>
-                    <textarea name="description"  class="form-control my-2" rows="20" placeholder="내용">${ marketPost.descriptionKor }</textarea>
+                    <textarea name="description"  class="form-control my-2" rows="20" placeholder="내용" required>${ marketPost.descriptionKor }</textarea>
                     <label>가격:</label>
                     <input type="number" name="price" class="form-control mb-2" value="${ marketPost.price }">
                     <label>창작 연도:</label>
                     <input type="number" name="yearCreated" class="form-control mb-2" value="${ marketPost.yearCreated }"/>
                     <label>작품 사이즈:</label><br>
                     <div class="mb-2">
-                        폭: <input type="number" name="width"> cm 높이: <input type="number" name="height"> cm 두께: <input type="number" name="depth"> cm<br>
+                        폭: <input type="number" name="width" value="${ width }" placeholder="폭"> cm 높이: <input type="number" name="height" value="${ height }" placeholder="높이"> cm
+                         두께: <input type="number" name="depth" value="${ depth }" placeholder="넓이"> cm<br>
                     </div>
                     <!-- TODO: 유저아이디 일단 적는데 나중에 지울거임 -->
                     <label>유저아이디:</label>

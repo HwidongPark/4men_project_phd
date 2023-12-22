@@ -18,10 +18,10 @@ public class MarketCreateDto {
 	private List<MultipartFile> files;
 	private String userid;
 	private int price;
-	private double width;
-	private double height;
-	private double depth;
-	private int yearCreated;
+	private Double width;
+	private Double height;
+	private Double depth;
+	private Integer yearCreated;
 	
 	public Market toEntity() {
 		return Market.builder()

@@ -25,7 +25,10 @@ public interface MarketDao {
 	// 전체 포스트 개수 읽어오기
 	Integer countTotNumber();
 	
-	// TODO: 페이징처리한 글 읽어오기
+	// 검색 전체 포스트 개수 읽어오기
+	Integer searchCountTotNumber(MarketSearchDto dto);
+	
+	// 페이징처리한 글 읽어오기
 	List<Market> readPagedMarketPosts(Map<String, Integer> paging);
 	
 	// 마켓 인기글 읽어오기

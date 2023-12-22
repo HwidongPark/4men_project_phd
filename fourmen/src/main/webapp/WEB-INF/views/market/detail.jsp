@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="jakarta.tags.core" %>    
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -31,7 +33,7 @@
                         <div class="carousel-images-wrapper">
                             <c:forEach var="postImage" items="${ marketPost.workImages }">
                                 <div class="carousel-each-image">
-                                    <img src="/fourmen/uploads/${ postImage.savedFileName }" class="carousel-image" alt="...">
+                                    <img src="/fourmen/uploads/${ postImage.savedFileName }" class="carousel-image" alt="supposed to be an image">
                                 </div>
                             </c:forEach>                       
                         </div>
@@ -51,10 +53,15 @@
             
             <div class="product-description">
                 <h1 id="product-title">${ marketPost.title }</h1>
-                <div id="production-year" class="year-dimension-description"><em>(${ marketPost.yearCreated })</em></div>
-                <div id="product-dimension" class="year-dimension-description"><em>${ marketPost.paintingSize }</em></div>
+                <c:if test="${ not empty marketPost.yearCreated }">
+                    <div id="production-year" class="year-dimension-description"><em>(${ marketPost.yearCreated })</em></div>
+                </c:if>
+                <c:if test="${ marketPost.paintingSize ne 'n x n x n cm' }">
+                    <div id="product-dimension" class="year-dimension-description"><em>${ marketPost.paintingSize }</em></div>
+                </c:if>
                 <hr>
-                <div id="product-price"><b>${ marketPost.price }</b></div>
+                <div id="product-price"><b><fmt:formatNumber type="number" maxFractionDigits="2" value="${ marketPost.price }" />원</b></div>
+                
                 <hr>
                 <div id="seller-description">
                      <div id="artist">

@@ -97,6 +97,10 @@ public class MarketController {
 		
 		String sDirectory = request.getServletContext().getRealPath("/static/uploads");
 		log.debug("sDirectory={}", sDirectory);
+		
+		String servletPath = request.getServletPath();
+		log.debug("servletPath={}", servletPath);
+		
 		// market의 게시글 리스트를 뷰로 전달
 		// TODO:  변수이름 다시 생각.. 그냥 가도 되기는 함.
 		model.addAttribute("marketPosts", pagedMarketPosts);	// 최신글들을 전달..
@@ -106,6 +110,7 @@ public class MarketController {
 		model.addAttribute("popularMarketPosts", popularMarketPosts);
 		model.addAttribute("sDirectory", sDirectory);
 		model.addAttribute("fileSeparator", File.separator);
+		model.addAttribute("servletPath", servletPath);
 		
 	}
 	
@@ -155,18 +160,32 @@ public class MarketController {
 	 * @return
 	 */
 	@GetMapping("/recent")
-	public String marketRecentList(Model model, HttpServletRequest request) {
-		List<MarketPostDto> marketPosts = marketService.readMarketPosts();
-		log.debug("marketRecentList(postLists={}) GET", marketPosts);
+	public String marketRecentList(@RequestParam(name = "page", required = false, defaultValue = "1") int page, Model model, HttpServletRequest request) {
+//		List<MarketPostDto> marketPosts = marketService.readMarketPosts();
+//		log.debug("marketRecentList(postLists={}) GET", marketPosts);
+//		
+//		String sDirectory = request.getServletContext().getRealPath("/static/uploads");
+//		log.debug("sDirectory={}", sDirectory);
+		
+		// 해당 페이지의 포스트들만 가져옴
+		List<MarketPostDto> pagedMarketPosts = marketService.readPagedMarketPosts(page);
+		log.debug("pagedMarketPosts={}", pagedMarketPosts);
+		
+		PagingDto pagingDto = marketService.paging(page);	// 페이지처리할 dto받아옴
+		log.debug("pagingDto={}", pagingDto);
 		
 		String sDirectory = request.getServletContext().getRealPath("/static/uploads");
 		log.debug("sDirectory={}", sDirectory);
+		
+		String servletPath = request.getServletPath();
+		
 		// market의 게시글 리스트를 뷰로 전달
-		model.addAttribute("marketPosts", marketPosts);
+		model.addAttribute("marketPosts", pagedMarketPosts);
 		model.addAttribute("sDirectory", sDirectory);
 		model.addAttribute("fileSeparator", File.separator);
 		model.addAttribute("pageTitle", "최신 장터 목록");
-		
+		model.addAttribute("pagingDto", pagingDto);
+		model.addAttribute("servletPath", servletPath);
 		
 		return "/market/list";
 	}
@@ -197,18 +216,31 @@ public class MarketController {
 	
 	
 	@GetMapping("/search")
-	public String search(Model model, MarketSearchDto dto,HttpServletRequest request) {
+	public String search(@RequestParam(name = "page", required = false, defaultValue = "1") int page, Model model, MarketSearchDto dto,HttpServletRequest request) {
 		log.debug("search(dto={})", dto);
+		dto.setPage(page);
+		log.debug("page={}", page);
+		log.debug("search(dto={})", dto);	// TODO: 페이지 처리 저절로 입혀지나 안되나 실험
+//		List<MarketPostDto> marketPosts = marketService.searchPosts(dto);
+//		log.debug("searchedMarketPosts = {}", marketPosts);
 		
-		List<MarketPostDto> marketPosts = marketService.searchPosts(dto);
-		log.debug("searchedMarketPosts = {}", marketPosts);
+		List<MarketPostDto> pagedMarketPosts = marketService.pagedSearchPosts(dto);
+		log.debug("pagedSearchPosts={}", pagedMarketPosts);
+		
+		PagingDto pagingDto = marketService.searchPaging(page, dto);	// 페이지처리할 dto받아옴
+		log.debug("pagingDto={}", pagingDto);
+		
 		
 		String sDirectory = request.getServletContext().getRealPath("/static/uploads");
+		String servletPath = request.getServletPath();
 		
-		model.addAttribute("marketPosts", marketPosts);
+		model.addAttribute("marketPosts", pagedMarketPosts);
 		model.addAttribute("sDirectory", sDirectory);
 		model.addAttribute("fileSeparator", File.separator);
+		model.addAttribute("pagingDto", pagingDto);
+		model.addAttribute("servletPath", servletPath);
 		model.addAttribute("pageTitle", "검색 결과");
+		
 		
 		return "/market/list";
 	}
@@ -241,8 +273,17 @@ public class MarketController {
 		log.debug("update(workId={}) POST", workid);
 		MarketPostDto marketPost = marketService.readMarketPost(workid);
 		log.debug("marketPostDto = {}", marketPost);
+		
+		String[] size = marketPost.getPaintingSize().split(" x ");
+		String width = size[0];
+		String height = size[1];
+		String depth = size[2].split(" cm")[0];
 				
 		model.addAttribute("marketPost", marketPost);
+		model.addAttribute("width", width);
+		model.addAttribute("height", height);
+		model.addAttribute("depth", depth);
+		
 	}
 	
 	

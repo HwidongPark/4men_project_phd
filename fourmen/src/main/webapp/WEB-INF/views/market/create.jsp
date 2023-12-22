@@ -23,7 +23,7 @@
             <div class="justify-content-center">
                 <form action="/fourmen/market/create" method="post" enctype="multipart/form-data" id="market-post-create-form">
                     <label class="mb-2">제목: </label>
-                    <input type="text" name="title" class="form-control mb-3" placeholder="제목" autofocus>
+                    <input type="text" name="title" class="form-control mb-3" placeholder="제목" autofocus required/>
                     <div class="my-2">
                         <span class="market-upload-photos">
                             <label>사진 첨부:</label><br>
@@ -33,9 +33,9 @@
                         <button class="market-create-add-phooto" type="button">+</button><br>
                         
                     </div>
-                    <textarea name="description"  class="form-control my-2" rows="20" placeholder="내용"></textarea>
+                    <textarea name="description"  class="form-control my-2" rows="20" placeholder="내용" required></textarea>
                     <label>가격:</label>
-                    <input type="number" name="price" class="form-control mb-2">
+                    <input type="number" name="price" class="form-control mb-2" required>
                     <label>창작 연도:</label>
                     <input type="number" name="yearCreated" class="form-control mb-2"/>
                     <label>작품 사이즈:</label><br>

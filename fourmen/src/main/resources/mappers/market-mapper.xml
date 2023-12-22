@@ -6,7 +6,7 @@
 <mapper namespace="com.itwill.fourmen.repository.MarketDao">
     <insert id="insertMarketPost" parameterType="Market">
         insert into market (userid, title, description_kor, price, year_created, painting_size)
-        values ('cirche', #{title}, #{descriptionKor}, #{price}, #{yearCreated}, #{paintingSize})
+        values ('cirche', #{title}, #{descriptionKor}, #{price}, #{yearCreated, jdbcType=INTEGER}, #{paintingSize, jdbcType=VARCHAR})
     </insert>
     <select id="getWorkId" resultType="long">
         SELECT max(workid) FROM market
@@ -14,11 +14,9 @@
     
     <select id="readPagedMarketPosts" resultType="Market">
         SELECT *
-        FROM (
-            SELECT *
-            FROM market
-            ORDER BY workid DESC)
-        OFFSET #{ startPage } ROWS FETCH NEXT #{ postsPerPage } ROWS ONLY
+        FROM market
+        ORDER BY workid DESC
+        OFFSET #{ startingPost } ROWS FETCH NEXT #{ postsPerPage } ROWS ONLY
     </select>
     
     <select id="countTotNumber" resultType="Integer">
@@ -96,7 +94,49 @@
                 AND PRICE &lt;= #{ maxPrice }
             </if>
         </where>
+        ORDER BY workid DESC
+        OFFSET #{ startingPost } ROWS FETCH NEXT #{ postsPerPage } ROWS ONLY
     </select>
+    
+    
+    <select id="searchCountTotNumber" resultType="Integer">
+        SELECT count(*)
+        FROM market
+        <where>
+            <if test="!keyword.equals('')">
+                <choose>
+                    <when test="searchCategory.equals('title')">
+                        title LIKE '%'||#{ keyword }||'%'
+                    </when>
+                    <when test="searchCategory.equals('content')">
+                        description_kor LIKE '%'||#{ keyword }||'%'
+                    </when>
+                    <when test="searchCategory.equals('userId')">
+                        userid LIKE '%'||#{ keyword }||'%'
+                    </when>
+                    <when test="searchCategory.equals('titleContent')">
+                        (title LIKE '%'||#{ keyword }||'%'
+                        OR description_kor LIKE '%'||#{ keyword }||'%')
+                    </when>
+                    <when test="searchCategory.equals('titleContentUserId')">
+                        (title LIKE '%'||#{ keyword }||'%'
+                        OR description_kor LIKE '%'||#{ keyword }||'%'
+                        OR userid LIKE '%'||#{ keyword }||'%')
+                    </when>
+                    <otherwise>
+                        title LIKE '%'||#{ keyword }||'%'
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="!minPrice.equals('')">
+                AND PRICE &gt;= #{ minPrice } 
+            </if>
+            <if test="!maxPrice.equals('')">
+                AND PRICE &lt;= #{ maxPrice }
+            </if>
+        </where>
+    </select>
+    
     
     <delete id="deleteMarketPost">
         DELETE FROM market WHERE workid = #{ workId }

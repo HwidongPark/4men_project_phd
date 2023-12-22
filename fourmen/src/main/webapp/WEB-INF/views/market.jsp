@@ -238,7 +238,7 @@
             <ul class="pagination">
                 <!-- 이전, 처음 페이지 -->
                 <li class="page-item">
-                    <c:url var="firstPage" value="/market" />
+                    <c:url var="firstPage" value="${ servletPath }" />
                     <a class="page-link-img" href="${ firstPage }" aria-label="first page">
                         <img id="pagination-img" alt="first page" src="/fourmen/pagination/pagination01.png">
                     </a>
@@ -253,7 +253,7 @@
                     </c:when>
                     <c:otherwise>
                         <li class="page-item">
-                            <c:url var="prevPage" value="/market">
+                            <c:url var="prevPage" value="${ servletPath }">
                                 <c:param name="page" value="${ page - 1 }"/>
                             </c:url>
                             <a class="page-link-img" href="${prevPage }" aria-label="previous">
@@ -266,7 +266,7 @@
                 <!-- 필요한만큼만 페이지 보여줌 -->
                 <c:forEach var="pageNum" begin="${ pagingDto.startPage }" end="${ pagingDto.endPage }" step="1">
                     <li class="page-item">
-                        <c:url var="moveToPage" value="/market">
+                        <c:url var="moveToPage" value="${ servletPath }">
                             <c:param name="page" value="${ pageNum }"/>
                         </c:url>
                         <a class="page-link" href="${ moveToPage }">${ pageNum }</a>
@@ -283,7 +283,7 @@
                         </li>
                     </c:when>
                     <c:otherwise>
-                        <c:url var="nextPage" value="/market">
+                        <c:url var="nextPage" value="${ servletPath }">
                             <c:param name="page" value="${ page + 1 }"></c:param>
                         </c:url>
                         <a class="page-link-img" href="${ nextPage }" aria-label="next">
@@ -291,7 +291,7 @@
                         </a>
                     </c:otherwise>
                 </c:choose>
-                <c:url var="lastPage" value="/market">
+                <c:url var="lastPage" value="${ servletPath }">
                     <c:param name="page" value="${ pagingDto.totNumPages }"/>
                 </c:url>
                 <li class="page-item">

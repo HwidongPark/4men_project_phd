@@ -134,7 +134,7 @@ public class MarketService {
 		log.debug("readPagedMarketPosts(page={})", page);
 		
 		Map<String, Integer> paging = new HashMap<>();
-		paging.put("startPage", (page - 1) * postsPerPage);
+		paging.put("startingPost", (page - 1) * postsPerPage);
 		paging.put("postsPerPage", postsPerPage);
 		
 		List<Market> pagedMarketPosts = marketDao.readPagedMarketPosts(paging);
@@ -172,6 +172,27 @@ public class MarketService {
 		};
 		
 		PagingDto pagingDto = PagingDto.builder().startPage(startPage).endPage(endPage).totNumPages(totNumPages).pagesShownInBar(pagesShownInBar).build();
+		
+		return pagingDto;
+	}
+	
+	/*
+	 * 
+	 */
+	public PagingDto searchPaging(int page, MarketSearchDto dto) {
+		int totNumPosts = marketDao.searchCountTotNumber(dto);
+		int startPage = (int) Math.ceil( ((double) page / pagesShownInBar) - 1 ) * pagesShownInBar + 1 ;
+	
+		int totNumPages = (int) Math.ceil((double) totNumPosts / postsPerPage);	// 총 페이지 개수
+		int endPage = 0;
+		if ((startPage + pagesShownInBar - 1) >= totNumPages) {
+			endPage = totNumPages;
+		} else {
+			endPage = startPage + pagesShownInBar - 1;
+		};
+		
+		PagingDto pagingDto = PagingDto.builder().startPage(startPage).endPage(endPage)
+				.totNumPages(totNumPages).postsPerPage(postsPerPage).pagesShownInBar(pagesShownInBar).build();
 		
 		return pagingDto;
 	}
@@ -306,11 +327,47 @@ public class MarketService {
 	}
 	
 	
-	public List<MarketPostDto> searchPosts(MarketSearchDto searchDto) {
+//	public List<MarketPostDto> searchPosts(MarketSearchDto searchDto) {
+//		log.debug("searchPosts(searchDto={})", searchDto);
+//		
+//		List<Market> marketPosts = marketDao.searchPosts(searchDto);
+//		
+//		List<MarketPostDto> marketPostsWithImages = new ArrayList<>();
+//		
+//		for (Market marketPost : marketPosts) {
+//			// 해당 게시글 이미지 읽어옴
+//			List<WorkImage> workImages = marketDao.readWorkImagesofPost(marketPost);
+//			log.debug("Images of the searchPost={}", workImages);
+//			// DTO생성해서 리스트 추가
+//			MarketPostDto marketPostWithImage = MarketPostDto.fromEntity(marketPost, workImages);
+//			log.debug("(search)marketPostWithImage={}", marketPostWithImage);
+//			
+//			marketPostsWithImages.add(marketPostWithImage);
+//		}
+//		
+//		return marketPostsWithImages;
+//		
+//	}
+	
+	
+	/**
+	 * 페이징 처리한 검색 Service method
+	 * @param searchDto
+	 * @return
+	 */
+	public List<MarketPostDto> pagedSearchPosts(MarketSearchDto searchDto) {
 		log.debug("searchPosts(searchDto={})", searchDto);
 		
+		// 검색 페이징 처리
+		int startingPost = (searchDto.getPage() - 1) * postsPerPage;
+		searchDto.setStartingPost(startingPost);
+		searchDto.setPostsPerPage(postsPerPage);
+		log.debug("searchDto필요정보 다 담음 searchDto={}", searchDto);
+		
+		// 페이징 처리한 포스트 가져옴
 		List<Market> marketPosts = marketDao.searchPosts(searchDto);
 		
+		// 이미지 입힘
 		List<MarketPostDto> marketPostsWithImages = new ArrayList<>();
 		
 		for (Market marketPost : marketPosts) {
