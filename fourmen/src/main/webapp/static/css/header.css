@@ -85,6 +85,7 @@ table {
 }
 
 
+
 /* nav 메뉴 관련 클래스 */
 .nav-btn-lists {
     display: flex;
@@ -154,6 +155,7 @@ table {
     flex-wrap: nowrap;
     padding-right: 20px;
 }
+
 
 .nav-each-btn-user a {
     display: inline-block;
