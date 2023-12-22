@@ -50,11 +50,20 @@ table {
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
-    padding: 1rem 0;
-    /* height: 5.5rem; */
+    padding: 0.5rem 0;
  	border-top: 1.5px gray solid;
     border-bottom: 1px gray solid;
+    
+    height: 4.5rem;
+    position: relative;
 
+}
+
+
+
+/* nav 아이템들 중앙 정렬 시킴 */
+.header-right-container {
+    flex: 1;
 }
 
 /* collapse 버튼 */
@@ -65,16 +74,17 @@ table {
 }
 
 /* 로고 이미지 */
-.logo {
-    text-decoration: none;
-    color: black;
-    width: 280px;
-    height: 70px;
-    padding-left: 17px;
-    padding-top: 5px;
-    margin-top: 5px;
-    margin-bottom: 5px;
+.logo-container {
+    flex: 1;
+    height: 100%;
 }
+
+.logo {
+    transform: scale(0.7);
+    object-fit: contain;
+    height: 100%;
+}
+
 
 /* nav 메뉴 관련 클래스 */
 .nav-btn-lists {
@@ -87,7 +97,7 @@ table {
 /* 헤더 메뉴 부분 */
 .nav-each-btn-list a {
     display: inline-block;
-    font-size: 1.225rem;
+    font-size: 0.9rem;
     padding: 0.7rem;    
     text-decoration: none;
     color: black;
@@ -127,22 +137,52 @@ table {
 }
 
 /* 미디어 쿼리 */
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 768px) {
     /* 여기에 반응형 스타일 추가 */
     .header-nav {
         flex-direction: column;
-        align-items: stretch;
+        align-items: start;
+        /* height: 3.5rem; */
+        height: auto;
     }
 
+	
+	.logo {
+		display:inline-block;
+		height: 3.5rem;
+		display: block;
+		position: relative;
+		left: -30px;
+	}
+	
+    .logo img{
+		object-fit: contain;
+		display: block;
+	}
+    
     .nav-collapse-btn {
         display: block;
+        position: absolute;
+        right: 10px;
+        top: 1.3rem;
+        
     }
-
-    .logo {
-        width: 100px;
-        height: 50px;
-        padding: 5px;
+    
+    .nav-list-container {
+		width: 100%;
+	}
+    
+    .nav-btn-lists {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
+    
+    /* 토글버튼 누를 시 nav-items 보여줌 */
+    .nav-lists-hide {
+		display: none;
+	}
+    
 
     .nav-btn-lists {
         flex-direction: column;
@@ -150,9 +190,15 @@ table {
 
     .nav-each-btn-list a {
         padding: 0.5rem;
+        font-size: 0.8rem;
     }
 
     .nav-btn-users {
         justify-content: center;
     }
+    
+    .nav-each-btn-user {
+		font-size: 0.8rem;
+	}
+    
 }
