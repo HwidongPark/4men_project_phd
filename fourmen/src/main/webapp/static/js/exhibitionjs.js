@@ -3,26 +3,39 @@
  */
 
  document.addEventListener('DOMContentLoaded', ()=>{
-	 const goButton = document.querySelector('button#goButton');
-	 goButton.addEventListener('click',()=>{
-		if(true){
-			window.location.href="exhibition2"
+	const form = document.querySelector('form#search-form');
+	const btnsearch = document.querySelector('button#btnSearch');
+	const startdate = document.querySelector('input#startdate-select');
+	const enddate = document.querySelector('input#enddate-select');
+	var selectcategory = document.getElementById('selectCategory');
+	const searchkeyword = document.querySelector('input#search-keyword');
+	btnsearch.addEventListener('click',(e)=>{
+		e.preventDefault();
+		if(selectcategory.value === 'location'){
+		 	if(searchkeyword.value !== '서울' &&
+		 	searchkeyword.value !== '부산' &&
+		 	searchkeyword.value !== '전남' &&
+		 	searchkeyword.value !== '전북' &&
+		 	searchkeyword.value !== '경남' &&
+		 	searchkeyword.value !== '경북' &&
+		 	searchkeyword.value !== '대전' &&
+			searchkeyword.value !== '대구' &&
+		 	searchkeyword.value !== '경기' &&
+		 	searchkeyword.value !== '충북' &&
+		 	searchkeyword.value !== '충남' &&
+		 	searchkeyword.value !== '강원' ){
+				 alert('위치명을 ex) 서울, 경기, 전남, 대전 등으로 입력해주세요.');
+				 return;
+			 }
 		}
-	 });
-	 
-	 const backButton = document.querySelector('button#backButton');
-	 backButton.addEventListener('click',()=>{
-		if(true){
-			 window.location.href ="exhibition"
-		}
-	 });
-	 
-	 const selectCategory = document.querySelector('select#selectCategory');
-	 selectCategory.addEventListener('click', ()=>{
-		  const searchKeyword = document.querySelector('input#search-keyword');
-		 if(selectCategory.ariaSelected=='전시회'){
-			 searchKeyword.ariaPlaceholderr ='테스트';
-		 }
-	 });
-	
+		
+  
+       
+          self.location = "exhibition" + '${pageMaker.makeQuery(1)}' + "&category=" + $("select option:selected").val() + "&keyword=" + encodeURIComponent($('#search-keyword').val()
+          + "&startdate=" + encodeURIComponent($('#startdate-select').val())+ "&enddate=" + encodeURIComponent($('#enddate-select').val()));
+   
+  
+		form.submit();
+		
+	});
  });
