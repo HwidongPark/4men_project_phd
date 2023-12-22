@@ -21,16 +21,17 @@
         <!-- 일단 CSS파일을 만들었는데 그냥 post.css나 나중에 하나로 통일해도 될 듯.. -->
         <div id="market-create-container" class="container w-75">
             <div class="justify-content-center">
-                <form action="/fourmen/market/create" method="post" enctype="multipart/form-data">
+                <form action="/fourmen/market/create" method="post" enctype="multipart/form-data" id="market-post-create-form">
                     <label class="mb-2">제목: </label>
                     <input type="text" name="title" class="form-control mb-3" placeholder="제목" autofocus>
                     <div class="my-2">
                         <span class="market-upload-photos">
-                            <label>사진 첨부:</label>
-                            <input type="file" name="files">
+                            <label>사진 첨부:</label><br>
+                            <input type="file" name="files" class="files">                            
                         </span>
                         <!-- +누를때마다 파일첨부 하나씩 추가.. 최대 20개 -->
                         <button class="market-create-add-phooto" type="button">+</button><br>
+                        
                     </div>
                     <textarea name="description"  class="form-control my-2" rows="20" placeholder="내용"></textarea>
                     <label>가격:</label>
@@ -46,7 +47,8 @@
                     <input type="text" name="userId" class="form-control mb-2">
                     
                     <button class="market-create-cancel btn btn-outline-secondary" type="button">취소</button>
-                    <input type="submit" value="작성" class="btn btn-outline-success">
+                    <button id="btn-market-create-submit" type="button" class="btn btn-outline-success">작성</button>
+                    
                 </form>
                 
             </div>

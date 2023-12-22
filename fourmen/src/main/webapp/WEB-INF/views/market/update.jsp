@@ -21,25 +21,25 @@
         <!-- 일단 CSS파일을 만들었는데 그냥 post.css나 나중에 하나로 통일해도 될 듯.. -->
         <div id="market-create-container" class="container w-75">
             <div class="justify-content-center">
-                <form action="/fourmen/market/modify" method="post" enctype="multipart/form-data">
+                <form action="/fourmen/market/modify" method="post" enctype="multipart/form-data" id="market-post-update-form">
                     <input id="workid" name="workId" value="${ marketPost.workId }" type="hidden">
                     <label class="mb-2">제목: </label>
                     <input type="text" name="title" class="form-control mb-3" placeholder="제목" value="${ marketPost.title }" autofocus>
                     <div>                        
                         <ul>
                             <c:forEach var="workImage" items="${ marketPost.workImages }">
-                                <li><span class="mr-4">${ workImage.originalFileName }</span><button type="button" class="marketBtnDeleteImage">삭제</button></li>
+                                <li><span class="mr-4 existing-files">${ workImage.originalFileName }</span><button type="button" class="marketBtnDeleteImage">삭제</button></li>
                             </c:forEach>
                         </ul>                        
                     </div>
                     
                     <div class="my-2">
                         <span class="market-upload-photos">
-                            <label>사진 첨부:</label>
-                            <input type="file" name="files">
+                            <label>사진 첨부:</label><br>
+                            <input type="file" name="files" class="files">                            
                         </span>
                         <!-- +누를때마다 파일첨부 하나씩 추가.. 최대 20개 -->
-                        <button class="market-create-add-phooto" type="button">+</button><br>
+                        <button class="market-create-add-phooto" type="button">+</button><br>                       
                     </div>
                     <textarea name="description"  class="form-control my-2" rows="20" placeholder="내용">${ marketPost.descriptionKor }</textarea>
                     <label>가격:</label>
@@ -55,7 +55,7 @@
                     <input type="text" name="userId" class="form-control mb-2" value="${ marketPost.userId }" readonly>
                     
                     <button class="market-create-cancel btn btn-outline-secondary" type="button" id="market-update-btn-cancel">취소</button>
-                    <input type="submit" value="수정" class="btn btn-outline-success">
+                    <button type="button" class="btn btn-outline-success" id="btn-market-update-submit">수정</button>
                     <!-- 테스트 -->
                     <input type="hidden" id="hidReqAttr" value="${ marketPost }" />
                 </form>
