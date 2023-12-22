@@ -174,7 +174,7 @@
             <ul class="pagination">
                 <!-- 이전, 처음 페이지 -->
                 <li class="page-item">
-                    <c:url var="firstPage" value="${ servletPath }" />
+                    <c:url var="firstPage" value="${ servletPath }"/>
                     <a class="page-link-img" href="${ firstPage }" aria-label="first page">
                         <img id="pagination-img" alt="first page" src="/fourmen/pagination/pagination01.png">
                     </a>
