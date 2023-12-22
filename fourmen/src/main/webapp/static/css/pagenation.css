@@ -32,7 +32,7 @@
 .pagination .page-item:active {
     color: black;
     font-weight: 900;
-    font-size: 105%;
+    font-size: 100%;
     background-color: transparent;
     border: none;
     box-shadow: none;
@@ -40,13 +40,13 @@
 
 /* 페이지네이션 <, <<, >, >> (이미지) 크기 */
 #pagination-img {
-    width: 13px; height: 20px; border: none;
+    width: 11px; height: 17px; border: none;
 }
 
 /* 페이지네이션 <, <<, >, >> (이미지) 요소의 여백 */
 .pagination .page-item .page-link-img {
-    margin-left: 10px;
-    margin-right: 10px;
+    margin-left: 11px;
+    margin-right: 11px;
 }
 
 /* 페이지네이션 숫자 여백 */

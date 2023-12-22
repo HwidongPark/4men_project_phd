@@ -14,9 +14,9 @@
 	crossorigin="anonymous">
 
 <link rel="stylesheet" href="css/header.css">
-
 <link rel="stylesheet" href="css/footer.css">
 <link rel="stylesheet" href="css/underheader.css">
+
 <style>
 
 @font-face {
@@ -34,7 +34,6 @@ body{
 
 
 div#artist_container {
-
 	margin: 0 auto;
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -46,13 +45,11 @@ div#artist {
 	grid-auto-rows: 200px;
 }
 
-
 .card .card-img {
     width: 100%; /* 이미지 너비 100%로 설정 */
     height: 100%; /* 이미지 높이 100%로 설정 */
     object-fit: cover; /* 이미지 비율 유지하면서 카드에 맞춰 잘립니다 */
 }
-
 
 .card .card-img-overlay {
     visibility: hidden;
@@ -79,21 +76,26 @@ div#artist {
 .card .card-img-overlay h5 {
     color: white; /* 텍스트의 색상을 흰색으로 변경 */
 }
-
-
 </style>
 
 </head>
+
+<!-- 네비게이션 -->
+<%@ include file="fragments/navigation.jspf"%>
+
+<!-- body 시작점 -->
 <body>
-	<!-- 네비게이션 -->
-	<%@ include file="fragments/navigation.jspf"%>
 
-	<div id="underheader-div">
-		<div class="container" id="underheadrcontainer">
-			<h2 class="commondesign">ARTIST</h2>
-		</div>
-	</div>
-
+    
+    <!-- 웹페이지 상단 헤더 아래 부분 -->
+    <div id="underheader-div">
+        <div class="container" id="underheadrcontainer">
+            <h2 class="commondesign">
+                ARTISTS
+            </h2>
+        </div>
+    </div>
+    
 
 	<div id="works" class="my-5 container-fluid w-75">
 		<div id = "artist_container">

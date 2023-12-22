@@ -2,21 +2,12 @@
 /* underheader.css */
 /* header 아래에 각 페이지들에 공통으로 들어가는 부분의 스타일을 작성한 css */
 
-.underheader {
-    padding: 3.75rem 0 6.25rem 0;
-}
-
-.underheader .underheadercontainer {
-    position: relative;
-    margin: 0 auto;
-}
-
 h2.commondesign {
-    position: relative;
-    font-weight: 400;
+    position: absolute;
+    font-weight: 300;
     font-size: 3.0rem;
-    color: #BDBDBD;
-    margin: 0;
+    color: #6E6E6E;
+    margin-left: 5rem;
     padding: 0;
 }
 
@@ -24,11 +15,11 @@ h2.commondesign::before {
     display: block;
     position: absolute;
     top: 50%;
-    left: -19.5rem;
+    left: -19.5in;
     margin-top: 0.0625rem;
-    width: 17.125rem;
-    height: 3px;
-    background: #BDBDBD;
+    width: 19.125in;
+    height: 2.7px;
+    background: #848484;
     content: '';
 }
 
