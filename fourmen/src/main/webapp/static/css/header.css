@@ -76,6 +76,8 @@ table {
     margin-bottom: 5px;
 }
 
+
+
 /* nav 메뉴 관련 클래스 */
 .nav-btn-lists {
     display: flex;
@@ -125,6 +127,7 @@ table {
     flex-wrap: nowrap;
     padding-right: 20px;
 }
+
 
 /* 미디어 쿼리 */
 @media only screen and (max-width: 600px) {

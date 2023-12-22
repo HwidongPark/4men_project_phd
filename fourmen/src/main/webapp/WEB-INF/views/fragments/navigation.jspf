@@ -5,15 +5,25 @@
 <div>
     <nav>
         <ul class="nav-btn-users">
+        	<c:if test="${empty signedInUser}">
             <li class="nav-each-btn-user">
-                <a href="login" class="nav-button-user">LOGIN</a>
-            </li>
-            <li class="nav-each-btn-user">
-                <a href="logout" class="nav-button-user">LOGOUT</a>
+                <a href="signup" class="nav-button-user">LOGIN</a>
             </li>
             <li class="nav-each-btn-user">
                 <a href="signup" class="nav-button-user">SIGN UP</a>
             </li>
+            </c:if>
+            <c:if test="${not empty signedInUser}">
+            <li class="nav-each-btn-user">
+            <c:url var="signOutPage" value="signout" />
+            <c:url var="myPage" value="mypage"/>
+				<a href="${myPage}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+  <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+  <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+</svg></a>
+                <a href="${signOutPage}" class="nav-button-user">LOGOUT</a>
+            </li>
+      		</c:if>
             <li class="nav-each-btn-user">
                 <a href="mypage" class="nav-button-user">MY PAGE</a>
             </li>
@@ -28,8 +38,7 @@
     <div class="logo-container">
 
         <a href="/fourmen/" class="logo">
-            <!-- <img class="logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHfSci5VGhQleIUe4noi8399niPqyDr3fDlQ&usqp=CAU" alt="4men_logo"/> -->
-            Fourmen
+            <img class="logo" src="logo/logo01.png" alt="4men_logo"/>
         </a>
     </div>
     

@@ -5,23 +5,76 @@
 <!-- POSTS 테이블에서 CRUD에 필요한 SQL 문장들을 선언 -->
 <mapper namespace="com.itwill.fourmen.repository.ExhibitionDao">
  	
- 	<select id="selectAll">
- 		select * from TEST order by STARTDATE
- 	</select>
+ 
  	
- 	<select id="search">
- 	<bind name="searchKeyword" value="'%'+keyword+'%'" />
- 	select * from TEST
- 	<where>
- 		<choose>
- 			<when test='category.equals("title")'>
- 				upper(NAME) like upper(#{searchKeyword})
- 			</when>
- 			<when test='category.equals("location")'>
- 				upper(LOCATION) like upper(#{searchKeyword})
- 			</when>
- 		</choose>
- 	</where> 
- 	order by STARTDATE 
- 	</select>
+ 	
+
+ <select id="list" resultType="Exhibition" parameterType="com.itwill.fourmen.board.Criteria">
+
+        SELECT  ID, NAME, LOCATION, STARTDATE, ENDDATE, PHOTO, SITE
+
+         FROM ( 
+
+                SELECT ID, 
+
+                       NAME, 
+
+                       LOCATION, 
+
+                       STARTDATE, 
+
+                       ENDDATE, 
+
+                       PHOTO,
+                       
+                       SITE,
+
+                       ROW_NUMBER() OVER(ORDER BY STARTDATE) AS RNUM
+
+                 from TEST 
+                 
+                 where 1=1
+                 <include refid="search"></include>
+
+                               ) MP
+
+        WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
+
+        ORDER BY ID
+
+    </select>
+
+
+    
+
+    <select id="listCount" resultType="int">
+  
+
+        SELECT COUNT(ID)
+
+          FROM TEST
+		where 1=1
+         <include refid="search"></include>
+
+    </select>
+    
+    <sql id="search">
+		<if test="category != null">
+			<if test="category == 'name'.toString()">AND NAME LIKE '%' || #{keyword} || '%'</if>
+			<if test="category == 'location'.toString()">AND LOCATION LIKE '%' || #{keyword} || '%'</if>
+		</if>
+		<if test="startdate != '' and enddate != ''">
+		 and STARTDATE between #{startdate} and #{enddate} or #{startdate} between STARTDATE and ENDDATE
+		</if>
+		<if test="category != null and startdate != '' and enddate != ''">
+		 and STARTDATE between #{startdate} and #{enddate} or #{startdate} between STARTDATE and ENDDATE
+		 <if test="category == 'name'.toString()">AND NAME LIKE '%' || #{keyword} || '%'</if>
+		 <if test="category == 'location'.toString()">AND LOCATION LIKE '%' || #{keyword} || '%'</if>
+		</if>
+		
+	</sql>
+	
+  
+	
+    
 </mapper>

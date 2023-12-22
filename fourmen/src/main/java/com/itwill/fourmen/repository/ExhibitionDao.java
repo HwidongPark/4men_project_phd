@@ -2,11 +2,21 @@ package com.itwill.fourmen.repository;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
+import com.itwill.fourmen.board.Criteria;
+import com.itwill.fourmen.board.SearchCriteria;
 import com.itwill.fourmen.domain.Exhibition;
-import com.itwill.fourmen.exhibition.ExhibitionSearchDto;
+
 
 public interface ExhibitionDao {
-	List<Exhibition> selectAll();
+
 	
-	List<Exhibition> search(ExhibitionSearchDto dto);
+	List<Exhibition> list(SearchCriteria scri);
+
+    int listCount(SearchCriteria scri);
+    
+
+
+
 }
