@@ -63,7 +63,7 @@
         </div>
     </section>
     
-    <!-- 제목 또는 내용으로 검색하는 검색창 -->
+    <!-- 게시글 검색창 -->
     <section role="search" class="search">
         <div class="forum-top-area">
             <div class="forum-search-area">
@@ -92,7 +92,7 @@
     <section class="freeboard-list" style="padding: 3.5rem 18.5rem 0rem 18.5rem;">
         <table class="table">
             <colgroup>
-                <col style="width: 100px;">
+
                 <col style="width: 10px;">
                 <col style="width: auto;">
                 <col style="width: 10%;">
@@ -101,7 +101,7 @@
             </colgroup>
             <thead>
             <tr>
-                <th>번호</th>
+                <!-- <th>번호</th> -->
                 <th></th>
                 <th>제목</th>
                 <th>작성자</th>
@@ -115,9 +115,10 @@
             <!-- PostController.java에서 전달된 데이터 사용 (리스트의 이름이 items에 들어가야 함)
             -> model.addAttribute("freeboard_posts", list); //-> 뷰에 전달되는 데이터. -->
                 <tr>
-                    <td>${p.post_num}</td>
+                    <td class="d-none">${p.post_id}</td> <!-- 필요하지 않으면 지우자... -->
+                    <!-- <td>${p.post_num}</td> -->
                     <td></td>
-                    <td id="table-td" style="text-align: left;">
+                    <td id="table-td" style="text-align: left; padding-left: 2rem">
                         <c:url var="freeboard_postDetailPage" value="/forum/freeboard-detail">
                             <c:param name="post_id" value="${p.post_id}" />
                         </c:url>
@@ -132,18 +133,21 @@
         </table>
     </section>
     
-    <!-- 새글 작성 내비게이션(HOME / MAP / NEW POST) -->
+    <!-- 새 글 작성 내비게이션(HOME / MAP / NEW POST) -->
     <div class="new-post-div">
         <nav class="new-post-nav">
             <ul class="new-post-ul">
                 <li id="new-post-li-one" class="new-post-li">
-                    <a href="../">HOME</a>
+                    <c:url var="homePage" value="/" />
+                    <a href="${homePage}">HOME</a>
                 </li>
                 <li id="new-post-li-two" class="new-post-li">
-                    <a href="map">MAP</a>    
+                    <c:url var="siteMapPage" value="#" />
+                    <a href="${siteMapPage}">MAP</a>    
                 </li>
                 <li id="new-post-li-three" class="new-post-li">
-                    <a href="freeboard-create">NEW POST</a>
+                    <c:url var="freeboardCreatePage" value="/forum/freeboard-create" />
+                    <a href="${freeboardCreatePage}">NEW POST</a>
                 </li>
             </ul>
         </nav>

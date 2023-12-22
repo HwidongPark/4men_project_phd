@@ -33,4 +33,15 @@ public class NoticeService {
 				.toList();
 	}
 	
+	// 공지게시판 선택한 글 상세내용 보여주기...
+	public Notice detail(long id) { // 전달받은 id 값에 해당하는 포스트를 리턴하므로 Post 타입 사용.
+		log.debug("noticeboard-detail(id={}", id);
+		
+		// 리포지토리 계층의 메서드를 호출해서 DB 테이블에서 해당 아이디의 포스트 상세내용을 검색.
+		Notice notice = noticeDao.selectByNoticeId(id);
+		log.debug("noticeboard-detail:{}", notice);
+		
+		return notice;
+	}
+	
 }

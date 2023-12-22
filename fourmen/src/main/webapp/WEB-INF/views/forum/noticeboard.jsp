@@ -63,7 +63,7 @@
         </div>
     </section>
     
-    <!-- 제목 또는 내용으로 검색하는 검색창 -->
+    <!-- 게시글 검색창 -->
     <section role="search" class="search">
         <div class="forum-top-area">
             <div class="forum-search-area">

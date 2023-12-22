@@ -10,6 +10,7 @@ import lombok.Data;
 @Data
 @Builder
 public class PostListItemDto {
+	private Long post_rownum;
 	private Long post_id;
 	private Long post_num;
 	private String post_title;

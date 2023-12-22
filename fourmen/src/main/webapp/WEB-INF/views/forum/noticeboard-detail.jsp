@@ -30,7 +30,41 @@
 
 <!-- body 시작점 -->
 <body>
-
+    
+    <!-- 웹페이지 상단 헤더 아래 부분 -->
+    <div id="underheader-div">
+        <div class="container" id="underheadrcontainer">
+            <h2 class="commondesign">
+                FORUM
+            </h2>
+        </div>
+    </div>
+    
+    <!-- main 시작점 -->
+    <main>
+    
+    <!-- 게시판 카테고리(자유게시판, 후기게시판, 질문게시판) -->
+    <section role="kategorie" class="kategorie" style="border-bottom: 1.5px solid #D8D8D8;">
+        <div class="forum-kategorie">
+            <ul class="forum-kategorie-board-lists">
+                <li class="forum-kategorie-board">
+                    <a href="freeboard">자유게시판</a>
+                </li>
+                <li class="forum-kategorie-board">
+                    <a href="queryboard">Q&A</a>
+                </li>
+                <li class="forum-kategorie-board">
+                    <a href="faqboard">FAQ</a>
+                </li>
+                <li class="forum-kategorie-board">
+                    <a href="noticeboard">NOTICE</a>
+                </li>
+            </ul>
+        </div>
+    </section>
+    
+    </main>
+    
     <!-- 푸터 파일 include -->
     <%@ include file="../fragments/footer.jspf" %>
     

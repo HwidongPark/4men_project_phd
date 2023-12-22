@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -14,6 +15,7 @@ import com.itwill.fourmen.domain.Post;
 import com.itwill.fourmen.domain.Qna;
 import com.itwill.fourmen.dto.post.FaqListItemDto;
 import com.itwill.fourmen.dto.post.NoticeListItemDto;
+import com.itwill.fourmen.dto.post.PostCreateDto;
 import com.itwill.fourmen.dto.post.PostListItemDto;
 import com.itwill.fourmen.dto.post.QnaLIstItemDto;
 import com.itwill.fourmen.service.FaqService;
@@ -139,7 +141,73 @@ public class PostController {
 		
 		// 뷰에 데이터를 전달하기 위해서 모델에 데이터를 속성으로 추가.
 		model.addAttribute("notice", notice);
+	}
 	
+	@GetMapping("/freeboard-create") //-> GET 방식의 "/forum/freeboard-create" 요청 주소를 처리하는 메서드.
+	public void create() {
+		log.debug("GET_FREEBOARD - create()");
+	}
+	
+	@PostMapping("/freeboard-create") //-> POST 방식의 "/forum/freeboard-create" 요청 주소를 처리하는 메서드.
+	public String create(PostCreateDto dto) { //-> String 타입 사용: 이 메서드가 클라이언트에게 리턴하는 값이 URL 경로를 나타내기 때문.
+		log.debug("POST_FREEBOARD - create(dto={}", dto);
+		
+		// 서비스 계층의 메서드를 호출해서 새 포스트 작성 서비스를 수행.
+		postService.create(dto);
+		
+		return "redirect:/forum/freeboard";
+	}
+	
+	@GetMapping("freeboard-detail/delete") //-> GET 방식의 "freeboard-detail/delete" 요청 주소를 처리하는 메서드.
+	/*
+	 * 누가.. freeboard-detail/delete 요청 주소를 보냈을까? -> 자바스크립트 파일에서 보냄.
+	 * freeboard-detail.js 파일에서 location.href = `freeboard-detail/delete?post_id=${postId.value}`; 가 실행되어,
+	 * localhost:8081/fourmen/forum/freeboard-detail/delete?post_id=(번호) 요청이 서버로 전달된 것이다!
+	 */
+	public String freeboard_delete(long post_id) {
+		
+		postService.delete(post_id);
+		
+		return "redirect:/forum/freeboard";
+	}
+	
+	@GetMapping("faqboard-detail/delete") //-> GET 방식의 "faqboard-detail/delete" 요청 주소를 처리하는 메서드.
+	/*
+	 * 누가.. faqboard-detail/delete 요청 주소를 보냈을까? -> 자바스크립트 파일에서 보냄.
+	 * faqboard-detail.js 파일에서 location.href = `faqboard-detail/delete?faq_id=${faqId.value}`; 가 실행되어,
+	 * localhost:8081/fourmen/forum/faqboard-detail/delete?faq_id=(번호) 요청이 서버로 전달된 것이다!
+	 */
+	public String faqboard_delete(long faq_id) {
+		
+		postService.delete(faq_id);
+		
+		return "redirect:/forum/freeboard";
+	}
+	
+	@GetMapping("noticeboard-detail/delete") //-> GET 방식의 "faqboard-detail/delete" 요청 주소를 처리하는 메서드.
+	/*
+	 * 누가.. noticeboard-detail/delete 요청 주소를 보냈을까? -> 자바스크립트 파일에서 보냄.
+	 * noticeboard-detail.js 파일에서 location.href = `noticeboard-detail/delete?notice_id=${noticeId.value}`; 가 실행되어,
+	 * localhost:8081/fourmen/forum/noticeboard-detail/delete?notice_id=(번호) 요청이 서버로 전달된 것이다!
+	 */
+	public String noticeboard_delete(long notice_id) {
+		
+		postService.delete(notice_id);
+		
+		return "redirect:/forum/freeboard";
+	}
+	
+	@GetMapping("qnaboard-detail/delete") //-> GET 방식의 "qnaboard-detail/delete" 요청 주소를 처리하는 메서드.
+	/*
+	 * 누가.. qnaboard-detail/delete 요청 주소를 보냈을까? -> 자바스크립트 파일에서 보냄.
+	 * qnaboard-detail.js 파일에서 location.href = `qnaboard-detail/delete?qna_id=${qnaId.value}`; 가 실행되어,
+	 * localhost:8081/fourmen/forum/qnaboard-detail/delete?qna_id=(번호) 요청이 서버로 전달된 것이다!
+	 */
+	public String qnaboard_delete(long qna_id) {
+		
+		postService.delete(qna_id);
+		
+		return "redirect:/forum/freeboard";
 	}
 	
 }

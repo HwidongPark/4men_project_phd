@@ -4,8 +4,18 @@
     "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- NOTICE_BOARD 테이블에서 CRUD에 필요한 SQL 문장들을 선언 -->
+<!-- namespace: 매퍼 파일에 정의된 SQL 문장들이 어떤 인터페이스와 연결되는지를 지정 -->
+<!-- namespace: 매퍼 파일에 정의된 SQL 문장들이 연결되는 인터페이스의 패키지 경로와 클래스 이름 지정 -->
 <mapper namespace="com.itwill.fourmen.repository.NoticeDao">
-    <select id="selectOrderByNoticeNumDesc" resultType="Notice">
+    
+    <!-- NOTICE_BOARD 테이블 전체 검색, 글 번호 내림차순 정렬 -->
+    <select id="selectOrderByNoticeNumDesc" resultType="Notice"> <!-- DB에서 select 시 반환되는 값의 타입 설정 -->
         select * from NOTICE_BOARD order by NOTICE_NUM desc
     </select>
+    
+    <!-- NOTICE_BOARD 테이블에서 아이디로 검색 -->
+    <select id="selectByNoticeId" resultType="Notice"> <!-- DB에서 select 시 반환되는 값의 타입 설정 -->
+        select * from NOTICE_BOARD where NOTICE_ID = #{notice_id}
+    </select>
+    
 </mapper>

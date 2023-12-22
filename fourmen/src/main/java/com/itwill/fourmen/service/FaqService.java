@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.itwill.fourmen.domain.Faq;
+import com.itwill.fourmen.dto.post.FaqCreateDto;
 import com.itwill.fourmen.dto.post.FaqListItemDto;
+import com.itwill.fourmen.dto.post.PostCreateDto;
 import com.itwill.fourmen.repository.FaqDao;
 
 import lombok.extern.slf4j.Slf4j;
@@ -42,6 +44,26 @@ public class FaqService {
 		log.debug("faqboard-detail:{}", faq);
 		
 		return faq;
+	}
+	
+	// Faq게시판 새 글 작성하기...
+	public int create(FaqCreateDto dto) { // 생성(삽입) 성공한 행의 개수를 리턴하므로 int 타입 사용.
+		log.debug("faqboard-create(dto={})", dto);
+		
+		// 리포지토리 계층의 메서드를 호출해서 DB 테이블에 데이터를 삽입.
+		int result = faqDao.insert(dto.toEntity());
+		log.debug("faqboard-create-result ={}", result);
+		
+		return result;
+	}
+	
+	// Faq게시판 글 삭제하기...
+	public int delete(long id) { // 삭제 성공한 행의 개수를 리턴하므로 int 타입 사용
+		
+		// 리포지토리 계층의 메서드를 호출해서 delete SQL을 실행.
+		int result = faqDao.delete(id);
+		
+		return result;
 	}
 	
 }

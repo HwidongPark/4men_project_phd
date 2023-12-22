@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.itwill.fourmen.domain.Post;
+import com.itwill.fourmen.dto.post.PostCreateDto;
 import com.itwill.fourmen.dto.post.PostListItemDto;
 import com.itwill.fourmen.repository.PostDao;
 
@@ -42,6 +43,26 @@ public class PostService {
 		log.debug("freeboard-detail:{}", post);
 		
 		return post;
+	}
+	
+	// 자유게시판 새 글 작성하기...
+	public int create(PostCreateDto dto) { // 생성(삽입) 성공한 행의 개수를 리턴하므로 int 타입 사용.
+		log.debug("freeboard-create(dto={})", dto);
+		
+		// 리포지토리 계층의 메서드를 호출해서 DB 테이블에 데이터를 삽입.
+		int result = postDao.insert(dto.toEntity());
+		log.debug("freeboard-create-result ={}", result);
+		
+		return result;
+	}
+	
+	// 자유게시판 글 삭제하기...
+	public int delete(long post_id) { // 삭제 성공한 행의 개수를 리턴하므로 int 타입 사용
+		
+		// 리포지토리 계층의 메서드를 호출해서 delete SQL을 실행.
+		int result = postDao.freeboard_delete(post_id);
+		
+		return result;
 	}
 	
 }
