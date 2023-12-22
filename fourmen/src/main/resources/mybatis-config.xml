@@ -5,10 +5,16 @@
 
 <!-- MyBatis3 프레임워크 설정 -->
 <configuration>
-    <typeAliases>
-        <typeAlias type="com.itwill.fourmen.domain.Market" alias="Market"/>
+
+	<typeAliases>
+    <typeAlias type="com.itwill.fourmen.domain.Market" alias="Market"/>
         <typeAlias type="com.itwill.fourmen.domain.WorkImage" alias="WorkImage"/>
-    </typeAliases>
-    
+		<typeAlias type="com.itwill.fourmen.domain.Artist"
+			alias = "Artist" />
+		<typeAlias type="com.itwill.fourmen.domain.Artist_Works"
+			alias = "Artist_Works"/>
+		<typeAlias type="com.itwill.fourmen.domain.Artist_Works_Img"
+			alias = "Artist_Works_Img"/>	
+	</typeAliases>
 
 </configuration>
