@@ -66,42 +66,33 @@ html {
 	<div id="works" class="my-5 container-fluid container-xl w-75">
 
 		<div class="card border-0">
+			<div class = "card-text d-none">
+				<input id = "worksid" name = "worksid" class = "card-text" value = "${artist_works.worksid}" />
+				<input id = "userid" name = "userid" class = "card-text" value = "${artist_works.userid}" />
+			</div>
+		
 			<div id="Works_Title" class="card-text">
-				<p class="card-text">자화상</p>
+				<p id="title" class="card-text">${artist_works.title}</p>
 			</div>
 			
 			<div class="card p-4 border-0">
-				<p class="card-text fs-5">네덜란드 출신의 화가인 빈센트 반 고흐는 가장 불운했던 화가 중 한
-					명으로 꼽힌다. 고흐는 그 생전에는 제대로 된 평을 받지 못했고 작품 역시 팔지 못했으나 그의 사후에야 명성을 얻게
-					되었다. 또한 오늘날에 이르러 고흐는 가장 사랑받는 화가 중 한 명이기도 하다. 고흐의 불운한 삶을 더 극대화한 것은
-					그가 앓고 있던 정신질환이었다. 고흐의 불안한 정신 상태는 그의 작품에서 나타나는 구불구불한 선들에 반영된 것으로
-					이해된다. 무엇보다 고흐의 삶을 더 극적으로 만든 사건은 1888년대 크리스마스 즈음에 고흐가 귀를 자른 일이었다. 더
-					놀라운 점은 이렇게 이상한 행위를 한 뒤 귀에 붕대를 감은 자신의 모습을 그림으로 담았다는 사실이다.</p>
+				<p id="content_kor" class="card-text fs-5">${artist_works.content_kor}</p>
 			</div>
 			<div class="card p-4 border-0">
-				<p class="card-text fs-5">On July 14, 2022, an almost certainly
-					authentic self-portrait of van Gogh was uncovered under his 1885
-					painting "Head of a peasant woman". Lesley Stevenson, a conservator
-					at the Scottish National Gallery of Modern Art, discovered it
-					during an X-ray examination of their existing pieces. It shows a
-					bearded van Gogh in a brimmed hat and a neckerchief around his
-					throat. His left ear was clearly visible. The portrait is covered
-					under layers of cardboard and glue, which experts are searching for
-					ways to remove in order to confirm its authenticity. They believe
-					it was painted when van Gogh moved to France and learnt about the
-					work of the impressionists there, an experience that influenced his
-					more colourful and expressive style that is much admired today. The
-					Dutch painter is known to often reuse his canvases or work on their
-					reverse in order to save money. The X-ray image will be featured at
-					a Royal Scottish Academy exhibit in Edinburgh and displayed using a
-					specially made lightbox.</p>
+				<p id="content_eng" class="card-text fs-5">${artist_works.content_eng}</p>
 			</div>
 		</div>
 		
 		<div class = "card border-0 rounded-0">
-			<img class="card-img mb-5 rounded-0" src = "https://courtauld.ac.uk/wp-content/uploads/2021/04/vsn-gogh-self-portrait-P.1948.SC_.175_cs-scaled.jpg">
-			<img class="card-img mb-5 rounded-0" src = "https://upload.wikimedia.org/wikipedia/commons/f/f6/Zelfportret_Rijksmuseum_SK-A-3262.jpeg">
-			<img class="card-img mb-5 rounded-0" src = "https://upload.wikimedia.org/wikipedia/commons/0/02/Van_Gogh_-_Selbstbildnis_mit_verbundenem_Ohr_und_Pfeife.jpeg">
+			<c:if test = "${empty worksImgList}">
+					<img class="card-img mb-5 rounded-0" src = "../images/works/default_works.png"/>
+			</c:if>
+			
+			<c:if test = "${not empty worksImgList}">
+				<c:forEach var = "wi" items = "${worksImgList}">
+					<img class="card-img mb-5 rounded-0" src = "../images/works/${wi.saved_file}" onerror="this.src='../images/works/default_works.png'" alt="test_works_img"/>
+				</c:forEach>
+			</c:if>
 		</div>
 	</div>
 
@@ -138,6 +129,17 @@ html {
 				onclick="window.scrollTo(0,0);">위로 가기</button>
 
 		</div>
+		
+		<div class = "mt-4 card-footer d-grid gap-2 d-md-flex justify-content-md-end">
+			<!-- 수정 버튼 -->
+			<c:url var = "worksModifyPage" value = "/artist/works_modify">
+				<c:param name = "worksid" value = "${artist_works.worksid}" />
+			</c:url>
+			<a href="${worksModifyPage}" class="btn btn-outline-dark me-md-2">작품 수정</a>
+			<!-- 작품 추가 버튼 -->
+			
+			<button class="btn btn-outline-dark" id="btnDelete">작품 삭제</button>
+		</div>
 
 	</div>
 
@@ -148,6 +150,7 @@ html {
 		integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
 		crossorigin="anonymous"></script>
 	<script src="../js/works-comments.js"></script>
+	<script src="../js/works-modify.js"></script>
 
 </body>
 </html>
