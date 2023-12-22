@@ -62,7 +62,7 @@
         SELECT *
         FROM market
         <where>
-            <if test="!keyword.equals('')">
+            <if test="!keyword.equals('') and keyword != null">
                 <choose>
                     <when test="searchCategory.equals('title')">
                         title LIKE '%'||#{ keyword }||'%'
@@ -87,10 +87,10 @@
                     </otherwise>
                 </choose>
             </if>
-            <if test="!minPrice.equals('')">
+            <if test="!minPrice.equals('') and minPrice != null">
                 AND PRICE &gt;= #{ minPrice } 
             </if>
-            <if test="!maxPrice.equals('')">
+            <if test="!maxPrice.equals('') and maxPrice != null">
                 AND PRICE &lt;= #{ maxPrice }
             </if>
         </where>
