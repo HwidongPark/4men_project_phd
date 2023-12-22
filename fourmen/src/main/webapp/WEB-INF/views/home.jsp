@@ -12,19 +12,32 @@
 	rel="stylesheet"
 	integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
 	crossorigin="anonymous">
-<link rel="stylesheet" href="css/header.css">
+
+<!-- css 파일 적용 -->
 <link rel="stylesheet" href="css/app.css">
+<link rel="stylesheet" href="css/header.css">
 <link rel="stylesheet" href="css/footer.css">
+<link rel="stylesheet" href="css/homeunderheader.css">
 
 </head>
 
+<!-- body 시작점 -->
 <body>
     
     <!-- 헤더 파일 include -->
     <%@ include file="fragments/navigation.jspf"%>
     
+    <!-- 웹페이지 상단 헤더 아래 부분 -->
+    <div id="underheader-div">
+        <div class="container" id="underheadrcontainer">
+            <h2 class="commondesign">
+            <!-- 홈페이지 헤더와 캐로셀 사이의 여백 만들기 -->
+            </h2>
+        </div>
+    </div>
+    
     <!-- Carousel 사진들 추가 -->
-    <div id="carousel" class="carousel slide w-75">
+    <div id="carousel" class="carousel slide w-100">
         <div class="carousel-indicators">
           <button type="button" data-bs-target="#carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
           <button type="button" data-bs-target="#carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -32,15 +45,15 @@
         </div>
         <div class="carousel-inner">
           <div class="carousel-item active img-size-control">
-            <img src="https://m.segye.com/content/image/2018/11/27/20181127003595.jpg"
+            <img src="picture/반고흐01.jpg"
              class="d-block w-100 carousel-img-size" alt="...">
           </div>
           <div class="carousel-item img-size-control">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSc3zBDYtml5oZ3HMDqdE20b6FPsKPpZ1LkHg&usqp=CAU" 
+            <img src="picture/반고흐02.jpg"
             class="d-block w-100 carousel-img-size" alt="...">
           </div>
           <div class="carousel-item img-size-control">
-            <img src="https://tvstore-phinf.pstatic.net/20210914_191/1631614821883lmWOm_JPEG/00020.jpg"
+            <img src="picture/르누아르01.jpg"
              class="d-block w-100 carousel-img-size" alt="...">
           </div>
         </div>

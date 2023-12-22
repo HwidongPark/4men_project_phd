@@ -54,11 +54,10 @@ h2 {
 }
 
 
-/* 이 밑부터 진짜 CSS시작    */
+/* 이 밑부터 진짜 CSS시작 */
 /* 캐로셀에 관한 css */
 #carousel {
     margin: 0 auto;
-    margin-top: 2em;
     max-height: 40rem;
     background-size: cover;
 }

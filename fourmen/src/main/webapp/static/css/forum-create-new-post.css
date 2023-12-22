@@ -1,0 +1,93 @@
+@charset "UTF-8";
+/* newpost.css */
+/* forum에서 새 글을 작성하기 위한 메뉴에 관한 css */
+
+.new-post-div {
+    display: flex;
+    justify-content: end;
+    padding-right: 17.5rem;
+}
+
+.new-post-div .new-post-nav {
+    padding-bottom: 3rem;
+    padding-top: 0.4rem;
+}
+
+.new-post-div .new-post-nav .new-post-ul {
+    display: flex;
+}
+
+.new-post-div .new-post-nav .new-post-ul .new-post-li {
+    position: relative;
+    padding: 0 1.25rem;
+    font-weight: 400;
+    font-size: 0.875rem;
+    line-height: 1.125rem;
+    color: #2E2E2E;
+    letter-spacing: -0.035em;
+}
+
+.new-post-div .new-post-nav .new-post-ul .new-post-li a {
+    text-decoration: none;
+    color: #1C1C1C;
+}
+
+.new-post-div .new-post-nav .new-post-ul .new-post-li a:hover {
+    font-weight: 700;
+    font-size: 0.845rem;
+    color: black;
+}
+
+/*
+.new-post-div .new-post-nav .new-post-ul .new-post-li::after {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 0.0625rem;
+    height: 0.625rem;
+    margin-top: -0.3125rem;
+    background: black;
+    content: '';
+}
+*/
+
+#new-post-li-three::after {
+    display: block;
+    position: absolute;
+    top: 55%;
+    left: 0;
+    width: 0.0625rem;
+    height: 0.625rem;
+    margin-top: -0.3125rem;
+    background: black;
+    content: '';
+}
+
+#new-post-li-two::after {
+    display: block;
+    position: absolute;
+    top: 55%;
+    left: 0;
+    width: 0.0625rem;
+    height: 0.625rem;
+    margin-top: -0.3125rem;
+    background: black;
+    content: '';
+}
+
+/*
+#new-post-li-one::after {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 0.0625rem;
+    height: 0.625rem;
+    margin-top: -0.3125rem;
+    background: black;
+    content: '';
+}
+*/
+
+
