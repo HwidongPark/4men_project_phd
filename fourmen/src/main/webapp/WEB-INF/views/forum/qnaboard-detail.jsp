@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="../css/forum-search-area.css">
 <link rel="stylesheet" href="../css/forum-kategorie-area.css">
 <link rel="stylesheet" href="../css/forum-create-new-post.css">
-<link rel="stylesheet" href="../css/forum-noticeboard-detail.css">
+<link rel="stylesheet" href="../css/forum-qnaboard-detail.css">
 
 <!-- 헤더 파일 include -->
 <%@ include file="../fragments/navigation.jspf"%>
@@ -36,7 +36,7 @@
     <div id="underheader-div">
         <div class="container" id="underheadrcontainer">
             <h2 class="commondesign">
-                NOTICE
+                Q&A
             </h2>
         </div>
     </div>
@@ -44,43 +44,43 @@
     <!-- main 시작점 -->
     <main>
     
-    <section role="noticeboard-view"> <!-- 게시글이 보이는 부분... -->
-        <div class="noticeboard-view-detail"> <!-- 제목 / 작성정보 / 내용을 묶는 div -->
-            <div class="noticeboard-view-detail-title">
-                ${notice.notice_title}
+    <section role="qnaboard-view"> <!-- 게시글이 보이는 부분... -->
+        <div class="qnaboard-view-detail"> <!-- 제목 / 작성정보 / 내용을 묶는 div -->
+            <div class="qnaboard-view-detail-title">
+                ${qna.qna_title}
             </div>
             <div class="d-none"> <!-- 게시글 고유 아이디를 보이지 않게 가림 -->
-                <input id="notice_id" name="notice_id" value="${notice.notice_id}">
+                <input id="qna_id" name="qna_id" value="${qna.qna_id}">
             </div>
-            <ul class="noticeboard-view-detail-info">
+            <ul class="qnaboard-view-detail-info">
                 <li>
-                    <label class="noticeboard-view-detail-info-label">작성일</label>
-                    <input id="noticeboard-view-detail-createdTime" value="${notice.notice_created_time}" type="text" readonly="readonly">
+                    <label class="qnaboard-view-detail-info-label">작성일</label>
+                    <input id="qnaboard-view-detail-createdTime" value="${qna.qna_created_time}" type="text" readonly="readonly">
                 </li>
                 <li>
-                    <label class="noticeboard-view-detail-info-label">작성자</label>
-                    <input id="noticeboard-view-detail-userId"  value="${notice.userid}" type="text" readonly="readonly">
+                    <label class="qnaboard-view-detail-info-label">작성자</label>
+                    <input id="qnaboard-view-detail-userId"  value="${qna.userid}" type="text" readonly="readonly">
                 </li>
                 <li>
-                    <label class="noticeboard-view-detail-info-label">조회</label>
-                    <input id="noticeboard-view-detail-view" value="${notice.notice_view_count}" type="number" readonly="readonly">
+                    <label class="qnaboard-view-detail-info-label">조회</label>
+                    <input id="qnaboard-view-detail-view" value="${qna.qna_view_count}" type="number" readonly="readonly">
                 </li>
                 <li>
-                    <label class="noticeboard-view-detail-info-label">댓글</label>
-                    <input id="noticeboard-view-detail-comment" value="1" type="number" readonly="readonly">
+                    <label class="qnaboard-view-detail-info-label">댓글</label>
+                    <input id="qnaboard-view-detail-comment" value="1" type="number" readonly="readonly">
                 </li>
             </ul>
             <div>
-                <button id="noticeboard-modify">수정</button>
-                <button id="noticeboard-delete">삭제</button>
+                <button id="qnaboard-modify">수정</button>
+                <button id="qnaboard-delete">삭제</button>
             </div>
-            <div class="noticeboard-view-detail-content">
-                <!-- <input class="noticeboard-view-detail-content-input" type="text" value="${notice.notice_content}"> -->
-                ${notice.notice_content}
+            <div class="qnaboard-view-detail-content">
+                <!-- <input class="qnaboard-view-detail-content-input" type="text" value="${qna.qna_content}"> -->
+                ${qna.qna_content}
             </div>
         </div>
-        <div class="noticeboard-view-list-button">
-            <button id="noticeboard-view-btnList" type="button">
+        <div class="qnaboard-view-list-button">
+            <button id="qnaboard-view-btnList" type="button">
                 목록
             </button>
         </div>
@@ -95,8 +95,8 @@
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
-    <script src="../js/header.js"></script>
-    <script src="../js/noticeboard-detail.js"></script>
+    <script src="js/header.js"></script>
+    <script src="../js/qnaboard-detail.js"></script>
 
 </body>
 </html>

@@ -51,7 +51,7 @@
                     <a href="freeboard">자유게시판</a>
                 </li>
                 <li class="forum-kategorie-board">
-                    <a href="queryboard">Q&A</a>
+                    <a href="qnaboard">Q&A</a>
                 </li>
                 <li class="forum-kategorie-board">
                     <a href="faqboard">FAQ</a>
@@ -113,12 +113,13 @@
             <c:forEach var="f" items="${faqboard_posts}">
             <!-- var: 변수(리스트 값을 저장) / items: 리스트 -->
             <!-- PostController.java에서 전달된 데이터 사용 (리스트의 이름이 items에 들어가야 함)
-            -> model.addAttribute("freeboard_posts", list); //-> 뷰에 전달되는 데이터. -->
+            -> model.addAttribute("faqboard_posts", list); //-> 뷰에 전달되는 데이터. -->
                 <tr>
+                    <td class="d-none">${f.faq_id}</td>
                     <td>${f.faq_num}</td>
                     <td></td>
                     <td id="table-td" style="text-align: left;">
-                        <c:url var="faqboard_faqDetailPage" value="/forum/faqboard-datail">
+                        <c:url var="faqboard_faqDetailPage" value="/forum/faqboard-detail">
                             <c:param name="faq_id" value="${f.faq_id}" />
                         </c:url>
                         <a href="${faqboard_faqDetailPage}">${f.faq_title}</a>

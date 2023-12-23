@@ -51,7 +51,7 @@
                     <a href="freeboard">자유게시판</a>
                 </li>
                 <li class="forum-kategorie-board">
-                    <a href="queryboard">Q&A</a>
+                    <a href="qnaboard">Q&A</a>
                 </li>
                 <li class="forum-kategorie-board">
                     <a href="faqboard">FAQ</a>
@@ -115,6 +115,7 @@
             <!-- PostController.java에서 전달된 데이터 사용 (리스트의 이름이 items에 들어가야 함)
             -> model.addAttribute("freeboard_posts", list); //-> 뷰에 전달되는 데이터. -->
                 <tr>
+                    <td class="d-none">${n.notice_id}</td>
                     <td>${n.notice_num}</td>
                     <td></td>
                     <td id="table-td" style="text-align: left;">

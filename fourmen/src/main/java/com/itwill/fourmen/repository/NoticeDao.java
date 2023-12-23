@@ -7,8 +7,7 @@ import com.itwill.fourmen.domain.Notice;
 public interface NoticeDao {
 	List<Notice> selectOrderByNoticeNumDesc();
 	Notice selectByNoticeId(long id);
-	Notice selectOrderByNoticeNumDesc(long id);
-	int insert(Notice notice);
-	int delete(long id);
+	int noticeboard_insert(Notice notice);
+	int noticeboard_delete(long notice_id);
 //	List<Notice> search(NoticeSearchDto dto);
 }

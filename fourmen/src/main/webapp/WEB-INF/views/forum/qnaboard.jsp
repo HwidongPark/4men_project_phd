@@ -51,7 +51,7 @@
                     <a href="freeboard">자유게시판</a>
                 </li>
                 <li class="forum-kategorie-board">
-                    <a href="queryboard">Q&A</a>
+                    <a href="qnaboard">Q&A</a>
                 </li>
                 <li class="forum-kategorie-board">
                     <a href="faqboard">FAQ</a>
@@ -110,18 +110,19 @@
             </tr>
             </thead>
             <tbody class="table-group-divider">
-            <c:forEach var="q" items="${queryboard_posts}">
+            <c:forEach var="q" items="${qnaboard_posts}">
             <!-- var: 변수(리스트 값을 저장) / items: 리스트 -->
             <!-- PostController.java에서 전달된 데이터 사용 (리스트의 이름이 items에 들어가야 함)
             -> model.addAttribute("freeboard_posts", list); //-> 뷰에 전달되는 데이터. -->
                 <tr>
+                    <td class="d-none">${q.qna_id}</td>
                     <td>${q.qna_num}</td>
                     <td></td>
                     <td id="table-td" style="text-align: left;">
-                        <c:url var="queryboard_queryDetailPage" value="/forum/queryboard-detail">
+                        <c:url var="qnaboard_qnaDetailPage" value="/forum/qnaboard-detail">
                             <c:param name="qna_id" value="${q.qna_id}" />
                         </c:url>
-                        <a href="${queryboard_queryDetailPage}">${q.qna_title}</a>
+                        <a href="${qnaboard_qnaDetailPage}">${q.qna_title}</a>
                     </td>
                     <td>${q.userid}</td>
                     <td>${q.qna_created_time}</td>

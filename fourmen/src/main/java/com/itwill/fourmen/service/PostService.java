@@ -50,7 +50,7 @@ public class PostService {
 		log.debug("freeboard-create(dto={})", dto);
 		
 		// 리포지토리 계층의 메서드를 호출해서 DB 테이블에 데이터를 삽입.
-		int result = postDao.insert(dto.toEntity());
+		int result = postDao.freeboard_insert(dto.toEntity());
 		log.debug("freeboard-create-result ={}", result);
 		
 		return result;

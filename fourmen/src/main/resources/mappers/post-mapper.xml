@@ -19,7 +19,7 @@
     </select>
     
     <!-- FREE_BOARD 테이블에 새 포스트 삽입 -->
-    <insert id="insert">
+    <insert id="freeboard_insert">
         insert into FREE_BOARD (POST_TITLE, POST_CONTENT) values (#{post_title}, #{post_content})
         <!-- #{} 부분은 대소문자 구별! (Post class 에서 작성한 것과 같아야 함 -->
         <!-- #{} 부분은 입력한 객체의 getter 메서드를 호출한다고 생각하면 됨 -->
@@ -29,21 +29,6 @@
     <!-- FREE_BOARD 테이블에서 입력한 아이디에 해당하는 포스트 삭제 -->
     <delete id="freeboard_delete">
         delete from FREE_BOARD where POST_ID = #{post_id}
-    </delete>
-    
-    <!-- FAQ_BOARD 테이블에서 입력한 아이디에 해당하는 포스트 삭제 -->
-    <delete id="faqboard_delete">
-        delete from FAQ_BOARD where FAQ_ID = #{faq_id}
-    </delete>
-    
-    <!-- FREE_BOARD 테이블에서 입력한 아이디에 해당하는 포스트 삭제 -->
-    <delete id="noticeboard_delete">
-        delete from NOTICE_BOARD where NOTICE_ID = #{notice_id}
-    </delete>
-    
-    <!-- FREE_BOARD 테이블에서 입력한 아이디에 해당하는 포스트 삭제 -->
-    <delete id="qnaboard_delete">
-        delete from QNA_BOARD where QNA_ID = #{qna_id}
     </delete>
     
 </mapper>

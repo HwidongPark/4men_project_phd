@@ -7,7 +7,7 @@ import com.itwill.fourmen.domain.Qna;
 public interface QnaDao {
 	List<Qna> selectOrderByQnaNumDesc();
 	Qna selectByQnaId(long id);
-	int insert(Qna qna);
-	int delete(long id);
+	int qnaboard_insert(Qna qna);
+	int qnaboard_delete(long id);
 //	List<Qna> search(QnaSearchDto dto);
 }

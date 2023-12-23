@@ -4,8 +4,31 @@
     "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- QNA_BOARD 테이블에서 CRUD에 필요한 SQL 문장들을 선언 -->
+<!-- namespace: 매퍼 파일에 정의된 SQL 문장들이 어떤 인터페이스와 연결되는지를 지정 -->
+<!-- namespace: 매퍼 파일에 정의된 SQL 문장들이 연결되는 인터페이스의 패키지 경로와 클래스 이름 지정 -->
 <mapper namespace="com.itwill.fourmen.repository.QnaDao">
+    
+    <!-- QNA_BOARD 테이블 전체 검색, 글 번호 내림차순 정렬 -->
     <select id="selectOrderByQnaNumDesc" resultType="Qna">
-        select * from QNA_BOARD order by QNA_NUM desc
+        select * from QNA_BOARD order by ROWNUM desc
     </select>
+    
+    <!-- QNA_BOARD 테이블에서 아이디로 검색 -->
+    <select id="selectByQnaId" resultType="Qna"> <!-- DB에서 select 시 반환되는 값의 타입 설정 -->
+        select * from QNA_BOARD where QNA_ID = #{qna_id}
+    </select>
+    
+    <!-- QNA_BOARD 테이블에 새 포스트 삽입 -->
+    <insert id="qnaboard_insert">
+        insert into QNA_BOARD (QNA_TITLE, QNA_CONTENT) values (#{qna_title}, #{qna_content})
+        <!-- #{} 부분은 대소문자 구별! (Qna class 에서 작성한 것과 같아야 함 -->
+        <!-- #{} 부분은 입력한 객체의 getter 메서드를 호출한다고 생각하면 됨 -->
+        <!-- ex. #{qna_title} -> Qna 클래스의 getQna_title() 메서드 실행하는 것 -->
+    </insert>
+    
+    <!-- QNA_BOARD 테이블에서 입력한 아이디에 해당하는 포스트 삭제 -->
+    <delete id="qnaboard_delete">
+        delete from QNA_BOARD where QNA_ID = #{qna_id}
+    </delete>
+    
 </mapper>

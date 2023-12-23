@@ -50,7 +50,7 @@
                     <a href="freeboard">자유게시판</a>
                 </li>
                 <li class="forum-kategorie-board">
-                    <a href="queryboard">Q&A</a>
+                    <a href="qnaboard">Q&A</a>
                 </li>
                 <li class="forum-kategorie-board">
                     <a href="faqboard">FAQ</a>

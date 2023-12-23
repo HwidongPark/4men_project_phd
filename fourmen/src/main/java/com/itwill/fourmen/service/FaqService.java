@@ -51,7 +51,7 @@ public class FaqService {
 		log.debug("faqboard-create(dto={})", dto);
 		
 		// 리포지토리 계층의 메서드를 호출해서 DB 테이블에 데이터를 삽입.
-		int result = faqDao.insert(dto.toEntity());
+		int result = faqDao.faqboard_insert(dto.toEntity());
 		log.debug("faqboard-create-result ={}", result);
 		
 		return result;
@@ -61,7 +61,7 @@ public class FaqService {
 	public int delete(long id) { // 삭제 성공한 행의 개수를 리턴하므로 int 타입 사용
 		
 		// 리포지토리 계층의 메서드를 호출해서 delete SQL을 실행.
-		int result = faqDao.delete(id);
+		int result = faqDao.faqboard_delete(id);
 		
 		return result;
 	}

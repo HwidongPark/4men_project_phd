@@ -18,4 +18,17 @@
         select * from NOTICE_BOARD where NOTICE_ID = #{notice_id}
     </select>
     
+    <!-- NOTICE_BOARD 테이블에 새 포스트 삽입 -->
+    <insert id="noticeboard_insert">
+        insert into NOTICE_BOARD (NOTICE_TITLE, NOTICE_CONTENT) values (#{notice_title}, #{notice_content})
+        <!-- #{} 부분은 대소문자 구별! (Notice class 에서 작성한 것과 같아야 함 -->
+        <!-- #{} 부분은 입력한 객체의 getter 메서드를 호출한다고 생각하면 됨 -->
+        <!-- ex. #{notice_title} -> Notice 클래스의 getNotice_title() 메서드 실행하는 것 -->
+    </insert>
+    
+    <!-- NOTICE_BOARD 테이블에서 입력한 아이디에 해당하는 포스트 삭제 -->
+    <delete id="noticeboard_delete">
+        delete from NOTICE_BOARD where NOTICE_ID = #{notice_id}
+    </delete>
+    
 </mapper>
