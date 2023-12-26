@@ -39,7 +39,7 @@
 <nav class="header-nav">
     <div class="logo-container" style="flex: 1;">
         <a href="http://localhost:8081/fourmen/" class="logo">
-            <img class="logo" src="/" alt="4men_logo"/>
+            <img class="logo" src="logo/logo01.png" alt="4men_logo"/>
         </a>
     </div>
     

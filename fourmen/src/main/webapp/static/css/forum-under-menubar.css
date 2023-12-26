@@ -1,6 +1,6 @@
 @charset "UTF-8";
-/* newpost.css */
-/* forum에서 새 글을 작성하기 위한 메뉴에 관한 css */
+/* forum-under-menubar.css */
+/* forum에서 글 목록 하단 메뉴바에 관한 css (HOME / MAP / NEW POST) */
 
 .new-post-div {
     display: flex;

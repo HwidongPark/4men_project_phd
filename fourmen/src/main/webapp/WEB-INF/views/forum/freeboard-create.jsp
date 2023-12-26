@@ -16,11 +16,10 @@
 <!-- css 파일 적용 -->
 <link rel="stylesheet" href="../css/header.css">
 <link rel="stylesheet" href="../css/footer.css">
-<link rel="stylesheet" href="../css/forumtable.css">
 <link rel="stylesheet" href="../css/underheader.css">
-<link rel="stylesheet" href="../css/pagenation.css">
 <link rel="stylesheet" href="../css/forum-search-area.css">
 <link rel="stylesheet" href="../css/forum-kategorie-area.css">
+<link rel="stylesheet" href="../css/forum-create-post.css">
 
 </head>
 
@@ -62,135 +61,31 @@
         </div>
     </section>
     
-    <!-- 게시글 검색창 -->
-    <section role="search" class="search">
-        <div class="forum-top-area">
-            <div class="forum-search-area">
-                <div class="forum-search-select-area">
-                    <select class="forum-select-box">
-                        <option class="forum-select-option">전체</option>
-                        <option class="forum-select-option">제목</option>
-                        <option class="forum-select-option">작성자</option>
-                        <option class="forum-select-option">내용</option>
-                    </select>
+    
+    <!-- 자유게시판 글 작성 -->
+    <section style="padding: 3.5rem 15.5rem 2.5rem 15.5rem;">
+        <div>
+            <c:url var="" value="" />
+            <form id="freeboard-create-form" action="">
+                <div id="freeboard-create-title">
+                    <input type="text" placeholder="제목을 입력하세요" />
                 </div>
-                <div class="forum-search-form-area">
-                    <input id=forum-search-input autocomplete="on" placeholder="검색어를 입력하세요." type="text">
+                <div id="freeboard-create-content">
+                    <textarea placeholder="내용을 입력하세요"></textarea>
                 </div>
-
-                <div class="forum-search-btn-area">
-                    <button class="forum-search-btn" type="button">
-                        <img id="forum-search-btn-img" alt="검색버튼" src="../icon/search01.svg">
-                    </button>
+                <div id="freeboard-create-author" class="d-none">
+                    <input type="text" readonly />
                 </div>
+                <div id="freeboard-create-file">
+                    <input type="file" name="original_file" multiple="multiple" />
+                </div>
+            </form>
+            <div id="freeboard-create-forUnderbar"></div>
+            <div id="freeboard-create-button">
+                <button class="btn btn-outline-secondary">완료</button>
             </div>
         </div>
     </section>
-    
-    <!-- board-list-content 게시판 글 리스트 테이블 -->
-    <section class="freeboard-list" style="padding: 3.5rem 18.5rem 2.5rem 18.5rem;">
-     <table class="table">
-        <colgroup>
-            <col style="width: 9%;">
-            <col>
-            <col style="width: 10%;">
-            <col style="width: 12%;">
-            <col style="width: 10%;">
-        </colgroup>
-        <thead>
-        <tr>
-            <th>번호</th>
-            <th>제목</th>
-            <th>작성자</th>
-            <th>작성일</th>
-            <th>조회</th>
-        </tr>
-        </thead>
-        <tbody class="table-group-divider">
-        <tr>
-            <td>1</td>
-            <td id="table-td" style="text-align: left;">제목1</td>
-            <td>작성자1</td>
-            <td>2023-12-13</td>
-            <td>1</td>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td id="table-td" style="text-align: left">제목1</td>
-            <td>작성자1</td>
-            <td>2023-12-13</td>
-            <td>1</td>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td id="table-td" style="text-align: left">제목1</td>
-            <td>작성자1</td>
-            <td>2023-12-13</td>
-            <td>1</td>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td id="table-td" style="text-align: left">제목1</td>
-            <td>작성자1</td>
-            <td>2023-12-13</td>
-            <td>1</td>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td id="table-td" style="text-align: left">제목1</td>
-            <td>작성자1</td>
-            <td>2023-12-13</td>
-            <td>1</td>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td style="text-align: left">제목1</td>
-            <td>작성자1</td>
-            <td>2023-12-13</td>
-            <td>1</td>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td style="text-align: left">제목1</td>
-            <td>작성자1</td>
-            <td>2023-12-13</td>
-            <td>1</td>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td style="text-align: left">제목1</td>
-            <td>작성자1</td>
-            <td>2023-12-13</td>
-            <td>1</td>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td style="text-align: left">제목1</td>
-            <td>작성자1</td>
-            <td>2023-12-13</td>
-            <td>1</td>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td style="text-align: left">제목1</td>
-            <td>작성자1</td>
-            <td>2023-12-13</td>
-            <td>1</td>
-        </tr>
-        </tbody>
-    </table>
-    </section>
-    
-    <div style="display: flex;">
-        <nav style="padding-bottom: 2rem;">
-            <ul>
-                <li>
-                리스트...
-                </li>
-            </ul>
-        </nav>
-    </div>
-    
     </main>
     
     <!-- 푸터 파일 include -->

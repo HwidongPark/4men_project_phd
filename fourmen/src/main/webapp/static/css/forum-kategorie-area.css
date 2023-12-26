@@ -1,6 +1,6 @@
 @charset "UTF-8";
 /* forum-kategorie-area.css */
-/* 게시판 카테고리에 관한 css (자유게시판, 후기게시판, 질문게시판) */
+/* 게시판 카테고리에 관한 css (자유게시판, QNA, FAQ, NOTICE) */
 
 .forum-kategorie .forum-kategorie-board-lists .forum-kategorie-board {
     display: inline-block;

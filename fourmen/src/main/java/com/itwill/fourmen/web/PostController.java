@@ -150,7 +150,7 @@ public class PostController {
 	 */
 	public String qnaboard_delete(long qna_id) {
 		
-		postService.delete(qna_id);
+		qnaService.delete(qna_id);
 		
 		return "redirect:/forum/qnaboard";
 	}
@@ -205,7 +205,7 @@ public class PostController {
 	 */
 	public String faqboard_delete(long faq_id) {
 		
-		postService.delete(faq_id);
+		faqService.delete(faq_id);
 		
 		return "redirect:/forum/faqboard";
 	}

@@ -21,7 +21,7 @@
 <link rel="stylesheet" href="../css/pagenation.css">
 <link rel="stylesheet" href="../css/forum-search-area.css">
 <link rel="stylesheet" href="../css/forum-kategorie-area.css">
-<link rel="stylesheet" href="../css/forum-create-new-post.css">
+<link rel="stylesheet" href="../css/forum-under-menubar.css">
 <link rel="stylesheet" href="../css/forum-noticeboard-detail.css">
 
 <!-- 헤더 파일 include -->
