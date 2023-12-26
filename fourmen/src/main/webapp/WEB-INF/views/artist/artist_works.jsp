@@ -14,7 +14,7 @@
 	crossorigin="anonymous">
 <link rel="stylesheet" href="../css/header.css">
 <link rel="stylesheet" href="../css/footer.css">
-<link rel="stylesheet" href="../css/underhead.css">
+<link rel="stylesheet" href="../css/underheader.css">
 <style>
 @font-face {
     font-family: 'Pretendard-Regular';

@@ -9,10 +9,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Artist {
+public class Artist_Img {
 
 	private String userid;
-	private String artist_bio_kor;
-	private String artist_bio_eng;
+	private String original_img;
+	private String saved_img;
 	
 }

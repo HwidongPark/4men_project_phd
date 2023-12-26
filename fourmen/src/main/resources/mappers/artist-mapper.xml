@@ -26,12 +26,16 @@
 	</select>
 	
 	<update id = "updateArtist">
-		update A_ARTIST set ARTIST_BIO_KOR = #{artist_bio_kor}, ARTIST_BIO_ENG = #{artist_bio_eng}, ARTIST_IMG = #{artist_img} where USERID = #{userid}
+		update A_ARTIST set ARTIST_BIO_KOR = #{artist_bio_kor}, ARTIST_BIO_ENG = #{artist_bio_eng} where USERID = #{userid}
 	</update>
 	
-	<update id = "deleteArtistProfileImg">
-		update A_ARTIST set ARTIST_BIO_KOR = #{artist_bio_kor}, ARTIST_BIO_ENG = #{artist_bio_eng}, ARTIST_IMG = NULL where USERID = #{userid}
+	<update id = "updateArtistProfileImg">
+		update ARTIST_IMG set ORIGINAL_IMG = #{original_img}, SAVED_IMG = #{saved_img} where USERID = #{userid}
 	</update>
+	
+	<delete id = "deleteArtistProfileImg">
+		delete from ARTIST_IMG where USERID = #{userid}
+	</delete>
 	
 	<insert id = "createWorks">
 		insert into A_WORKS (USERID, WORKSID, TITLE, CONTENT_KOR, CONTENT_ENG) values (#{userid}, #{worksid}, #{title}, #{content_kor}, #{content_eng})

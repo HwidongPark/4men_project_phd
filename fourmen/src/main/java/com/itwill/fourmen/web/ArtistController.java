@@ -25,7 +25,9 @@ import com.itwill.fourmen.dto.artist.ArtistUpdateDto;
 import com.itwill.fourmen.dto.artist.ArtistWorksImgListItemDto;
 import com.itwill.fourmen.dto.artist.ArtistWorksListItemDto;
 import com.itwill.fourmen.service.ArtistService;
+import com.itwill.fourmen.util.RequestContextHelper;
 
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -37,7 +39,6 @@ import lombok.extern.slf4j.Slf4j;
 public class ArtistController {
 
 	private final ArtistService artistService;
-	
 	
 	@GetMapping("/artist_details")
     public void details(@RequestParam(name="userid") String userid, Model model) {
@@ -75,24 +76,23 @@ public class ArtistController {
 		model.addAttribute("artist" ,artist);
 	}
 	
-	// Artist 개개인 정보 수정후 POST 방식으로 전달. 
-	@PostMapping(path = "/artist_modify")
-	public String artistUpdate(@ModelAttribute ArtistUpdateDto dto, HttpServletRequest request) throws IllegalStateException, IOException {
-		
-		log.debug("artistUpdate()");
-		log.debug("artistUpadate(ArtistUpdateDto dto) = {}", dto);
-		log.debug(dto.getArtist_bio_kor());
-		log.debug(dto.getArtist_bio_eng());
-		
-		//final String UPLOAD_PATH = "/Users/ojng/4men_team_project/fourmen/src/main/webapp/static/images/char/";
-		
-		String sDirectory = request.getServletContext().getRealPath("/static/images/char");
-		log.debug("ArtistController artistUpdate - sDirectory = {}",sDirectory);
-		
-		artistService.updateArtist(dto, sDirectory);
-		
-		return "redirect:/artist";
-	}// end of artistUpdate method..
+//	// Artist 개개인 정보 수정후 POST 방식으로 전달. 
+//	@PostMapping(path = "/artist_modify")
+//	public String artistUpdate(@ModelAttribute ArtistUpdateDto dto, HttpServletRequest request) throws IllegalStateException, IOException {
+//		log.debug("artistUpdate()");
+//		log.debug("artistUpadate(ArtistUpdateDto dto) = {}", dto);
+//		
+//		//이거 안되네....
+//		//ServletContext context = RequestContextHelper.getCurrentServletContext();
+//		//String sDirectory = context.getRealPath("/static/imgaes/char/");
+//		
+//		String sDirectory = request.getServletContext().getRealPath("/static/images/char");
+//		log.debug("ArtistController artistUpdate - sDirectory = {}",sDirectory);
+//		
+//		artistService.updateArtist(dto, sDirectory);
+//		
+//		return "redirect:/artist";
+//	}// end of artistUpdate method..
 	
 	// Artist 작품 추가하는 페이지 get 방식으로 가져오기...
 	@GetMapping("/artist_add_works")
@@ -126,7 +126,7 @@ public class ArtistController {
 		
 		int result =  artistService.deleteWorks(worksid);
 		
-		log.debug("deleteWorks result = {}",result);
+		log.debug("deleteWorks result = {}", result);
 		
 		return "redirect:/artist";
 	}
@@ -136,9 +136,9 @@ public class ArtistController {
 		log.debug("worksModify");
 		
 		Artist_Works artist_works = artistService.worksDetails(worksid);
-		model.addAttribute("artist_Works", artist_works);
+		model.addAttribute("artist_works", artist_works);
 		
 		List<ArtistWorksImgListItemDto> artist_works_img_list = artistService.getWorksImg(worksid);
-		model.addAttribute("artist_works_img_list" ,artist_works_img_list);
+		model.addAttribute("artist_works_img_list", artist_works_img_list);
 	}
 }

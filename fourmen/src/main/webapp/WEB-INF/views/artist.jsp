@@ -105,7 +105,7 @@ div#artist {
 				</c:url>
 				<a href="${artist_details}">
 					<div class="card text-bg-light">
-						<img src="images/char/${a.artist_img}" onerror="this.onerror=null; this.src='images/char/default_user.png'" class="card-img" alt="test_user"/>
+						<img src="images/char/${a.artist_img}" onerror="this.src='images/char/default_user.png'" class="card-img" alt="test_user"/>
 						<div class="card-img-overlay">
 							<h5 class="card-title fs-2">${a.userid}</h5>
 						</div>

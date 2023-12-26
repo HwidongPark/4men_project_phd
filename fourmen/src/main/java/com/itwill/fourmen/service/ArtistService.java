@@ -88,43 +88,84 @@ public class ArtistService {
 	}
 	
 	// artist_details에서 개인 소개글과 사진을 업데이트 하기 위함...
-	public void updateArtist(ArtistUpdateDto dto, String sDirectory) throws IllegalStateException, IOException {
-		log.debug("ArtistService updateArtist()");
-		log.debug("ArtistService updateArtist DTO = {}", dto);
-		log.debug("ArtistService updateArtist sDirectory = {}", sDirectory);
-		
-		Artist artist = artistDao.selectByUserid(dto.getUserid());
-		log.debug("ArtistService updateArtist Artist artist_img = {}", artist.getArtist_img());
-		
-		MultipartFile file = dto.getUpload_file();
-		
-		if(!file.isEmpty()) {
-			String originalFileName = file.getOriginalFilename();
-			log.debug("originalFileName = {}",originalFileName);
-			
-			// 확장자....!
-			String fileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
-			log.debug("fileExtension = {}", fileExtension);
-			
-			// 새로운 파일 이름...!
-			String artist_img = UUID.randomUUID().toString() + fileExtension;
-			
-			String absolutePath = sDirectory + File.separator + artist_img;
-			log.debug("absolutePath = {}", absolutePath);
-			file.transferTo(new File(absolutePath));
-			
-			dto.setArtist_img(artist_img);
-			
-			artistDao.updateArtist(dto.toEntity());
-			
-			log.debug("UPLOAD SUCCESS....!");
-		} else if (file.isEmpty()) {
-			
-			Artist newArtist = Artist.builder().userid(dto.getUserid()).artist_bio_kor(dto.getArtist_bio_kor()).artist_bio_eng(dto.getArtist_bio_eng()).build();
-			
-			artistDao.deleteArtistProfileImg(newArtist);
-		}
-	}
+//	public void updateArtist(ArtistUpdateDto dto, String sDirectory) throws IllegalStateException, IOException {
+//		log.debug("ArtistService updateArtist()");
+//		log.debug("ArtistService updateArtist DTO = {}", dto);
+//		log.debug("ArtistService updateArtist sDirectory = {}", sDirectory);
+//
+//		Artist artist = artistDao.selectByUserid(dto.getUserid());
+//		log.debug("ArtistService updateArtist Artist artist_img = {}", artist.getArtist_img());
+//
+//		MultipartFile file = dto.getUpload_file();
+//
+//		if (!file.isEmpty()) {
+//			// 프사도 바꾸고 소개글도 바꾼다.
+//			// 단순히 원래 있던 프로필 사진을 삭제한다.
+//			File exsistFile = new File(sDirectory + File.separator + artist.getArtist_img());
+//			boolean existFileIsDeleted = exsistFile.delete();
+//			log.debug("Profile IMG DELETE = ", existFileIsDeleted);
+//
+//			String originalFileName = file.getOriginalFilename();
+//			log.debug("originalFileName = {}", originalFileName);
+//
+//			dto.setOriginal_img(originalFileName);
+//
+//			// 확장자....!
+//			String fileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
+//			log.debug("fileExtension = {}", fileExtension);
+//
+//			// 새로운 파일 이름...!
+//			String artist_img = UUID.randomUUID().toString() + fileExtension;
+//
+//			String absolutePath = sDirectory + File.separator + artist_img;
+//			log.debug("absolutePath = {}", absolutePath);
+//			file.transferTo(new File(absolutePath));
+//
+//			dto.setArtist_img(artist_img);
+//
+//			artistDao.updateArtist(dto.toEntity());
+//
+//			log.debug("UPLOAD SUCCESS....!");
+//
+//		} else {
+//			// 업로드 된 파일이 없음
+//			if (!artist.getArtist_img().equals("")) {
+//				// 프사를 변경하지 않을 것, 즉 소개글만 바꿀것임
+//				Artist newArtist = artist.builder().userid(dto.getUserid()).artist_bio_kor(dto.getArtist_bio_kor())
+//						.artist_bio_eng(dto.getArtist_bio_eng()).original_img(artist.getOriginal_img())
+//						.artist_img(artist.getArtist_img()).build();
+//
+//				artistDao.updateArtist(newArtist);
+//			}
+//
+//		} 
+//	}// end of updateArtist
+	
+	/**
+	 * 아티스트의 프로필 사진을 지우는 메서드
+	 * @param userid
+	 * @param sDirectory
+	 */
+//	public int deleteProfileImg(String userid, String sDirectory) {
+//		log.debug("deleteProfileImg()");
+//		log.debug("deleteProfileImg(USERID = {}, sDIRECTORY = {}", userid, sDirectory);
+//		
+//		Artist artist = artistDao.selectByUserid(userid);
+//		log.debug("ARTIST = {}", artist.getUserid());
+//		
+//		// TOMCAT 서버 (WAS)에서 이미지 삭제.
+//		
+//		File file = new File(sDirectory + File.separator + artist.getArtist_img());
+//		boolean isDeleted = file.delete();
+//		log.debug("Profile IMG DELETE = ", isDeleted);
+//		
+//		// DB 이미지 데이터 삭제
+//		int result = artistDao.deleteArtistProfileImg(artist);
+//		log.debug("deleteProfileImg result = {}", result);
+//		
+//		return result;
+//	}
+	
 	
 	public void addWorks(ArtistAddWorksDto dto) {
 		log.debug("ArtistService addWorks");

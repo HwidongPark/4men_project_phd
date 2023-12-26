@@ -40,7 +40,7 @@ div#modify {
 	<main class = "my-2">
 		<div class = "card">
 			<c:url var="artistModifyPage" value="/artist/artist_modify" />
-			<form class = "card-body" id = "postModifyForm" action = "${artistModifyPage}"  method="post" enctype="multipart/form-data">
+			<form class = "card-body" id = "artistModifyForm" action = "${artistModifyPage}"  method="post" enctype="multipart/form-data">
 				
 					<div class = "my-2">
 						<label for="userid" class = "form-label">아티스트 아이디</label>
@@ -65,12 +65,16 @@ div#modify {
 									<th class = "col-1">삭제</th>
 								</tr>
 							</thead>
+							
 							<tbody class = "table-secondary table-group-divider">
-								<tr>
-									<td>${artist.artist_img}</td>
-									<td><button class = "btn btn-outline-dark" id = "btnImgDelete">X</button></td>
-								</tr>
+								<c:if test = "${not empty artist.original_img}">
+									<tr>
+										<td><input class = "form-control" id = "original_img" type = "text" name = "original_img" value = "${artist.original_img}" readonly /></td>
+										<td><button class = "btn btn-outline-dark" id = "btnImgDelete" type="button">X</button></td>
+									</tr>
+								</c:if>
 							</tbody>
+							
 						</table>
 					</div>
 					
@@ -101,26 +105,6 @@ div#modify {
 	            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
 	            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
 	            crossorigin="anonymous"></script>
-	<script>
-		document.addEventListener("DOMContentLoaded", () => {
-			
-			const btnDelete = document.querySelector('#btnImgDelete');
-			
-			const userid = document.querySelector('input#userid');
-			
-			btnDelete.addEventListener('click', () => {
-				
-				const result = confirm('정말 삭제 할까요...?');
-				
-				console.log(`confirm result = ${result}`);
-				
-				if(result) {
-					// 화면에서 이미지 숨기기 (화면에서만 삭제된 것처럼 보이기...)
-					btnDelete.parentNode.parentNode.remove();
-				}
-			});
-			
-		});
-	</script>
+	<script src="../js/artist-modify.js"></script>
 </body>
 </html>
