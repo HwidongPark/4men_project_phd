@@ -23,6 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
     myPageIcon.addEventListener('click', function() {
         console.log("버튼 누름");
         myPageOuterContainer.classList.toggle('my-page-open');
+        myPageOuterContainer.classList.toggle('my-page-close');
     })
     
     

@@ -14,11 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.itwill.dto.MarketCreateDto;
-import com.itwill.dto.MarketPostDto;
-import com.itwill.dto.MarketSearchDto;
-import com.itwill.dto.PagingDto;
 import com.itwill.fourmen.domain.Market;
+import com.itwill.fourmen.domain.User;
+import com.itwill.fourmen.domain.WishList;
+import com.itwill.fourmen.dto.market.MarketCreateDto;
+import com.itwill.fourmen.dto.market.MarketPostDto;
+import com.itwill.fourmen.dto.market.MarketSearchDto;
+import com.itwill.fourmen.dto.market.PagingDto;
 import com.itwill.fourmen.service.MarketService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -32,39 +34,7 @@ import oracle.jdbc.proxy.annotation.GetDelegate;
 @RequestMapping("/market")
 public class MarketController {
 	
-	private final MarketService marketService;	
-	
-//	/**
-//	 * 마켓 메인페이지로 이동하는 컨트롤러 메서드
-//	 * @param model
-//	 * @param request
-//	 */
-//	@GetMapping("")
-//	public void market(Model model, HttpServletRequest request) {
-//		int numOfPopularMarketPosts = 0;
-//		
-//		List<MarketPostDto> marketPosts = marketService.readMarketPosts();	// 최신글 읽어
-//		log.debug("market(postLists={}) GET", marketPosts);
-//		
-//		// TODO: 인기글 8개 읽어옴
-//		if (marketPosts.size() < 8) {
-//			numOfPopularMarketPosts = marketPosts.size();
-//		} else {
-//			numOfPopularMarketPosts = 8;
-//		}
-//		List<MarketPostDto> popularMarketPosts = marketService.readPopularMarketPosts(numOfPopularMarketPosts);
-//		log.debug("popularMarketPosts={}", popularMarketPosts);
-//		
-//		String sDirectory = request.getServletContext().getRealPath("/static/uploads");
-//		log.debug("sDirectory={}", sDirectory);
-//		// market의 게시글 리스트를 뷰로 전달
-//		model.addAttribute("marketPosts", marketPosts);	// 최신글들을 전달..
-//		// TODO: 인기글 8개 전달
-//		model.addAttribute("popularMarketPosts", popularMarketPosts);
-//		model.addAttribute("sDirectory", sDirectory);
-//		model.addAttribute("fileSeparator", File.separator);
-//		
-//	}
+	private final MarketService marketService;
 	
 	
 	/**
@@ -122,7 +92,8 @@ public class MarketController {
 	 */
 	@GetMapping("/detail")
 	public void detail(@RequestParam Long workid, Model model) {
-		log.debug("detail(workId={}) GET", workid);
+		log.debug("detail(workId={}) GET", workid);			
+		
 		MarketPostDto marketPost = marketService.readMarketPost(workid);
 		log.debug("marketPostDto = {}", marketPost);
 		
@@ -161,11 +132,6 @@ public class MarketController {
 	 */
 	@GetMapping("/recent")
 	public String marketRecentList(@RequestParam(name = "page", required = false, defaultValue = "1") int page, Model model, HttpServletRequest request) {
-//		List<MarketPostDto> marketPosts = marketService.readMarketPosts();
-//		log.debug("marketRecentList(postLists={}) GET", marketPosts);
-//		
-//		String sDirectory = request.getServletContext().getRealPath("/static/uploads");
-//		log.debug("sDirectory={}", sDirectory);
 		
 		// 해당 페이지의 포스트들만 가져옴
 		List<MarketPostDto> pagedMarketPosts = marketService.readPagedMarketPosts(page);
@@ -221,8 +187,6 @@ public class MarketController {
 		dto.setPage(page);
 		log.debug("page={}", page);
 		log.debug("search(dto={})", dto);	// TODO: 페이지 처리 저절로 입혀지나 안되나 실험
-//		List<MarketPostDto> marketPosts = marketService.searchPosts(dto);
-//		log.debug("searchedMarketPosts = {}", marketPosts);
 		
 		List<MarketPostDto> pagedMarketPosts = marketService.pagedSearchPosts(dto);
 		log.debug("pagedSearchPosts={}", pagedMarketPosts);

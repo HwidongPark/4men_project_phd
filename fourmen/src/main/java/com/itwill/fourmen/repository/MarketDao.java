@@ -3,10 +3,11 @@ package com.itwill.fourmen.repository;
 import java.util.List;
 import java.util.Map;
 
-import com.itwill.dto.MarketPostDto;
-import com.itwill.dto.MarketSearchDto;
 import com.itwill.fourmen.domain.Market;
+import com.itwill.fourmen.domain.WishList;
 import com.itwill.fourmen.domain.WorkImage;
+import com.itwill.fourmen.dto.market.MarketPostDto;
+import com.itwill.fourmen.dto.market.MarketSearchDto;
 
 public interface MarketDao {
 	
@@ -56,10 +57,15 @@ public interface MarketDao {
 	int deleteImage(Long imgId);
 	
 	// 특정 이미지 가져오기
-	 WorkImage readImage (Long imgId); 
-	
+	 WorkImage readImage (Long imgId);
 	 
 	 // 포스트 글 수정
 	 int updateMarketPost(Market market);
+	 
+	 // 찜하기 추가
+	 int addWishList(WishList wishList);
+	 
+	 // 이미 찜했는지 확인하는 메서드
+	 int readWishList(WishList wishList);
 	 
 }

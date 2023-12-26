@@ -15,14 +15,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.itwill.dto.MarketCreateDto;
-import com.itwill.dto.MarketPostDto;
-import com.itwill.dto.MarketPostRestDto;
-import com.itwill.dto.MarketSearchDto;
-import com.itwill.dto.PagingDto;
 import com.itwill.fourmen.domain.Market;
+import com.itwill.fourmen.domain.User;
+import com.itwill.fourmen.domain.WishList;
 import com.itwill.fourmen.domain.WorkImage;
+import com.itwill.fourmen.dto.market.MarketCreateDto;
+import com.itwill.fourmen.dto.market.MarketPostDto;
+import com.itwill.fourmen.dto.market.MarketPostRestDto;
+import com.itwill.fourmen.dto.market.MarketSearchDto;
+import com.itwill.fourmen.dto.market.PagingDto;
 import com.itwill.fourmen.repository.MarketDao;
+import com.itwill.fourmen.repository.UserDao;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -33,6 +36,7 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class MarketService {
 	private final MarketDao marketDao;
+	private final UserDao userDao;
 	
 	private int postsPerPage = 2;
 	private int pagesShownInBar = 3;
@@ -288,25 +292,15 @@ public class MarketService {
 		log.debug("readMarketPost(workId={})", workId);
 		
 		Market marketPost = marketDao.readMarketPost(workId);
-		log.debug("읽어온 마켓포스트 = {}", marketPost);
+		log.debug("읽어온 마켓포스트 = {}", marketPost);				
+		
+		User user = userDao.selectByUserid(marketPost.getUserId());
+		log.debug("글 올린 유저={}", user);		
 		
 		List<WorkImage> workImages = marketDao.readWorkImagesofPost(marketPost);
 		log.debug("읽어온 마켓포스트의 이미지 리스트 = {}", workImages);
 		
-		MarketPostDto marketPostWithImages = MarketPostDto.builder()
-							.workId(marketPost.getWorkId())
-							.userId(marketPost.getUserId())
-							.title(marketPost.getTitle())
-							.descriptionKor(marketPost.getDescriptionKor())
-							.price(marketPost.getPrice())
-							.yearCreated(marketPost.getYearCreated())
-							.paintingSize(marketPost.getPaintingSize())
-							.isSold(marketPost.getIsSold())
-							.createdTime(marketPost.getCreatedTime())
-							.views(marketPost.getViews())
-							.likes(marketPost.getLikes())
-							.workImages(workImages)
-							.build();
+		MarketPostDto marketPostWithImages = MarketPostDto.fromEntity(marketPost, workImages, user);
 		
 		return marketPostWithImages;							
 		
@@ -495,6 +489,41 @@ public class MarketService {
 			}
 			
 		}
+		
+		return result;
+	}
+	
+	
+	/**
+	 * 로그인된 유저가 보고있는 마켓 게시물을 위시리스트에 추가.
+	 * @return
+	 */
+	public int addWishList(WishList wishList) {
+		int result = 0;
+		
+		log.debug("addWishList(wishList={})", wishList);
+		
+		int isExisting = readWishList(wishList);
+		log.debug("이미 찜하기 추가했나?");
+		
+		if (isExisting >= 1) {
+			log.debug("이미 추가되서 돌아감");
+			return result;
+		} else {
+			result = marketDao.addWishList(wishList);
+			log.debug("위시리스트 추가 결과={}", result);
+			
+			return result;
+		}
+		
+	}
+	
+	
+	public int readWishList(WishList wishList) {
+		log.debug("readWishList(wishList={})", wishList);
+		
+		int result = marketDao.readWishList(wishList);
+		log.debug("result={}", result);
 		
 		return result;
 	}

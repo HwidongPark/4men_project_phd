@@ -4,15 +4,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.itwill.dto.MarketPostDto;
-import com.itwill.dto.MarketPostRestDto;
+import com.itwill.fourmen.domain.WishList;
 import com.itwill.fourmen.domain.WorkImage;
+import com.itwill.fourmen.dto.market.MarketPostDto;
+import com.itwill.fourmen.dto.market.MarketPostRestDto;
 import com.itwill.fourmen.service.MarketService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -51,6 +53,23 @@ public class MarketRestController {
 		
 		int result = marketService.deleteImage(imgId, sDirectory);
 		log.debug("image delete result = {}", result);
+		
+		return ResponseEntity.ok(result);
+	}
+	
+	
+	/**
+	 * 로그인된 유저가 보고있는 마켓 게시물을 위시리스트에 추가.
+	 * 만약 이미 추가됐을 경우 추가하지 않고 0을 반환
+	 * @param wishList
+	 * @return
+	 */
+	@PostMapping("/wishlist")
+	public ResponseEntity<Integer> wishList(@RequestBody WishList wishList) {
+		log.debug("wishList(wishList={})", wishList);
+		
+		int result = marketService.addWishList(wishList);
+		log.debug("결과={}", result);
 		
 		return ResponseEntity.ok(result);
 	}

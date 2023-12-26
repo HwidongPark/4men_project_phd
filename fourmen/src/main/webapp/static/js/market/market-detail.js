@@ -2,6 +2,10 @@
  * market-detail.js
  */
 document.addEventListener('DOMContentLoaded', function() {
+    // 찜하기, 쪽지보내기 버튼
+    const btnRequestDeal = document.querySelector('#market-request-deal');
+    const btnAddWishList = document.querySelector('#market-add-to-wishlist')
+    
     const carouselImagesWrapper = document.querySelector('.carousel-images-wrapper');
     const carouselImageContainer = document.querySelector('.carousel-images-container');
     // 각각 사진의 div리스트
@@ -19,8 +23,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const btnMarketUpdate = document.querySelector('#market-btn-update');
     
     // workId
-    const workId = document.querySelector('#workId');
+    const workId = document.querySelector('#workid');
     console.log(workid.innerText);
+    
+    // 게사자 아이디
+    const writerId = document.querySelector('#artist-userid');
+    
     // 사진 리스트 폭 초기화
     const numOfPhotos = carouselImages.length;
     console.log(numOfPhotos);
@@ -141,9 +149,46 @@ document.addEventListener('DOMContentLoaded', function() {
   
     
     
-    btnMarketUpdate.addEventListener('click', () => {
-        
+    // 찜하기
+    btnAddWishList.addEventListener('click', function() {       
+       console.log('찜하기 클릭');
+       console.log(`signedInUser=${signedInUser}`);
+       
+       if (signedInUser == "") {    // 로그인 안했을 시 로그인시킴
+           const target = encodeURIComponent(`/fourmen/market/detail?workid=${ workId.value }`);
+           console.log(`target=${target}`);
+           
+           location.href=`/fourmen/signup?target=${target}`;
+           
+           return;
+       } else if (signedInUser == writerId.value) {   // 본인 게시글일시 본인글임을 알리고 끝냄
+           alert('본인글은 찜할 수 없습니다.');
+           return;
+       }
+       
+       const data = {
+           userId: signedInUser,
+           workId: workId.value
+       };
+       
+       axios.post('/fourmen/market/wishlist', data)
+       .then((response) => {
+           console.log(`response=${response.data}`);
+           if (response.data === 1) {
+               alert('찜하기 성공');
+           } else if (response.data === 0) {
+               alert('이미 찜한 게시글입니다.');
+           }
+       })
+       .catch ((error) => {
+           console.log(`에러발생: ${error}`);
+       })
+       
     });
+    
+    // 쪽지보내기
+    
+    
     
 
 })

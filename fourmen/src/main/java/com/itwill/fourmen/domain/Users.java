@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class Users {
-
+	// 이거 안쓰는거
 	private String userid;
 	private String name;
 	private String nickname;

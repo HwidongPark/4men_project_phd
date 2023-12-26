@@ -65,7 +65,8 @@
                 <hr>
                 <div id="seller-description">
                      <div id="artist">
-                        <em><a href="#" id="artist-name">${ marketPost.userId }</a></em>
+                        <input id="artist-userid" value="${ marketPost.userId }" type="hidden" />
+                        <em><a href="#" id="artist-name">${ marketPost.nickname }</a></em>
                         <div id="artist-bio">
                             저는 어렸을때부터 코끼리 그림을 그렸던 예술가입니다. 저의 작품은 매우 질이 좋습니다. 저의 그림실력은 뛰어납니다.
                             지금이 저의 작품을 살 절호의 기회입니다. 지금 저의 작품은 비록 5만원이지만, 훗날 사람들이 저의 진가를 알아보고 가격이 뛸 것이라 생각합니다.
@@ -96,8 +97,8 @@
                     </div> 
                 </div>
                 <div class="text-center">
-                    <button class="btn btn-secondary my-1 btn-rounded">쪽지 보내기</button><br>            
-                    <button class="btn btn-danger btn-rounded">찜하기</button>                    
+                    <button id="market-request-deal" class="btn btn-secondary my-1 btn-rounded">거래요청 쪽지 보내기</button><br>            
+                    <button id="market-add-to-wishlist" class="btn btn-danger btn-rounded">찜하기</button>                    
                 </div>
             </div>
 
@@ -135,7 +136,9 @@
 		  integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
 		   crossorigin="anonymous"></script>
 		
-        
+        <script>
+            const signedInUser = '${signedInUser}';
+        </script>
         <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
         <script src="../js/line-control.js"></script>
         <script src="../js/header.js"></script>
