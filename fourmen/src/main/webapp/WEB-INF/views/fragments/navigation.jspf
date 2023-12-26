@@ -16,11 +16,13 @@
             <c:if test="${not empty signedInUser}">
             <li class="nav-each-btn-user">
             <c:url var="signOutPage" value="signout" />
-            <c:url var="myPage" value="mypage"/>
-				<a href="${myPage}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-  <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
-  <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
-</svg></a>
+            <!-- <c:url var="myPage" value="mypage"/> -->
+				<a id="my-page-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                    </svg>
+                </a>
                 <a href="${signOutPage}" class="nav-button-user">LOGOUT</a>
             </li>
       		</c:if>
@@ -34,28 +36,51 @@
     </nav>
 </div>
 
+<!-- 사이드바 -->
+<aside id="my-page-slide-outer-container" class="my-page-close">
+    <div id="my-page-username">
+        admin 님,
+    </div>
+    <ul id="my-page-slide-inner-container">
+        <li class="my-page-list-item">
+            <a href="#">내 정보</a>
+        </li>
+        <li class="my-page-list-item">
+            <a href="#">내 작성 글</a>
+        </li>
+        <li class="my-page-list-item">
+            <a href="#">내 찜 목록</a>
+        </li>
+        <li class="my-page-list-item">
+            <a href="#">거래요청 관리</a>
+        </li>
+        <li class="my-page-list-item">
+            <a href="#">로그아웃</a>
+        </li>
+    </ul>
+</aside>
 
 
 <nav class="header-nav">
     <div class="logo-container" style="flex: 1;">
-        <a href="http://localhost:8081/fourmen/" class="logo">
-            <img class="logo" src="/" alt="4men_logo"/>
+        <a href="/fourmen" class="logo">
+            <img class="logo" src="/fourmen/logo/logo01.png" alt="4men_logo"/>
         </a>
     </div>
     
     <div class="header-list-container">
         <ul class="nav-btn-lists">
             <li class="nav-each-btn-list">
-                <a href="http://localhost:8081/fourmen/artist" class="nav-button">ARTISTS</a>
+                <a href="/fourmen/artist" class="nav-button">ARTISTS</a>
             </li>
             <li class="nav-each-btn-list">
-                <a href="http://localhost:8081/fourmen/market" class="nav-button">MARKET</a>
+                <a href="/fourmen/market" class="nav-button">MARKET</a>
             </li>
             <li class="nav-each-btn-list">
-                <a href="http://localhost:8081/fourmen/exhibition" class="nav-button">EXHIBITION</a>
+                <a href="/fourmen/exhibition" class="nav-button">EXHIBITION</a>
             </li>
             <li class="nav-each-btn-list">
-                <a href="http://localhost:8081/fourmen/forum/freeboard" class="nav-button">FORUM</a>
+                <a href="/fourmen/forum/freeboard" class="nav-button">FORUM</a>
             </li>
             <li class="nav-each-btn-list">
                 <a href="#" class="nav-button">ADMIN</a>
