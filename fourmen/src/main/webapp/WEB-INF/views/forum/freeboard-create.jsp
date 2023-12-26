@@ -14,6 +14,7 @@
     crossorigin="anonymous">
 
 <!-- css 파일 적용 -->
+
 <link rel="stylesheet" href="../css/header.css">
 <link rel="stylesheet" href="../css/footer.css">
 <link rel="stylesheet" href="../css/underheader.css">
@@ -65,27 +66,29 @@
     <!-- 자유게시판 글 작성 -->
     <section style="padding: 3.5rem 15.5rem 2.5rem 15.5rem;">
         <div>
-            <c:url var="" value="" />
-            <form id="freeboard-create-form" action="">
+            <c:url var="freeboardCreatePage" value="/forum/freeboard-create" />
+            <form id="freeboard-create-form" action="${freeboardCreatePage}" method="post" enctype="multipart/form-data">
                 <div id="freeboard-create-title">
-                    <input type="text" placeholder="제목을 입력하세요" />
+                    <input name="post_title" type="text" placeholder="제목을 입력하세요" />
                 </div>
                 <div id="freeboard-create-content">
-                    <textarea placeholder="내용을 입력하세요"></textarea>
+                    <textarea name="post_content" placeholder="내용을 입력하세요"></textarea>
                 </div>
+                <!-- 작성자 아이디는 로그인한 사용자 아이디로 + 보이지 않도록 설정 -->
                 <div id="freeboard-create-author" class="d-none">
-                    <input type="text" readonly />
+                    <input type="text" name="author" value="${signedInUser}" readonly />
                 </div>
                 <div id="freeboard-create-file">
-                    <input type="file" name="original_file" multiple="multiple" />
+                    <input id="freeboard-add-file" type="file" name="original_file" multiple="multiple" onchange="showFileName()" />
                 </div>
-            </form>
-            <div id="freeboard-create-forUnderbar"></div>
-            <div id="freeboard-create-button">
-                <button class="btn btn-outline-secondary">완료</button>
-            </div>
+                <div id="freeboard-create-forUnderbar"></div>
+                <div id="freeboard-create-button">
+                    <button class="btn btn-outline-secondary">완료</button>
+                </div>
+                </form>
         </div>
     </section>
+    
     </main>
     
     <!-- 푸터 파일 include -->
@@ -97,5 +100,6 @@
         crossorigin="anonymous"></script>
     <script src="js/header.js"></script>
 
+    
 </body>
 </html>

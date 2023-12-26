@@ -55,6 +55,5 @@
 }
 
 #freeboard-create-file input {
-    border: 2px solid gray;
+    border: none;
 }
-
