@@ -44,6 +44,9 @@ public interface MarketDao {
 	// 해당 포스트 조회시 조회수 증가
 	int addView(Long workId);
 	
+	// 좋아요 추가
+	int addLikes(WishList wishList);
+	
 	// 검색
 	List<Market> searchPosts(MarketSearchDto dto);
 	
@@ -68,4 +71,8 @@ public interface MarketDao {
 	 // 이미 찜했는지 확인하는 메서드
 	 int readWishList(WishList wishList);
 	 
+	 // 유저가 찜한 게시글 리스트 반환
+	 List<WishList> readWishListOfUser(String signedInUser);
+	 
+
 }

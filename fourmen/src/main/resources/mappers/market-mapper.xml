@@ -54,9 +54,12 @@
     
     
     <update id="addView">
-        UPDATE market SET views = views + 1 WHERE worksid = ${ workId }
+        UPDATE market SET views = views + 1 WHERE worksid = #{ workId }
     </update>
     
+    <update id="addLikes">
+        UPDATE market SET likes = likes + 1 WHERE worksid = #{workId}
+    </update>
     
     <select id="searchPosts" resultType="Market">
         SELECT *
@@ -175,6 +178,12 @@
         SELECT count(*)
         FROM wishlist
         WHERE userid = #{userId} AND workid = #{workId}
+    </select>
+    
+    <select id="readWishListOfUser" resultType="WishList">
+        SELECT *
+        FROM wishlist
+        WHERE userid = #{ signedInUser }
     </select>
     
 </mapper>

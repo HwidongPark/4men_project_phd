@@ -67,11 +67,12 @@ public class MarketRestController {
 	@PostMapping("/wishlist")
 	public ResponseEntity<Integer> wishList(@RequestBody WishList wishList) {
 		log.debug("wishList(wishList={})", wishList);
-		
+				
 		int result = marketService.addWishList(wishList);
 		log.debug("결과={}", result);
 		
 		return ResponseEntity.ok(result);
 	}
+	
 	
 }

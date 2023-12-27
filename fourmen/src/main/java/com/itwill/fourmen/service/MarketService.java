@@ -503,6 +503,7 @@ public class MarketService {
 		
 		log.debug("addWishList(wishList={})", wishList);
 		
+		// marketService의 readWishList 메서드 사용
 		int isExisting = readWishList(wishList);
 		log.debug("이미 찜하기 추가했나?");
 		
@@ -513,12 +514,19 @@ public class MarketService {
 			result = marketDao.addWishList(wishList);
 			log.debug("위시리스트 추가 결과={}", result);
 			
+			// TODO: 라이크 추가해야함
+			marketDao.addLikes(wishList);
+			
 			return result;
 		}
 		
 	}
 	
-	
+	/**
+	 * 해당 게시물이 이미 위시리스트에 추가돼 있는지 확인하는 메서드.
+	 * @param wishList
+	 * @return 해당유저가 이미 찜해놨다면 1, 아니면 0을 반환
+	 */
 	public int readWishList(WishList wishList) {
 		log.debug("readWishList(wishList={})", wishList);
 		
@@ -528,5 +536,20 @@ public class MarketService {
 		return result;
 	}
 	
+	
+	/**
+	 * 로그인된 유저의 찜 목록을 돌려줌
+	 * @param signedInUser
+	 * @return
+	 */
+	public List<WishList> readWishList(String signedInUser) {
+		
+		log.debug("readWishList(signedInUser={})", signedInUser);
+		List<WishList> userWishLIst =  marketDao.readWishListOfUser(signedInUser);
+		
+		log.debug("user's wishlist = {}", userWishLIst);
+		
+		return userWishLIst;
+	}
 	
 }	// MarketService 클래스 끝

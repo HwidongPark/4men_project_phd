@@ -24,6 +24,7 @@ import com.itwill.fourmen.dto.market.PagingDto;
 import com.itwill.fourmen.service.MarketService;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import oracle.jdbc.proxy.annotation.GetDelegate;
@@ -43,7 +44,7 @@ public class MarketController {
 	 * @param request
 	 */
 	@GetMapping("")
-	public void market(@RequestParam(name = "page", required = false, defaultValue = "1") int page, Model model, HttpServletRequest request) {
+	public void market(@RequestParam(name = "page", required = false, defaultValue = "1") int page, Model model, HttpServletRequest request, HttpSession session) {
 		log.debug("market(page={})", page);
 		
 		int numOfPopularMarketPosts = 0;	// 인기글 개수 초기화.. 최대 8개로 제한할거임
@@ -71,6 +72,17 @@ public class MarketController {
 		String servletPath = request.getServletPath();
 		log.debug("servletPath={}", servletPath);
 		
+		// 로그인한 상태라면 좋아요한 게시글 목록 읽어옴
+		String signedInUser = (String) session.getAttribute("signedInUser");		
+		log.debug("마켓리스트갈 때 로그인된 유저={}", signedInUser);
+		if (signedInUser != null) {
+			List<WishList> userWishList = marketService.readWishList(signedInUser);
+			log.debug("userWishList={}", userWishList);
+			model.addAttribute("userWishList", userWishList);
+		}
+				
+		
+		
 		// market의 게시글 리스트를 뷰로 전달
 		// TODO:  변수이름 다시 생각.. 그냥 가도 되기는 함.
 		model.addAttribute("marketPosts", pagedMarketPosts);	// 최신글들을 전달..
@@ -81,6 +93,9 @@ public class MarketController {
 		model.addAttribute("sDirectory", sDirectory);
 		model.addAttribute("fileSeparator", File.separator);
 		model.addAttribute("servletPath", servletPath);
+		
+		
+		
 		
 	}
 	

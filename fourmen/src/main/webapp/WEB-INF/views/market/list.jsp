@@ -1,3 +1,4 @@
+<%@page import="org.apache.taglibs.standard.tag.common.xml.JSTLXPathFactory"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
@@ -149,9 +150,18 @@
                                     </span>
                                     ${ marketPost.views }
                                     <!-- 좋아요(찜) -->
-                                    <span class="material-symbols-outlined">
-                                        favorite
-                                    </span>
+                                    <c:choose>
+                                        <c:forEach items="${ userWishList }" var="wishList">    <!-- 유저가 찜한 게시글이면 꽉찬 하트 -->
+                                            <c:when test="${ wishList.workId eq marketPost.workId }">
+                                                <i class="fa-solid fa-heart"></i>                                         
+                                            </c:when>
+                                        </c:forEach>
+                                        <c:otherwise>
+                                            <span class="material-symbols-outlined">    <!-- 유저가 찜하지 않은 글이면 빈 하트 -->
+                                                favorite
+                                            </span>
+                                        </c:otherwise>
+                                    </c:choose>
                                     ${ marketPost.likes }
                                 </div>                                
                             </div>
@@ -167,6 +177,7 @@
             </c:if>
         </div>
     </main>
+    
     
     <!-- 게시판 글 페이지네이션(pagination)-->
     <div>
@@ -260,8 +271,7 @@
             </ul>
         </nav>
     </div>
-    
-    
+
     
     <%@ include file="../fragments/footer.jspf"%>
 
