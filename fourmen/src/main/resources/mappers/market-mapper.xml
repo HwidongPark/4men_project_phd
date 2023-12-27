@@ -61,6 +61,10 @@
         UPDATE market SET likes = likes + 1 WHERE worksid = #{workId}
     </update>
     
+    <update id="subtractLikes">
+        UPDATE market SET likes = likes - 1 WHERE worksid = #{workId}
+    </update>
+    
     <select id="searchPosts" resultType="Market">
         SELECT *
         FROM market
@@ -174,6 +178,10 @@
         insert into wishlist (userid, category, workid) values (#{ userId }, 'market', #{ workId })
     </insert>
     
+    <delete id="removeWishList">
+        DELETE FROM wishlist WHERE userid = #{userId} AND workid = #{workId}
+    </delete>
+    
     <select id="readWishList" resultType="Integer">
         SELECT count(*)
         FROM wishlist
@@ -184,6 +192,7 @@
         SELECT *
         FROM wishlist
         WHERE userid = #{ signedInUser }
+        ORDER BY id DESC
     </select>
     
 </mapper>

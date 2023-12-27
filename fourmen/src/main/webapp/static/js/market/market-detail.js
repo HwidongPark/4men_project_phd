@@ -2,9 +2,10 @@
  * market-detail.js
  */
 document.addEventListener('DOMContentLoaded', function() {
-    // 찜하기, 쪽지보내기 버튼
-    const btnRequestDeal = document.querySelector('#market-request-deal');
-    const btnAddWishList = document.querySelector('#market-add-to-wishlist')
+    // 찜하기, 찜 취소, 쪽지보내기 버튼
+    const btnRequestDeal = document.querySelector('#market-request-deal');    
+    const btnAddWishList = document.querySelector('#market-add-to-wishlist');
+    const btnRemoveWishList = document.querySelector('#market-remove-from-wishlist');
     
     const carouselImagesWrapper = document.querySelector('.carousel-images-wrapper');
     const carouselImageContainer = document.querySelector('.carousel-images-container');
@@ -144,9 +145,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		    // 사진 리스트 폭 초기화
     	carouselImageContainer.scrollTo({left: scrollbarPosition * scrollMaxWidth, behavior: 'smooth'});
 		// console.log("크기 변하는 중");
-	})
-        
-  
+	})        
     
     
     // 찜하기
@@ -176,6 +175,7 @@ document.addEventListener('DOMContentLoaded', function() {
            console.log(`response=${response.data}`);
            if (response.data === 1) {
                alert('찜하기 성공');
+               location.reload();
            } else if (response.data === 0) {
                alert('이미 찜한 게시글입니다.');
            }
@@ -184,11 +184,47 @@ document.addEventListener('DOMContentLoaded', function() {
            console.log(`에러발생: ${error}`);
        })
        
-    });
+    });       
+
+    
+    // 찜 취소
+    btnRemoveWishList.addEventListener('click', function() {
+		
+	    console.log('찜하기 취소 클릭');
+        console.log(`signedInUser=${signedInUser}`);
+       
+        if (signedInUser == "") {    // 로그인 안했을 시 로그인시킴
+            alert("로그인되지 않았습니다.");
+            location.reload();
+                       
+            return;
+        }
+       
+        const data = {
+            userId: signedInUser,
+            workId: workId.value
+        };
+       
+        axios.post('/fourmen/market/wishlist/remove', data)
+        .then((response) => {
+            console.log(`response=${response.data}`);
+            if (response.data === 1) {
+                alert('찜하기 취소 성공');
+                location.reload();
+            } else if (response.data === 0) {
+                alert('찜하기 취소 실패. 다시 시도해주세요.');
+                location.reload();
+            }
+        })
+       .catch ((error) => {
+           console.log(`에러발생: ${error}`);
+       })
+				
+	});
     
     // 쪽지보내기
     
     
     
 
-})
+});

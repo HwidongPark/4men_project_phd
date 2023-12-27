@@ -106,15 +106,31 @@ public class MarketController {
 	 * @param model
 	 */
 	@GetMapping("/detail")
-	public void detail(@RequestParam Long workid, Model model) {
+	public void detail(@RequestParam Long workid, Model model, HttpSession session) {
 		log.debug("detail(workId={}) GET", workid);			
 		
+		// 해당 게시물 읽어옴
 		MarketPostDto marketPost = marketService.readMarketPost(workid);
 		log.debug("marketPostDto = {}", marketPost);
 		
+		// 조회수 추가
 		marketService.addView(workid);
 		
+		// 로그인된 유저가 종아요 눌렀는지 여부 확인
+		String signedInUser = (String) session.getAttribute("signedInUser");
+		WishList wishList = new WishList();
+		wishList.setUserId(signedInUser);
+		wishList.setWorkId(workid);
+		
+		int isWishListed = 0;
+		
+		if (signedInUser != null) {
+			isWishListed = marketService.readWishList(wishList);
+		}
+		
+		
 		model.addAttribute("marketPost", marketPost);
+		model.addAttribute("isWishListed", isWishListed);
 	}
 	
 	

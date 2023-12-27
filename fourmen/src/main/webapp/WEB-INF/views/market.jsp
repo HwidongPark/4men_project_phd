@@ -24,6 +24,8 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="/fourmen/css/pagenation.css">
+    
+    <script src="https://kit.fontawesome.com/5b5cfeea7f.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -148,9 +150,19 @@
                                     </span>
                                     ${ popularMarketPost.views }
                                     <!-- 좋아요(찜) -->
-                                    <span class="material-symbols-outlined">
-                                        favorite
-                                    </span>
+                                    <c:set var="isWishListed" value="false" />
+                                    <c:forEach items="${ userWishList }" var="wishList">
+                                        <c:if test="${ wishList.workId eq popularMarketPost.workId }">
+                                            <c:set var="isWishListed" value="true" />
+                                        </c:if>
+                                    </c:forEach>
+                                    
+                                    <c:if test="${ isWishListed }">
+                                        <i class="fa-solid fa-heart  market-filled-heart"></i>                             
+                                    </c:if>
+                                    <c:if test="${ !isWishListed }">
+                                        <i class="fa-regular fa-heart market-empty-heart"></i> 
+                                    </c:if>
                                     ${ popularMarketPost.likes }
                                 </div>                                
                             </div>
@@ -210,19 +222,20 @@
                                         visibility
                                     </span>
                                     ${ marketPost.views }
-                                    <!-- 좋아요(찜) -->
-                                    <c:choose>
-                                        <c:forEach items="${ userWishList }" var="wishList">    <!-- 유저가 찜한 게시글이면 꽉찬 하트 -->
-                                            <c:when test="${ wishList.workId eq marketPost.workId }">
-                                                <i class="fa-solid fa-heart"></i>                                         
-                                            </c:when>
-                                        </c:forEach>
-                                        <c:otherwise>
-                                            <span class="material-symbols-outlined">    <!-- 유저가 찜하지 않은 글이면 빈 하트 -->
-                                                favorite
-                                            </span>
-                                        </c:otherwise>
-                                    </c:choose>
+                                	<!-- 좋아요(찜) -->
+                                    <c:set var="isWishListed" value="false" />
+                                    <c:forEach items="${ userWishList }" var="wishList">
+                                        <c:if test="${ wishList.workId eq marketPost.workId }">
+                                            <c:set var="isWishListed" value="true" />
+                                        </c:if>
+                                    </c:forEach>
+                                    
+                                    <c:if test="${ isWishListed }">
+                                        <i class="fa-solid fa-heart fa-sm market-filled-heart"></i>                             
+                                    </c:if>
+                                    <c:if test="${ !isWishListed }">
+                                        <i class="fa-regular fa-heart fa-sm market-empty-heart"></i> 
+                                    </c:if>
                                     ${ marketPost.likes }
                                 </div>                                
                             </div>

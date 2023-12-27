@@ -226,7 +226,7 @@ div.market-create-btn-container button {
 .market-price-views-likes-container .market-views-and-likes {
     flex: 3;
     text-align: right;
-    font-size: 0.9em;
+    font-size: 0.875em;
     color: #6c757d;
     
     /* 이 div안의 아이템들을 중앙정렬 */
@@ -234,9 +234,19 @@ div.market-create-btn-container button {
 }
 
 .market-price-views-likes-container span.material-symbols-outlined {
-    font-size: 0.9em;
+    font-size: 0.875em;
     color: #6c757d;
 }
+
+.market-filled-heart {
+	color: red;
+	font-size: 0.83em;
+}
+
+.market-empty-heart {
+	font-size: 0.83em;
+}
+
 
 .market-item-price {
     font-size: inherit;

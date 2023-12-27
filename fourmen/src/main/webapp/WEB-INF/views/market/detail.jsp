@@ -97,8 +97,15 @@
                     </div> 
                 </div>
                 <div class="text-center">
-                    <button id="market-request-deal" class="btn btn-secondary my-1 btn-rounded">거래요청 쪽지 보내기</button><br>            
-                    <button id="market-add-to-wishlist" class="btn btn-danger btn-rounded">찜하기</button>                    
+                    <button id="market-request-deal" class="btn btn-secondary my-1 btn-rounded">거래요청 쪽지 보내기</button><br>
+                    <c:if test="${ isWishListed le 0 }">
+                        <button id="market-add-to-wishlist" class="btn btn-danger btn-rounded">찜하기</button>
+                        <button id="market-remove-from-wishlist" class="btn btn-success btn-rounded d-none">찜 취소</button>
+                    </c:if>
+                    <c:if test="${ isWishListed ge 1 }">
+                        <button id="market-add-to-wishlist" class="btn btn-danger btn-rounded d-none">찜하기</button>
+                        <button id="market-remove-from-wishlist" class="btn btn-success btn-rounded">찜 취소</button>
+                    </c:if>
                 </div>
             </div>
 

@@ -150,18 +150,21 @@
                                     </span>
                                     ${ marketPost.views }
                                     <!-- 좋아요(찜) -->
-                                    <c:choose>
-                                        <c:forEach items="${ userWishList }" var="wishList">    <!-- 유저가 찜한 게시글이면 꽉찬 하트 -->
-                                            <c:when test="${ wishList.workId eq marketPost.workId }">
-                                                <i class="fa-solid fa-heart"></i>                                         
-                                            </c:when>
-                                        </c:forEach>
-                                        <c:otherwise>
-                                            <span class="material-symbols-outlined">    <!-- 유저가 찜하지 않은 글이면 빈 하트 -->
-                                                favorite
-                                            </span>
-                                        </c:otherwise>
-                                    </c:choose>
+                                    <c:set var="isWishListed" value="false" />
+                                    <c:forEach items="${ userWishList }" var="wishList">
+                                        <c:if test="${ wishList.workId eq marketPost.workId }">
+                                            <c:set var="isWishListed" value="true" />
+                                        </c:if>
+                                    </c:forEach>
+                                    
+                                    <c:if test="isWishListed">
+                                        <i class="fa-solid fa-heart"></i>   <!-- 유저가 찜한 글이면 꽉찬 하트 -->                               
+                                    </c:if>
+                                    <c:if test="!isWishListed">
+                                        <span class="material-symbols-outlined">    <!-- 유저가 찜하지 않은 글이면 빈 하트 -->
+                                            favorite
+                                        </span>
+                                    </c:if>                                 
                                     ${ marketPost.likes }
                                 </div>                                
                             </div>

@@ -75,4 +75,20 @@ public class MarketRestController {
 	}
 	
 	
+	/**
+	 * 로그인된 유저가 찜해놓은 게시물을 찜 취소하는 메서드.
+	 * @param wishList
+	 * @return 찜취소 성공 시 1, 실패시 0 반환
+	 */
+	@PostMapping("/wishlist/remove")
+	public ResponseEntity<Integer> removeWishList(@RequestBody WishList wishList) {
+		
+		log.debug("removeWishList(wishList={})", wishList);
+		
+		int result = marketService.removeWishList(wishList);
+		log.debug("찜하기 제거 결과 = {}", result);
+		
+		return ResponseEntity.ok(result);
+	}
+	
 }

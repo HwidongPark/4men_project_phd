@@ -47,6 +47,9 @@ public interface MarketDao {
 	// 좋아요 추가
 	int addLikes(WishList wishList);
 	
+	// 좋아요 하나 빼기
+	int subtractLikes(WishList wishList);
+	
 	// 검색
 	List<Market> searchPosts(MarketSearchDto dto);
 	
@@ -67,6 +70,9 @@ public interface MarketDao {
 	 
 	 // 찜하기 추가
 	 int addWishList(WishList wishList);
+	 	 
+	// 찜하기 제거
+	int removeWishList(WishList wishList);
 	 
 	 // 이미 찜했는지 확인하는 메서드
 	 int readWishList(WishList wishList);

@@ -91,40 +91,37 @@
         <table class="table">
             <colgroup>
 
-                <col style="width: 10px;">
-                <col style="width: auto;">
+                <col style="width: 50%;">
                 <col style="width: 10%;">
+                <col style="width: 15%;">
                 <col style="width: 15%;">
                 <col style="width: 10%;">
             </colgroup>
             <thead>
             <tr>
                 <!-- <th>번호</th> -->
-                <th></th>
                 <th>제목</th>
+                <th>가격</th>
                 <th>작성자</th>
                 <th>작성일</th>
                 <th>조회</th>
             </tr>
             </thead>
             <tbody class="table-group-divider">
-            <c:forEach var="p" items="${freeboard_posts}">
+            <c:forEach var="wishListPost" items="${wishListPosts}">
             <!-- var: 변수(리스트 값을 저장) / items: 리스트 -->
             <!-- PostController.java에서 전달된 데이터 사용 (리스트의 이름이 items에 들어가야 함)
             -> model.addAttribute("freeboard_posts", list); //-> 뷰에 전달되는 데이터. -->
                 <tr>
-                    <td class="d-none">${p.post_id}</td> <!-- 필요하지 않으면 지우자... -->
-                    <!-- <td>${p.post_num}</td> -->
-                    <td></td>
-                    <td id="table-td" style="text-align: left; padding-left: 2rem">
-                        <c:url var="freeboard_postDetailPage" value="/forum/freeboard-detail">
-                            <c:param name="post_id" value="${p.post_id}" />
-                        </c:url>
-                        <a href="${freeboard_postDetailPage}">${p.post_title}</a>
+                    <td>
+                        <a href="/fourmen/market/detail?workid=${ wishListPost.workId }">
+                            ${ wishListPost.title }
+                        </a>
                     </td>
-                    <td>${p.userid}</td>
-                    <td>${p.post_created_time}</td>
-                    <td>${p.post_view_count}</td>
+                    <td>${ wishListPost.price }</td>
+                    <td>${ wishListPost.userId }</td>
+                    <td>${ wishListPost.createdTime }</td>
+                    <td>${ wishListPost.views }</td>
                 </tr>
             </c:forEach>
             </tbody>

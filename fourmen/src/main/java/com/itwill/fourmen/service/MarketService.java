@@ -133,7 +133,7 @@ public class MarketService {
 	}
 	
 	
-	// TODO: 페이징처리 서비스 완료하기
+	// 페이징처리 서비스 완료하기
 	public List<MarketPostDto> readPagedMarketPosts(int page) {
 		log.debug("readPagedMarketPosts(page={})", page);
 		
@@ -180,8 +180,8 @@ public class MarketService {
 		return pagingDto;
 	}
 	
-	/*
-	 * 
+	/**
+	 * 현재 페이지를 아규먼트로 받아 해당 페이지의 페이지내이션에서 첫, 끝 페이지 등을 계산해서 PagingDto를 반환
 	 */
 	public PagingDto searchPaging(int page, MarketSearchDto dto) {
 		int totNumPosts = marketDao.searchCountTotNumber(dto);
@@ -514,13 +514,36 @@ public class MarketService {
 			result = marketDao.addWishList(wishList);
 			log.debug("위시리스트 추가 결과={}", result);
 			
-			// TODO: 라이크 추가해야함
-			marketDao.addLikes(wishList);
+			// 라이크 추가
+			int addLikeResult = marketDao.addLikes(wishList);
+			log.debug("좋아요 추가 결과={}", addLikeResult);
 			
 			return result;
 		}
 		
 	}
+	
+	
+	/**
+	 * WishList를 아규먼트로 받아 해당 게시글을 찜하기에서 삭제
+	 * @param wishList
+	 * @return 제거 성공 시 1, 실패 시 0
+	 */
+	public int removeWishList(WishList wishList) {
+		
+		log.debug("removeWishList(wishList={})", wishList);
+		
+		int result = 0;
+		result = marketDao.removeWishList(wishList);
+		log.debug("위시리스트 제거 결과={}", result);
+		
+		
+		int subtractLike = marketDao.subtractLikes(wishList);
+		log.debug("좋아요 제거 결과={}", subtractLike);
+		
+		return result;
+	}
+	
 	
 	/**
 	 * 해당 게시물이 이미 위시리스트에 추가돼 있는지 확인하는 메서드.
@@ -551,5 +574,6 @@ public class MarketService {
 		
 		return userWishLIst;
 	}
+	
 	
 }	// MarketService 클래스 끝
