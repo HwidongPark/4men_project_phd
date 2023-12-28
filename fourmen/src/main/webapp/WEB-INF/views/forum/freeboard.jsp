@@ -67,23 +67,26 @@
     <section role="search" class="search">
         <div class="forum-top-area">
             <div class="forum-search-area">
+                <c:url var="searchPage" value="search" />
+                <form action="${searchPage}" method="get">
                 <div class="forum-search-select-area">
-                    <select class="forum-select-box">
-                        <option class="forum-select-option">전체</option>
-                        <option class="forum-select-option">제목</option>
-                        <option class="forum-select-option">작성자</option>
-                        <option class="forum-select-option">내용</option>
+                    <select class="forum-select-box" name="category">
+                        <option class="forum-select-option" value="all">전체</option>
+                        <option class="forum-select-option" value="title">제목</option>
+                        <option class="forum-select-option" value="author">작성자</option>
+                        <option class="forum-select-option" value="content">내용</option>
                     </select>
                 </div>
                 <div class="forum-search-form-area">
-                    <input id=forum-search-input autocomplete="on" placeholder="검색어를 입력하세요." type="text">
+                    <input id=forum-search-input name="keyword" autocomplete="on" placeholder="검색어를 입력하세요." type="text">
                 </div>
 
                 <div class="forum-search-btn-area">
-                    <button class="forum-search-btn" type="button">
+                    <button class="forum-search-btn" type="submit">
                         <img id="forum-search-btn-img" alt="검색버튼" src="../icon/search01.svg">
                     </button>
                 </div>
+                </form>
             </div>
         </div>
     </section>
@@ -205,8 +208,7 @@
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
     <script src="../js/header.js"></script>
-    <!-- <script src="../js/forum/forum-category-bold-style.js"></script> -->
-    <script src="../js/forum/bold-test01.js"></script>
+    <script src="../js/forum/forum-category-bold-style.js"></script>
 
 </body>
 </html>

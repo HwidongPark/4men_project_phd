@@ -31,19 +31,9 @@ document.addEventListener('DOMContentLoaded', () => {
     categoryButtons.forEach(button => {
         button.addEventListener('click', change_category_style);
     });
-    
+
     // 페이지가 redirect된 경우, localStorage에 저장된 클라이언트의 상태 정보를 확인하고 bold 스타일을 다시 적용
     const selectedMenu = localStorage.getItem('selectedMenu');
-    if (selectedMenu) {
-        categoryButtons.forEach(button => {
-            if (button.textContent === selectedMenu) {
-                button.style.fontWeight = 'bold';
-                button.style.color = 'black';
-                button.style.borderBottom = '2.5px solid black';
-            }
-        });
-    }
-   
     // 현재 URL과 localStorage에 저장된 URL이 같으면 bold 스타일을 다시 적용
     if (window.location.href === localStorage.getItem('selectedURL')) {
         categoryButtons.forEach(button => {

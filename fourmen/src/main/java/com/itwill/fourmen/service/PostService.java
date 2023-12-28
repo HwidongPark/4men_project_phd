@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.itwill.fourmen.domain.Post;
 import com.itwill.fourmen.dto.post.PostCreateDto;
 import com.itwill.fourmen.dto.post.PostListItemDto;
+import com.itwill.fourmen.dto.post.PostSearchDto;
 import com.itwill.fourmen.repository.PostDao;
 
 import lombok.extern.slf4j.Slf4j;
@@ -73,6 +74,17 @@ public class PostService {
 		log.debug("addView 결과={}", result);
 		
 		return result;
+	}
+	
+	// 자유게시판에서 검색하기...
+	public List<PostListItemDto> search(PostSearchDto dto) {
+		log.debug("search(dto={}", dto);
+		
+		List<Post> list = postDao.search(dto);
+		
+		return list.stream()
+				.map(PostListItemDto::fromEntity)
+				.toList();
 	}
 	
 }

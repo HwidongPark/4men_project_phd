@@ -39,12 +39,3 @@ function change_category_style(event) {
         });
     }
 }
-
-// addEventListener: HTML 문서가 로드되면 실행할 함수 등록.
-document.addEventListener('DOMContentLoaded', () => {
-    // ** 이벤트 처리에 사용될 요소 찾기. **
-    const categoryButtons = document.querySelectorAll('.category-button');
-    categoryButtons.forEach(button => {
-        button.addEventListener('click', change_category_style);
-    });
-});
