@@ -263,7 +263,42 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // 거래요청 보내기 버튼 클릭
     btnSendRequest.addEventListener('click', function() {
-        requestDealForm.submit();
+        const messageTitle = document.querySelector('#market-message-title');
+        const messageContent = document.querySelector('#market-message-content');
+        const messagePriceOffered = document.querySelector('#market-message-price-offered');
+        
+        console.log(`제시가격=${messagePriceOffered.value}`);
+        
+        const data = {
+            title: messageTitle.value,
+            content: messageContent.value,
+            price_offered: messagePriceOffered.value,
+            recipient: writerId.value,
+            sender: signedInUser,
+            workId: workId.value
+        }
+        
+        if (messageTitle.value == '' || messageContent.value == '' || messagePriceOffered.value == '') {    // 빈칸이 있을 경우 빈칸 입력시
+            alert('제목, 내용, 제시가격을 모두 입력해야 합니다.');
+            
+            return;
+            
+        } else {    // 모두 입력한 경우에만 메세지 보낼 수 있도록 함
+            axios.post('/fourmen/mypage/message', data)
+            .then((response) => {
+                
+                btnCloseModal.click();
+                
+            })
+            .catch((error) => {
+                
+                console.log(`에러 발생!! ERROR: ${error}`);
+                
+            })
+        }
+        
+
+        
     });
     
     

@@ -49,7 +49,9 @@ public class AuthFilter extends HttpFilter implements Filter {
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		HttpSession session= httpRequest.getSession(); //요청 객체에서 세션찾기
 		Object signedInUser = session.getAttribute("signedInUser"); // 세션에서 로그인 정보찾기
-
+		log.debug("signedInUser={}", signedInUser);
+		
+		
 		if(signedInUser != null) {
 		    log.debug("로그인 상태 : {}",signedInUser);
 		    // 요청을 필터 체인의 다음 단계(다음 필터 또는 서블릿)로 전달

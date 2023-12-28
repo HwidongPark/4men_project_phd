@@ -31,6 +31,7 @@
         <filter-name>AuthFilter</filter-name>
         <url-pattern>/market/create</url-pattern>
         <url-pattern>/market/wishlist</url-pattern>
+        <url-pattern>/mypage/*</url-pattern>
     </filter-mapping>
 
     <listener>

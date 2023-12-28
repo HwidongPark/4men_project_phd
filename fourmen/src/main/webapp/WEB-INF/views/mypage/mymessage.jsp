@@ -1,3 +1,4 @@
+<%@page import="com.itwill.fourmen.domain.Message"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -19,11 +20,12 @@
         <link rel="stylesheet" href="../css/forum-search-area.css">
         <link rel="stylesheet" href="../css/forum-kategorie-area.css">
         <link rel="stylesheet" href="../css/forum-create-new-post.css">
-		
+		<link rel="stylesheet" href="../css/mypage-message.css">
 	</head>
 	
-
-<!-- 헤더 파일 include -->
+	<body>
+		
+        <!-- 헤더 파일 include -->
 <%@ include file="../fragments/navigation.jspf"%>
 
 <!-- body 시작점 -->
@@ -33,7 +35,7 @@
     <div id="underheader-div">
         <div class="container" id="underheadrcontainer">
             <h2 class="commondesign">
-                Wish List
+                거래 관리
             </h2>
         </div>
     </div>
@@ -46,17 +48,11 @@
         <div class="forum-kategorie">
             <ul class="forum-kategorie-board-lists">
                 <li class="forum-kategorie-board">
-                    <a href="freeboard">자유게시판</a>
+                    <a href="freeboard">받은 메세지</a>
                 </li>
                 <li class="forum-kategorie-board">
-                    <a href="queryboard">Q&A</a>
-                </li>
-                <li class="forum-kategorie-board">
-                    <a href="faqboard">FAQ</a>
-                </li>
-                <li class="forum-kategorie-board">
-                    <a href="noticeboard">NOTICE</a>
-                </li>
+                    <a href="queryboard">보낸 메세지</a>
+                </li>                
             </ul>
         </div>
     </section>
@@ -87,42 +83,47 @@
     </section>
     
     <!-- board-list-content 게시판 글 리스트 테이블 -->
-    <section class="freeboard-list" style="padding: 3.5rem 18.5rem 0rem 18.5rem;">
-        <table class="table">
+    <section class="freeboard-list w-85" style="padding: 3.5rem 18.5rem 0rem 18.5rem;">
+        <table class="table w-100">
             <colgroup>
 
+                <col style="width: 15%;">
                 <col style="width: 50%;">
+                <col style="width: 15%;">
                 <col style="width: 10%;">
-                <col style="width: 15%;">
-                <col style="width: 15%;">
                 <col style="width: 10%;">
             </colgroup>
             <thead>
             <tr>
-                <!-- <th>번호</th> -->
+                <th>대표 사진</th>
                 <th>제목</th>
-                <th>가격</th>
-                <th>작성자</th>
-                <th>작성일</th>
-                <th>조회</th>
+                <th>제시 가격</th>
+                <th>보낸이</th>
+                <th>작성일</th>            
             </tr>
             </thead>
             <tbody class="table-group-divider">
-            <c:forEach var="wishListPost" items="${wishListPosts}">
+            <c:forEach var="myMessageDto" items="${ myMessagesDtoList }">
             <!-- var: 변수(리스트 값을 저장) / items: 리스트 -->
             <!-- PostController.java에서 전달된 데이터 사용 (리스트의 이름이 items에 들어가야 함)
             -> model.addAttribute("freeboard_posts", list); //-> 뷰에 전달되는 데이터. -->
                 <tr>
                     <td>
-                        <a href="/fourmen/market/detail?workid=${ wishListPost.workId }">
-                            ${ wishListPost.title }
-                        </a>
+                        <div class="mymessage-image-container">
+                            <img src="/fourmen/uploads/${ myMessageDto.postDto.workImages[0].savedFileName }">
+                        </div>
                     </td>
-                    <td>${ wishListPost.price }</td>
-                    <td>${ wishListPost.userId }</td>
-                    <td>${ wishListPost.createdTime }</td>
-                    <td>${ wishListPost.views }</td>
+                    <td>
+                        <div class="mymessage-title">
+                            ${ myMessageDto.title }
+                        </div>
+                    </td>
+                    <td>${ myMessageDto.priceOffered }</td>
+                    <td>${ myMessageDto.sender }</td>
+                    <td>${ myMessageDto.timeSent }</td>
                 </tr>
+                <div class="d-none mymessage-workid">${ myMessageDto.workId }</div>
+                <div class="d-none mymessage-id">${ myMessageDto.id }</div>
             </c:forEach>
             </tbody>
         </table>
@@ -190,7 +191,6 @@
                 </ul>
             </nav>
         </div>
-
     </main>
     
     <!-- 푸터 파일 include -->
@@ -201,6 +201,16 @@
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
     <script src="../js/header.js"></script>
-
-</body>
+        
+		
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+	 integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+	  crossorigin="anonymous"></script>
+    
+    
+    <script src="/fourmen/js/mypage/mymessage.js"></script>  
+    
+  </body>
+		
+	</body>
 </html>

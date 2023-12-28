@@ -5,9 +5,27 @@
 
 <mapper namespace="com.itwill.fourmen.repository.MyPageDao">
     
+    <select id="readMyMessage" resultType="Message">
+        SELECT *
+        FROM messages
+        WHERE recipient = #{signedInUser}
+    </select>
+    
+    <select id="readMyMessageById" resultType="Message">
+        SELECT *
+        FROM messages
+        WHERE id = #{id}
+    </select>
+    
     <insert id="sendMessage">
         INSERT INTO messages (sender, recipient, workid, title, content, price_offered)
-        SET (#{sender}, #{recipient}, #{workId}, #{title}, #{content}, #{priceOffered})
+        VALUES (#{sender}, #{recipient}, #{workId}, #{title}, #{content}, #{price_offered})
     </insert>
+    
+    <insert id="replyMessage">
+        INSERT INTO messages (sender, recipient, workid, title, content, price_offered, price, reply_to)
+        VALUES (#{sender}, #{recipient}, #{workId}, #{title}, #{content}, #{priceOffered}, #{price}, #{replyTo})
+    </insert>
+    
     
 </mapper>

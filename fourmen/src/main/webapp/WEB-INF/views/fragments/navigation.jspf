@@ -52,7 +52,7 @@
             <a href="/fourmen/mypage/wishlist">내 찜 목록</a>
         </li>
         <li class="my-page-list-item">
-            <a href="#">거래요청 관리</a>
+            <a href="/fourmen/mypage/mymessage">거래요청 관리</a>
         </li>
         <li class="my-page-list-item">
             <a href="#">로그아웃</a>

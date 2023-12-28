@@ -119,14 +119,14 @@
                                     <div class="modal-label">
                                         <label class="mb-1">제목</label>
                                     </div>
-                                    <input type="text" name="title" class="form-control mb-2" required/>
+                                    <input id="market-message-title" type="text" name="title" class="form-control mb-2" required/>
                                     <div class="modal-label">
                                         <label class="mb-1">내용</label>
                                     </div>
-                                    <textarea class="form-control mb-2" name="content" rows="10" required></textarea>
+                                    <textarea id="market-message-content" class="form-control mb-2" name="content" rows="10" required></textarea>
                                     <div>
                                         <label class="mb-1">제시 가격</label>
-                                        <input type="number" name="priceOffered" value="${ marketPost.price }" class="form-control" required/>
+                                        <input id="market-message-price-offered" type="number" name="price_offered" value="${ marketPost.price }" class="form-control" required/>
                                     </div>
                                     <input type="hidden" name="workId" value="${ marketPost.workId }">
                                     <input type="hidden" name="recipient" value="${ marketPost.userId }">

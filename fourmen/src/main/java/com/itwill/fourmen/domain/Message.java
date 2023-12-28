@@ -1,9 +1,12 @@
 package com.itwill.fourmen.domain;
 
+import java.time.LocalDateTime;
+
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Builder
+@NoArgsConstructor
 @Data
 public class Message {
 	
@@ -13,7 +16,10 @@ public class Message {
 	private Long workId;
 	private String title;
 	private String content;
-	private Long priceOffered;
-	private String isClosed;
+	private Long price;
+	private Long price_offered;
+	private String is_closed;
+	private Long reply_to;
+	private LocalDateTime time_sent;
 	
 }
