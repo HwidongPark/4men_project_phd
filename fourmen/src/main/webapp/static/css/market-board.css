@@ -211,6 +211,17 @@ div.market-create-btn-container button {
     text-overflow: ellipsis;   
 }
 
+/* 모달관련 */
+.modal-label {
+    display: flex;
+    justify-content: flex-start!important;
+}
+
+.modal-label label {
+    display: flex;
+    
+}
+
 
 /* 매물 기타설명에 관해서 */
 

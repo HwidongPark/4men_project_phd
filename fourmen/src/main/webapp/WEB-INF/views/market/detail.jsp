@@ -97,8 +97,51 @@
                     </div> 
                 </div>
                 <div class="text-center">
-                    <button id="market-request-deal" class="btn btn-secondary my-1 btn-rounded">거래요청 쪽지 보내기</button><br>
-                    <c:if test="${ isWishListed le 0 }">
+                <!-- Button trigger modal -->
+                <button type="button" id="market-request-deal" class="btn btn-secondary my-1 btn-rounded"
+                    data-bs-toggle="modal" data-bs-target="#requestDeal">
+                    거래요청 쪽지 보내기
+                </button><br />
+                
+                <!-- Modal -->
+                <div class="modal fade" id="requestDeal" tabindex="-1"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                                    거래요청 쪽지 보내기
+                                </h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="" method="post">
+                                    <div class="modal-label">
+                                        <label class="mb-1">제목</label>
+                                    </div>
+                                    <input type="text" class="form-control mb-2" required/>
+                                    <div class="modal-label">
+                                        <label class="mb-1">내용</label>
+                                    </div>
+                                    <textarea class="form-control mb-2" rows="10" required></textarea>
+                                    <div>
+                                        <label class="mb-1">제시 가격</label>
+                                        <input type="number" value="${ marketPost.price }" class="form-control" required/>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                    닫기
+                                </button>
+                                <button id="market-send-request" type="button" class="btn btn-primary">
+                                    거래 요청
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <c:if test="${ isWishListed le 0 }">
                         <button id="market-add-to-wishlist" class="btn btn-danger btn-rounded">찜하기</button>
                         <button id="market-remove-from-wishlist" class="btn btn-success btn-rounded d-none">찜 취소</button>
                     </c:if>
@@ -108,7 +151,6 @@
                     </c:if>
                 </div>
             </div>
-
         </section>
         
         <!-- 작품 설명 -->

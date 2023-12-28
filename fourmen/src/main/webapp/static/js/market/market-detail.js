@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const btnAddWishList = document.querySelector('#market-add-to-wishlist');
     const btnRemoveWishList = document.querySelector('#market-remove-from-wishlist');
     
+    const sendRequest = document.querySelector('#market-send-request');
+    
     const carouselImagesWrapper = document.querySelector('.carousel-images-wrapper');
     const carouselImageContainer = document.querySelector('.carousel-images-container');
     // 각각 사진의 div리스트
@@ -223,8 +225,37 @@ document.addEventListener('DOMContentLoaded', function() {
 	});
     
     // 쪽지보내기
+//    btnRequestDeal.addEventListener('click', function() {
+//       console.log("쪽지보내기 버튼 클릭");
+//       
+//       if (signedInUser == "") {    // 로그인 안했을 시 로그인시킴
+//           const target = encodeURIComponent(`/fourmen/market/detail?workid=${ workId.value }`);
+//           console.log(`target=${target}`);
+//           
+//           location.href=`/fourmen/signup?target=${target}`;
+           
+//           return;
+//       }
+       
+        
+//    });
     
-    
-    
+    sendRequest.addEventListener('click', function() {
+        
+        console.log("보내기버튼 누름");
+        
+        if (signedInUser == "") {    // 로그인 안했을 시 로그인시킴
+            const target = encodeURIComponent(`/fourmen/market/detail?workid=${ workId.value }`);
+            console.log(`target=${target}`);
+            
+            location.href=`/fourmen/signup?target=${target}`;
+           
+            return;
+        }
+        
+        
+        
+        
+    });
 
 });
