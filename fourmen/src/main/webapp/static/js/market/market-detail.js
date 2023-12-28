@@ -6,8 +6,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const btnRequestDeal = document.querySelector('#market-request-deal');    
     const btnAddWishList = document.querySelector('#market-add-to-wishlist');
     const btnRemoveWishList = document.querySelector('#market-remove-from-wishlist');
+        
+    // 거래요청 모달
+    const modalBody = document.querySelector('.modal-to-show');
+    const requestDealForm = document.querySelector('#request-deal-form');
     
-    const sendRequest = document.querySelector('#market-send-request');
+    // 모달 거래요청 보내기 버튼
+    const btnSendRequest = document.querySelector('#market-send-request');
+    // 모달 닫기 버튼
+    const btnCloseModal = document.querySelector('#market-request-deal-close');
     
     const carouselImagesWrapper = document.querySelector('.carousel-images-wrapper');
     const carouselImageContainer = document.querySelector('.carousel-images-container');
@@ -224,38 +231,40 @@ document.addEventListener('DOMContentLoaded', function() {
 				
 	});
     
-    // 쪽지보내기
-//    btnRequestDeal.addEventListener('click', function() {
-//       console.log("쪽지보내기 버튼 클릭");
-//       
-//       if (signedInUser == "") {    // 로그인 안했을 시 로그인시킴
-//           const target = encodeURIComponent(`/fourmen/market/detail?workid=${ workId.value }`);
-//           console.log(`target=${target}`);
-//           
-//           location.href=`/fourmen/signup?target=${target}`;
-           
-//           return;
-//       }
-       
-        
-//    });
-    
-    sendRequest.addEventListener('click', function() {
-        
-        console.log("보내기버튼 누름");
-        
+
+    // 거래요청 버튼 클릭    
+    btnRequestDeal.addEventListener('click', function() {
+                
         if (signedInUser == "") {    // 로그인 안했을 시 로그인시킴
             const target = encodeURIComponent(`/fourmen/market/detail?workid=${ workId.value }`);
             console.log(`target=${target}`);
             
             location.href=`/fourmen/signup?target=${target}`;
-           
+            
+            modalBody.setAttribute('id', '');
+            
             return;
+        } else if (signedInUser == writerId.value) {  // 본인글일 시 경고메세지 띄움
+            
+            modalBody.setAttribute('id', '');
+            
+            alert('본인글에 거래요청을 보낼 수 없습니다.');
+            
+            location.reload();
+            return;
+        } else {
+            modalBody.setAttribute('id', 'requestDeal');
+            btnRequestDeal.click();
         }
-        
-        
-        
         
     });
 
-});
+    
+    
+    // 거래요청 보내기 버튼 클릭
+    btnSendRequest.addEventListener('click', function() {
+        requestDealForm.submit();
+    });
+    
+    
+}); // DOMLoaded 이벤트리스너 끝

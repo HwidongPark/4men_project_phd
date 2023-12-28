@@ -104,7 +104,7 @@
                 </button><br />
                 
                 <!-- Modal -->
-                <div class="modal fade" id="requestDeal" tabindex="-1"
+                <div class="modal fade modal-to-show" tabindex="-1"
                     aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -115,23 +115,26 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <form action="" method="post">
+                                <form method="post" action="/fourmen/mypage/message" id="request-deal-form">
                                     <div class="modal-label">
                                         <label class="mb-1">제목</label>
                                     </div>
-                                    <input type="text" class="form-control mb-2" required/>
+                                    <input type="text" name="title" class="form-control mb-2" required/>
                                     <div class="modal-label">
                                         <label class="mb-1">내용</label>
                                     </div>
-                                    <textarea class="form-control mb-2" rows="10" required></textarea>
+                                    <textarea class="form-control mb-2" name="content" rows="10" required></textarea>
                                     <div>
                                         <label class="mb-1">제시 가격</label>
-                                        <input type="number" value="${ marketPost.price }" class="form-control" required/>
+                                        <input type="number" name="priceOffered" value="${ marketPost.price }" class="form-control" required/>
                                     </div>
+                                    <input type="hidden" name="workId" value="${ marketPost.workId }">
+                                    <input type="hidden" name="recipient" value="${ marketPost.userId }">
+                                    <input type="hidden" name="sender" value="${ signedInUser }">
                                 </form>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                <button type="button" id="market-request-deal-close" class="btn btn-secondary" data-bs-dismiss="modal">
                                     닫기
                                 </button>
                                 <button id="market-send-request" type="button" class="btn btn-primary">
