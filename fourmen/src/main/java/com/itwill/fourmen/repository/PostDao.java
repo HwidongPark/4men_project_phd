@@ -12,5 +12,5 @@ public interface PostDao {
 	int freeboard_update(Post posd);
 	int freeboard_delete(long post_id);
 	int freeboard_addView(long post_id);
-	List<Post> search(PostSearchDto dto);
+	List<Post> freeboard_search(PostSearchDto dto);
 }

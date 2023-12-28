@@ -35,7 +35,7 @@
     <div id="underheader-div">
         <div class="container" id="underheadrcontainer">
             <h2 class="commondesign">
-                FORUM
+                FORUM / 자유게시판
             </h2>
         </div>
     </div>
@@ -67,18 +67,18 @@
     <section role="search" class="search">
         <div class="forum-top-area">
             <div class="forum-search-area">
-                <c:url var="searchPage" value="search" />
-                <form action="${searchPage}" method="get">
+                <c:url var="freeboard_searchPage" value="freeboard_search" />
+                <form action="${freeboard_searchPage}" method="get">
                 <div class="forum-search-select-area">
                     <select class="forum-select-box" name="category">
-                        <option class="forum-select-option" value="all">전체</option>
-                        <option class="forum-select-option" value="title">제목</option>
-                        <option class="forum-select-option" value="author">작성자</option>
-                        <option class="forum-select-option" value="content">내용</option>
+                        <option class="forum-select-option" value="post_all">전체</option>
+                        <option class="forum-select-option" value="post_title">제목</option>
+                        <option class="forum-select-option" value="post_author">작성자</option>
+                        <option class="forum-select-option" value="post_content">내용</option>
                     </select>
                 </div>
                 <div class="forum-search-form-area">
-                    <input id=forum-search-input name="keyword" autocomplete="on" placeholder="검색어를 입력하세요." type="text">
+                    <input id="forum-search-input" name="keyword" autocomplete="on" placeholder="검색어를 입력하세요." type="text">
                 </div>
 
                 <div class="forum-search-btn-area">

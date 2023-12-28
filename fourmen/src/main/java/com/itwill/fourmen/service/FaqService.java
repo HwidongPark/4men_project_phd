@@ -6,9 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.itwill.fourmen.domain.Faq;
+import com.itwill.fourmen.domain.Qna;
 import com.itwill.fourmen.dto.post.FaqCreateDto;
 import com.itwill.fourmen.dto.post.FaqListItemDto;
+import com.itwill.fourmen.dto.post.FaqSearchDto;
 import com.itwill.fourmen.dto.post.PostCreateDto;
+import com.itwill.fourmen.dto.post.QnaLIstItemDto;
+import com.itwill.fourmen.dto.post.QnaSearchDto;
 import com.itwill.fourmen.repository.FaqDao;
 
 import lombok.extern.slf4j.Slf4j;
@@ -74,6 +78,17 @@ public class FaqService {
 		log.debug("addView 결과={}", result);
 		
 		return result;
+	}
+	
+	// Faq게시판에서 검색하기...
+	public List<FaqListItemDto> search(FaqSearchDto dto) {
+		log.debug("search(dto={}", dto);
+		
+		List<Faq> list = faqDao.faqboard_search(dto);
+		
+		return list.stream()
+				.map(FaqListItemDto::fromEntity)
+				.toList();
 	}
 	
 }

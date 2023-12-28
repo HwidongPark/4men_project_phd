@@ -37,7 +37,7 @@
     </update>
     
     <!-- FREE_BOARD 테이블에서 전체(제목+내용), 내용, 제목 또는 내용, 작성자로 검색하기 -->
-    <select id="search" resultType="Post">
+    <select id="freeboard_search" resultType="Post">
         <!-- <bind> 개념 정리:
         개념: 외부에서 전달된 파라미터를 이용하여 변수를 생성하는 엘리먼트.
         조건: MyBatis version 3.2.3 이상에서 사용.
@@ -55,7 +55,7 @@
         <!-- where를 태그로 사용 -->
         <where>
             <choose>
-                <when test='category eq "title"'>
+                <when test='category eq "post_title"'>
                 <!-- category 는 어디서 나온 것일까?
                 param.getCategory()를 호출한 것.
                 PostSearchDto.java에 필드로 category가 선언되어 있음.
@@ -63,22 +63,22 @@
                 -->
                     upper(POST_TITLE) like upper(#{searchKeyword})
                 </when>
-                <when test='category eq "content"'>
+                <when test='category eq "post_content"'>
                     upper(POST_CONTENT) like upper(#{searchKeyword})
                 </when>
-                <when test='category eq "all"'>
+                <when test='category eq "post_all"'>
                     upper(POST_TITLE) like upper(#{searchKeyword}) 
                     or
                     upper(POST_CONTENT) like upper(#{searchKeyword})
                     or
                     upper(USERID) like upper(#{searchKeyword})
                 </when>
-                <when test='category eq "author"'>
+                <when test='category eq "post_author"'>
                     upper(USERID) like upper(#{searchKeyword})
                 </when>
             </choose>
         </where>
-        order by USERID desc
-    </select>  
+        order by POST_ID desc
+    </select>
     
 </mapper>

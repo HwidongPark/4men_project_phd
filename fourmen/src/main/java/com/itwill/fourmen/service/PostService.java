@@ -80,7 +80,7 @@ public class PostService {
 	public List<PostListItemDto> search(PostSearchDto dto) {
 		log.debug("search(dto={}", dto);
 		
-		List<Post> list = postDao.search(dto);
+		List<Post> list = postDao.freeboard_search(dto);
 		
 		return list.stream()
 				.map(PostListItemDto::fromEntity)

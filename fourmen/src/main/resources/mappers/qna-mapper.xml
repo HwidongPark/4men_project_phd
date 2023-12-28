@@ -36,4 +36,49 @@
         update QNA_BOARD set QNA_VIEW_COUNT = QNA_VIEW_COUNT + 1 where QNA_ID = ${qna_id}
     </update>
     
+    <!-- QNA_BOARD 테이블에서 전체(제목+내용+작성자), 내용, 제목 또는 내용, 작성자로 검색하기 -->
+    <select id="qnaboard_search" resultType="Qna">
+        <!-- <bind> 개념 정리:
+        개념: 외부에서 전달된 파라미터를 이용하여 변수를 생성하는 엘리먼트.
+        조건: MyBatis version 3.2.3 이상에서 사용.
+        동적 쿼리문 안에 작성.
+        name 속성: 작성자가 지정할 변수 이름.
+        value 속성: 받아오는 파라미터 값.
+        -->
+        <bind name="searchKeyword" value="'%' + keyword + '%'" />
+        <!-- keyword 는 어디서 나온 것일까?
+        param.getKeyword()를 호출한 것.
+        QnaSearchDto.java에 필드로 keyword가 선언되어 있음.
+        QnaDao에서 아규먼트로 넘긴 QnaSearchDto에 필드로 선언된 keyword를 get() 메서드로 가져옴.
+        -->
+        select * from QNA_BOARD
+        <!-- where를 태그로 사용 -->
+        <where>
+            <choose>
+                <when test='category eq "qna_title"'>
+                <!-- category 는 어디서 나온 것일까?
+                param.getCategory()를 호출한 것.
+                PostSearchDto.java에 필드로 category가 선언되어 있음.
+                PostDao에서 아규먼트로 넘긴 PostSearchDto에 필드로 선언된 category를 get() 메서드로 가져옴.
+                -->
+                    upper(QNA_TITLE) like upper(#{searchKeyword})
+                </when>
+                <when test='category eq "qna_content"'>
+                    upper(QNA_CONTENT) like upper(#{searchKeyword})
+                </when>
+                <when test='category eq "qna_all"'>
+                    upper(QNA_TITLE) like upper(#{searchKeyword}) 
+                    or
+                    upper(QNA_CONTENT) like upper(#{searchKeyword})
+                    or
+                    upper(USERID) like upper(#{searchKeyword})
+                </when>
+                <when test='category eq "qna_author"'>
+                    upper(USERID) like upper(#{searchKeyword})
+                </when>
+            </choose>
+        </where>
+        order by QNA_ID desc
+    </select>
+    
 </mapper>

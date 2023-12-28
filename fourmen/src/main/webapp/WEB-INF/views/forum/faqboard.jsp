@@ -67,23 +67,26 @@
     <section role="search" class="search">
         <div class="forum-top-area">
             <div class="forum-search-area">
+                <c:url var="faqboard_searchPage" value="faqboard_search" />
+                <form action="${faqboard_searchPage}" method="get">
                 <div class="forum-search-select-area">
-                    <select class="forum-select-box">
-                        <option class="forum-select-option">전체</option>
-                        <option class="forum-select-option">제목</option>
-                        <option class="forum-select-option">작성자</option>
-                        <option class="forum-select-option">내용</option>
+                    <select class="forum-select-box" name="category">
+                        <option class="forum-select-option" value="faq_all">전체</option>
+                        <option class="forum-select-option" value="faq_title">제목</option>
+                        <option class="forum-select-option" value="faq_author">작성자</option>
+                        <option class="forum-select-option" value="faq_content">내용</option>
                     </select>
                 </div>
                 <div class="forum-search-form-area">
-                    <input id=forum-search-input autocomplete="on" placeholder="검색어를 입력하세요." type="text">
+                    <input id="forum-search-input" name="keyword" autocomplete="on" placeholder="검색어를 입력하세요." type="text">
                 </div>
 
                 <div class="forum-search-btn-area">
-                    <button class="forum-search-btn" type="button">
+                    <button class="forum-search-btn" type="submit">
                         <img id="forum-search-btn-img" alt="검색버튼" src="../icon/search01.svg">
                     </button>
                 </div>
+                </form>
             </div>
         </div>
     </section>

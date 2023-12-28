@@ -15,13 +15,16 @@ import com.itwill.fourmen.domain.Post;
 import com.itwill.fourmen.domain.Qna;
 import com.itwill.fourmen.dto.post.FaqCreateDto;
 import com.itwill.fourmen.dto.post.FaqListItemDto;
+import com.itwill.fourmen.dto.post.FaqSearchDto;
 import com.itwill.fourmen.dto.post.NoticeCreateDto;
 import com.itwill.fourmen.dto.post.NoticeListItemDto;
+import com.itwill.fourmen.dto.post.NoticeSearchDto;
 import com.itwill.fourmen.dto.post.PostCreateDto;
 import com.itwill.fourmen.dto.post.PostListItemDto;
 import com.itwill.fourmen.dto.post.PostSearchDto;
 import com.itwill.fourmen.dto.post.QnaCreateDto;
 import com.itwill.fourmen.dto.post.QnaLIstItemDto;
+import com.itwill.fourmen.dto.post.QnaSearchDto;
 import com.itwill.fourmen.service.FaqService;
 import com.itwill.fourmen.service.NoticeService;
 import com.itwill.fourmen.service.PostService;
@@ -104,7 +107,7 @@ public class PostController {
 		return "redirect:/forum/freeboard";
 	}
 	
-	@GetMapping("search") //-> GET 방식의 "forum/freeboard/search" 요청 주소를 처리하는 메서드.
+	@GetMapping("freeboard_search") //-> GET 방식의 "forum/freeboard_search" 요청 주소를 처리하는 메서드.
 	public String search(PostSearchDto dto, Model model) {
     	log.debug("search(dto={})", dto);
     
@@ -175,6 +178,20 @@ public class PostController {
 		
 		return "redirect:/forum/qnaboard";
 	}
+	
+	@GetMapping("qnaboard_search") //-> GET 방식의 "forum/qnaboard_search" 요청 주소를 처리하는 메서드.
+	public String search(QnaSearchDto dto, Model model) {
+    	log.debug("search(dto={})", dto);
+    
+		// 서비스 계층의 메서드를 호출해서 검색 서비스를 수행.
+    	List<QnaLIstItemDto> list = qnaService.search(dto);
+    
+    	// 검색 결과를 뷰에 전달하기 위해서 모델 속성(attribute)에 추가.
+    	model.addAttribute("qnaboard_posts", list);
+    	
+    	return "forum/qnaboard"; //-> 뷰의 경로(/WEB-INF/views/forum/qnaboard.jsp)
+    	//-> servlet-context에서 prefix 부분이 /WEB-INF/views/ 였으므로.
+	}
 	// qnaboard 처리 끝 //
 	
 	// faqboard 처리 시작 //
@@ -233,6 +250,20 @@ public class PostController {
 		
 		return "redirect:/forum/faqboard";
 	}
+	
+	@GetMapping("faqboard_search") //-> GET 방식의 "forum/faqboard_search" 요청 주소를 처리하는 메서드.
+	public String search(FaqSearchDto dto, Model model) {
+    	log.debug("search(dto={})", dto);
+    
+		// 서비스 계층의 메서드를 호출해서 검색 서비스를 수행.
+    	List<FaqListItemDto> list = faqService.search(dto);
+    
+    	// 검색 결과를 뷰에 전달하기 위해서 모델 속성(attribute)에 추가.
+    	model.addAttribute("faqboard_posts", list);
+    	
+    	return "forum/faqboard"; //-> 뷰의 경로(/WEB-INF/views/forum/qnaboard.jsp)
+    	//-> servlet-context에서 prefix 부분이 /WEB-INF/views/ 였으므로.
+	}
 	// faqboard 처리 끝 //
 	
 	// noticeboard 처리 시작 //
@@ -290,6 +321,20 @@ public class PostController {
 		noticeService.delete(notice_id);
 		
 		return "redirect:/forum/noticeboard";
+	}
+	
+	@GetMapping("noticeboard_search") //-> GET 방식의 "forum/noticeboard_search" 요청 주소를 처리하는 메서드.
+	public String search(NoticeSearchDto dto, Model model) {
+    	log.debug("search(dto={})", dto);
+    
+		// 서비스 계층의 메서드를 호출해서 검색 서비스를 수행.
+    	List<NoticeListItemDto> list = noticeService.search(dto);
+    
+    	// 검색 결과를 뷰에 전달하기 위해서 모델 속성(attribute)에 추가.
+    	model.addAttribute("noticeboard_posts", list);
+    	
+    	return "forum/noticeboard"; //-> 뷰의 경로(/WEB-INF/views/forum/qnaboard.jsp)
+    	//-> servlet-context에서 prefix 부분이 /WEB-INF/views/ 였으므로.
 	}
 	// noticeboard 처리 끝 //
 	

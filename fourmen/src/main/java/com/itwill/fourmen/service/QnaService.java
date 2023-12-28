@@ -5,10 +5,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.itwill.fourmen.domain.Post;
 import com.itwill.fourmen.domain.Qna;
 import com.itwill.fourmen.dto.post.PostCreateDto;
+import com.itwill.fourmen.dto.post.PostListItemDto;
+import com.itwill.fourmen.dto.post.PostSearchDto;
 import com.itwill.fourmen.dto.post.QnaCreateDto;
 import com.itwill.fourmen.dto.post.QnaLIstItemDto;
+import com.itwill.fourmen.dto.post.QnaSearchDto;
 import com.itwill.fourmen.repository.QnaDao;
 
 import lombok.extern.slf4j.Slf4j;
@@ -74,6 +78,17 @@ public class QnaService {
 		log.debug("addView 결과={}", result);
 		
 		return result;
+	}
+	
+	// 문의게시판에서 검색하기...
+	public List<QnaLIstItemDto> search(QnaSearchDto dto) {
+		log.debug("search(dto={}", dto);
+		
+		List<Qna> list = qnaDao.qnaboard_search(dto);
+		
+		return list.stream()
+				.map(QnaLIstItemDto::fromEntity)
+				.toList();
 	}
 	
 }

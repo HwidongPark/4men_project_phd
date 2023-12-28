@@ -5,9 +5,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.itwill.fourmen.domain.Faq;
 import com.itwill.fourmen.domain.Notice;
+import com.itwill.fourmen.dto.post.FaqListItemDto;
+import com.itwill.fourmen.dto.post.FaqSearchDto;
 import com.itwill.fourmen.dto.post.NoticeCreateDto;
 import com.itwill.fourmen.dto.post.NoticeListItemDto;
+import com.itwill.fourmen.dto.post.NoticeSearchDto;
 import com.itwill.fourmen.dto.post.PostCreateDto;
 import com.itwill.fourmen.repository.NoticeDao;
 
@@ -74,6 +78,17 @@ public class NoticeService {
 		log.debug("addView 결과={}", result);
 		
 		return result;
+	}
+	
+	// 공지게시판에서 검색하기...
+	public List<NoticeListItemDto> search(NoticeSearchDto dto) {
+		log.debug("search(dto={}", dto);
+		
+		List<Notice> list = noticeDao.noticeboard_search(dto);
+		
+		return list.stream()
+				.map(NoticeListItemDto::fromEntity)
+				.toList();
 	}
 	
 }
