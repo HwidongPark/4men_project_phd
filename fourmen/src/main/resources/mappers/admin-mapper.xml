@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- POSTS 테이블에서 CRUD에 필요한 SQL 문장들을 선언 -->
+<mapper namespace = "com.itwill.fourmen.repository.AdminUserDao">
+	
+	<select id="adminuserlist" resultType="User" parameterType="com.itwill.fourmen.board.Criteria">
+
+        SELECT  USERID, PASSWORD, NAME, NICKNAME, PHONE, EMAIL, GRADE, PROFILE_O_IMG, PROFILE_S_IMG
+
+         FROM ( 
+
+                SELECT USERID, 
+
+                       PASSWORD, 
+
+                       NAME, 
+
+                       NICKNAME, 
+
+                       PHONE, 
+
+                       EMAIL,
+                       
+                       GRADE,
+                       
+                       PROFILE_O_IMG,
+                       
+                       PROFILE_S_IMG,
+
+                       ROW_NUMBER() OVER(ORDER BY USERID) AS RNUM
+
+                 from USERS 
+                 
+                 where 1=1
+                 <include refid="search"></include>
+
+                               ) MP
+
+        WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
+
+        ORDER BY USERID
+
+    </select>
+
+
+    
+
+    <select id="listCount" resultType="int">
+  
+
+        SELECT COUNT(USERID)
+
+          FROM USERS
+		where 1=1
+         <include refid="search"></include>
+
+    </select>
+    
+    <sql id="search">
+		<if test="category != null">
+			<if test="category == 'userid'.toString()">AND USERID LIKE '%' || #{keyword} || '%'</if>
+			<if test="category == 'name'.toString()">AND NAME LIKE '%' || #{keyword} || '%'</if>
+			<if test="category == 'nickname'.toString()">AND NICKNAME LIKE '%' || #{keyword} || '%'</if>
+			<if test="category == 'phone'.toString()">AND PHONE LIKE '%' || #{keyword} || '%'</if>
+			<if test="category == 'email'.toString()">AND EMAIL LIKE '%' || #{keyword} || '%'</if>
+			<if test="category == 'grade'.toString()">AND GRADE LIKE '%' || #{keyword} || '%'</if>
+		</if>
+
+		
+	</sql>
+	
+	<insert id="userUpdate">
+		update USERS set NAME = #{name}, NICKNAME = #{nickname}, PHONE = #{phone}, EMAIL = #{email}, GRADE = #{grade}
+		where USERID = #{userid} 
+	</insert>
+	
+	<select id="selectById" resultType="USER">
+		select * from USERS where USERID = #{userid}
+	</select>
+	
+	<delete id="userdelete">
+		delete from USERS where USERID = #{userid}
+	</delete>
+	
+	<select id="Exhibitonadmin" resultType="Exhibition" parameterType="com.itwill.fourmen.board.Criteria">
+
+        SELECT  ID, NAME, LOCATION, STARTDATE, ENDDATE, PHOTO, SITE
+
+         FROM ( 
+
+                SELECT ID, 
+
+                       NAME, 
+
+                       LOCATION, 
+
+                       STARTDATE, 
+
+                       ENDDATE, 
+
+                       PHOTO,
+                       
+                       SITE,
+
+                       ROW_NUMBER() OVER(ORDER BY STARTDATE) AS RNUM
+
+                 from TEST 
+                 
+                 where 1=1
+                 <include refid="ExhibitionadminSearch"></include>
+
+                               ) MP
+
+        WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
+
+        ORDER BY ID
+
+    </select>
+
+
+    
+
+    <select id="ExhibitionadminlistCount" resultType="int">
+  
+
+        SELECT COUNT(ID)
+
+          FROM TEST
+		where 1=1
+         <include refid="ExhibitionadminSearch"></include>
+
+    </select>
+    
+    <sql id="ExhibitionadminSearch">
+		<if test="category != null">
+			<if test="category == 'name'.toString()">AND NAME LIKE '%' || #{keyword} || '%'</if>
+			<if test="category == 'location'.toString()">AND LOCATION LIKE '%' || #{keyword} || '%'</if>
+		</if>
+		<if test="startdate != '' and enddate != ''">
+		 and STARTDATE between #{startdate} and #{enddate} or #{startdate} between STARTDATE and ENDDATE
+		</if>
+		<if test="category != null and startdate != '' and enddate != ''">
+		 and STARTDATE between #{startdate} and #{enddate} or #{startdate} between STARTDATE and ENDDATE
+		 <if test="category == 'name'.toString()">AND NAME LIKE '%' || #{keyword} || '%'</if>
+		 <if test="category == 'location'.toString()">AND LOCATION LIKE '%' || #{keyword} || '%'</if>
+		</if>
+		
+	</sql>
+	
+	<delete id="Exhibitiondelete">
+		delete from TEST where NAME = #{name}
+	</delete>
+	
+    <insert id = "Exhibitionplus">
+		insert into TEST (NAME, LOCATION, STARTDATE, ENDDATE, PHOTO, SITE) values (#{name}, #{location}, #{startdate}, #{enddate}, #{photo}, #{site})
+	</insert>
+  
+	
+</mapper>

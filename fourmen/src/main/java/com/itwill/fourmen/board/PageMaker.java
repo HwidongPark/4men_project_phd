@@ -199,6 +199,30 @@ public class PageMaker {
 			}
 		}
 		
-				
+		   public String makeSearchAdminUser(int page)
+			{
+			  
+			 UriComponents uriComponents =
+			            UriComponentsBuilder.newInstance()
+			            .queryParam("page", page)
+			            .queryParam("perPageNum", cri.getPerPageNum())
+			            .queryParam("category", ((SearchCriteriaAdminUser)cri).getCategory())
+			            .queryParam("keyword", encodingUser(((SearchCriteriaAdminUser)cri).getKeyword()))
+			            .build(); 
+			    return uriComponents.toUriString();  
+			}
 
+			private String encodingUser(String keyword) {
+				if(keyword == null || keyword.trim().length() == 0) { 
+					return "";
+				}
+				try {
+					return URLEncoder.encode(keyword, "UTF-8");
+
+				} catch(UnsupportedEncodingException e) { 
+					return ""; 
+				}
+			}
+				
+				
 }

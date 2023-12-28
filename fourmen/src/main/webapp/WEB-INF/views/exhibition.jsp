@@ -14,6 +14,8 @@
 	crossorigin="anonymous">
 <link rel="stylesheet" href="css/header.css">
 <link rel="stylesheet" href="css/footer.css">
+	<link rel="stylesheet" href="css/underheader.css">
+	<link rel="stylesheet" href="css/pagenation.css">	
 
 <style>
 	html, body, div, span, applet, object, iframe,
@@ -216,12 +218,27 @@ table {
 	border:1px solid #42454c;
 }
 
+#exhibition-image{
+	width: 270px;
+	height: 400px;
+}
 	
 </style>
-	<link rel="stylesheet" href="/fourmen/css/pagenation.css">	
+
 </head>
+
+<%@ include file="fragments/navigation.jspf"%>
 <body>
-		 <%@ include file="fragments/navigation.jspf"%>
+		 
+		 
+	<!-- 웹페이지 상단 헤더 아래 부분 -->
+    <div id="underheader-div">
+        <div class="container" id="underheadrcontainer">
+            <h2 class="commondesign">
+                EXHIBITION
+            </h2>
+        </div>
+    </div>
 		 
 		 <div class="w-75 m-auto ">
 		 
@@ -279,7 +296,7 @@ table {
              <c:forEach var="exhibition" items="${exhibition}">
                 <div class="col">
                     <div class="card card border-light mb-3">
-                        <img src="${exhibition.photo}" class="card-img-top" alt="...">
+                        <img src="image/${exhibition.photo}" class="card-img-top" id="exhibition-image" alt="...">
                         <div class="card-body">
                             <h5 class="card-title text-center">${exhibition.name}</h5>
                             <p class="card-text text-center">${exhibition.startdate}~${exhibition.enddate}</p>
@@ -391,11 +408,11 @@ table {
     </div>
     	
   
-		</main>
+		
 		
 	<div class="m-5"></div>
 		
-		
+	</main>	
 
 		<%@ include file="fragments/footer.jspf" %>
 	
@@ -403,7 +420,14 @@ table {
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
 		crossorigin="anonymous"></script>
-
+	 <script>
+      $(function(){
+        $('#searchBtn').click(function() {
+          self.location = "exhibition" + '${pageMaker.makeQuery(1)}' + "&category=" + $("select option:selected").val() + "&keyword=" + encodeURIComponent($('#search-keyword').val()
+          + "&startdate=" + encodeURIComponent($('#startdate-select').val())+ "&enddate=" + encodeURIComponent($('#enddate-select').val()));
+        });
+      });   
+    </script>
 	<script src="js/exhibitionjs.js"></script>
 </body>
 </html>

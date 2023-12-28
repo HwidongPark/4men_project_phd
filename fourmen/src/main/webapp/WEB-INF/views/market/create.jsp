@@ -16,7 +16,7 @@
 	<body>
         <%@ include file="../fragments/navigation.jspf" %>
         <div class="container w-75 my-4">
-		  <h1 class="h1">장터 글 작성</h1>
+		  <h1 class="h1">장터글 작성</h1>
         </div>
         <!-- 일단 CSS파일을 만들었는데 그냥 post.css나 나중에 하나로 통일해도 될 듯.. -->
         <div id="market-create-container" class="container w-75">

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.itwill.fourmen.board.Criteria;
 import com.itwill.fourmen.board.PageMaker;
 import com.itwill.fourmen.board.SearchCriteria;
+import com.itwill.fourmen.board.SearchCriteriaAdminUser;
 import com.itwill.fourmen.domain.Exhibition;
 import com.itwill.fourmen.domain.User;
 import com.itwill.fourmen.dto.user.UserSignInDto;
@@ -31,6 +32,7 @@ import com.itwill.fourmen.service.ArtistService;
 
 import com.itwill.fourmen.service.ExhibitionService;
 import com.itwill.fourmen.service.UserService;
+import com.itwill.fourmen.service.adminUserService;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -46,6 +48,8 @@ public class HomeController {
 	private final UserService userservice;
 
 	private final ArtistService artistService;
+	
+	private final adminUserService adminuserservice;
 
 	
     @GetMapping("/")
@@ -99,10 +103,22 @@ public class HomeController {
 //    	return "/market/detail";
 //    }
     
-    @GetMapping("/admin")
-    public void admin() {
-    	log.debug("admin()");
-    }
+
+    @RequestMapping(value = "/admin", method = RequestMethod.GET)
+	public String adminuserlist(Model model, @ModelAttribute("scri") SearchCriteriaAdminUser scri) throws Exception{
+	
+		
+		model.addAttribute("adminuserlist",adminuserservice.adminuserlist(scri));
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(scri);
+		pageMaker.setTotalCount(adminuserservice.listCount(scri));
+		
+		model.addAttribute("pageMaker", pageMaker);
+		
+		return "/admin";
+		
+	}
     
     @GetMapping("/signup")
     public void signup() {
