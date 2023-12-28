@@ -9,11 +9,11 @@
 <mapper namespace="com.itwill.fourmen.repository.PostDao">
 
     <!-- FREE_BOARD 테이블 전체 검색, 글 번호 내림차순 정렬 -->
-    <select id="selectOrderByPostNumDesc" resultType="Post">
-        select * from FREE_BOARD order by ROWNUM desc
+    <select id="selectOrderByPostIdDesc" resultType="Post">
+        select * from FREE_BOARD order by POST_ID desc
     </select>
     
-    <!-- FREE_BOARD 테이블에서 아이디로 검색 -->
+    <!-- FREE_BOARD 테이블에서 게시글 아이디로 검색 -->
     <select id="selectByPostId" resultType="Post"> <!-- DB에서 select 시 반환되는 값의 타입 설정 -->
         select * from FREE_BOARD where POST_ID = #{post_id}
     </select>
@@ -26,9 +26,14 @@
         <!-- ex. #{post_title} -> Post 클래스의 getPost_title() 메서드 실행하는 것 -->
     </insert>
     
-    <!-- FREE_BOARD 테이블에서 입력한 아이디에 해당하는 포스트 삭제 -->
+    <!-- FREE_BOARD 테이블에서 입력한 게시글 아이디에 해당하는 포스트 삭제 -->
     <delete id="freeboard_delete">
         delete from FREE_BOARD where POST_ID = #{post_id}
     </delete>
+    
+    <!-- FREE_BOARD 테이블에서 입력한 게시글 아이디에 해당하는 포스트 조회수 1씩 증가 -->
+    <update id='freeboard_addView'>
+        update FREE_BOARD set POST_VIEW_COUNT = POST_VIEW_COUNT + 1 where POST_ID = ${post_id}
+    </update>
     
 </mapper>

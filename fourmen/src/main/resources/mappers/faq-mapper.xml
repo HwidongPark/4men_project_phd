@@ -9,8 +9,8 @@
 <mapper namespace="com.itwill.fourmen.repository.FaqDao">
     
     <!-- FAQ_BOARD 테이블 전체 검색, 글 번호 내림차순 정렬 -->
-    <select id="selectOrderByFaqNumDesc" resultType="Faq"> <!-- DB에서 select 시 반환되는 값의 타입 설정 -->
-        select * from FAQ_BOARD order by FAQ_NUM desc
+    <select id="selectOrderByFaqIdDesc" resultType="Faq"> <!-- DB에서 select 시 반환되는 값의 타입 설정 -->
+        select * from FAQ_BOARD order by FAQ_ID desc
     </select>
     
     <!-- FAQ_BOARD 테이블에서 아이디(PK)로 검색 -->
@@ -30,5 +30,10 @@
     <delete id="faqboard_delete">
         delete from FAQ_BOARD where FAQ_ID = #{faq_id}
     </delete>
+    
+    <!-- FAQ_BOARD 테이블에서 입력한 게시글 아이디에 해당하는 포스트 조회수 1씩 증가 -->
+    <update id='faqboard_addView'>
+        update FAQ_BOARD set FAQ_VIEW_COUNT = FAQ_VIEW_COUNT + 1 where FAQ_ID = ${faq_id}
+    </update>
     
 </mapper>

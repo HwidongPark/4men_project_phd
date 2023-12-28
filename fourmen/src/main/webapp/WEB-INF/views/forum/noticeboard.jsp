@@ -43,21 +43,21 @@
     <!-- main 시작점 -->
     <main>
     
-    <!-- 게시판 카테고리(자유게시판, 후기게시판, 질문게시판) -->
+    <!-- 게시판 카테고리(자유게시판, 문의게시판, Faq게시판, 공지게시판) -->
     <section role="kategorie" class="kategorie" style="border-bottom: 1.5px solid #D8D8D8;">
         <div class="forum-kategorie">
             <ul class="forum-kategorie-board-lists">
                 <li class="forum-kategorie-board">
-                    <a href="freeboard">자유게시판</a>
+                    <a href="freeboard" class="category-button" onclick="change_category_style(event)">자유게시판</a>
                 </li>
                 <li class="forum-kategorie-board">
-                    <a href="qnaboard">Q&A</a>
+                    <a href="qnaboard" class="category-button" onclick="change_category_style(event)">Q&A</a>
                 </li>
                 <li class="forum-kategorie-board">
-                    <a href="faqboard">FAQ</a>
+                    <a href="faqboard" class="category-button" onclick="change_category_style(event)">FAQ</a>
                 </li>
                 <li class="forum-kategorie-board">
-                    <a href="noticeboard">NOTICE</a>
+                    <a href="noticeboard" class="category-button" onclick="change_category_style(event)">NOTICE</a>
                 </li>
             </ul>
         </div>
@@ -116,7 +116,7 @@
             -> model.addAttribute("freeboard_posts", list); //-> 뷰에 전달되는 데이터. -->
                 <tr>
                     <td class="d-none">${n.notice_id}</td>
-                    <td>${n.notice_num}</td>
+                    <td>${n.notice_id}</td>
                     <td></td>
                     <td id="table-td" style="text-align: left;">
                         <c:url var="noticeboard_noticeDetailPage" value="/forum/noticeboard-detail">
@@ -144,7 +144,7 @@
                     <a href="map">MAP</a>    
                 </li>
                 <li id="new-post-li-three" class="new-post-li">
-                    <a href="freeboard-create">NEW POST</a>
+                    <a href="noticeboard-create">NEW POST</a>
                 </li>
             </ul>
         </nav>
@@ -202,7 +202,8 @@
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
-    <script src="js/header.js"></script>
+    <script src="../js/header.js"></script>
+    <script src="../js/forum/forum-category-bold-style.js"></script>
 
 </body>
 </html>

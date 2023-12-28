@@ -11,7 +11,6 @@ import lombok.Data;
 @Builder
 public class QnaLIstItemDto {
 	private Long qna_id;
-	private Long qna_num;
 	private String qna_title;
 	private String userid;
 	private String qna_content;
@@ -23,7 +22,6 @@ public class QnaLIstItemDto {
 	public static QnaLIstItemDto fromEntity(Qna qna) {
 		return QnaLIstItemDto.builder()
 				.qna_id(qna.getQna_id())
-				.qna_num(qna.getQna_num())
 				.qna_title(qna.getQna_title())
 				.userid(qna.getUserid())
 				.qna_content(qna.getQna_content())

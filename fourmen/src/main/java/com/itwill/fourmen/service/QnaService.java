@@ -25,7 +25,7 @@ public class QnaService {
 	public List<QnaLIstItemDto> read() {
 		log.debug("read()");
 		// qnaDao의 메서드를 호출해서 qna 목록을 리턴받고, 컨트롤러에게 리턴.
-		List<Qna> list = qnaDao.selectOrderByQnaNumDesc(); //-> DB에서 가져오는 데이터 타입은 Qna 타입.
+		List<Qna> list = qnaDao.selectOrderByQnaIdDesc(); //-> DB에서 가져오는 데이터 타입은 Qna 타입.
 		log.debug("Qna(문의게시판) 포스트 목록 개수 = {}", list.size());
 		
 		return list.stream()
@@ -62,6 +62,16 @@ public class QnaService {
 		
 		// 리포지토리 계층의 메서드를 호출해서 delete SQL을 실행.
 		int result = qnaDao.qnaboard_delete(qna_id);
+		
+		return result;
+	}
+	
+	// 유저가 문의게시판 게시글의 상세보기를 클릭하면 조회수 증가...
+	public int addView(Long qna_id) {
+		log.debug("addView(faq_id={})", qna_id);
+		
+		int result = qnaDao.qnaboard_addView(qna_id);
+		log.debug("addView 결과={}", result);
 		
 		return result;
 	}

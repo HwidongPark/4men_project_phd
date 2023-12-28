@@ -9,8 +9,8 @@
 <mapper namespace="com.itwill.fourmen.repository.NoticeDao">
     
     <!-- NOTICE_BOARD 테이블 전체 검색, 글 번호 내림차순 정렬 -->
-    <select id="selectOrderByNoticeNumDesc" resultType="Notice"> <!-- DB에서 select 시 반환되는 값의 타입 설정 -->
-        select * from NOTICE_BOARD order by NOTICE_NUM desc
+    <select id="selectOrderByNoticeIdDesc" resultType="Notice"> <!-- DB에서 select 시 반환되는 값의 타입 설정 -->
+        select * from NOTICE_BOARD order by NOTICE_ID desc
     </select>
     
     <!-- NOTICE_BOARD 테이블에서 아이디로 검색 -->
@@ -30,5 +30,10 @@
     <delete id="noticeboard_delete">
         delete from NOTICE_BOARD where NOTICE_ID = #{notice_id}
     </delete>
+    
+    <!-- NOTICE_BOARD 테이블에서 입력한 게시글 아이디에 해당하는 포스트 조회수 1씩 증가 -->
+    <update id='noticeboard_addView'>
+        update NOTICE_BOARD set NOTICE_VIEW_COUNT = NOTICE_VIEW_COUNT + 1 where NOTICE_ID = ${notice_id}
+    </update>
     
 </mapper>

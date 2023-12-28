@@ -34,8 +34,6 @@
     </nav>
 </div>
 
-
-
 <nav class="header-nav">
     <div class="logo-container" style="flex: 1;">
         <a href="http://localhost:8081/fourmen/" class="logo">
@@ -55,7 +53,7 @@
                 <a href="http://localhost:8081/fourmen/exhibition" class="nav-button">EXHIBITION</a>
             </li>
             <li class="nav-each-btn-list">
-                <a href="http://localhost:8081/fourmen/forum/freeboard" class="nav-button">FORUM</a>
+                <a href="http://localhost:8081/fourmen/forum/freeboard" class="nav-button" onclick="change_style(event)">FORUM</a>
             </li>
             <li class="nav-each-btn-list">
                 <a href="#" class="nav-button">ADMIN</a>
@@ -72,3 +70,4 @@
     <div class="header-right-container"></div>
     
 </nav>
+<script src="../js/forum/forum-category-bold-style.js"></script>

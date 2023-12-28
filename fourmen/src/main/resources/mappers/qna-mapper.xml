@@ -9,8 +9,8 @@
 <mapper namespace="com.itwill.fourmen.repository.QnaDao">
     
     <!-- QNA_BOARD 테이블 전체 검색, 글 번호 내림차순 정렬 -->
-    <select id="selectOrderByQnaNumDesc" resultType="Qna">
-        select * from QNA_BOARD order by ROWNUM desc
+    <select id="selectOrderByQnaIdDesc" resultType="Qna">
+        select * from QNA_BOARD order by QNA_ID desc
     </select>
     
     <!-- QNA_BOARD 테이블에서 아이디로 검색 -->
@@ -30,5 +30,10 @@
     <delete id="qnaboard_delete">
         delete from QNA_BOARD where QNA_ID = #{qna_id}
     </delete>
+    
+    <!-- QNA_BOARD 테이블에서 입력한 게시글 아이디에 해당하는 포스트 조회수 1씩 증가 -->
+    <update id='qnaboard_addView'>
+        update QNA_BOARD set QNA_VIEW_COUNT = QNA_VIEW_COUNT + 1 where QNA_ID = ${qna_id}
+    </update>
     
 </mapper>

@@ -78,10 +78,13 @@ public class PostController {
 	}
 	
 	@GetMapping("/freeboard-detail")
-	public void freeboard_detail(@RequestParam(name = "post_id") long id, Model model) {
+	public void freeboard_detail(@RequestParam(name = "post_id") long post_id, Model model) {
 	
 	// 서비스 계층의 메서드를 호출해서 뷰에 전달할 포스트 상세보기 내용을 읽음.
-	Post post = postService.detail(id);
+	Post post = postService.detail(post_id);
+	
+	// 서비스 계층의 메서드를 호출해서 뷰에 전달할 포스트 조회수 내용을 읽음.
+	postService.addView(post_id);
 	
 	// 뷰에 데이터를 전달하기 위해서 모델에 데이터를 속성으로 추가.
 	model.addAttribute("post", post);
@@ -133,10 +136,13 @@ public class PostController {
 	}
 	
 	@GetMapping("/qnaboard-detail")
-	public void qnaboard_detail(@RequestParam(name = "qna_id") long id, Model model) {
+	public void qnaboard_detail(@RequestParam(name = "qna_id") long qna_id, Model model) {
 	
 	// 서비스 계층의 메서드를 호출해서 뷰에 전달할 포스트 상세보기 내용을 읽음.
-	Qna qna = qnaService.detail(id);
+	Qna qna = qnaService.detail(qna_id);
+	
+	// 서비스 계층의 메서드를 호출해서 뷰에 전달할 포스트 조회수 내용을 읽음.
+	qnaService.addView(qna_id);
 	
 	// 뷰에 데이터를 전달하기 위해서 모델에 데이터를 속성으로 추가.
 	model.addAttribute("qna", qna);
@@ -188,10 +194,13 @@ public class PostController {
 	}
 	
 	@GetMapping("/faqboard-detail")
-	public void faqboard_detail(@RequestParam(name = "faq_id") long id, Model model) {
+	public void faqboard_detail(@RequestParam(name = "faq_id") long faq_id, Model model) {
 	
 	// 서비스 계층의 메서드를 호출해서 뷰에 전달할 포스트 상세보기 내용을 읽음.
-	Faq faq = faqService.detail(id);
+	Faq faq = faqService.detail(faq_id);
+	
+	// 서비스 계층의 메서드를 호출해서 뷰에 전달할 포스트 조회수 내용을 읽음.
+	faqService.addView(faq_id);
 	
 	// 뷰에 데이터를 전달하기 위해서 모델에 데이터를 속성으로 추가.
 	model.addAttribute("faq", faq);
@@ -243,10 +252,13 @@ public class PostController {
 	}
 	
 	@GetMapping("/noticeboard-detail")
-	public void noticeboard_detail(@RequestParam(name = "notice_id") long id, Model model) {
+	public void noticeboard_detail(@RequestParam(name = "notice_id") long notice_id, Model model) {
 	
 	// 서비스 계층의 메서드를 호출해서 뷰에 전달할 포스트 상세보기 내용을 읽음.
-	Notice notice = noticeService.detail(id);
+	Notice notice = noticeService.detail(notice_id);
+	
+	// 서비스 계층의 메서드를 호출해서 뷰에 전달할 포스트 조회수 내용을 읽음.
+	noticeService.addView(notice_id);
 	
 	// 뷰에 데이터를 전달하기 위해서 모델에 데이터를 속성으로 추가.
 	model.addAttribute("notice", notice);

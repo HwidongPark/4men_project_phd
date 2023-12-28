@@ -63,28 +63,28 @@
     </section>
     
     
-    <!-- 자유게시판 글 작성 -->
+    <!-- 공지게시판 글 작성 -->
     <section style="padding: 3.5rem 15.5rem 2.5rem 15.5rem;">
         <div>
-            <c:url var="freeboardCreatePage" value="/forum/freeboard-create" />
-            <form id="freeboard-create-form" action="/forum/freeboard-create" method="post" enctype="multipart/form-data">
-                <div id="freeboard-create-title">
-                    <input id="post_title" name="post_title" type="text" placeholder="제목을 입력하세요" />
+            <c:url var="noticeboardCreatePage" value="/forum/noticeboard-create" />
+            <form id="noticeboard-create-form" action="/forum/noticeboard-create" method="post" enctype="multipart/form-data">
+                <div id="noticeboard-create-title">
+                    <input id="notice_title" name="notice_title" type="text" placeholder="제목을 입력하세요" />
                 </div>
-                <div id="freeboard-create-content">
-                    <textarea id="post_content" name="post_content" placeholder="내용을 입력하세요"></textarea>
+                <div id="noticeboard-create-content">
+                    <textarea id="notice_content" name="notice_content" placeholder="내용을 입력하세요"></textarea>
                 </div>
                 <!-- 작성자 아이디는 로그인한 사용자 아이디로 + 보이지 않도록 설정 -->
-                <div id="freeboard-create-author" class="d-none">
+                <div id="noticeboard-create-author" class="d-none">
                     <input type="text" name="author" value="${signedInUser}" readonly />
                 </div>
-                <div id="freeboard-create-file">
-                    <input id="freeboard-add-file" type="file" name="original_file" multiple="multiple" onchange="showFileName()" />
+                <div id="noticeboard-create-file">
+                    <input id="noticeboard-add-file" type="file" name="original_file" multiple="multiple" onchange="showFileName()" />
                 </div>
             </form>
-                <div id="freeboard-create-forUnderbar"></div>
-                <div id="freeboard-create-button">
-                    <button id="freeboard-create" class="btn btn-outline-secondary" type="submit">완료</button>
+                <div id="noticeboard-create-forUnderbar"></div>
+                <div id="noticeboard-create-button">
+                    <button id="noticeboard-create" class="btn btn-outline-secondary" type="submit">완료</button>
                 </div>
         </div>
     </section>
@@ -99,8 +99,8 @@
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
     <script src="../js/header.js"></script>
-    <script src="../js/forum/freeboard-create.js"></script>
+    <script src="../js/forum/noticeboard-create.js"></script>
     <script src="../js/forum/forum-category-bold-style.js"></script>
-
+    
 </body>
 </html>

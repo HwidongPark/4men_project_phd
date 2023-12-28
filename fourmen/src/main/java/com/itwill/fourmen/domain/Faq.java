@@ -11,7 +11,6 @@ import lombok.Data;
 @Builder
 public class Faq {
 	private Long faq_id;
-	private Long faq_num;
 	private String faq_title;
 	private String userid;
 	private String faq_content;

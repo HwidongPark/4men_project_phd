@@ -11,7 +11,6 @@ import lombok.Data;
 @Builder
 public class Notice {
 	private Long notice_id;
-	private Long notice_num;
 	private String notice_title;
 	private String userid;
 	private String notice_content;

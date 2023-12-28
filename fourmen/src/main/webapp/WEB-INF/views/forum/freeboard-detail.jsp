@@ -96,7 +96,7 @@
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
     <script src="../js/header.js"></script>
-    <script src="../js/freeboard-detail.js"></script>
+    <script src="../js/forum/freeboard-detail.js"></script>
 
 </body>
 </html>

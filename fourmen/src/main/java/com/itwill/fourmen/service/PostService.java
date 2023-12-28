@@ -24,7 +24,7 @@ public class PostService {
 	public List<PostListItemDto> read() {
 		log.debug("read()");
 		// postDao의 메서드를 호출해서 포스트(자유게시판) 목록을 리턴받고, 컨트롤러에게 리턴.
-		List<Post> list = postDao.selectOrderByPostNumDesc(); //-> DB에서 가져오는 데이터 타입은 Post 타입.
+		List<Post> list = postDao.selectOrderByPostIdDesc(); //-> DB에서 가져오는 데이터 타입은 Post 타입.
 		log.debug("자유게시판 포스트 목록 개수 = {}", list.size());
 		
 		return list.stream()
@@ -61,6 +61,16 @@ public class PostService {
 		
 		// 리포지토리 계층의 메서드를 호출해서 delete SQL을 실행.
 		int result = postDao.freeboard_delete(post_id);
+		
+		return result;
+	}
+	
+	// 유저가 자유게시판 게시글의 상세보기를 클릭하면 조회수 증가...
+	public int addView(Long post_id) {
+		log.debug("addView(post_id={})", post_id);
+		
+		int result = postDao.freeboard_addView(post_id);
+		log.debug("addView 결과={}", result);
 		
 		return result;
 	}
