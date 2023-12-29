@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.itwill.fourmen.repository.CommentDao">
+
+    <!-- 특정 포스트에 달려 있는 모든 댓글 검색. -->
+    <select id = "selectByWorksId" resultType = "Comments">
+    	select * from COMMENTS where WORKSID = #{worksid} order by CREATED_TIME desc
+    </select>
+    
+    <!-- 모달창에서 댓글 수정을 위한 특정 댓글 한개만 SELECT -->
+    <select id = "getComment" resultType = "Comments">
+    	select * from COMMENTS where COMMENT_ID = #{comment_id}
+    </select>
+    
+    <insert id = "registerComment">
+    	insert into COMMENTS (WORKSID, COMMENT_WRITER, COMMENT_CONTENT, POST_CATEGORY) values (#{worksid} , #{comment_writer}, #{comment_content}, 'WORKS')
+    </insert>
+    
+    <delete id = "deleteCommentByCommentId">
+    	delete from COMMENTS where COMMENT_ID = #{comment_id}
+    </delete>
+    
+    <update id = "updateComment">
+    	update COMMENTS set COMMENT_CONTENT = #{comment_content}, MODIFIED_TIME = systimestamp where COMMENT_ID = #{comment_id}
+    </update>
+    
+</mapper>

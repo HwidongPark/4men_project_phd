@@ -12,27 +12,23 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-
 @Slf4j
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/artist")
+@RequestMapping("/api/works")
 public class ArtistRestController {
-	
+
 	private final ArtistService artistService;
 	
-//	@DeleteMapping("/delete/images/{userid}")
-//	public ResponseEntity<Integer> deleteProfileImage (@PathVariable String userid, HttpServletRequest request){
-//		log.debug("ArtistRestController - deleteProfileImage()");
-//		log.debug("ArtistRestController - deleteProfileImage - USERID = {}", userid);
-//		
-//		String sDirectory = request.getServletContext().getRealPath("/static/images/char");
-//		log.debug("sDirectory = {}",sDirectory);
-//		
-//		int result = artistService.deleteProfileImg(userid, sDirectory);
-//		
-//		return ResponseEntity.ok(result);
-//	}
-	
+	@DeleteMapping("/{worksid}")
+	public ResponseEntity<Integer> deleteWorks(@PathVariable long worksid, HttpServletRequest request) {
+		log.debug("deleteWorks(WORKSID = {})", worksid);
+		
+		String sDirectory = request.getServletContext().getRealPath("/static/images/works");
+		
+		int result = artistService.deleteWorks(worksid, sDirectory);
+		
+		return ResponseEntity.ok(result);
+	}
 	
 }

@@ -5,47 +5,75 @@
 <!-- POSTS 테이블에서 CRUD에 필요한 SQL 문장들을 선언 -->
 <mapper namespace = "com.itwill.fourmen.repository.ArtistDao">
 
+	<select id = "getWorksID" resultType = "long">
+		select max(worksid) FROM WORKS
+	</select>
+	
+	<select id = "getUserIdByWorksId" resultType = "string">
+		select USERID from WORKS where WORKSID = #{worksid}
+	</select>
+
 	<select id = "selectOrderByUseridDesc" resultType = "Artist">
-		select * from A_ARTIST order by USERID desc
+		select * from ARTIST order by USERID desc
+	</select>
+	
+	<select id = "selectUserImgByUserid" resultType = "Artist_Img">
+		select * from ARTIST_IMG order by USERID desc
+	</select>
+	
+	<select id ="selectUserProfileImgByUserid" resultType = "Artist_Img">
+		select * from ARTIST_IMG where USERID = #{userid}
 	</select>
 	
 	<select id = "selectByUserid" resultType = "Artist">
-		select * from A_ARTIST where USERID = #{userid}
+		select * from ARTIST where USERID = #{userid}
 	</select>
 	
-	<select id = "selectWorksByUserid" resultType = "Artist_Works">
-		select * from A_WORKS where USERID = #{userid} order by WORKSID desc
+	<select id = "selectWorksListByUserid" resultType = "Artist_Works">
+		select * from WORKS where USERID = #{userid} order by WORKSID desc
 	</select>
 	
 	<select id = "selectByWorksid" resultType = "Artist_Works">
-		select * from A_WORKS where WORKSID = #{worksid}
+		select * from WORKS where WORKSID = #{worksid}
 	</select>
 	
 	<select id = "selectWorksImgByWorksid" resultType = "Artist_Works_Img">
-		select * from A_WORKS_IMG where WORKSID = #{worksid}
+		select * from IMAGES where WORKSID = #{worksid} order by IMGID
+	</select>
+	
+	<select id ="selectWorksImgByImgId" resultType = "Artist_Works_Img">
+		select * from IMAGES where IMGID = #{imgid}
 	</select>
 	
 	<update id = "updateArtist">
-		update A_ARTIST set ARTIST_BIO_KOR = #{artist_bio_kor}, ARTIST_BIO_ENG = #{artist_bio_eng} where USERID = #{userid}
+		update ARTIST set ARTIST_BIO_KOR = #{artist_bio_kor}, ARTIST_BIO_ENG = #{artist_bio_eng} where USERID = #{userid}
 	</update>
 	
 	<update id = "updateArtistProfileImg">
 		update ARTIST_IMG set ORIGINAL_IMG = #{original_img}, SAVED_IMG = #{saved_img} where USERID = #{userid}
 	</update>
 	
-	<delete id = "deleteArtistProfileImg">
-		delete from ARTIST_IMG where USERID = #{userid}
-	</delete>
+	<update id = "deleteArtistProfileImg">
+		update ARTIST_IMG set ORIGINAL_IMG = NULL, SAVED_IMG = NULL where USERID = #{userid}
+	</update>
 	
 	<insert id = "createWorks">
-		insert into A_WORKS (USERID, WORKSID, TITLE, CONTENT_KOR, CONTENT_ENG) values (#{userid}, #{worksid}, #{title}, #{content_kor}, #{content_eng})
+		insert into WORKS (USERID, TITLE, CONTENT_KOR, CONTENT_ENG) values (#{userid}, #{title}, #{content_kor}, #{content_eng})
 	</insert>
 	
 	<insert id = "createWorksImg">
-		insert into A_WORKS_IMG (WORKSID, CATEGORY, ORIGINAL_FILE, SAVED_FILE) values (#{worksid}, #{category}, #{original_file}, #{saved_file})
+		insert into IMAGES (WORKSID, CATEGORY, ORIGINAL_FILE, SAVED_FILE) values (#{worksid},'WORKS', #{original_file}, #{saved_file})
 	</insert>
 	
 	<delete id="deleteWorks">
-		delete from A_WORKS where WORKSID = #{worksid}
+		delete from WORKS where WORKSID = #{worksid}
+	</delete>
+	
+	<update id="updateWorksArticle">
+		update WORKS set TITLE = #{title}, CONTENT_KOR = #{content_kor}, CONTENT_ENG = #{content_eng} where WORKSID = #{worksid}
+	</update>
+	
+	<delete id="deleteWorksImg">
+		delete from IMAGES where IMGID = #{imgid}
 	</delete>
 </mapper>

@@ -47,7 +47,7 @@ table {
 /* 이 밑부터 진짜 CSS */
 /* ***** nav를 포함한 해더. (부트스트랩X)***** */
 body {
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 

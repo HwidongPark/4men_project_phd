@@ -13,9 +13,9 @@ import lombok.Data;
 @Builder
 public class ArtistAddWorksImgDto {
 
-	private String worksid;
+	private Long worksid;
 	private String category;
-	private List<MultipartFile> original_file;
+	private List<MultipartFile> upload_files;
 	private String saved_file;
 	
 }

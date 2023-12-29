@@ -61,18 +61,18 @@ div#modify {
 						<table class = "table">
 							<thead>
 								<tr>
-									<th class = "col-11">업로드된 프로필 사진</th>
-									<th class = "col-1">삭제</th>
+									<th class = "col-10">업로드된 프로필 사진</th>
+									<th class = "col-1"></th>
+									<th class = "col-1"></th>
 								</tr>
 							</thead>
 							
 							<tbody class = "table-secondary table-group-divider">
-								<c:if test = "${not empty artist.original_img}">
 									<tr>
-										<td><input class = "form-control" id = "original_img" type = "text" name = "original_img" value = "${artist.original_img}" readonly /></td>
+										<td><input class = "form-control" id = "original_img" type = "text" name = "original_img" value = "${artist_img.original_img}" onfocus = "this.blur()" readonly /></td>
+										<td><input class = "form-control d-none" id = "isFileDeleted" type = "text" name = "isFileDeleted" value ="NO"  readonly /></td>
 										<td><button class = "btn btn-outline-dark" id = "btnImgDelete" type="button">X</button></td>
 									</tr>
-								</c:if>
 							</tbody>
 							
 						</table>
@@ -81,7 +81,7 @@ div#modify {
 					
 					<div class = "my-2">
 						<label for = "artist_img" class = "form-label">아티스트 사진</label>
-						<input class = "form-control" type = "file" name = "upload_file" />
+						<input class = "form-control" type = "file" name = "upload_file" id = "upload_file"/>
 					</div>
 					
 					<div class = "my-2">

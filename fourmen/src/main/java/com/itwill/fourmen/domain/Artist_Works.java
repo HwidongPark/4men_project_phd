@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 public class Artist_Works {
 
 	private String userid;
-	private String worksid;
+	private Long worksid;
 	private String title;
 	private String content_kor;
 	private String content_eng;

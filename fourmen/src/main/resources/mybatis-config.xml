@@ -36,6 +36,10 @@
             alias="Artist_Works" />
         <typeAlias type="com.itwill.fourmen.domain.Artist_Works_Img"
             alias="Artist_Works_Img" />
+        <typeAlias type="com.itwill.fourmen.domain.Artist_Img" 
+        	alias="Artist_Img" />	
+        <typeAlias type="com.itwill.fourmen.domain.Comments"
+        	alias="Comments"/>
     </typeAliases>
 
 
