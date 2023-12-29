@@ -72,7 +72,7 @@
                     <input id="notice_title" name="notice_title" type="text" placeholder="제목을 입력하세요" />
                 </div>
                 <div id="noticeboard-create-content">
-                    <textarea id="notice_content" name="notice_content" placeholder="내용을 입력하세요"></textarea>
+                    <textarea id="notice_content" name="notice_content" placeholder="내용을 입력하세요"  maxlength="1000" onkeyup="return textarea_maxlength(this)"></textarea>
                 </div>
                 <!-- 작성자 아이디는 로그인한 사용자 아이디로 + 보이지 않도록 설정 -->
                 <div id="noticeboard-create-author" class="d-none">

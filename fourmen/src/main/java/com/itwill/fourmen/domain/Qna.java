@@ -15,6 +15,5 @@ public class Qna {
 	private String userid;
 	private String qna_content;
 	private LocalDate qna_created_time;
-	private LocalDateTime qna_deleted_time;
 	private Long qna_view_count;
 }

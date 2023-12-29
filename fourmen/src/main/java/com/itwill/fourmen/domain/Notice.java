@@ -15,6 +15,5 @@ public class Notice {
 	private String userid;
 	private String notice_content;
 	private LocalDate notice_created_time;
-	private LocalDateTime notice_deleted_time;
 	private Long notice_view_count;
 }

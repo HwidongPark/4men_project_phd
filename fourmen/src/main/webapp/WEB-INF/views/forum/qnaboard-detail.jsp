@@ -74,13 +74,12 @@
                 <button id="qnaboard-modify">수정</button>
                 <button id="qnaboard-delete">삭제</button>
             </div>
-            <div class="qnaboard-view-detail-content">
-                <!-- <input class="qnaboard-view-detail-content-input" type="text" value="${qna.qna_content}"> -->
-                ${qna.qna_content}
+            <div>
+                <textarea id="qnaboard-view-detail-content" class="qnaboard-view-detail-content" readonly="readonly">${qna.qna_content}</textarea>
             </div>
         </div>
         <div class="qnaboard-view-list-button">
-            <button id="qnaboard-view-btnList" type="button">
+            <button id="qnaboard-view-btnList" class="btn btn-outline-secondary" type="button">
                 목록
             </button>
         </div>

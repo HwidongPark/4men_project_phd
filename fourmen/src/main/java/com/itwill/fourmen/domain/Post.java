@@ -15,6 +15,5 @@ public class Post {
 	private String userid;
 	private String post_content;
 	private LocalDate post_created_time;
-	private LocalDateTime post_deleted_time;
 	private Long post_view_count;
 }

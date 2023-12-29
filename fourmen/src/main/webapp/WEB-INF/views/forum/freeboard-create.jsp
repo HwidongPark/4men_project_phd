@@ -72,7 +72,7 @@
                     <input id="post_title" name="post_title" type="text" placeholder="제목을 입력하세요" />
                 </div>
                 <div id="freeboard-create-content">
-                    <textarea id="post_content" name="post_content" placeholder="내용을 입력하세요"></textarea>
+                    <textarea id="post_content" name="post_content" placeholder="내용을 입력하세요" maxlength="1000" onkeyup="return textarea_maxlength(this)"></textarea>
                 </div>
                 <!-- 작성자 아이디는 로그인한 사용자 아이디로 + 보이지 않도록 설정 -->
                 <div id="freeboard-create-author" class="d-none">

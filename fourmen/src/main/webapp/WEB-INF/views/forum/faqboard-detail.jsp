@@ -74,13 +74,12 @@
                 <button id="faqboard-modify">수정</button>
                 <button id="faqboard-delete">삭제</button>
             </div>
-            <div class="faqboard-view-detail-content">
-                <!-- <input class="faqboard-view-detail-content-input" type="text" value="${faq.faq_content}"> -->
-                ${faq.faq_content}
+            <div>
+                <textarea id="faqboard-view-detail-content" class="faqboard-view-detail-content" readonly="readonly">${faq.faq_content}</textarea>
             </div>
         </div>
         <div class="faqboard-view-list-button">
-            <button id="faqboard-view-btnList" type="button">
+            <button id="faqboard-view-btnList" class="btn btn-outline-secondary" type="button">
                 목록
             </button>
         </div>

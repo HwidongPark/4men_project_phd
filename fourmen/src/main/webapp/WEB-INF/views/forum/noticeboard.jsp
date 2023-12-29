@@ -104,7 +104,7 @@
             </colgroup>
             <thead>
             <tr>
-                <th>번호</th>
+                <!-- <th>번호</th> -->
                 <th></th>
                 <th>제목</th>
                 <th>작성자</th>
@@ -136,18 +136,21 @@
         </table>
     </section>
     
-    <!-- 새글 작성 내비게이션(HOME / MAP / NEW POST) -->
+    <!-- 새 글 작성 내비게이션(HOME / MAP / NEW POST) -->
     <div class="new-post-div">
         <nav class="new-post-nav">
             <ul class="new-post-ul">
                 <li id="new-post-li-one" class="new-post-li">
-                    <a href="../">HOME</a>
+                    <c:url var="homePage" value="/" />
+                    <a href="${homePage}">HOME</a>
                 </li>
                 <li id="new-post-li-two" class="new-post-li">
-                    <a href="map">MAP</a>    
+                    <c:url var="siteMapPage" value="#" />
+                    <a href="${siteMapPage}">MAP</a>    
                 </li>
                 <li id="new-post-li-three" class="new-post-li">
-                    <a href="noticeboard-create">NEW POST</a>
+                    <c:url var="noticeboardCreatePage" value="/forum/noticeboard-create" />
+                    <a href="${noticeboardCreatePage}">NEW POST</a>
                 </li>
             </ul>
         </nav>

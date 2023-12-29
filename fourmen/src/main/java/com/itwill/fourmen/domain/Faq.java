@@ -15,6 +15,5 @@ public class Faq {
 	private String userid;
 	private String faq_content;
 	private LocalDate faq_created_time;
-	private LocalDateTime faq_deleted_time;
 	private Long faq_view_count;
 }

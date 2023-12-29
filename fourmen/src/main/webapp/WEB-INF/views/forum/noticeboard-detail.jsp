@@ -74,13 +74,12 @@
                 <button id="noticeboard-modify">수정</button>
                 <button id="noticeboard-delete">삭제</button>
             </div>
-            <div class="noticeboard-view-detail-content">
-                <!-- <input class="noticeboard-view-detail-content-input" type="text" value="${notice.notice_content}"> -->
-                ${notice.notice_content}
+            <div>
+                <textarea id="noticeboard-view-detail-content" class="noticeboard-view-detail-content" readonly="readonly">${notice.notice_content}</textarea>
             </div>
         </div>
         <div class="noticeboard-view-list-button">
-            <button id="noticeboard-view-btnList" type="button">
+            <button id="noticeboard-view-btnList" class="btn btn-outline-secondary" type="button">
                 목록
             </button>
         </div>

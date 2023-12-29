@@ -72,7 +72,7 @@
                     <input id="faq_title" name="faq_title" type="text" placeholder="제목을 입력하세요" />
                 </div>
                 <div id="faqboard-create-content">
-                    <textarea id="faq_content" name="faq_content" placeholder="내용을 입력하세요"></textarea>
+                    <textarea id="faq_content" name="faq_content" placeholder="내용을 입력하세요"  maxlength="1000" onkeyup="return textarea_maxlength(this)"></textarea>
                 </div>
                 <!-- 작성자 아이디는 로그인한 사용자 아이디로 + 보이지 않도록 설정 -->
                 <div id="faqboard-create-author" class="d-none">
