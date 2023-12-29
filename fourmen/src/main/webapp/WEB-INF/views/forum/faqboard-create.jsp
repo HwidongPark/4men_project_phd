@@ -69,10 +69,10 @@
             <c:url var="faqboardCreatePage" value="/forum/faqboard-create" />
             <form id="faqboard-create-form" action="/forum/faqboard-create" method="post" enctype="multipart/form-data">
                 <div id="faqboard-create-title">
-                    <input id="faq_title" name="faq_title" type="text" placeholder="제목을 입력하세요" />
+                    <input id="faq_title" name="faq_title" type="text" placeholder="제목을 입력하세요 (30자)" maxlength="30" onkeyup="return input_maxlength(this)" />
                 </div>
                 <div id="faqboard-create-content">
-                    <textarea id="faq_content" name="faq_content" placeholder="내용을 입력하세요"  maxlength="1000" onkeyup="return textarea_maxlength(this)"></textarea>
+                    <textarea id="faq_content" name="faq_content" placeholder="내용을 입력하세요 (1000자)"  maxlength="1000" onkeyup="return textarea_maxlength(this)"></textarea>
                 </div>
                 <!-- 작성자 아이디는 로그인한 사용자 아이디로 + 보이지 않도록 설정 -->
                 <div id="faqboard-create-author" class="d-none">

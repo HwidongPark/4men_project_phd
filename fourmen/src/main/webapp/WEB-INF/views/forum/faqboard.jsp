@@ -95,7 +95,7 @@
     <section class="freeboard-list" style="padding: 3.5rem 18.5rem 0rem 18.5rem;">
         <table class="table">
             <colgroup>
-                <col style="width: 100px;">
+            
                 <col style="width: 10px;">
                 <col style="width: auto;">
                 <col style="width: 10%;">

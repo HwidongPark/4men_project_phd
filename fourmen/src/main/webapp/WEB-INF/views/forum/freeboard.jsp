@@ -35,7 +35,7 @@
     <div id="underheader-div">
         <div class="container" id="underheadrcontainer">
             <h2 class="commondesign">
-                FORUM / 자유게시판
+                FORUM
             </h2>
         </div>
     </div>

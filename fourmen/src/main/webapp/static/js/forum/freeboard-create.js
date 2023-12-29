@@ -4,14 +4,27 @@
  * 새 포스트 작성 기능.
  */
 
-// 글자수가 maxlength를 넘어가면 경고창을 띄우고, 남은 글자수를 표시하는 함수.
-function textarea_maxlength(obj){
+// 제목 글자수가 maxlength를 넘어가면 경고창을 띄우는 함수.
+function input_maxlength(obj) {
     let maxCharacters = parseInt(obj.getAttribute("maxlength"));
     let currentLength = obj.value.length; // 현재 입력된 글자수
     let remainingLength = maxCharacters - currentLength;
     
     if (currentLength > maxCharacters) {
-        alert('글자 수 제한을 초과했습니다!');
+        alert('글자 수 제한을 초과했습니다! (30자)');
+        obj.value = obj.value.substring(0, maxCharacters);
+        remainingLength = 0;
+    }
+}
+
+// 본문 글자수가 maxlength를 넘어가면 경고창을 띄우고, 남은 글자수를 표시하는 함수.
+function textarea_maxlength(obj) {
+    let maxCharacters = parseInt(obj.getAttribute("maxlength"));
+    let currentLength = obj.value.length; // 현재 입력된 글자수
+    let remainingLength = maxCharacters - currentLength;
+    
+    if (currentLength > maxCharacters) {
+        alert('글자 수 제한을 초과했습니다! (1000자)');
         obj.value = obj.value.substring(0, maxCharacters);
         remainingLength = 0;
     }
@@ -54,6 +67,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // textareaContent에 이벤트 핸들러(리스너) 등록
     textareaContent.addEventListener('input', () => {
         textarea_maxlength(textareaContent);
+    });
+    
+    // inputTitle에 이벤트 핸들러(리스너) 등록
+    inputTitle.addEventListener('input', () => {
+       input_maxlength(inputTitle); 
     });
     
     // 완료 버튼에 클릭 이벤트 핸들러(리스너)를 등록.
