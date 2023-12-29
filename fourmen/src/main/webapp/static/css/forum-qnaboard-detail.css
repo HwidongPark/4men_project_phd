@@ -10,23 +10,27 @@
 }
 
 .qnaboard-view-detail-title {
-    border-top: 3px solid gray;
-    padding-top: 2em;
+    border-top: 3px solid #A4A4A4;
+    padding-top: 2rem;
     padding-bottom: 2rem;
     font-size: 30px;
 }
 
+/* 작성일 작성자 조회 댓글 요소 */
 .qnaboard-view-detail .qnaboard-view-detail-info li {
     display: inline-block;
 }
 
+/* 작성일 작성자 조회 댓글 요소와 본문 간 여백 설정 */
 .qnaboard-view-detail-info {
     padding-bottom: 2rem;
 }
 
 .qnaboard-view-detail-content {
-    background-color: rgb(192, 192, 192);
-    padding: 3rem;
+    background-color: #E6E6E6;
+    padding: 2.5rem;
+    height: 20rem;
+    line-height: 150%;
 }
 
 .qnaboard-view-detail .qnaboard-view-detail-info .qnaboard-view-detail-info-label {
@@ -35,6 +39,7 @@
 
 .qnaboard-view-detail .qnaboard-view-detail-info input {
     border: none;
+    pointer-events: none;
     color: gray;
 }
 

@@ -10,8 +10,8 @@
 }
 
 .faqboard-view-detail-title {
-    border-top: 3px solid gray;
-    padding-top: 2em;
+    border-top: 3px solid #A4A4A4;
+    padding-top: 2rem;
     padding-bottom: 2rem;
     font-size: 30px;
 }
@@ -25,8 +25,10 @@
 }
 
 .faqboard-view-detail-content {
-    background-color: rgb(192, 192, 192);
-    padding: 3rem;
+    background-color: #E6E6E6;
+    padding: 2.5rem;
+    height: 20rem;
+    line-height: 150%;
 }
 
 .faqboard-view-detail .faqboard-view-detail-info .faqboard-view-detail-info-label {
@@ -35,6 +37,7 @@
 
 .faqboard-view-detail .faqboard-view-detail-info input {
     border: none;
+    pointer-events: none;
     color: gray;
 }
 
