@@ -22,6 +22,7 @@ import com.itwill.fourmen.domain.Artist;
 import com.itwill.fourmen.domain.Artist_Img;
 import com.itwill.fourmen.domain.Artist_Works;
 import com.itwill.fourmen.domain.Artist_Works_Img;
+import com.itwill.fourmen.domain.User;
 import com.itwill.fourmen.dto.artist.ArtistAddWorksDto;
 import com.itwill.fourmen.dto.artist.ArtistAddWorksImgDto;
 import com.itwill.fourmen.dto.artist.ArtistDto;
@@ -29,10 +30,14 @@ import com.itwill.fourmen.dto.artist.ArtistWorksImgListItemDto;
 import com.itwill.fourmen.dto.artist.ArtistWorksListItemDto;
 import com.itwill.fourmen.dto.artist.WorksDto;
 import com.itwill.fourmen.service.ArtistService;
+import com.itwill.fourmen.service.UserService;
+import com.itwill.fourmen.service.adminUserService;
 import com.itwill.fourmen.util.RequestContextHelper;
 
 import jakarta.servlet.ServletContext;
+import jakarta.servlet.ServletRequest;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -43,7 +48,7 @@ import lombok.extern.slf4j.Slf4j;
 public class ArtistController {
 
 	private final ArtistService artistService;
-	
+	private final adminUserService adminUserService;
 	
 	@GetMapping("/artist_register")
 	public void register() {
@@ -51,20 +56,40 @@ public class ArtistController {
 	}
 	
 	@GetMapping("/artist_details")
-    public void details(@RequestParam(name="userid") String userid, Model model) {
-    	log.debug("details(userid ={})",userid);
+    public void details(@RequestParam(name="userid") String userid, Model model, HttpSession session) {
+    	log.debug("details(userid = {})",userid);
     	
-    	// Artist 개개인의 작품 리스트 (페이지의 하단)
-    	List<ArtistWorksListItemDto> worksList = artistService.readWorks(userid);
-    	model.addAttribute("worksList", worksList);
+    	// 유저 정보 가져오기
     	
-    	// Artist 개개인 소개 및 정보 (페이지의 상단)
-    	Artist artist = artistService.details(userid);
-    	model.addAttribute("artist", artist);
-    	
-    	// Artist 개인의 사진 정보
-    	Artist_Img artist_img = artistService.artistImgDetails(userid);
-    	model.addAttribute("artist_img", artist_img);
+    	String signedInUser = (String) session.getAttribute("signedInUser");
+    	if(!(signedInUser == null)) {
+    		User user = adminUserService.selectById(signedInUser);
+        	model.addAttribute("user", user);	
+        	
+        	// Artist 개개인의 작품 리스트 (페이지의 하단)
+        	List<ArtistWorksListItemDto> worksList = artistService.readWorks(userid);
+        	model.addAttribute("worksList", worksList);
+        	
+        	// Artist 개개인 소개 및 정보 (페이지의 상단)
+        	Artist artist = artistService.details(userid);
+        	model.addAttribute("artist", artist);
+        	
+        	// Artist 개인의 사진 정보
+        	Artist_Img artist_img = artistService.artistImgDetails(userid);
+        	model.addAttribute("artist_img", artist_img);
+    	} else {
+    		// Artist 개개인의 작품 리스트 (페이지의 하단)
+        	List<ArtistWorksListItemDto> worksList = artistService.readWorks(userid);
+        	model.addAttribute("worksList", worksList);
+        	
+        	// Artist 개개인 소개 및 정보 (페이지의 상단)
+        	Artist artist = artistService.details(userid);
+        	model.addAttribute("artist", artist);
+        	
+        	// Artist 개인의 사진 정보
+        	Artist_Img artist_img = artistService.artistImgDetails(userid);
+        	model.addAttribute("artist_img", artist_img);
+    	}
     }
 	
 	@GetMapping("/artist_works")

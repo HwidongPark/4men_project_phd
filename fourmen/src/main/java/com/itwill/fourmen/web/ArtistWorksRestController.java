@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.itwill.fourmen.service.ArtistService;
 
-import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,18 +15,18 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/artist")
-public class ArtistRestController {
+@RequestMapping("/api/works")
+public class ArtistWorksRestController {
 
 	private final ArtistService artistService;
 	
-	@DeleteMapping("/artist_details/{userid}")
-	public ResponseEntity<Integer> deleteArtist(@PathVariable String userid, HttpServletRequest request){
-		log.debug("deleteArtist(userid = {})", userid);
+	@DeleteMapping("/{worksid}")
+	public ResponseEntity<Integer> deleteWorks(@PathVariable long worksid, HttpServletRequest request) {
+		log.debug("deleteWorks(WORKSID = {})", worksid);
 		
-		ServletContext sDirectory = request.getServletContext();
+		String sDirectory = request.getServletContext().getRealPath("/static/images/works");
 		
-		int result = artistService.deleteArtist(userid, sDirectory);
+		int result = artistService.deleteWorks(worksid, sDirectory);
 		
 		return ResponseEntity.ok(result);
 	}

@@ -20,8 +20,8 @@ public class ArtistDto {
 	private String nickname;
 	private String artist_bio_kor;
 	private String artist_bio_eng;
-	private String original_img;
-	private String saved_img;
+	private String artist_o_img;
+	private String artist_s_img;
 	
 	private MultipartFile upload_file;
 	
@@ -33,16 +33,16 @@ public class ArtistDto {
 				.nickname(artist.getNickname())
 				.artist_bio_kor(artist.getArtist_bio_kor())
 				.artist_bio_eng(artist.getArtist_bio_eng())
-				.original_img(artist_Img.getOriginal_img())
-				.saved_img(artist_Img.getSaved_img())
+				.artist_o_img(artist_Img.getArtist_o_img())
+				.artist_s_img(artist_Img.getArtist_s_img())
 				.build();
 	}
 	
 	public static ArtistDto fromEntity(Artist_Img artist_Img) {
 		return ArtistDto.builder()
 				.userid(artist_Img.getUserid())
-				.original_img(artist_Img.getOriginal_img())
-				.saved_img(artist_Img.getSaved_img())
+				.artist_o_img(artist_Img.getArtist_o_img())
+				.artist_s_img(artist_Img.getArtist_s_img())
 				.build();
 		
 	}
@@ -68,8 +68,8 @@ public class ArtistDto {
 	public Artist_Img artistImgToEntity() {
 		return Artist_Img.builder()
 				.userid(userid)
-				.original_img(original_img)
-				.saved_img(saved_img)
+				.artist_o_img(artist_o_img)
+				.artist_s_img(artist_s_img)
 				.build();
 	}
 }

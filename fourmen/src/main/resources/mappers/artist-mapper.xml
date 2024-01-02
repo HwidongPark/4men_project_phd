@@ -46,15 +46,15 @@
 	</select>
 	
 	<update id = "updateArtist">
-		update ARTIST set NICKNAME = #{nickname} ARTIST_BIO_KOR = #{artist_bio_kor}, ARTIST_BIO_ENG = #{artist_bio_eng} where USERID = #{userid}
+		update ARTIST set NICKNAME = #{nickname}, ARTIST_BIO_KOR = #{artist_bio_kor}, ARTIST_BIO_ENG = #{artist_bio_eng} where USERID = #{userid}
 	</update>
 	
 	<update id = "updateArtistProfileImg">
-		update ARTIST_IMG set ORIGINAL_IMG = #{original_img}, SAVED_IMG = #{saved_img} where USERID = #{userid}
+		update ARTIST_IMG set ARTIST_O_IMG = #{artist_o_img}, ARTIST_S_IMG = #{artist_s_img} where USERID = #{userid}
 	</update>
 	
-	<update id = "deleteArtistProfileImg">
-		update ARTIST_IMG set ORIGINAL_IMG = NULL, SAVED_IMG = NULL where USERID = #{userid}
+	<update id = "updateArtistProfileImgNull">
+		update ARTIST_IMG set ARTIST_O_IMG = NULL, ARTIST_S_IMG = NULL where USERID = #{userid}
 	</update>
 	
 	<insert id = "registerArtist">
@@ -62,7 +62,7 @@
 	</insert>
 	
 	<insert id= "registerArtistImg">
-		insert into ARTIST_IMG values (#{userid}, #{original_img}, #{saved_img})
+		insert into ARTIST_IMG values (#{userid}, #{artist_o_img}, #{artist_s_img})
 	</insert>
 	
 	<insert id = "createWorks">
@@ -75,6 +75,14 @@
 	
 	<delete id="deleteWorks">
 		delete from WORKS where WORKSID = #{worksid}
+	</delete>
+	
+	<delete id ="deleteArtistProfileImg">
+		delete from ARTIST_IMG where USERID = #{userid}
+	</delete>
+	
+	<delete id = "deleteArtist">
+		delete from ARTIST where USERID = #{userid}
 	</delete>
 	
 	<update id="updateWorksArticle">
