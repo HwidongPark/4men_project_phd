@@ -53,7 +53,7 @@
 		update ARTIST_IMG set ARTIST_O_IMG = #{artist_o_img}, ARTIST_S_IMG = #{artist_s_img} where USERID = #{userid}
 	</update>
 	
-	<update id = "deleteArtistProfileImg">
+	<update id = "updateArtistProfileImgNull">
 		update ARTIST_IMG set ARTIST_O_IMG = NULL, ARTIST_S_IMG = NULL where USERID = #{userid}
 	</update>
 	
@@ -75,6 +75,14 @@
 	
 	<delete id="deleteWorks">
 		delete from WORKS where WORKSID = #{worksid}
+	</delete>
+	
+	<delete id ="deleteArtistProfileImg">
+		delete from ARTIST_IMG where USERID = #{userid}
+	</delete>
+	
+	<delete id = "deleteArtist">
+		delete from ARTIST where USERID = #{userid}
 	</delete>
 	
 	<update id="updateWorksArticle">

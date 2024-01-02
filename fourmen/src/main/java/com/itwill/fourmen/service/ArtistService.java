@@ -23,6 +23,7 @@ import com.itwill.fourmen.dto.artist.ArtistWorksListItemDto;
 import com.itwill.fourmen.dto.artist.WorksDto;
 import com.itwill.fourmen.repository.ArtistDao;
 
+import jakarta.servlet.ServletContext;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -219,7 +220,7 @@ public class ArtistService {
 				
 				int artistUpdate = artistDao.updateArtist(dto.artisToEntity());
 				
-				int artistProfileDelete = artistDao.deleteArtistProfileImg(dto.getUserid());
+				int artistProfileDelete = artistDao.updateArtistProfileImgNull(dto.getUserid());
 				log.debug("=============================================================================");
 				log.debug("ArtistService - updateArtist 내용 업데이트됨...!", artistUpdate);
 				log.debug("ArtistService - updateArtist 프사 삭제됨...!", artistProfileDelete);
@@ -247,7 +248,7 @@ public class ArtistService {
 		log.debug("Profile IMG DELETE = ", isDeleted);
 		
 		// DB 이미지 데이터 삭제
-		int result = artistDao.deleteArtistProfileImg(artist_Img.getUserid());
+		int result = artistDao.updateArtistProfileImgNull(artist_Img.getUserid());
 		log.debug("deleteProfileImg result = {}", result);
 		
 		return result;
@@ -295,6 +296,46 @@ public class ArtistService {
 				artistDao.createWorksImg(artist_Works_Img);
 			}
 		}
+	}
+	
+	public int deleteArtist(String userid, ServletContext sDirectory) {
+		log.debug("ArtistService deleteArtist()");
+		log.debug("ArtistService deleteArtist userid = {}, sDirectory = {}", userid, sDirectory);
+		
+		List<Artist_Works> artist_Works = artistDao.selectWorksListByUserid(userid);
+		
+		Artist artist = artistDao.selectByUserid(userid);
+		
+		for(Artist_Works id : artist_Works) {
+			long worksid = id.getWorksid();
+			
+			List<Artist_Works_Img> artist_Works_Imgs = artistDao.selectWorksImgByWorksid(worksid);
+			String worksImgDirectory = sDirectory.getRealPath("/static/images/wokrs");
+			
+			for(Artist_Works_Img img : artist_Works_Imgs) {
+				File file = new File(worksImgDirectory + File.separator + img.getSaved_file());
+				boolean isDeleted = file.delete();
+				log.debug("FILE IS DELETED?? >> {}", isDeleted);
+			}
+			int result = artistDao.deleteWorks(worksid);
+			
+			log.debug("아티스트 작품 삭제 결과 = {}", result);
+		}
+		
+		String artistProfileImg = sDirectory.getRealPath("/static/images/char");
+		Artist_Img artist_Img = artistDao.selectUserProfileImgByUserid(userid);
+		
+		File file = new File(artistProfileImg + File.separator + artist_Img.getArtist_s_img());
+		boolean isProfileImgDeleted = file.delete();
+		log.debug("PROFILE IMG IS DELETED?? >> {}",isProfileImgDeleted);
+		
+		int artistImgDeleteResult =  artistDao.deleteArtistProfileImg(userid);
+		log.debug("프로필 사진 삭제 결과 = {}", artistImgDeleteResult);
+		
+		int artistDeleteResult = artistDao.deleteArtist(userid);
+		log.debug("아티스트 삭제 결과 = {}", artistDeleteResult);
+		
+		return artistDeleteResult;
 	}
 	
 	public int deleteWorks(Long worksid, String sDirectory) {

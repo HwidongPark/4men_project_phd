@@ -61,6 +61,8 @@ div#details {
 
 		<!-- 페이지 상단 아티스트 사진 및 소개 -->
 		<div class="card mb-3 border-0" style="max-width: 100%;">
+			<input class ="form-control d-none" id = "userid" name="userid" value ="${artist.userid}"/>
+			
 			<div class="row g-0">
 				<div class="px-3 col-md-6">
 					<img id="artist_img" src="../images/char/${artist_img.artist_s_img}" 
@@ -108,20 +110,26 @@ div#details {
 		<!-- 페이지 최하단 로그인한 아티스트만 소개글 및 사진 수정 & 작품 추가 및 삭제/수정 버튼 -->
 		<div class = "mt-4 card-footer d-grid gap-2 d-md-flex justify-content-md-end">
 			<!-- 수정 버튼 -->
-			<c:if test = "${signedInUser eq artist.userid}"> 
-				<c:url var = "ArtistModifyPage" value = "/artist/artist_modify">
-					<c:param name = "userid" value = "${artist.userid}" />
-				</c:url>
-				<a href="${ArtistModifyPage}" class="btn btn-outline-dark me-md-2">수정</a>
-				<!-- 작품 추가 버튼 -->
-				<c:url var = "WorksAddPage" value = "/artist/artist_add_works">
-					<c:param name = "userid" value = "${artist.userid}" />
-				</c:url>
-				<a href="${WorksAddPage}" class="btn btn-outline-dark">작품 추가</a>
+			<c:if test = "${not empty signedInUser}">
+				<c:if test = "${signedInUser eq artist.userid}"> 
+					<c:url var = "ArtistModifyPage" value = "/artist/artist_modify">
+						<c:param name = "userid" value = "${artist.userid}" />
+					</c:url>
+					<a href="${ArtistModifyPage}" class="btn btn-outline-dark">수정</a>
+					<!-- 작품 추가 버튼 -->
+					<c:url var = "WorksAddPage" value = "/artist/artist_add_works">
+						<c:param name = "userid" value = "${artist.userid}" />
+					</c:url>
+					<a href="${WorksAddPage}" class="btn btn-outline-dark">작품 추가</a>
+				</c:if>
+				<c:if test = "${signedInUser eq artist.userid || user.grade eq '관리자'}">
+					<button class ="btn btn-outline-dark me-md-2" id = "btnDelete" value = "삭제">아티스트 삭제</button>
+				</c:if> 
 			</c:if>
-			<c:if test = "${signedInUser eq artist.userid || user.grade eq '관리자'}">
-				<button class ="btn btn-outline-dark" value = "삭제">삭제</button>
-			</c:if> 
+			
+			<c:if test = "${empty signedInUser}">
+				<div></div>
+			</c:if>
 		</div>
 
 	</div>
@@ -132,5 +140,7 @@ div#details {
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
 		crossorigin="anonymous"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>		
+	<script src = "../js/artist-delete.js"></script>	
 </body>
 </html>

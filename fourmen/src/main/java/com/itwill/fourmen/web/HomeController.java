@@ -59,20 +59,32 @@ public class HomeController {
     }
     
     @GetMapping("/artist")
-    public void artist(Model model) {
+    public void artist(Model model, HttpSession session) {
     	log.debug("artist()");
     	
-//    	List<ArtistListItemDto> artists = artistService.read();
-//    	log.debug("Artist = {} " ,artists);
-//    	model.addAttribute("artistList", artists);
+    	String signedInUser = (String) session.getAttribute("signedInUser");
+    	if(!(signedInUser==null)) {
+    		User user = adminuserservice.selectById(signedInUser);
+    		model.addAttribute("user",user);
+    		
+    		List<ArtistDto> artist = artistService.readArtist();
+        	log.debug("ArtistList = {}", artist);
+        	model.addAttribute("artist", artist);
+        	
+        	List<ArtistDto> artistImg = artistService.readArtistImg();
+        	log.debug("ArtistImgList = {}", artistImg);
+        	model.addAttribute("artistImg", artistImg);
+    		
+    	} else {
+    		List<ArtistDto> artist = artistService.readArtist();
+        	log.debug("ArtistList = {}", artist);
+        	model.addAttribute("artist", artist);
+        	
+        	List<ArtistDto> artistImg = artistService.readArtistImg();
+        	log.debug("ArtistImgList = {}", artistImg);
+        	model.addAttribute("artistImg", artistImg);
+    	}
     	
-    	List<ArtistDto> artist = artistService.readArtist();
-    	log.debug("ArtistList = {}", artist);
-    	model.addAttribute("artist", artist);
-    	
-    	List<ArtistDto> artistImg = artistService.readArtistImg();
-    	log.debug("ArtistImgList = {}", artistImg);
-    	model.addAttribute("artistImg", artistImg);
     }
     
     @GetMapping("/forum")

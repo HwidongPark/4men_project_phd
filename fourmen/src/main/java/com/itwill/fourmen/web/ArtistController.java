@@ -57,24 +57,39 @@ public class ArtistController {
 	
 	@GetMapping("/artist_details")
     public void details(@RequestParam(name="userid") String userid, Model model, HttpSession session) {
-    	log.debug("details(userid ={})",userid);
+    	log.debug("details(userid = {})",userid);
     	
     	// 유저 정보 가져오기
+    	
     	String signedInUser = (String) session.getAttribute("signedInUser");
-    	User user = adminUserService.selectById(signedInUser);
-    	model.addAttribute("user", user);
-    	
-    	// Artist 개개인의 작품 리스트 (페이지의 하단)
-    	List<ArtistWorksListItemDto> worksList = artistService.readWorks(userid);
-    	model.addAttribute("worksList", worksList);
-    	
-    	// Artist 개개인 소개 및 정보 (페이지의 상단)
-    	Artist artist = artistService.details(userid);
-    	model.addAttribute("artist", artist);
-    	
-    	// Artist 개인의 사진 정보
-    	Artist_Img artist_img = artistService.artistImgDetails(userid);
-    	model.addAttribute("artist_img", artist_img);
+    	if(!(signedInUser == null)) {
+    		User user = adminUserService.selectById(signedInUser);
+        	model.addAttribute("user", user);	
+        	
+        	// Artist 개개인의 작품 리스트 (페이지의 하단)
+        	List<ArtistWorksListItemDto> worksList = artistService.readWorks(userid);
+        	model.addAttribute("worksList", worksList);
+        	
+        	// Artist 개개인 소개 및 정보 (페이지의 상단)
+        	Artist artist = artistService.details(userid);
+        	model.addAttribute("artist", artist);
+        	
+        	// Artist 개인의 사진 정보
+        	Artist_Img artist_img = artistService.artistImgDetails(userid);
+        	model.addAttribute("artist_img", artist_img);
+    	} else {
+    		// Artist 개개인의 작품 리스트 (페이지의 하단)
+        	List<ArtistWorksListItemDto> worksList = artistService.readWorks(userid);
+        	model.addAttribute("worksList", worksList);
+        	
+        	// Artist 개개인 소개 및 정보 (페이지의 상단)
+        	Artist artist = artistService.details(userid);
+        	model.addAttribute("artist", artist);
+        	
+        	// Artist 개인의 사진 정보
+        	Artist_Img artist_img = artistService.artistImgDetails(userid);
+        	model.addAttribute("artist_img", artist_img);
+    	}
     }
 	
 	@GetMapping("/artist_works")

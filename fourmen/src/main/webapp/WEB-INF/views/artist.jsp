@@ -96,8 +96,12 @@ div#artist {
 
 	<div id="works" class="mb-5 container-fluid w-75">
 			<div class = "d-grid d-md-flex justify-content-md-end">
-				<c:url var = "registerArtist" value = "/artist/artist_register"></c:url>
-					<a href="${registerArtist}" class = "mb-3 btn btn-outline-dark">아티스트 추가</a>
+				<c:if test = "${not empty signedInUser}">
+					<c:if test = "${user.grade eq '아티스트'}">
+						<c:url var = "registerArtist" value = "/artist/artist_register"></c:url>
+							<a href="${registerArtist}" class = "mb-3 btn btn-outline-dark">아티스트 추가</a>
+					</c:if>	
+				</c:if>		
 			</div>
 	
 		<div id = "artist_container">
@@ -108,11 +112,9 @@ div#artist {
 				
 				<a href="${artist_details}">
 					<div class="card text-bg-light">
-						<c:forEach var="img" items ="${artistImg}" varStatus="imgLoop">
-							<c:if test="${loop.index == imgLoop.index}">
-								<c:if test="${a.userid eq img.userid}">
-									<img src="images/char/${img.artist_s_img}" onerror="this.src='images/char/default_user.png'" class="card-img" alt="test_user"/>
-								</c:if>
+						<c:forEach var="img" items ="${artistImg}">
+							<c:if test="${a.userid eq img.userid}">
+								<img src="images/char/${img.artist_s_img}" onerror="this.src='images/char/default_user.png'" class="card-img" alt="test_user"/>
 							</c:if>
 						</c:forEach>
 								

@@ -40,7 +40,7 @@ public interface ArtistDao {
 	
 	int updateArtistProfileImg(Artist_Img artist_Img);
 	
-	int deleteArtistProfileImg(String userid);
+	int updateArtistProfileImgNull(String userid);
 	
 	int registerArtist(Artist artist);
 	
@@ -49,6 +49,10 @@ public interface ArtistDao {
 	int createWorks(Artist_Works artist_Works);
 	
 	int createWorksImg(Artist_Works_Img artist_Works_Img);
+	
+	int deleteArtist(String userid);
+	
+	int deleteArtistProfileImg(String userid);
 	
 	int deleteWorks(Long worksid);
 	
