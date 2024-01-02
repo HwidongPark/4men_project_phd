@@ -126,6 +126,7 @@ public class MarketController {
 		
 		if (signedInUser != null) {
 			isWishListed = marketService.readWishList(wishList);
+			log.debug("로그인한 유저가 좋아요 눌렀나?={}", isWishListed);
 		}
 		
 		

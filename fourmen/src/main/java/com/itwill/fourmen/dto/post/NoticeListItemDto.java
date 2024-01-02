@@ -11,7 +11,6 @@ import lombok.Data;
 @Builder
 public class NoticeListItemDto {
 	private Long notice_id;
-	private Long notice_num;
 	private String notice_title;
 	private String userid;
 	private String notice_content;
@@ -23,7 +22,6 @@ public class NoticeListItemDto {
 	public static NoticeListItemDto fromEntity(Notice notice) {
 		return NoticeListItemDto.builder()
 				.notice_id(notice.getNotice_id())
-				.notice_num(notice.getNotice_num())
 				.notice_title(notice.getNotice_title())
 				.userid(notice.getUserid())
 				.notice_content(notice.getNotice_content())

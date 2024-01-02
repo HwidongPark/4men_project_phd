@@ -8,6 +8,7 @@ import lombok.Data;
 @Builder
 @Data
 public class WorkImage {
+	
 	Long imgId;
 	Long workId;
 	String category;

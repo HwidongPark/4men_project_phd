@@ -17,7 +17,8 @@
 
 
 	<typeAliases>
-        <typeAlias type="com.itwill.fourmen.domain.Exhibition" alias="Exhibition"/>
+        <typeAlias type="com.itwill.fourmen.domain.Exhibition" 
+            alias="Exhibition"/>
         <typeAlias type="com.itwill.fourmen.domain.Post"
             alias="Post" />
         <typeAlias type="com.itwill.fourmen.domain.Notice"
@@ -38,8 +39,15 @@
             alias="Artist_Works_Img" />
         <typeAlias type="com.itwill.fourmen.domain.User"
             alias="User" />
-        <typeAlias type="com.itwill.fourmen.domain.WishList" alias="WishList"/>
-        <typeAlias type="com.itwill.fourmen.domain.Message" alias="Message"/>
+
+        <typeAlias type="com.itwill.fourmen.domain.Artist_Img" 
+        	alias="Artist_Img" />	
+        <typeAlias type="com.itwill.fourmen.domain.Comments"
+        	alias="Comments"/>
+        <typeAlias type="com.itwill.fourmen.domain.WishList" 
+          alias="WishList"/>
+        <typeAlias type="com.itwill.fourmen.domain.Message" 
+          alias="Message"/>
 
     </typeAliases>
 

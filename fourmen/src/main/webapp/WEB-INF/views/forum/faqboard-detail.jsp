@@ -21,8 +21,8 @@
 <link rel="stylesheet" href="../css/pagenation.css">
 <link rel="stylesheet" href="../css/forum-search-area.css">
 <link rel="stylesheet" href="../css/forum-kategorie-area.css">
-<link rel="stylesheet" href="../css/forum-create-new-post.css">
-<link rel="stylesheet" href="../css/forum-freeboard-detail.css">
+<link rel="stylesheet" href="../css/forum-under-menubar.css">
+<link rel="stylesheet" href="../css/forum-faqboard-detail.css">
 
 <!-- 헤더 파일 include -->
 <%@ include file="../fragments/navigation.jspf"%>
@@ -36,7 +36,7 @@
     <div id="underheader-div">
         <div class="container" id="underheadrcontainer">
             <h2 class="commondesign">
-                자유게시판
+                FAQ
             </h2>
         </div>
     </div>
@@ -44,43 +44,42 @@
     <!-- main 시작점 -->
     <main>
     
-    <section role="freeboard-view"> <!-- 게시글이 보이는 부분... -->
-        <div class="freeboard-view-detail"> <!-- 제목 / 작성정보 / 내용을 묶는 div -->
-            <div class="freeboard-view-detail-title">
+    <section role="faqboard-view"> <!-- 게시글이 보이는 부분... -->
+        <div class="faqboard-view-detail"> <!-- 제목 / 작성정보 / 내용을 묶는 div -->
+            <div class="faqboard-view-detail-title">
                 ${faq.faq_title}
             </div>
             <div class="d-none"> <!-- 게시글 고유 아이디를 보이지 않게 가림 -->
                 <input id="faq_id" name="faq_id" value="${faq.faq_id}">
             </div>
-            <ul class="freeboard-view-detail-info">
+            <ul class="faqboard-view-detail-info">
                 <li>
-                    <label class="freeboard-view-detail-info-label">작성일</label>
-                    <input id="freeboard-view-detail-createdTime" value="${faq.faq_created_time}" type="text" readonly="readonly">
+                    <label class="faqboard-view-detail-info-label">작성일</label>
+                    <input id="faqboard-view-detail-createdTime" value="${faq.faq_created_time}" type="text" readonly="readonly">
                 </li>
                 <li>
-                    <label class="freeboard-view-detail-info-label">작성자</label>
-                    <input id="freeboard-view-detail-userId"  value="${faq.userid}" type="text" readonly="readonly">
+                    <label class="faqboard-view-detail-info-label">작성자</label>
+                    <input id="faqboard-view-detail-userId"  value="${faq.userid}" type="text" readonly="readonly">
                 </li>
                 <li>
-                    <label class="freeboard-view-detail-info-label">조회</label>
-                    <input id="freeboard-view-detail-view" value="${faq.faq_view_count}" type="number" readonly="readonly">
+                    <label class="faqboard-view-detail-info-label">조회</label>
+                    <input id="faqboard-view-detail-view" value="${faq.faq_view_count}" type="number" readonly="readonly">
                 </li>
                 <li>
-                    <label class="freeboard-view-detail-info-label">댓글</label>
-                    <input id="freeboard-view-detail-comment" value="1" type="number" readonly="readonly">
+                    <label class="faqboard-view-detail-info-label">댓글</label>
+                    <input id="faqboard-view-detail-comment" value="1" type="number" readonly="readonly">
                 </li>
             </ul>
             <div>
-                <button id="freeboard-modify">수정</button>
-                <button id="freeboard-delete">삭제</button>
+                <button id="faqboard-modify">수정</button>
+                <button id="faqboard-delete">삭제</button>
             </div>
-            <div class="freeboard-view-detail-content">
-                <!-- <input class="freeboard-view-detail-content-input" type="text" value="${faq.faq_content}"> -->
-                ${faq.faq_content}
+            <div>
+                <textarea id="faqboard-view-detail-content" class="faqboard-view-detail-content" readonly="readonly">${faq.faq_content}</textarea>
             </div>
         </div>
-        <div class="freeboard-view-list-button">
-            <button id="freeboard-view-btnList" type="button">
+        <div class="faqboard-view-list-button">
+            <button id="faqboard-view-btnList" class="btn btn-outline-secondary" type="button">
                 목록
             </button>
         </div>
@@ -96,7 +95,7 @@
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
     <script src="../js/header.js"></script>
-    <script src="../js/freeboard-detail.js"></script>
+    <script src="../js/forum/faqboard-detail.js"></script>
 
 </body>
 </html>

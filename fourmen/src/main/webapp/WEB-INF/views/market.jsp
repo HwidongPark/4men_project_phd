@@ -167,7 +167,7 @@
                                 </div>                                
                             </div>
                             <c:if
-                                test="${ not empty popularMarketPost.isSold }">
+                                test="${ popularMarketPost.isSold eq 'Y'}">
                                 <div class="is-sold">
                                     <b>거래 완료</b>
                                 </div>
@@ -240,7 +240,7 @@
                                 </div>                                
                             </div>
                             <c:if
-                                test="${ not empty marketPost.isSold }">
+                                test="${ marketPost.isSold eq 'Y' }">
                                 <div class="is-sold">
                                     <b>거래 완료</b>
                                 </div>

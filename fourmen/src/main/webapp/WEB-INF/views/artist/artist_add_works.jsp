@@ -48,11 +48,6 @@ div#modify {
 					</div>
 					
 					<div class = "my-2">
-						<label for="worksid" class = "form-label">작품 번호</label>
-						<input class = "form-control" id = "worksid" type = "text" name = "worksid"  placeholder = "작품 아이디를 입력하세요."/>
-					</div>
-					
-					<div class = "my-2">
 						<label for="title" class = "form-label">작품 제목</label>
 						<input class = "form-control" id = "title" type = "text" name = "title"  placeholder = "작품 제목을 입력하세요."/>
 					</div>
@@ -68,13 +63,8 @@ div#modify {
 					</div>
 					
 					<div class = "my-2">
-						<label for = "artist_img_category" class = "form-label">사진 카테고리</label>
-						<input class = "form-control" id = "category" type = "text" name = "category"  placeholder = "사진 카테고리를 입력하세요."/>
-					</div>
-					
-					<div class = "my-2">
 						<label for = "artist_img" class = "form-label">작품 사진</label>
-						<input class = "form-control" type = "file" name = "original_file" multiple="multiple"/>
+						<input class = "form-control" type = "file" name = "upload_files" multiple="multiple"/>
 					</div>
 					
 					<div class = "my-2">

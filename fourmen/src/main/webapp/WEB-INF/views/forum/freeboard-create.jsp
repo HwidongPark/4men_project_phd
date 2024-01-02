@@ -14,13 +14,13 @@
     crossorigin="anonymous">
 
 <!-- css 파일 적용 -->
+
 <link rel="stylesheet" href="../css/header.css">
 <link rel="stylesheet" href="../css/footer.css">
-<link rel="stylesheet" href="../css/forumtable.css">
 <link rel="stylesheet" href="../css/underheader.css">
-<link rel="stylesheet" href="../css/pagenation.css">
 <link rel="stylesheet" href="../css/forum-search-area.css">
 <link rel="stylesheet" href="../css/forum-kategorie-area.css">
+<link rel="stylesheet" href="../css/forum-create-post.css">
 
 </head>
 
@@ -42,154 +42,52 @@
     <!-- main 시작점 -->
     <main>
     
-    <!-- 게시판 카테고리(자유게시판, 후기게시판, 질문게시판) -->
+    <!-- 게시판 카테고리(자유게시판, 문의게시판, Faq게시판, 공지게시판) -->
     <section role="kategorie" class="kategorie" style="border-bottom: 1.5px solid #D8D8D8;">
         <div class="forum-kategorie">
             <ul class="forum-kategorie-board-lists">
                 <li class="forum-kategorie-board">
-                    <a href="freeboard">자유게시판</a>
+                    <a href="freeboard" class="category-button" onclick="change_category_style(event)">자유게시판</a>
                 </li>
                 <li class="forum-kategorie-board">
-                    <a href="queryboard">Q&A</a>
+                    <a href="qnaboard" class="category-button" onclick="change_category_style(event)">Q&A</a>
                 </li>
                 <li class="forum-kategorie-board">
-                    <a href="faqboard">FAQ</a>
+                    <a href="faqboard" class="category-button" onclick="change_category_style(event)">FAQ</a>
                 </li>
                 <li class="forum-kategorie-board">
-                    <a href="noticeboard">NOTICE</a>
+                    <a href="noticeboard" class="category-button" onclick="change_category_style(event)">NOTICE</a>
                 </li>
             </ul>
         </div>
     </section>
     
-    <!-- 게시글 검색창 -->
-    <section role="search" class="search">
-        <div class="forum-top-area">
-            <div class="forum-search-area">
-                <div class="forum-search-select-area">
-                    <select class="forum-select-box">
-                        <option class="forum-select-option">전체</option>
-                        <option class="forum-select-option">제목</option>
-                        <option class="forum-select-option">작성자</option>
-                        <option class="forum-select-option">내용</option>
-                    </select>
+    
+    <!-- 자유게시판 글 작성 -->
+    <section style="padding: 3.5rem 15.5rem 2.5rem 15.5rem;">
+        <div>
+            <c:url var="freeboardCreatePage" value="/forum/freeboard-create" />
+            <form id="freeboard-create-form" action="/forum/freeboard-create" method="post" enctype="multipart/form-data">
+                <div id="freeboard-create-title">
+                    <input id="post_title" name="post_title" type="text" placeholder="제목을 입력하세요 (30자)" maxlength="30" onkeyup="return input_maxlength(this)"/>
                 </div>
-                <div class="forum-search-form-area">
-                    <input id=forum-search-input autocomplete="on" placeholder="검색어를 입력하세요." type="text">
+                <div id="freeboard-create-content">
+                    <textarea id="post_content" name="post_content" placeholder="내용을 입력하세요 (1000자)" maxlength="1000" onkeyup="return textarea_maxlength(this)"></textarea>
                 </div>
-
-                <div class="forum-search-btn-area">
-                    <button class="forum-search-btn" type="button">
-                        <img id="forum-search-btn-img" alt="검색버튼" src="../icon/search01.svg">
-                    </button>
+                <!-- 작성자 아이디는 로그인한 사용자 아이디로 + 보이지 않도록 설정 -->
+                <div id="freeboard-create-author" class="d-none">
+                    <input type="text" name="author" value="${signedInUser}" readonly />
                 </div>
-            </div>
+                <div id="freeboard-create-file">
+                    <input id="freeboard-add-file" type="file" name="original_file" multiple="multiple" onchange="showFileName()" />
+                </div>
+            </form>
+                <div id="freeboard-create-forUnderbar"></div>
+                <div id="freeboard-create-button">
+                    <button id="freeboard-create" class="btn btn-outline-secondary" type="submit">완료</button>
+                </div>
         </div>
     </section>
-    
-    <!-- board-list-content 게시판 글 리스트 테이블 -->
-    <section class="freeboard-list" style="padding: 3.5rem 18.5rem 2.5rem 18.5rem;">
-     <table class="table">
-        <colgroup>
-            <col style="width: 9%;">
-            <col>
-            <col style="width: 10%;">
-            <col style="width: 12%;">
-            <col style="width: 10%;">
-        </colgroup>
-        <thead>
-        <tr>
-            <th>번호</th>
-            <th>제목</th>
-            <th>작성자</th>
-            <th>작성일</th>
-            <th>조회</th>
-        </tr>
-        </thead>
-        <tbody class="table-group-divider">
-        <tr>
-            <td>1</td>
-            <td id="table-td" style="text-align: left;">제목1</td>
-            <td>작성자1</td>
-            <td>2023-12-13</td>
-            <td>1</td>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td id="table-td" style="text-align: left">제목1</td>
-            <td>작성자1</td>
-            <td>2023-12-13</td>
-            <td>1</td>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td id="table-td" style="text-align: left">제목1</td>
-            <td>작성자1</td>
-            <td>2023-12-13</td>
-            <td>1</td>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td id="table-td" style="text-align: left">제목1</td>
-            <td>작성자1</td>
-            <td>2023-12-13</td>
-            <td>1</td>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td id="table-td" style="text-align: left">제목1</td>
-            <td>작성자1</td>
-            <td>2023-12-13</td>
-            <td>1</td>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td style="text-align: left">제목1</td>
-            <td>작성자1</td>
-            <td>2023-12-13</td>
-            <td>1</td>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td style="text-align: left">제목1</td>
-            <td>작성자1</td>
-            <td>2023-12-13</td>
-            <td>1</td>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td style="text-align: left">제목1</td>
-            <td>작성자1</td>
-            <td>2023-12-13</td>
-            <td>1</td>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td style="text-align: left">제목1</td>
-            <td>작성자1</td>
-            <td>2023-12-13</td>
-            <td>1</td>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td style="text-align: left">제목1</td>
-            <td>작성자1</td>
-            <td>2023-12-13</td>
-            <td>1</td>
-        </tr>
-        </tbody>
-    </table>
-    </section>
-    
-    <div style="display: flex;">
-        <nav style="padding-bottom: 2rem;">
-            <ul>
-                <li>
-                리스트...
-                </li>
-            </ul>
-        </nav>
-    </div>
     
     </main>
     
@@ -200,7 +98,9 @@
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
-    <script src="js/header.js"></script>
+    <script src="../js/header.js"></script>
+    <script src="../js/forum/freeboard-create.js"></script>
+    <script src="../js/forum/forum-category-bold-style.js"></script>
 
 </body>
 </html>

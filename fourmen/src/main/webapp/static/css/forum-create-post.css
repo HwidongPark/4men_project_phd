@@ -1,0 +1,251 @@
+@charset "UTF-8";
+/* forum-create-post.css */
+/* forum에서 글 작성에 관한 css */
+
+/* 자유게시판 */
+#freeboard-create-form {
+    border-top: 2px solid #D8D8D8;
+}
+
+#freeboard-create-forUnderbar {
+    border-bottom: 2px solid #D8D8D8;
+}
+
+#freeboard-create-button {
+    margin-top: 1.5rem;
+    justify-content: center;
+    display: flex;
+}
+
+#freeboard-create-button button {
+    border: 2px solid #D8D8D8;
+    padding: 0.5rem 2rem 0.5rem 2rem;
+}
+
+#freeboard-create-title {
+    margin-top: 2rem;
+}
+
+#freeboard-create-title input {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 30px;
+}
+
+#freeboard-create-title input:focus {
+    border: none;
+    outline: none;
+}
+
+#freeboard-create-content textarea {
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+    padding: 1.85rem;
+    border: none;
+    outline: none;
+    width: 100%;
+    height: 25rem;
+    resize: none;
+    background-color: #E6E6E6;
+    line-height: 150%;
+}
+
+#freeboard-create-file {
+    margin-top: 1.25rem;
+    margin-bottom: 2rem;
+}
+
+#freeboard-create-file input {
+    border: none;
+}
+
+#reamaining-chars {
+    text-align: right;
+}
+
+/* 문의게시판 */
+#qnaboard-create-form {
+    border-top: 2px solid #D8D8D8;
+}
+
+#qnaboard-create-forUnderbar {
+    border-bottom: 2px solid #D8D8D8;
+}
+
+#qnaboard-create-button {
+    margin-top: 1.5rem;
+    justify-content: center;
+    display: flex;
+}
+
+#qnaboard-create-button button {
+    border: 2px solid #D8D8D8;
+    padding: 0.5rem 2rem 0.5rem 2rem;
+}
+
+#qnaboard-create-title {
+    margin-top: 2rem;
+}
+
+#qnaboard-create-title input {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 30px;
+}
+
+#qnaboard-create-title input:focus {
+    border: none;
+    outline: none;
+}
+
+#qnaboard-create-content textarea {
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+    padding: 1.85rem;
+    border: none;
+    outline: none;
+    width: 100%;
+    height: 25rem;
+    resize: none;
+    background-color: #E6E6E6;
+    line-height: 150%;
+}
+
+#qnaboard-create-file {
+    margin-top: 1.25rem;
+    margin-bottom: 2rem;
+}
+
+#qnaboard-create-file input {
+    border: none;
+}
+
+#reamaining-chars {
+    text-align: right;
+}
+
+/* FAQ 게시판 */
+#faqboard-create-form {
+    border-top: 2px solid #D8D8D8;
+}
+
+#faqboard-create-forUnderbar {
+    border-bottom: 2px solid #D8D8D8;
+}
+
+#faqboard-create-button {
+    margin-top: 1.5rem;
+    justify-content: center;
+    display: flex;
+}
+
+#faqboard-create-button button {
+    border: 2px solid #D8D8D8;
+    padding: 0.5rem 2rem 0.5rem 2rem;
+}
+
+#faqboard-create-title {
+    margin-top: 2rem;
+}
+
+#faqboard-create-title input {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 30px;
+}
+
+#faqboard-create-title input:focus {
+    border: none;
+    outline: none;
+}
+
+#faqboard-create-content textarea {
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+    padding: 1.85rem;
+    border: none;
+    outline: none;
+    width: 100%;
+    height: 25rem;
+    resize: none;
+    background-color: #E6E6E6;
+    line-height: 150%;
+}
+
+#faqboard-create-file {
+    margin-top: 1.25rem;
+    margin-bottom: 2rem;
+}
+
+#faqboard-create-file input {
+    border: none;
+}
+
+#reamaining-chars {
+    text-align: right;
+}
+
+/* 공지게시판 */
+#noticeboard-create-form {
+    border-top: 2px solid #D8D8D8;
+}
+
+#noticeboard-create-forUnderbar {
+    border-bottom: 2px solid #D8D8D8;
+}
+
+#noticeboard-create-button {
+    margin-top: 1.5rem;
+    justify-content: center;
+    display: flex;
+}
+
+#noticeboard-create-button button {
+    border: 2px solid #D8D8D8;
+    padding: 0.5rem 2rem 0.5rem 2rem;
+}
+
+#noticeboard-create-title {
+    margin-top: 2rem;
+}
+
+#noticeboard-create-title input {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 30px;
+}
+
+#noticeboard-create-title input:focus {
+    border: none;
+    outline: none;
+}
+
+#noticeboard-create-content textarea {
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+    padding: 1.85rem;
+    border: none;
+    outline: none;
+    width: 100%;
+    height: 25rem;
+    resize: none;
+    background-color: #E6E6E6;
+    line-height: 150%;
+}
+
+#noticeboard-create-file {
+    margin-top: 1.25rem;
+    margin-bottom: 2rem;
+}
+
+#noticeboard-create-file input {
+    border: none;
+}
+
+#reamaining-chars {
+    text-align: right;
+}

@@ -36,6 +36,7 @@
     </nav>
 </div>
 
+
 <!-- 사이드바 -->
 <aside id="my-page-slide-outer-container" class="my-page-close">
     <div id="my-page-username">
@@ -52,7 +53,7 @@
             <a href="/fourmen/mypage/wishlist">내 찜 목록</a>
         </li>
         <li class="my-page-list-item">
-            <a href="#">거래요청 관리</a>
+            <a href="/fourmen/mypage/mymessage">거래요청 관리</a>
         </li>
         <li class="my-page-list-item">
             <a href="#">로그아웃</a>
@@ -83,7 +84,9 @@
                 <a href="/fourmen/exhibition" class="nav-button">EXHIBITION</a>
             </li>
             <li class="nav-each-btn-list">
+
                 <a href="/fourmen/forum/freeboard" class="nav-button">FORUM</a>
+
 
             </li>
             <li class="nav-each-btn-list">
@@ -101,3 +104,4 @@
     <div class="header-right-container"></div>
     
 </nav>
+<script src="../js/forum/forum-category-bold-style.js"></script>

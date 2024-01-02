@@ -169,7 +169,7 @@
                                 </div>                                
                             </div>
                             <c:if
-                                test="${ not empty marketPost.isSold }">
+                                test="${ marketPost.isSold eq 'Y' }">
                                 <div class="is-sold">
                                     <b>거래 완료</b>
                                 </div>
@@ -183,6 +183,7 @@
     
     
     <!-- 게시판 글 페이지네이션(pagination)-->
+    <c:if test="${ pageTitle ne '인기 장터 목록' }">
     <div>
         <nav aria-label="Page navigation">            
             <ul class="pagination">
@@ -274,7 +275,7 @@
             </ul>
         </nav>
     </div>
-
+    </c:if>
     
     <%@ include file="../fragments/footer.jspf"%>
 

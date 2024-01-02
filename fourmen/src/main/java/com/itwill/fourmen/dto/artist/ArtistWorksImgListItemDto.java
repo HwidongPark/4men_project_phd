@@ -10,7 +10,7 @@ import lombok.Data;
 public class ArtistWorksImgListItemDto {
 
 	private Long imgid;
-	private String worksid;
+	private Long worksid;
 	private String category;
 	private String original_file;
 	private String saved_file;

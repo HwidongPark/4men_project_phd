@@ -11,7 +11,6 @@ import lombok.Data;
 @Builder
 public class FaqListItemDto {
 	private Long faq_id;
-	private Long faq_num;
 	private String faq_title;
 	private String userid;
 	private String faq_content;
@@ -23,7 +22,6 @@ public class FaqListItemDto {
 	public static FaqListItemDto fromEntity(Faq faq) {
 		return FaqListItemDto.builder()
 				.faq_id(faq.getFaq_id())
-				.faq_num(faq.getFaq_num())
 				.faq_title(faq.getFaq_title())
 				.userid(faq.getUserid())
 				.faq_content(faq.getFaq_content())

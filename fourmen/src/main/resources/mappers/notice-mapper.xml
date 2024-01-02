@@ -9,8 +9,8 @@
 <mapper namespace="com.itwill.fourmen.repository.NoticeDao">
     
     <!-- NOTICE_BOARD 테이블 전체 검색, 글 번호 내림차순 정렬 -->
-    <select id="selectOrderByNoticeNumDesc" resultType="Notice"> <!-- DB에서 select 시 반환되는 값의 타입 설정 -->
-        select * from NOTICE_BOARD order by NOTICE_NUM desc
+    <select id="selectOrderByNoticeIdDesc" resultType="Notice"> <!-- DB에서 select 시 반환되는 값의 타입 설정 -->
+        select * from NOTICE_BOARD order by NOTICE_ID desc
     </select>
     
     <!-- NOTICE_BOARD 테이블에서 아이디로 검색 -->
@@ -18,4 +18,66 @@
         select * from NOTICE_BOARD where NOTICE_ID = #{notice_id}
     </select>
     
+    <!-- NOTICE_BOARD 테이블에 새 포스트 삽입 -->
+    <insert id="noticeboard_insert">
+        insert into NOTICE_BOARD (NOTICE_TITLE, NOTICE_CONTENT) values (#{notice_title}, #{notice_content})
+        <!-- #{} 부분은 대소문자 구별! (Notice class 에서 작성한 것과 같아야 함 -->
+        <!-- #{} 부분은 입력한 객체의 getter 메서드를 호출한다고 생각하면 됨 -->
+        <!-- ex. #{notice_title} -> Notice 클래스의 getNotice_title() 메서드 실행하는 것 -->
+    </insert>
+    
+    <!-- NOTICE_BOARD 테이블에서 입력한 아이디에 해당하는 포스트 삭제 -->
+    <delete id="noticeboard_delete">
+        delete from NOTICE_BOARD where NOTICE_ID = #{notice_id}
+    </delete>
+    
+    <!-- NOTICE_BOARD 테이블에서 입력한 게시글 아이디에 해당하는 포스트 조회수 1씩 증가 -->
+    <update id='noticeboard_addView'>
+        update NOTICE_BOARD set NOTICE_VIEW_COUNT = NOTICE_VIEW_COUNT + 1 where NOTICE_ID = ${notice_id}
+    </update>
+
+    <!-- NOTICE_BOARD 테이블에서 전체(제목+내용+작성자), 내용, 제목 또는 내용, 작성자로 검색하기 -->
+    <select id="noticeboard_search" resultType="Notice">
+        <!-- <bind> 개념 정리:
+        개념: 외부에서 전달된 파라미터를 이용하여 변수를 생성하는 엘리먼트.
+        조건: MyBatis version 3.2.3 이상에서 사용.
+        동적 쿼리문 안에 작성.
+        name 속성: 작성자가 지정할 변수 이름.
+        value 속성: 받아오는 파라미터 값.
+        -->
+        <bind name="searchKeyword" value="'%' + keyword + '%'" />
+        <!-- keyword 는 어디서 나온 것일까?
+        param.getKeyword()를 호출한 것.
+        NoticeSearchDto.java에 필드로 keyword가 선언되어 있음.
+        NoticeDao에서 아규먼트로 넘긴 NoticeSearchDto에 필드로 선언된 keyword를 get() 메서드로 가져옴.
+        -->
+        select * from NOTICE_BOARD
+        <!-- where를 태그로 사용 -->
+        <where>
+            <choose>
+                <when test='category eq "notice_title"'>
+                <!-- category 는 어디서 나온 것일까?
+                param.getCategory()를 호출한 것.
+                NoticeSearchDto.java에 필드로 category가 선언되어 있음.
+                NoticeDao에서 아규먼트로 넘긴 NoticeSearchDto에 필드로 선언된 category를 get() 메서드로 가져옴.
+                -->
+                    upper(NOTICE_TITLE) like upper(#{searchKeyword})
+                </when>
+                <when test='category eq "notice_content"'>
+                    upper(NOTICE_CONTENT) like upper(#{searchKeyword})
+                </when>
+                <when test='category eq "notice_all"'>
+                    upper(NOTICE_TITLE) like upper(#{searchKeyword}) 
+                    or
+                    upper(NOTICE_CONTENT) like upper(#{searchKeyword})
+                    or
+                    upper(USERID) like upper(#{searchKeyword})
+                </when>
+                <when test='category eq "notice_author"'>
+                    upper(USERID) like upper(#{searchKeyword})
+                </when>
+            </choose>
+        </where>
+        order by NOTICE_ID desc
+    </select>
 </mapper>

@@ -195,4 +195,9 @@
         ORDER BY id DESC
     </select>
     
+    <update id="confirmDeal">
+        UPDATE market SET is_sold = 'Y' WHERE worksid = #{ workId }
+    </update>
+    
+    
 </mapper>

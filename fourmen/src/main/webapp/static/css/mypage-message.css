@@ -1,0 +1,17 @@
+@charset "UTF-8";
+
+.mymessage-image-container {
+    width: auto;
+    height: 56px;
+    margin: 0;
+}
+
+.mymessage-image-container img {
+    height: 100%;
+    
+}
+
+
+.mymessage-title:hover {
+    color: #adb5bd;
+}
