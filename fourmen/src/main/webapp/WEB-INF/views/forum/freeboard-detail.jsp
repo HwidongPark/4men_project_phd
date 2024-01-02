@@ -97,15 +97,7 @@
         crossorigin="anonymous"></script>
     <script src="../js/header.js"></script>
     <script src="../js/forum/freeboard-detail.js"></script>
-    <script type="text/javascript">
-    document.addEventListener('DOMContentLoaded', function() {
-        const textarea = document.querySelector('#freeboard-view-detail-content');
-        textarea.addEventListener('input', function () {
-        this.style.height = 'auto';
-        this.style.height = (this.scrollHeight) + 'px';
-        });
-    });
-    </script>
+
 
 </body>
 </html>

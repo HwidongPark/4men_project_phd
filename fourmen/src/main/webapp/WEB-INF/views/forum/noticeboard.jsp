@@ -35,7 +35,7 @@
     <div id="underheader-div">
         <div class="container" id="underheadrcontainer">
             <h2 class="commondesign">
-                FORUM
+                NOTICE
             </h2>
         </div>
     </div>
@@ -209,7 +209,7 @@
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
     <script src="../js/header.js"></script>
-    <script src="../js/forum/forum-category-bold-style.js"></script>
+    <!-- <script src="../js/forum/forum-category-bold-style.js"></script> -->
 
 </body>
 </html>

@@ -81,7 +81,6 @@
                 <div id="faqboard-create-file">
                     <input id="faqboard-add-file" type="file" name="original_file" multiple="multiple" onchange="showFileName()" />
                 </div>
-                
             </form>
                 <div id="faqboard-create-forUnderbar"></div>
                 <div id="faqboard-create-button">

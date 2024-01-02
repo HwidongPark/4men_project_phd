@@ -40,9 +40,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // form 요소 찾기.
     const form = document.querySelector('form#freeboard-create-form');
     
-    // 포스트 고유 아이디(번호(post_id))를 가지고 있는 요소 찾기.
-    const postId = document.querySelector('input#post_id');
-        
     // 완료 버튼 찾기.
     const btnCreate = document.querySelector('button#freeboard-create');
     
