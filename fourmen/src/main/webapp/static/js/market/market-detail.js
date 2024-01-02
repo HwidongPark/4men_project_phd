@@ -2,6 +2,20 @@
  * market-detail.js
  */
 document.addEventListener('DOMContentLoaded', function() {
+    // 찜하기, 찜 취소, 쪽지보내기 버튼
+    const btnRequestDeal = document.querySelector('#market-request-deal');    
+    const btnAddWishList = document.querySelector('#market-add-to-wishlist');
+    const btnRemoveWishList = document.querySelector('#market-remove-from-wishlist');
+        
+    // 거래요청 모달
+    const modalBody = document.querySelector('.modal-to-show');
+    const requestDealForm = document.querySelector('#request-deal-form');
+    
+    // 모달 거래요청 보내기 버튼
+    const btnSendRequest = document.querySelector('#market-send-request');
+    // 모달 닫기 버튼
+    const btnCloseModal = document.querySelector('#market-request-deal-close');
+    
     const carouselImagesWrapper = document.querySelector('.carousel-images-wrapper');
     const carouselImageContainer = document.querySelector('.carousel-images-container');
     // 각각 사진의 div리스트
@@ -19,8 +33,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const btnMarketUpdate = document.querySelector('#market-btn-update');
     
     // workId
-    const workId = document.querySelector('#workId');
+    const workId = document.querySelector('#workid');
     console.log(workid.innerText);
+    
+    // 게사자 아이디
+    const writerId = document.querySelector('#artist-userid');
+    
     // 사진 리스트 폭 초기화
     const numOfPhotos = carouselImages.length;
     console.log(numOfPhotos);
@@ -136,14 +154,117 @@ document.addEventListener('DOMContentLoaded', function() {
 		    // 사진 리스트 폭 초기화
     	carouselImageContainer.scrollTo({left: scrollbarPosition * scrollMaxWidth, behavior: 'smooth'});
 		// console.log("크기 변하는 중");
-	})
-        
-  
+	})        
     
     
-    btnMarketUpdate.addEventListener('click', () => {
-        
-    });
+    // 찜하기
+    btnAddWishList.addEventListener('click', function() {       
+       console.log('찜하기 클릭');
+       console.log(`signedInUser=${signedInUser}`);
+       
+       if (signedInUser == "") {    // 로그인 안했을 시 로그인시킴
+           const target = encodeURIComponent(`/fourmen/market/detail?workid=${ workId.value }`);
+           console.log(`target=${target}`);
+           
+           location.href=`/fourmen/signup?target=${target}`;
+           
+           return;
+       } else if (signedInUser == writerId.value) {   // 본인 게시글일시 본인글임을 알리고 끝냄
+           alert('본인글은 찜할 수 없습니다.');
+           return;
+       }
+       
+       const data = {
+           userId: signedInUser,
+           workId: workId.value
+       };
+       
+       axios.post('/fourmen/market/wishlist', data)
+       .then((response) => {
+           console.log(`response=${response.data}`);
+           if (response.data === 1) {
+               alert('찜하기 성공');
+               location.reload();
+           } else if (response.data === 0) {
+               alert('이미 찜한 게시글입니다.');
+           }
+       })
+       .catch ((error) => {
+           console.log(`에러발생: ${error}`);
+       })
+       
+    });       
+
+    
+    // 찜 취소
+    btnRemoveWishList.addEventListener('click', function() {
+		
+	    console.log('찜하기 취소 클릭');
+        console.log(`signedInUser=${signedInUser}`);
+       
+        if (signedInUser == "") {    // 로그인 안했을 시 로그인시킴
+            alert("로그인되지 않았습니다.");
+            location.reload();
+                       
+            return;
+        }
+       
+        const data = {
+            userId: signedInUser,
+            workId: workId.value
+        };
+       
+        axios.post('/fourmen/market/wishlist/remove', data)
+        .then((response) => {
+            console.log(`response=${response.data}`);
+            if (response.data === 1) {
+                alert('찜하기 취소 성공');
+                location.reload();
+            } else if (response.data === 0) {
+                alert('찜하기 취소 실패. 다시 시도해주세요.');
+                location.reload();
+            }
+        })
+       .catch ((error) => {
+           console.log(`에러발생: ${error}`);
+       })
+				
+	});
     
 
-})
+    // 거래요청 버튼 클릭    
+    btnRequestDeal.addEventListener('click', function() {
+                
+        if (signedInUser == "") {    // 로그인 안했을 시 로그인시킴
+            const target = encodeURIComponent(`/fourmen/market/detail?workid=${ workId.value }`);
+            console.log(`target=${target}`);
+            
+            location.href=`/fourmen/signup?target=${target}`;
+            
+            modalBody.setAttribute('id', '');
+            
+            return;
+        } else if (signedInUser == writerId.value) {  // 본인글일 시 경고메세지 띄움
+            
+            modalBody.setAttribute('id', '');
+            
+            alert('본인글에 거래요청을 보낼 수 없습니다.');
+            
+            location.reload();
+            return;
+        } else {
+            modalBody.setAttribute('id', 'requestDeal');
+            btnRequestDeal.click();
+        }
+        
+    });
+
+    
+    
+    // 거래요청 보내기 버튼 클릭
+    btnSendRequest.addEventListener('click', function() {
+        requestDealForm.submit();
+    });
+    
+    
+}); // DOMLoaded 이벤트리스너 끝

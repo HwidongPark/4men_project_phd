@@ -112,17 +112,36 @@ async function checkNickname(e){
 		}
 	}
 	function checkPhone(e){
-		if(e.target.value===''){
+
+  	if( e.target.value >= 0 && e.target.value <= 1000000000000){
+		 if(e.target.value.length >=9){
+			phoneChecked = true; 
+		 } else{
+			 phoneChecked = false;
+			 alert('올바르지 않은 전화번호입니다 . -제외하고 입력해주세요');
+			 return;
+			 
+		 }
+    	
+  	}else{
+		  
+		  phoneChecked = false;
+  	alert('전화번호로 입력해주세요');
+  	return;
+	}
+		
+	   /*if(e.target.value===''){
 			phoneChecked = false;
 		} else {
 			phoneChecked = true;
-		}
+		}*/
 		if(idChecked && pwdChecked && nameChecked && nicknameChecked && phoneChecked && emailChecked){
 			btnSignup.classList.remove('disabled');
 		} else {
 			btnSignup.classList.add('disabled');
 		}
 	}
+	
 	
 	function checkEmail(e){
 		if(e.target.value===''){

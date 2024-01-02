@@ -153,9 +153,150 @@
 		delete from TEST where NAME = #{name}
 	</delete>
 	
+
+	
     <insert id = "Exhibitionplus">
 		insert into TEST (NAME, LOCATION, STARTDATE, ENDDATE, PHOTO, SITE) values (#{name}, #{location}, #{startdate}, #{enddate}, #{photo}, #{site})
 	</insert>
   
+   <!-- marketadmin -->
+    <select id="getWorkId" resultType="long">
+        SELECT max(worksid) FROM market
+    </select>
+    
+    <select id="readPagedMarketPosts" resultType="Market">
+        SELECT *
+        FROM market
+        ORDER BY worksid DESC
+        OFFSET #{ startingPost } ROWS FETCH NEXT #{ postsPerPage } ROWS ONLY
+    </select>
+    
+    <select id="countTotNumber" resultType="Integer">
+        SELECT count(*)
+        FROM market
+    </select>
+    
+        <select id="readMarketPosts" resultType="Market">
+        SELECT * FROM market ORDER BY worksid DESC
+    </select>
+    
+    <select id="readMarketPost" resultType="Market">
+        SELECT * FROM market WHERE worksid = #{ workId }
+    </select>
+    
+    <select id="readPopularMarketPosts" resultType="Market">
+        SELECT *
+        FROM (
+            SELECT *
+            FROM market
+            ORDER BY (views + 10 * likes) DESC
+        )
+        
+    </select>
+    
+    
+    <select id="readWorkImagesofPost" resultType="WorkImage">
+        SELECT * FROM images WHERE worksid= #{workId}
+    </select>
+    
+     <select id="searchPosts" resultType="Market">
+        SELECT *
+        FROM market
+        <where>
+            <if test="!keyword.equals('') and keyword != null">
+                <choose>
+                    <when test="searchCategory.equals('title')">
+                        title LIKE '%'||#{ keyword }||'%'
+                    </when>
+                    <when test="searchCategory.equals('content')">
+                        description_kor LIKE '%'||#{ keyword }||'%'
+                    </when>
+                    <when test="searchCategory.equals('userId')">
+                        userid LIKE '%'||#{ keyword }||'%'
+                    </when>
+                    <when test="searchCategory.equals('titleContent')">
+                        (title LIKE '%'||#{ keyword }||'%'
+                        OR description_kor LIKE '%'||#{ keyword }||'%')
+                    </when>
+                    <when test="searchCategory.equals('titleContentUserId')">
+                        (title LIKE '%'||#{ keyword }||'%'
+                        OR description_kor LIKE '%'||#{ keyword }||'%'
+                        OR userid LIKE '%'||#{ keyword }||'%')
+                    </when>
+                    <otherwise>
+                        title LIKE '%'||#{ keyword }||'%'
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="!minPrice.equals('') and minPrice != null">
+                AND PRICE &gt;= #{ minPrice } 
+            </if>
+            <if test="!maxPrice.equals('') and maxPrice != null">
+                AND PRICE &lt;= #{ maxPrice }
+            </if>
+        </where>
+        ORDER BY worksid DESC
+        OFFSET #{ startingPost } ROWS FETCH NEXT #{ postsPerPage } ROWS ONLY
+    </select>
+    
+    
+    <select id="searchCountTotNumber" resultType="Integer">
+        SELECT count(*)
+        FROM market
+        <where>
+            <if test="!keyword.equals('')">
+                <choose>
+                    <when test="searchCategory.equals('title')">
+                        title LIKE '%'||#{ keyword }||'%'
+                    </when>
+                    <when test="searchCategory.equals('content')">
+                        description_kor LIKE '%'||#{ keyword }||'%'
+                    </when>
+                    <when test="searchCategory.equals('userId')">
+                        userid LIKE '%'||#{ keyword }||'%'
+                    </when>
+                    <when test="searchCategory.equals('titleContent')">
+                        (title LIKE '%'||#{ keyword }||'%'
+                        OR description_kor LIKE '%'||#{ keyword }||'%')
+                    </when>
+                    <when test="searchCategory.equals('titleContentUserId')">
+                        (title LIKE '%'||#{ keyword }||'%'
+                        OR description_kor LIKE '%'||#{ keyword }||'%'
+                        OR userid LIKE '%'||#{ keyword }||'%')
+                    </when>
+                    <otherwise>
+                        title LIKE '%'||#{ keyword }||'%'
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="!minPrice.equals('')">
+                AND PRICE &gt;= #{ minPrice } 
+            </if>
+            <if test="!maxPrice.equals('')">
+                AND PRICE &lt;= #{ maxPrice }
+            </if>
+        </where>
+    </select>
+    
+       <select id="readImage" resultType="WorkImage">
+        SELECT * FROM images WHERE imgid = #{ imgId }
+    </select>
+    
+       <select id="readWishList" resultType="Integer">
+        SELECT count(*)
+        FROM wishlist
+        WHERE userid = #{userId} AND workid = #{workId}
+    </select>
+    
+    <select id="readWishListOfUser" resultType="WishList">
+        SELECT *
+        FROM wishlist
+        WHERE userid = #{ signedInUser }
+        ORDER BY id DESC
+    </select>
+    
+    <delete id="Marketdelete">
+        DELETE FROM market WHERE title = #{ title }
+    </delete>
 	
 </mapper>

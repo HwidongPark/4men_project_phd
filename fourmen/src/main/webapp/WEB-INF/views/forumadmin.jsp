@@ -16,7 +16,11 @@
 	<link rel="stylesheet" href="css/underheader.css">
 	<link rel="stylesheet" href="css/pagenation.css">	
 	<link rel="stylesheet" href="css/forum-kategorie-area.css">
-	<link rel="stylesheet" href="css/exhibition.css">
+
+<link rel="stylesheet" href="css/forum-search-area.css">
+
+<link rel="stylesheet" href="css/forum-create-new-post.css">
+
 </head>
 <%@ include file="fragments/navigation.jspf"%>
 <body>
@@ -25,12 +29,12 @@
     <div id="underheader-div">
         <div class="container" id="underheadrcontainer">
             <h2 class="commondesign">
-                EXHIBITION ADMIN
+                FORUM ADMIN
             </h2>
         </div>
     </div>
 		
-		
+		<main>
 			  <!-- 게시판 카테고리(자유게시판, 후기게시판, 질문게시판) -->
     <section role="kategorie" class="kategorie" style="border-bottom: 1.5px solid #D8D8D8;">
         <div class="forum-kategorie">
@@ -53,81 +57,114 @@
             </ul>
         </div>
     </section>
-    	<main class="main-content">
-    	 <div class="w-75 m-auto ">
-		 
-		<c:url var="exhibitionSearch" value="/exhibitionadmin" />
-    	<form action="${exhibitionSearch}" method="get" id="search-form" role="form">
-    	
-    	<div class="all-select">
-    	
-    	<div class="date-select">
-    	<label for="date">
-  		<input type="date"
-         id="startdate-select"
-         name="startdate"
-         max="2030-01-01"
-         min="2023-01-01"
-         >
-		</label>
-		<label for="date">~
-  		<input type="date"
-         id="enddate-select"
-         name="enddate"
-         max="2030-01-01"
-         min="2023-01-01"
-         >
-		</label>
-		</div>
-		
-		<div class="text-select">
-        <select name="category" id="selectCategory">
-            <option value="name" name="name"<c:out value="${scri.category eq 'title' ? 'selected' : ''}"/>>전시회</option>
-            <option value="location" name="location"<c:out value="${scri.category eq 'location' ? 'selected' : ''}"/>>위치</option>
-        </select>
-        <input id="search-keyword" type="text" name="keyword" placeholder="검색" value="${scri.keyword}">
-		</form>
-		
- 		<button id="btnSearch">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
-            </svg>
-       </button>
-		</div>
-		</div>   
-			
-     	<div class="exhibition-plus-box">
-     	<a href="exhibitionadmin/plus"><button class="exhibition-plus btn btn-success">전시회 추가</button></a>
-     	</div>
-        <!-- 각 메뉴들의 내용을 간략하게 보여줌 -->
+    </main>
     
-		
-        <!-- 훈련과정 간략하게 보여줌 -->
-        <div class="gridbox">
-            <div class="row row-cols-1 row-cols-md-3 g-4">
-             <c:forEach var="exhibition" items="${exhibition}">
-                <div class="col">
-                    <div class="card card border-light mb-3">
-                    	<c:url var="exhibitiondelete" value="/exhibitionadmin/delete"/>
-                        
-                    	
-                        <a class="aReserve" href="${exhibition.site}"><img src="image/${exhibition.photo}" class="card-img-top" id="exhibition-image" alt="..."></a>
-                        <div class="card-body">
-                        <form action="${exhibitiondelete}" method="get" id="exhibition-admin">
-                            <h5 class="card-title text-center" id="exhibition-name">${exhibition.name}</h5>
-                            </form>
-                            <p class="card-text text-center">${exhibition.startdate}~${exhibition.enddate}</p>
-                            <div id="btnDiv"><button id="btndelete" data-exname="${exhibition.name}" class="btndelete btn btn-danger">삭제하기</button></div>
-                        
-                    </div>
-                    </div>
+        <section role="kategorie" class="kategorie" style="border-bottom: 1.5px solid #D8D8D8;">
+        <div class="forum-kategorie">
+            <ul class="forum-kategorie-board-lists">
+                <li class="forum-kategorie-board">
+                    <a href="freeboard">자유게시판</a>
+                </li>
+                <li class="forum-kategorie-board">
+                    <a href="queryboard">Q&A</a>
+                </li>
+                <li class="forum-kategorie-board">
+                    <a href="faqboard">FAQ</a>
+                </li>
+                <li class="forum-kategorie-board">
+                    <a href="noticeboard">NOTICE</a>
+                </li>
+            </ul>
+        </div>
+    </section>
+    
+    <!-- 게시글 검색창 -->
+    <section role="search" class="search">
+        <div class="forum-top-area">
+            <div class="forum-search-area">
+                <div class="forum-search-select-area">
+                    <select class="forum-select-box">
+                        <option class="forum-select-option">전체</option>
+                        <option class="forum-select-option">제목</option>
+                        <option class="forum-select-option">작성자</option>
+                        <option class="forum-select-option">내용</option>
+                    </select>
                 </div>
-                </c:forEach>
-   				</div>
-              </div>
+                <div class="forum-search-form-area">
+                    <input id=forum-search-input autocomplete="on" placeholder="검색어를 입력하세요." type="text">
+                </div>
 
-            </main>
-            <!-- 게시판 글 페이지네이션(pagination)-->
+                <div class="forum-search-btn-area">
+                    <button class="forum-search-btn" type="button">
+                        <img id="forum-search-btn-img" alt="검색버튼" src="icon/search01.svg">
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- board-list-content 게시판 글 리스트 테이블 -->
+    <section class="freeboard-list" style="padding: 3.5rem 18.5rem 0rem 18.5rem;">
+        <table class="table">
+            <colgroup>
+                <col style="width: 100px;">
+                <col style="width: 10px;">
+                <col style="width: auto;">
+                <col style="width: 10%;">
+                <col style="width: 15%;">
+                <col style="width: 10%;">
+            </colgroup>
+            <thead>
+            <tr>
+                <th>번호</th>
+                <th></th>
+                <th>제목</th>
+                <th>작성자</th>
+                <th>작성일</th>
+                <th>조회</th>
+            </tr>
+            </thead>
+            <tbody class="table-group-divider">
+            <c:forEach var="f" items="${faqboard_posts}">
+  
+                <tr>
+                    <td>${f.faq_num}</td>
+                    <td></td>
+                    <td id="table-td" style="text-align: left;">
+                        <c:url var="faqboard_faqDetailPage" value="/forum/faqboard-datail">
+                            <c:param name="faq_id" value="${f.faq_id}" />
+                        </c:url>
+                        <a href="${faqboard_faqDetailPage}">${f.faq_title}</a>
+                    </td>
+                    <td>${f.userid}</td>
+                    <td>${f.faq_created_time}</td>
+                    <td>${f.faq_view_count}</td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
+    </section>
+    
+    <!-- 새글 작성 내비게이션(HOME / MAP / NEW POST) -->
+    <div class="new-post-div">
+        <nav class="new-post-nav">
+            <ul class="new-post-ul">
+                <li id="new-post-li-one" class="new-post-li">
+                    <a href="../">HOME</a>
+                </li>
+                <li id="new-post-li-two" class="new-post-li">
+                    <a href="map">MAP</a>    
+                </li>
+                <li id="new-post-li-three" class="new-post-li">
+                    <a href="freeboard-create">NEW POST</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    
+    
+    
+	            <!-- 게시판 글 페이지네이션(pagination)-->
     <div>
         <nav aria-label="Page navigation">            
             <ul class="pagination">
@@ -202,7 +239,6 @@
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
 		crossorigin="anonymous"></script>
-	<script src="js/exhibitionjs.js"></script>
-	<script src="js/exhibitionadmin.js"></script>
+
 </body>
 </html>

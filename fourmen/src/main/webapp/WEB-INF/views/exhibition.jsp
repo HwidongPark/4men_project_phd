@@ -239,14 +239,14 @@ table {
             </h2>
         </div>
     </div>
-		 
+		 <main class="main-content">
 		 <div class="w-75 m-auto ">
-		 
+	
 		<c:url var="exhibitionSearch" value="/exhibition" />
     	<form action="${exhibitionSearch}" method="get" id="search-form" role="form">
     	
-    	<div class="all-select">
     	
+    	<div class="all-select">
     	<div class="date-select">
     	<label for="date">
   		<input type="date"
@@ -265,13 +265,14 @@ table {
          >
 		</label>
 		</div>
-		
+		 
 		<div class="text-select">
         <select name="category" id="selectCategory">
             <option value="name" name="name"<c:out value="${scri.category eq 'title' ? 'selected' : ''}"/>>전시회</option>
             <option value="location" name="location"<c:out value="${scri.category eq 'location' ? 'selected' : ''}"/>>위치</option>
         </select>
         <input id="search-keyword" type="text" name="keyword" placeholder="검색" value="${scri.keyword}">
+		
 		</form>
 		
  		<button id="btnSearch">
@@ -281,7 +282,7 @@ table {
        </button>
 		</div>
 		</div>   
-			
+	
         
 
     	
@@ -289,14 +290,14 @@ table {
     
         <!-- 각 메뉴들의 내용을 간략하게 보여줌 -->
     
-		<main class="main-content">
+		
         <!-- 훈련과정 간략하게 보여줌 -->
         <div class="gridbox">
             <div class="row row-cols-1 row-cols-md-3 g-4">
              <c:forEach var="exhibition" items="${exhibition}">
                 <div class="col">
                     <div class="card card border-light mb-3">
-                        <img src="image/${exhibition.photo}" class="card-img-top" id="exhibition-image" alt="...">
+                        <a class="aReserve" href="${exhibition.site}"><img src="image/${exhibition.photo}" class="card-img-top" id="exhibition-image" alt="..."></a>
                         <div class="card-body">
                             <h5 class="card-title text-center">${exhibition.name}</h5>
                             <p class="card-text text-center">${exhibition.startdate}~${exhibition.enddate}</p>
@@ -420,6 +421,7 @@ table {
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
 		crossorigin="anonymous"></script>
+
 	 <script>
       $(function(){
         $('#searchBtn').click(function() {
@@ -428,6 +430,9 @@ table {
         });
       });   
     </script>
+
+    <script src="/fourmen/js/header.js"></script>
+
 	<script src="js/exhibitionjs.js"></script>
 </body>
 </html>

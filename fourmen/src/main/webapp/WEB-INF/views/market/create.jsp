@@ -44,7 +44,7 @@
                     </div>
                     <!-- TODO: 유저아이디 일단 적는데 나중에 지울거임 -->
                     <label>유저아이디:</label>
-                    <input type="text" name="userId" class="form-control mb-2">
+                    <input type="text" name="userId" class="form-control mb-2" value=${ sessionScope.signedInUser } readonly>
                     
                     <button class="market-create-cancel btn btn-outline-secondary" type="button">취소</button>
                     <button id="btn-market-create-submit" type="button" class="btn btn-outline-success">작성</button>

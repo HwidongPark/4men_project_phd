@@ -91,6 +91,7 @@ public class HomeController {
 	}
 
     
+
 //    @GetMapping("/market")
 //    public void market() {
 //    	log.debug("market()");
@@ -119,6 +120,7 @@ public class HomeController {
 		return "/admin";
 		
 	}
+
     
     @GetMapping("/signup")
     public void signup() {

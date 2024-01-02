@@ -65,6 +65,9 @@
                 <li class="forum-kategorie-board">
                     <a href="../exhibitionadmin">전시회 관리</a>
                 </li>
+                 <li class="forum-kategorie-board">
+                    <a href="../forumadmin">게시판 관리</a>
+                </li>
             </ul>
         </div>
     </section>

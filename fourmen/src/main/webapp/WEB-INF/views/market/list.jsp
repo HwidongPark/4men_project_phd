@@ -1,3 +1,4 @@
+<%@page import="org.apache.taglibs.standard.tag.common.xml.JSTLXPathFactory"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
@@ -85,14 +86,14 @@
                     <option value="titleContentUserId">제목 + 내용 + 작성자</option>
                 </select>
                 <!-- 검색어 input -->
-                <input class="search-keyword" name="keyword">
+                <input class="search-keyword" type="text" name="keyword">
                 <button id="btnSearch">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16"
                         height="16" fill="currentColor" class="bi bi-search"
                         viewBox="0 0 16 16">
                             <path
                             d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
-                        </svg>
+                    </svg>
                 </button>
             </div>
         </form>
@@ -149,9 +150,21 @@
                                     </span>
                                     ${ marketPost.views }
                                     <!-- 좋아요(찜) -->
-                                    <span class="material-symbols-outlined">
-                                        favorite
-                                    </span>
+                                    <c:set var="isWishListed" value="false" />
+                                    <c:forEach items="${ userWishList }" var="wishList">
+                                        <c:if test="${ wishList.workId eq marketPost.workId }">
+                                            <c:set var="isWishListed" value="true" />
+                                        </c:if>
+                                    </c:forEach>
+                                    
+                                    <c:if test="isWishListed">
+                                        <i class="fa-solid fa-heart"></i>   <!-- 유저가 찜한 글이면 꽉찬 하트 -->                               
+                                    </c:if>
+                                    <c:if test="!isWishListed">
+                                        <span class="material-symbols-outlined">    <!-- 유저가 찜하지 않은 글이면 빈 하트 -->
+                                            favorite
+                                        </span>
+                                    </c:if>                                 
                                     ${ marketPost.likes }
                                 </div>                                
                             </div>
@@ -168,13 +181,20 @@
         </div>
     </main>
     
+    
     <!-- 게시판 글 페이지네이션(pagination)-->
     <div>
         <nav aria-label="Page navigation">            
             <ul class="pagination">
                 <!-- 이전, 처음 페이지 -->
                 <li class="page-item">
-                    <c:url var="firstPage" value="${ servletPath }" />
+                    <c:url var="firstPage" value="${ servletPath }">
+                        <c:param name="page" value="1"/>
+                        <c:param name="searchCategory" value="${ param.searchCategory }"/>
+                        <c:param name="keyword" value="${ param.keyword }"/>
+                        <c:param name="minPrice" value="${ param.minPrice }" />
+                        <c:param name="maxPrice" value="${ param.maxPrice }"/>
+                    </c:url>
                     <a class="page-link-img" href="${ firstPage }" aria-label="first page">
                         <img id="pagination-img" alt="first page" src="/fourmen/pagination/pagination01.png">
                     </a>
@@ -191,6 +211,10 @@
                         <li class="page-item">
                             <c:url var="prevPage" value="${ servletPath }">
                                 <c:param name="page" value="${ page - 1 }"/>
+                                <c:param name="searchCategory" value="${ param.searchCategory }"/>
+                                <c:param name="keyword" value="${ param.keyword }"/>
+                                <c:param name="minPrice" value="${ param.minPrice }" />
+                                <c:param name="maxPrice" value="${ param.maxPrice }"/>
                             </c:url>
                             <a class="page-link-img" href="${prevPage }" aria-label="previous">
                                 <img id="pagination-img" alt="previous page" src="/fourmen/pagination/pagination02.png">
@@ -204,6 +228,10 @@
                     <li class="page-item">
                         <c:url var="moveToPage" value="${ servletPath }">
                             <c:param name="page" value="${ pageNum }"/>
+                            <c:param name="searchCategory" value="${ param.searchCategory }"/>
+                            <c:param name="keyword" value="${ param.keyword }"/>
+                            <c:param name="minPrice" value="${ param.minPrice }" />
+                            <c:param name="maxPrice" value="${ param.maxPrice }"/>
                         </c:url>
                         <a class="page-link" href="${ moveToPage }">${ pageNum }</a>
                     </li>
@@ -221,6 +249,10 @@
                     <c:otherwise>
                         <c:url var="nextPage" value="${ servletPath }">
                             <c:param name="page" value="${ page + 1 }"></c:param>
+                            <c:param name="searchCategory" value="${ param.searchCategory }"/>
+                            <c:param name="keyword" value="${ param.keyword }"/>
+                            <c:param name="minPrice" value="${ param.minPrice }" />
+                            <c:param name="maxPrice" value="${ param.maxPrice }"/>
                         </c:url>
                         <a class="page-link-img" href="${ nextPage }" aria-label="next">
                             <img id="pagination-img" alt="next page" src="/fourmen/pagination/pagination03.png">
@@ -229,6 +261,10 @@
                 </c:choose>
                 <c:url var="lastPage" value="${ servletPath }">
                     <c:param name="page" value="${ pagingDto.totNumPages }"/>
+                    <c:param name="searchCategory" value="${ param.searchCategory }"/>
+                    <c:param name="keyword" value="${ param.keyword }"/>
+                    <c:param name="minPrice" value="${ param.minPrice }" />
+                    <c:param name="maxPrice" value="${ param.maxPrice }"/>
                 </c:url>
                 <li class="page-item">
                     <a class="page-link-img" href="${ lastPage }" aria-label="last page">
@@ -238,8 +274,7 @@
             </ul>
         </nav>
     </div>
-    
-    
+
     
     <%@ include file="../fragments/footer.jspf"%>
 
