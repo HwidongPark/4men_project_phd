@@ -14,7 +14,7 @@
 	</select>
 
 	<select id = "selectOrderByUseridDesc" resultType = "Artist">
-		select * from ARTIST order by USERID desc
+		select * from ARTIST order by NICKNAME desc
 	</select>
 	
 	<select id = "selectUserImgByUserid" resultType = "Artist_Img">
@@ -46,7 +46,7 @@
 	</select>
 	
 	<update id = "updateArtist">
-		update ARTIST set ARTIST_BIO_KOR = #{artist_bio_kor}, ARTIST_BIO_ENG = #{artist_bio_eng} where USERID = #{userid}
+		update ARTIST set NICKNAME = #{nickname} ARTIST_BIO_KOR = #{artist_bio_kor}, ARTIST_BIO_ENG = #{artist_bio_eng} where USERID = #{userid}
 	</update>
 	
 	<update id = "updateArtistProfileImg">
@@ -56,6 +56,14 @@
 	<update id = "deleteArtistProfileImg">
 		update ARTIST_IMG set ORIGINAL_IMG = NULL, SAVED_IMG = NULL where USERID = #{userid}
 	</update>
+	
+	<insert id = "registerArtist">
+		insert into ARTIST values (#{userid}, #{artist_bio_kor}, #{artist_bio_eng}, #{nickname})
+	</insert>
+	
+	<insert id= "registerArtistImg">
+		insert into ARTIST_IMG values (#{userid}, #{original_img}, #{saved_img})
+	</insert>
 	
 	<insert id = "createWorks">
 		insert into WORKS (USERID, TITLE, CONTENT_KOR, CONTENT_ENG) values (#{userid}, #{title}, #{content_kor}, #{content_eng})

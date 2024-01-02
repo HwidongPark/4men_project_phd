@@ -80,7 +80,7 @@ public class CommentRestController {
 		
 		return ResponseEntity.ok(dto);
 	}
-	
+	// 선택된 댓글 한가지만 삭제
 	@DeleteMapping("/{comment_id}")
 	public ResponseEntity<Integer> deleteComment(@PathVariable long comment_id){
 		log.debug("=====================================");
@@ -92,5 +92,16 @@ public class CommentRestController {
 		
 		return ResponseEntity.ok(result);
 	}
-	
+	// 글이 삭제된다면 그 글에 종속된 댓글 모두 삭제
+	@DeleteMapping("/all/{worksid}")
+	public ResponseEntity<Integer> deleteAllComments(@PathVariable long worksid){
+		log.debug("=====================================");
+		log.debug("commentRestController - deleteAllComments()");
+		log.debug("deleteAllComments - WORKSID = {}", worksid);
+		log.debug("=====================================");
+		
+		int result = commentService.deleteAllComments(worksid);
+		
+		return ResponseEntity.ok(result);
+	}
 }

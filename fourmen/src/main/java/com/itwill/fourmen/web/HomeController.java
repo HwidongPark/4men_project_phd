@@ -63,9 +63,12 @@ public class HomeController {
 //    	model.addAttribute("artistList", artists);
     	
     	List<ArtistDto> artist = artistService.readArtist();
-    	log.debug("ArtistImgList = {}", artist);
+    	log.debug("ArtistList = {}", artist);
     	model.addAttribute("artist", artist);
     	
+    	List<ArtistDto> artistImg = artistService.readArtistImg();
+    	log.debug("ArtistImgList = {}", artistImg);
+    	model.addAttribute("artistImg", artistImg);
     }
     
     @GetMapping("/forum")

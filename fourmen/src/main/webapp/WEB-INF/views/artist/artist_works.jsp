@@ -68,7 +68,7 @@ html {
     <div id="underheader-div">
         <div class="container" id="underheadrcontainer">
             <h2 class="commondesign">
-                artists detail
+                ARTIST_WORKS
             </h2>
         </div>
     </div>
@@ -136,7 +136,7 @@ html {
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title">글 수정</h5>
+						<h5 class="modal-title">감상평 수정</h5>
 						<button type="button" class="btn-close" data-bs-dismiss="modal"
 							aria-label="Close"></button>
 					</div>
@@ -149,7 +149,7 @@ html {
 						<button type="button" class="btn btn-secondary"
 							data-bs-dismiss="modal">취소</button>
 						<button id="btnUpdateComment" type="button"
-							class="btn btn-primary">글 변경</button>
+							class="btn btn-primary">변경</button>
 					</div>
 				</div>
 			</div>

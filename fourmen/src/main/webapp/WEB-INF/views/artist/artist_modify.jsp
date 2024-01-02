@@ -48,6 +48,11 @@ div#modify {
 					</div>
 					
 					<div class = "my-2">
+						<label for="usernickname" class = "form-label">아티스트 닉네임</label>
+						<input class = "form-control" id = "nickname" type = "text" name = "nickname" value = "${artist.nickname}" />
+					</div>
+					
+					<div class = "my-2">
 						<label for="artist_bio_kor" class = "form-label">소개글_한글</label>
 						<textarea class = "form-control" id = "artist_bio_kor" name = "artist_bio_kor">${artist.artist_bio_kor}</textarea>
 					</div>

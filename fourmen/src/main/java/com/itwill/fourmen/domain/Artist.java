@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 public class Artist {
 
 	private String userid;
+	private String nickname;
 	private String artist_bio_kor;
 	private String artist_bio_eng;
 	

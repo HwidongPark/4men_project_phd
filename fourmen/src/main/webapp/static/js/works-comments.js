@@ -139,11 +139,11 @@ document.addEventListener('DOMContentLoaded', () => {
 			
 					<div class="pb-2 border-bottom">
 						<span class = "d-none">${comment.comment_id}</span>
-						<span class = "fs-4">${comment.comment_writer}</span>
-						<span class = "text-secondary">${formattedTime}</span>	
+						<span class = "fs-5 fw-bold">${comment.comment_writer}</span>
+						<span class = "ps-2 text-secondary">${formattedTime}</span>	
 					</div>
 				
-				<div class = "my-3 p-2"><span class = "fs-4">${comment.comment_content}</span></div>		
+				<div class = "my-3 p-2"><span class = "fs-5">${comment.comment_content}</span></div>		
 			`;
 
 			if (comment.comment_writer === 'TEST') {
@@ -218,5 +218,24 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 		
 	}// end of showCommentModal
+	
+	const btnDeleteAllComments = document.querySelector('button#btnDelete');
+	btnDeleteAllComments.addEventListener('click', (e) => {
+		
+		const worksid = document.querySelector('input#worksid');
+		const uri = `../api/comment/all/${worksid}`;
+		
+		axios.delete(uri)
+		.then((response) => {
+			console.log(response);
+			
+			if(response.data === 1){
+				alert('모든 댓글 삭제 완료...!');
+			}
+		}).catch((error) => {
+			console.log(error);
+		});	
+		
+	}); // end btnDeleteAllcomments Event.
 	
 });

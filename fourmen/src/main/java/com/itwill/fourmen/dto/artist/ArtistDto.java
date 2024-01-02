@@ -17,6 +17,7 @@ import lombok.NoArgsConstructor;
 public class ArtistDto {
 
 	private String userid;
+	private String nickname;
 	private String artist_bio_kor;
 	private String artist_bio_eng;
 	private String original_img;
@@ -29,6 +30,7 @@ public class ArtistDto {
 	public static ArtistDto fromEntity(Artist artist, Artist_Img artist_Img) {
 		return ArtistDto.builder()
 				.userid(artist.getUserid())
+				.nickname(artist.getNickname())
 				.artist_bio_kor(artist.getArtist_bio_kor())
 				.artist_bio_eng(artist.getArtist_bio_eng())
 				.original_img(artist_Img.getOriginal_img())
@@ -48,6 +50,7 @@ public class ArtistDto {
 	public static ArtistDto fromEntity(Artist artist) {
 		return ArtistDto.builder()
 				.userid(artist.getUserid())
+				.nickname(artist.getNickname())
 				.artist_bio_kor(artist.getArtist_bio_kor())
 				.artist_bio_eng(artist.getArtist_bio_eng())
 				.build();
@@ -56,6 +59,7 @@ public class ArtistDto {
 	public Artist artisToEntity() {
 		return Artist.builder()
 				.userid(userid)
+				.nickname(nickname)
 				.artist_bio_kor(artist_bio_kor)
 				.artist_bio_eng(artist_bio_eng)
 				.build();

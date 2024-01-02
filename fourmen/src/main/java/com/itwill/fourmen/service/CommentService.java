@@ -85,4 +85,19 @@ public class CommentService {
 		return result;
 	}// end of deleteComment
 	
+	
+	public int deleteAllComments(long worksid) {
+		log.debug("==========deleteAllComment=========");
+		log.debug(">> WORKSID = {}", worksid);
+		log.debug("===================================");
+		
+		int result = commentDao.deleteAllCommentsByWorksId(worksid);
+		
+		log.debug("====댓글 삭제 결과====");
+		log.debug(">> result {}", result);
+		log.debug("======================");
+		
+		return result;
+	}
+	
 }// end of CommentSerivce

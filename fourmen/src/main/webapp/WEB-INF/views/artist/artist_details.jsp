@@ -13,6 +13,7 @@
 	crossorigin="anonymous">
 <link rel="stylesheet" href="../css/header.css">
 <link rel="stylesheet" href="../css/footer.css">
+<link rel="stylesheet" href="../css/underheader.css">
 
 <style>
 @font-face {
@@ -45,6 +46,17 @@ div#details {
 	<!-- 헤더 파일 include -->
 	<%@ include file="../fragments/navigation.jspf"%>
 
+    <!-- 웹페이지 상단 헤더 아래 부분 -->
+    <div id="underheader-div">
+        <div class="container" id="underheadrcontainer">
+            <h2 class="commondesign">
+                ARTIST_DETAILS
+            </h2>
+        </div>
+    </div>
+
+
+
 	<div id="details" class="my-5 container-fluid w-75">
 
 		<!-- 페이지 상단 아티스트 사진 및 소개 -->
@@ -56,7 +68,7 @@ div#details {
 				</div>
 				<div class="px-3 col-md-6">
 					<div class="card-body">
-						<h5 id="userid" class="fs-1 card-title text-success fw-bolder">${artist.userid}</h5>
+						<h5 id="userid" class="fs-1 card-title text-success fw-bolder">${artist.nickname}</h5>
 						<p id="artist_bio_kor" class="fs-5 card-text">${artist.artist_bio_kor}</p> <br><br>
 						<p class="fs-5 card-text">
 							<small id="artist_bio_eng" class="text-body-secondary">${artist.artist_bio_eng}</small>

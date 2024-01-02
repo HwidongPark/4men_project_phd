@@ -8,6 +8,7 @@ import com.itwill.fourmen.domain.Artist;
 import com.itwill.fourmen.domain.Artist_Img;
 import com.itwill.fourmen.domain.Artist_Works;
 import com.itwill.fourmen.domain.Artist_Works_Img;
+import com.itwill.fourmen.dto.artist.ArtistDto;
 
 public interface ArtistDao {
 
@@ -40,6 +41,10 @@ public interface ArtistDao {
 	int updateArtistProfileImg(Artist_Img artist_Img);
 	
 	int deleteArtistProfileImg(String userid);
+	
+	int registerArtist(Artist artist);
+	
+	int registerArtistImg (Artist_Img artist_Img);
 	
 	int createWorks(Artist_Works artist_Works);
 	

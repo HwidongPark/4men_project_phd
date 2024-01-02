@@ -44,6 +44,12 @@ public class ArtistController {
 
 	private final ArtistService artistService;
 	
+	
+	@GetMapping("/artist_register")
+	public void register() {
+		log.debug("register()");
+	}
+	
 	@GetMapping("/artist_details")
     public void details(@RequestParam(name="userid") String userid, Model model) {
     	log.debug("details(userid ={})",userid);
@@ -86,6 +92,20 @@ public class ArtistController {
 		Artist_Img artist_Img = artistService.artistImgDetails(userid);
 		model.addAttribute("artist_img", artist_Img);
 	}
+	
+	@PostMapping("/artist_register")
+	public String artistRegister(@ModelAttribute ArtistDto dto, HttpServletRequest request) throws IllegalStateException, IOException {
+		log.debug("artistRegister()");
+		log.debug("artistRegister - DTO = {}", dto);
+		
+		String sDirectory = request.getServletContext().getRealPath("/static/images/char");
+		log.debug("ArtistController artistRegister - sDirectory = {}", sDirectory);
+		
+		artistService.registerArtist(dto, sDirectory);
+		
+		return "redirect:/artist";
+	}
+	
 	
 	// Artist 개개인 정보 수정후 POST 방식으로 전달. 
 	@PostMapping(path = "/artist_modify")

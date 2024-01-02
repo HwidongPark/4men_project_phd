@@ -34,7 +34,7 @@ public class ArtistService {
 	private final ArtistDao artistDao;
 	
 	// 등록된 아티스트들을 /aritst 페이지에 뿌려주는 역할 
-	public List<ArtistDto> read() {
+	public List<ArtistDto> readArtist() {
 		log.debug("ArtistService read()");
 		
 		List<Artist> list = artistDao.selectOrderByUseridDesc();
@@ -45,7 +45,7 @@ public class ArtistService {
 		return list.stream().map(ArtistDto::fromEntity).toList();
 	}// end of read() method
 	
-	public List<ArtistDto> readArtist() {
+	public List<ArtistDto> readArtistImg() {
 		log.debug("ArtistService - read()");
 		
 		List<Artist_Img> artistImgList = artistDao.selectUserImgByUserid();
@@ -122,6 +122,43 @@ public class ArtistService {
 		
 		return worksImgList.stream().map(ArtistWorksImgListItemDto::fromEntity).toList();
 	}
+	
+	
+	// 아티스트 등록
+	public void registerArtist(ArtistDto dto, String sDirectory) throws IllegalStateException, IOException {
+		log.debug("ArtistService registerArtist()");
+		log.debug("===============PARAMS===============");
+		log.debug("DTO =  {}",dto);
+		log.debug("sDirectory = {}", sDirectory);
+		log.debug("====================================");
+		
+		MultipartFile file = dto.getUpload_file();
+		
+		if(!file.isEmpty()) {
+			String originalFileName = file.getOriginalFilename();
+			log.debug("originalFileName = {}", originalFileName);
+			
+			dto.setOriginal_img(originalFileName);
+			
+			String fileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
+			log.debug("fileExtension = {}", fileExtension);
+			
+			String artist_img = UUID.randomUUID().toString() + fileExtension;
+
+			String absolutePath = sDirectory + File.separator + artist_img;
+			log.debug("absolutePath = {}", absolutePath);
+			file.transferTo(new File(absolutePath));
+			
+			dto.setSaved_img(artist_img);
+			
+			int registerArtistResult = artistDao.registerArtist(dto.artisToEntity());
+			log.debug("아티스트 등록 = {}", registerArtistResult);
+			
+			int registerArtistImgResult = artistDao.registerArtistImg(dto.artistImgToEntity());
+			log.debug("아티스트 사진 등록 = {}", registerArtistImgResult);
+		}
+	}
+	
 	
 	// artist_details에서 개인 소개글과 사진을 업데이트 하기 위함...
 	public void updateArtist(ArtistDto dto, String sDirectory) throws IllegalStateException, IOException {

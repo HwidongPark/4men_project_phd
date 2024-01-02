@@ -26,12 +26,9 @@
     font-style: normal;
 }
 
-body{
-
-  font-family: 'Pretendard-Regular';
-
+div#works{
+	font-family: 'Pretendart-Regular';
 }
-
 
 div#artist_container {
 	margin: 0 auto;
@@ -97,19 +94,32 @@ div#artist {
     </div>
     
 
-	<div id="works" class="my-5 container-fluid w-75">
+	<div id="works" class="mb-5 container-fluid w-75">
+			<div class = "d-grid d-md-flex justify-content-md-end">
+				<c:url var = "registerArtist" value = "/artist/artist_register"></c:url>
+					<a href="${registerArtist}" class = "mb-3 btn btn-outline-dark">아티스트 추가</a>
+			</div>
+	
 		<div id = "artist_container">
-			<c:forEach var="a" items="${artist}">
+			<c:forEach var="a" items="${artist}" varStatus = "loop">
 				<c:url var="artist_details" value="/artist/artist_details">
 					<c:param name="userid" value="${a.userid}"/>
 				</c:url>
+				
 				<a href="${artist_details}">
-						<div class="card text-bg-light">
-							<img src="images/char/${a.saved_img}" onerror="this.src='images/char/default_user.png'" class="card-img" alt="test_user"/>
-							<div class="card-img-overlay">
-								<h5 class="card-title fs-2">${a.userid}</h5>
-							</div>
+					<div class="card text-bg-light">
+						<c:forEach var="img" items ="${artistImg}" varStatus="imgLoop">
+							<c:if test="${loop.index == imgLoop.index}">
+								<c:if test="${a.userid eq img.userid}">
+									<img src="images/char/${img.saved_img}" onerror="this.src='images/char/default_user.png'" class="card-img" alt="test_user"/>
+								</c:if>
+							</c:if>
+						</c:forEach>
+								
+						<div class="card-img-overlay">
+							<h5 class="card-title fs-2">${a.nickname}</h5>
 						</div>
+					</div>
 				</a>
 			</c:forEach>
 		</div>

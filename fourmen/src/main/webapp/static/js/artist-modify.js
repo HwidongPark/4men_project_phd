@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		btnDelete.disabled = true; 
 	}
     
+    
     console.log(isFileDeleted.value);
     
 	btnDelete.addEventListener('click', () => {

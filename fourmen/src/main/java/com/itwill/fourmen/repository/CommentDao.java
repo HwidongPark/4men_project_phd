@@ -14,5 +14,7 @@ public interface CommentDao {
 	
 	int deleteCommentByCommentId(long comment_id);
 	
+	int deleteAllCommentsByWorksId(long worksid);
+	
 	int updateComment(Comments comments);
 }
