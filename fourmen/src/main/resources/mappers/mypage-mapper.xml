@@ -9,7 +9,36 @@
         SELECT *
         FROM messages
         WHERE recipient = #{signedInUser}
+        ORDER BY id DESC
+        OFFSET #{startingPage} ROWS FETCH NEXT #{postsPerPage} ROWS ONLY
     </select>
+    
+    <select id="totNumOfMessages" resultType="Integer">
+        SELECT count(*)
+        FROM messages
+        WHERE recipient = #{signedInUser}
+    </select>
+    
+    <select id="readFirstMessages" resultType="Message">
+        SELECT *
+        FROM messages
+        WHERE reply_to is null
+        ORDER BY id DESC
+    </select>
+    
+    <select id="readReply" resultType="Message">
+        SELECT *
+        FROM messages
+        WHERE reply_to = #{id}
+    </select>
+    
+    
+    <select id="findParentMessage" resultType="Message">
+        SELECT *
+        FROM messages
+        WHERE id = #{replyTo}
+    </select>
+    
     
     <select id="readMyMessageById" resultType="Message">
         SELECT *
@@ -26,6 +55,7 @@
         INSERT INTO messages (sender, recipient, workid, title, content, price_offered, price, reply_to)
         VALUES (#{sender}, #{recipient}, #{workId}, #{title}, #{content}, #{priceOffered}, #{price}, #{replyTo})
     </insert>
+    
     
     
 </mapper>

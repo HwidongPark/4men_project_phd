@@ -36,4 +36,16 @@ public class MyPageRestController {
 	}
 	
 	
+	@PostMapping("/mymessage/confirm-deal")
+	public ResponseEntity<Integer> confirmDeal(@RequestBody Message message) {
+		
+		log.debug("confirmDeal(message={})", message);
+		
+		int result = myPageService.confirmDeal(message);
+		log.debug("거래 확정 결과={}", result);
+		
+		return ResponseEntity.ok(result);
+	}
+	
+	
 }

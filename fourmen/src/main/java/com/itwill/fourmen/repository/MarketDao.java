@@ -80,5 +80,8 @@ public interface MarketDao {
 	 // 유저가 찜한 게시글 리스트 반환
 	 List<WishList> readWishListOfUser(String signedInUser);
 	 
-
+	 
+	 // 거래 확정 메서드
+	 int confirmDeal(Long workId);
+	 
 }

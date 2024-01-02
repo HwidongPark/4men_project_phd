@@ -22,7 +22,7 @@
             <input type="text" name="recipient" class="form-control mb-2" value="${ messageDto.sender }" readonly>
             <input class="d-none" name="sender" value="${ signedInUser }"> <!-- 보내는 사람 (나) -->
             <label class="mb-1">제목</label>
-            <input type="text" name="title" class="form-control mb-2" required>
+            <input type="text" name="title" class="form-control mb-2" value="Re: ${ messageDto.title }" required>
             <label class="mb-1">내용</label>
             <textarea id="message-detail-content" name="content" class="form-control" rows="22" required></textarea>
             <div class="mb-4">

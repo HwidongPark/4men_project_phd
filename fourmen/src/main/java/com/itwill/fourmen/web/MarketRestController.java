@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.itwill.fourmen.domain.Market;
+import com.itwill.fourmen.domain.Message;
 import com.itwill.fourmen.domain.WishList;
 import com.itwill.fourmen.domain.WorkImage;
 import com.itwill.fourmen.dto.market.MarketPostDto;
@@ -87,6 +89,23 @@ public class MarketRestController {
 		
 		int result = marketService.removeWishList(wishList);
 		log.debug("찜하기 제거 결과 = {}", result);
+		
+		return ResponseEntity.ok(result);
+	}
+	
+	
+	/**
+	 * workId에 해당하는 마켓 게시글의 거래를 확정시키는 controller method
+	 * @param workId
+	 * @return
+	 */
+	@PostMapping("/confirm-deal")
+	public ResponseEntity<Integer> confirmDeal(@RequestBody Message message) {
+		
+		log.debug("confirmDeal(message={})", message);
+		
+		int result = marketService.confirmDeal(message.getWorkId());
+		log.debug("거리 확정 결과={}", result);
 		
 		return ResponseEntity.ok(result);
 	}

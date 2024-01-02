@@ -9,10 +9,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwill.fourmen.domain.Message;
 import com.itwill.fourmen.domain.WishList;
 import com.itwill.fourmen.dto.market.MarketPostDto;
+import com.itwill.fourmen.dto.market.PagingDto;
 import com.itwill.fourmen.dto.mymessage.MyMessageDto;
 import com.itwill.fourmen.service.MarketService;
 import com.itwill.fourmen.service.MyPageService;
@@ -58,19 +60,23 @@ public class MyPageController {
 	}
 	
 	
+	
 	/**
-	 * 현재 로그인한 유저가 받은 메세지를 보여주는 컨트롤러
+	 * 로그인한 유저가 받은 모든 메세지를 받아서 my message페이지에 전달함
 	 * @param session
+	 * @param request
+	 * @param model
 	 * @return
 	 */
 	@GetMapping("/mymessage")
-	public String myMessage(HttpSession session, HttpServletRequest request, Model model) {
+	public String myMessage(HttpSession session, HttpServletRequest request, Model model
+			, @RequestParam(name = "page", defaultValue = "1", required = false) int page) {
 		String signedInUser = (String) session.getAttribute("signedInUser");
 		
 		log.debug("myMessage(signedInUser={})", signedInUser);
 		
 		// 메세지 받은거 다 가져옴
-		List<Message> myMessages = myPageService.readMyMessage(signedInUser);
+		List<Message> myMessages = myPageService.readMyMessage(signedInUser, page);
 		log.debug("myMessages={}", myMessages);
 		
 		List<MyMessageDto> messageDtoList = new ArrayList<>(); 
@@ -84,13 +90,29 @@ public class MyPageController {
 		
 		log.debug("messageDtoList={}", messageDtoList);		
 		
+		// 페이징 객체 가져옴
+		PagingDto pagingDto = myPageService.pagingMessages(page, signedInUser);
+		log.debug("pagingDto={}", pagingDto);
+		
+		// 로그인한 유저가 포함된 메세지 번들(메세지, 답변 모두 포함된)
+		List<MyMessageDto> messageBundles = myPageService.readMyMessageReplyBundle(signedInUser);
+		log.debug("messageBundles={}", messageBundles);			
+		
+		log.debug("my first received messages in the message bundles = {}", messageDtoList);			
+		
 		String sDirectory = request.getServletContext().getRealPath("/static/uploads");
 		
-		model.addAttribute("myMessagesDtoList", messageDtoList);
+		model.addAttribute("messageDtoList", messageDtoList);
+		model.addAttribute("messageBundles", messageBundles);	// TODO: 일단 유저가 받은 메세지, 답변들 번들 넘겨줌.. 필요없으면 나중에 지우기
+		model.addAttribute("page", page);
+		model.addAttribute("pagingDto", pagingDto);
 		model.addAttribute("sDirectory", sDirectory);
 		
 		return "/mypage/mymessage";
 	}
+	
+	
+	
 	
 	
 	/**
@@ -100,13 +122,21 @@ public class MyPageController {
 	 * @return
 	 */
 	@GetMapping("/mymessage/detail")
-	public String myMessageDetail(Long id, Model model) {
+	public String myMessageDetail(Long id, Model model, HttpSession session) {
 		log.debug("myMessageDetail(id={})", id);
 		
 		MyMessageDto messageDto = myPageService.readMymessage(id);
 		log.debug("messageDto={}", messageDto);
 		
+		// 유저가 누른 메세지를 포함한 번들을 messageDto의 replies에 추가해줌
+		MyMessageDto firstMessageDto = myPageService.findFirstMessage(messageDto);
+		
+		firstMessageDto = myPageService.findReplies(firstMessageDto);
+		log.debug("firstMessageDto={}", firstMessageDto);
+		
+		
 		model.addAttribute("messageDto", messageDto);
+		model.addAttribute("firstMessageDto", firstMessageDto);
 		
 		return "/mypage/mymessage/detail";
 	}
@@ -133,7 +163,12 @@ public class MyPageController {
 	}
 	
 	
-	
+	/**
+	 * 해당 메세지에 대해 답장하는 컨트롤러
+	 * @param messageDto
+	 * @param model
+	 * @return
+	 */
 	@PostMapping("/mymessage/reply")
 	public String reply (MyMessageDto messageDto, Model model) {
 		

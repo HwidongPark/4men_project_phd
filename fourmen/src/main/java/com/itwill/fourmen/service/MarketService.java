@@ -576,4 +576,14 @@ public class MarketService {
 	}
 	
 	
+	public int confirmDeal(Long workId) {
+		log.debug("confirmDeal(workId={})", workId);
+		
+		int result = marketDao.confirmDeal(workId);
+		log.debug("거래 확정 결과={}", result);
+		
+		return result;
+	}
+	
+	
 }	// MarketService 클래스 끝
