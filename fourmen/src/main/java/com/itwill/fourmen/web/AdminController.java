@@ -24,10 +24,10 @@ import com.itwill.fourmen.domain.User;
 import com.itwill.fourmen.domain.WishList;
 import com.itwill.fourmen.dto.admin.UserUpdateDto;
 import com.itwill.fourmen.dto.admin.exhibitioncreateDto;
-import com.itwill.fourmen.dto.artist.ArtistUpdateDto;
 import com.itwill.fourmen.dto.market.MarketPostDto;
 import com.itwill.fourmen.dto.market.MarketSearchDto;
 import com.itwill.fourmen.dto.market.PagingDto;
+import com.itwill.fourmen.dto.post.PostListItemDto;
 import com.itwill.fourmen.repository.AdminUserDao;
 import com.itwill.fourmen.service.adminUserService;
 
@@ -204,9 +204,36 @@ public String Marketsearchdelete(@RequestParam(name="title") String title) {
 	 return "redirect:/marketadmin";   
 	    }
 
-@GetMapping("/forumadmin")
-public void forumadmin() {
-	
-	
-}
+//@GetMapping("/forumadmin")
+//// freeeboard 처리 시작 //
+//@GetMapping("/freeboard") //-> GET 방식의 "/forum/freeboard" 요청 주소를 처리하는 메서드.
+//public void freeboard(Model freeboardModel) {
+//	//-> 디스패쳐 서블릿에게 뷰에 전달할 데이터를 저장할 모델 객체를 요청해서 받음.
+//	// Model: 데이터를 담는 그릇 역할, map 구조로 저장됨, key와 value로 구성.
+//	
+//	// postService의 메서드를 호출해서 포스트 목록을 만들고 뷰에 전달.
+//	List<PostListItemDto> list = postService.read();
+//	freeboardModel.addAttribute("freeboard_posts", list); //-> 뷰에 전달되는 데이터.
+//	
+//	log.debug("자유게시판 리스트 사이즈 = {}", list.size());
+//	
+//	// 리턴 값이 없으면 요청 경로로 뷰(JSP)를 찾음.
+//	//-> /WEB-INF/views/forum/freeboard.jsp
+//}
+//
+//@RequestMapping(value = "/forumadmin", method = RequestMethod.GET)
+//	public String forumadmin(Model model, @ModelAttribute("scri") SearchCriteria scri) throws Exception{
+//	
+//		
+//		model.addAttribute("exhibition", adminuserservice.Exhibitonadmin(scri));
+//		
+//		PageMaker pageMaker = new PageMaker();
+//		pageMaker.setCri(scri);
+//		pageMaker.setTotalCount(adminuserservice.ExhibitionadminlistCount(scri));
+//		
+//		model.addAttribute("pageMaker", pageMaker);
+//		
+//		return "/exhibitionadmin";
+//		
+//	}
 }

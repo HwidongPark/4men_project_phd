@@ -39,8 +39,8 @@
     <form action="${signinPage}" method="post">
       <a href="/fourmen"><img class="logo" src="logo/logo01.png" alt="4men_logo"/></a>
 	
-      <input type="text" name="userid" placeholder="ID" required/>
-      <input type="password" name="password" placeholder="Password" required/>
+      <input maxlength="30" type="text" name="userid" placeholder="ID" required/>
+      <input maxlength="30" type="password" name="password" placeholder="Password" required/>
       	 <c:if test="${not empty param.result && param.result eq 'f'}">
       <div class="text-danger">아이디와 패스워드를 확인해주세요</div>
       </c:if>
@@ -51,12 +51,12 @@
     <div class="overlay">
       <div class="overlay-panel overlay-left">
         <h1>Login</h1>
-        <p>artists archive 회원이시라면 로그인해주세요 </p>
+        <p>회원이시라면 로그인해주세요 </p>
         <button class="ghost" id="signIn">Sign In</button>
       </div>
       <div class="overlay-panel overlay-right">
         <h1>Create Account</h1>
-        <p>artists archive 회원이 아니시라면 회원가입해주세요</p>
+        <p>회원이 아니시라면 회원가입해주세요</p>
         <button class="ghost" id="signUp">Sign Up</button>
       </div>
     </div>

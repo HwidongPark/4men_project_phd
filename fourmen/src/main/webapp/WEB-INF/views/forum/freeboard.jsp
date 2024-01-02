@@ -67,7 +67,7 @@
     <section role="search" class="search">
         <div class="forum-top-area">
             <div class="forum-search-area">
-                <c:url var="freeboard_searchPage" value="freeboard_search" />
+                <c:url var="freeboard_searchPage" value="freeboard" />
                 <form action="${freeboard_searchPage}" method="get">
                 <div class="forum-search-select-area">
                     <select class="forum-select-box" name="category">
@@ -156,49 +156,75 @@
     </div>
     
     <!-- 게시판 글 페이지네이션(pagination)-->
-        <div>
-            <nav aria-label="Page navigation">
-                <ul class="pagination">
-                    <li class="page-item">
-                        <a class="page-link-img" href="#" aria-label="first page">
-                            <img id="pagination-img" alt="first page" src="../pagination/pagination01.png">
-                        </a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link-img" href="#" aria-label="previous">
-                            <img id="pagination-img" alt="previous page" src="../pagination/pagination02.png">
-                        </a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">1</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">2</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">3</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">4</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">5</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link-img" href="#" aria-label="next">
-                            <img id="pagination-img" alt="next page" src="../pagination/pagination03.png">
-                        </a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link-img" href="#" aria-label="last page">
-                            <img id="pagination-img" alt="last page" src="../pagination/pagination04.png">
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-
+	
     </main>
+     <div>
+        <nav aria-label="Page navigation">            
+            <ul class="pagination">
+                <!-- 이전, 처음 페이지 -->
+                <li class="page-item">
+                     <a class="page-link-img" href="freeboard${pageMaker.makeSearchAdminUser(pageMaker.startPage)}">
+                        <img id="pagination-img" alt="first page" src="/fourmen/pagination/pagination01.png">
+                    </a>
+                </li>
+                
+              <!--   <c:choose>
+                    <c:when  test="${ page le 1 }">
+                        <li class="page-item">
+                            <span class="page-link-img" aria-label="previous">
+                                <img id="pagination-img" alt="previous page" src="/fourmen/pagination/pagination02.png">
+                            </span>
+                        </li>
+                    </c:when>
+                    <c:otherwise>  -->  
+                        <li class="page-item">
+                            <c:url var="prevPage" value="freeboard${pageMaker.makeSearchAdminUser(pageMaker.startPage)}">
+                                <c:param name="page" value=""/>
+                            </c:url>
+                            <a class="page-link-img" href="freeboard${pageMaker.makeSearchAdminUser(pageMaker.startPage)}" aria-label="previous">
+                                <img id="pagination-img" alt="previous page" src="/fourmen/pagination/pagination02.png">
+                            </a>
+                        </li>
+                  <!--  </c:otherwise>
+                </c:choose>  --> 
+                
+            
+                <!-- 필요한만큼만 페이지 보여줌 -->
+                 <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+                    <li class="page-item">
+                        <a class="page-link"  href="freeboard${pageMaker.makeSearchAdminUser(idx)}">${idx}</a>
+                    </li>
+                </c:forEach>
+                
+                <!-- 다음 마지막 페이지 -->
+               <!--  <c:choose>
+                    <c:when  test="${ page ge pageMaker.endPage }">
+                        <li class="page-item">
+                            <span class="page-link-img" aria-label="previous">
+                                <img id="pagination-img" alt="previous page" src="/fourmen/pagination/pagination03.png">
+                            </span>
+                        </li>
+                    </c:when>
+                    <c:otherwise> --> 
+      		<li class="page-item">
+      			<c:url var="nextPage" value="freeboard${pageMaker.makeSearchAdminUser(pageMaker.endPage)}">
+                            <c:param name="page" value=""></c:param>
+                        </c:url>
+                        <a class="page-link-img" href="freeboard${pageMaker.makeSearchAdminUser(pageMaker.endPage)}" aria-label="next">
+                            <img id="pagination-img" alt="next page" src="/fourmen/pagination/pagination03.png">
+                        </a>
+              </li>
+             <!--  </c:otherwise>
+              </c:choose> --> 
+               
+                <li class="page-item">
+                    <a class="page-link-img" href="freeboard${pageMaker.makeSearchAdminUser(pageMaker.endPage)}">
+                        <img id="pagination-img" alt="last page" src="/fourmen/pagination/pagination04.png">
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
     
     <!-- 푸터 파일 include -->
     <%@ include file="../fragments/footer.jspf" %>

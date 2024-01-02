@@ -9,8 +9,10 @@
 	const enddate = document.querySelector('input#enddate-select');
 	var selectcategory = document.getElementById('selectCategory');
 	const searchkeyword = document.querySelector('input#search-keyword');
+
 	btnsearch.addEventListener('click',(e)=>{
 		e.preventDefault();
+		
 		if(selectcategory.value === 'location'){
 		 	if(searchkeyword.value !== '서울' &&
 		 	searchkeyword.value !== '부산' &&
@@ -28,7 +30,7 @@
 				 return;
 			 }
 		}
-
+	
 		
    		//self.location = "exhibition" + '${pageMaker.makeQuery(1)}' + "&category=" + $("select option:selected").val() + "&keyword=" + encodeURIComponent($('#search-keyword').val()
         //  + "&startdate=" + encodeURIComponent($('#startdate-select').val())+ "&enddate=" + encodeURIComponent($('#enddate-select').val()));

@@ -42,6 +42,7 @@ signInButton.addEventListener('click', () => {
 		const response= await axios.get(uri);
 		
 		const checkIdResult = document.querySelector('div#checkIdResult');
+		if(e.target.value.length <=30){
 		if(response.data ==='Y'){
 			idChecked = true;
 			checkIdResult.innerHTML = '사용 가능한 아이디 입니다';
@@ -53,6 +54,11 @@ signInButton.addEventListener('click', () => {
 			checkIdResult.classList.remove('text-success');
 			checkIdResult.classList.add('text-danger');
 			
+		}}else{
+			idChecked = false;
+			e.target.value=null;
+			alert('올바른 아이디 형태가 아닙니다');
+			return;
 		}
 		if(idChecked && pwdChecked && nameChecked && nicknameChecked && phoneChecked && emailChecked){
 			btnSignup.classList.remove('disabled');
@@ -62,8 +68,11 @@ signInButton.addEventListener('click', () => {
 	}
 	
 	function checkPassword(e){
-		if(e.target.value===''){
+		if(e.target.value==='' || e.target.value.length >=30){
 			pwdChecked = false;
+			e.target.value=null;
+			alert('올바른 비밀번호 형태가 아닙니다');
+			return;
 		} else {
 			pwdChecked = true;
 		}
@@ -76,8 +85,11 @@ signInButton.addEventListener('click', () => {
 	
 	
 	function checkName(e){
-		if(e.target.value===''){
+		if(e.target.value==='' || e.target.value.length >=20){
 			nameChecked = false;
+			e.target.value=null;
+			alert('올바른 이름 형태가 아닙니다');
+			return;
 		} else {
 			nameChecked = true;
 		}
@@ -94,6 +106,7 @@ async function checkNickname(e){
 		const response= await axios.get(uri);
 		
 		const checkNicknameResult = document.querySelector('div#checkNicknameResult');
+		if(e.target.value.length <=30){
 		if(response.data ==='Y'){
 			nicknameChecked = true;
 			checkNicknameResult.innerHTML = '사용 가능한 닉네임 입니다';
@@ -104,7 +117,14 @@ async function checkNickname(e){
 			checkNicknameResult.innerHTML = '중복되는 닉네임 입니다';
 			checkNicknameResult.classList.remove('text-success');
 			checkNicknameResult.classList.add('text-danger');
+		}} else{
+			nicknameChecked = false;
+			e.target.value=null;
+			alert('올바른 닉네임 형태가 아닙니다');
+			return;
+			
 		}
+		
 		if(idChecked && pwdChecked && nameChecked && nicknameChecked && phoneChecked && emailChecked){
 			btnSignup.classList.remove('disabled');
 		} else {
@@ -118,6 +138,7 @@ async function checkNickname(e){
 			phoneChecked = true; 
 		 } else{
 			 phoneChecked = false;
+			 e.target.value=null;
 			 alert('올바르지 않은 전화번호입니다 . -제외하고 입력해주세요');
 			 return;
 			 
@@ -126,6 +147,7 @@ async function checkNickname(e){
   	}else{
 		  
 		  phoneChecked = false;
+		  e.target.value=null;
   	alert('전화번호로 입력해주세요');
   	return;
 	}
@@ -144,8 +166,11 @@ async function checkNickname(e){
 	
 	
 	function checkEmail(e){
-		if(e.target.value===''){
+		if(e.target.value==='' || e.target.value.length >=30){
 			emailChecked = false;
+			e.target.value=null;
+			alert('30자 이내로 이메일 작성해주세요');
+			return;
 		} else {
 			emailChecked = true;
 		}

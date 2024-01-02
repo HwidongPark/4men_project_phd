@@ -9,9 +9,68 @@
 <mapper namespace="com.itwill.fourmen.repository.PostDao">
 
     <!-- FREE_BOARD 테이블 전체 검색, 글 번호 내림차순 정렬 -->
-    <select id="selectOrderByPostIdDesc" resultType="Post">
+   <!--  <select id="selectOrderByPostIdDesc" resultType="Post">
         select * from FREE_BOARD order by POST_ID desc
+    </select> -->
+    
+    <select id="selectOrderByPostIdDesc" resultType="Post" parameterType="com.itwill.fourmen.board.Criteria">
+
+        SELECT  POST_ID, POST_TITLE, USERID, POST_CONTENT, POST_CREATED_TIME, POST_VIEW_COUNT
+
+         FROM ( 
+
+                SELECT POST_ID, 
+                
+                	POST_TITLE, 
+                	
+                	USERID, 
+                	
+                	POST_CONTENT, 
+                	
+                	POST_CREATED_TIME, 
+                	
+                	POST_VIEW_COUNT,
+
+                    ROW_NUMBER() OVER(ORDER BY POST_ID) AS RNUM
+
+                 from FREE_BOARD 
+                 
+                 where 1=1
+                 <include refid="search"></include>
+
+                               ) MP
+
+        WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
+
+        ORDER BY POST_ID
+
     </select>
+    
+    
+    <select id="listCount" resultType="int">
+  
+
+        SELECT COUNT(POST_ID)
+
+          FROM FREE_BOARD
+		where 1=1
+         <include refid="search"></include>
+
+    </select>
+    
+     <sql id="search">
+		<if test="category != null">
+			<if test="category == 'post_title'.toString()">AND POST_TITLE LIKE '%' || #{keyword} || '%'</if>
+			<if test="category == 'post_content'.toString()">AND POST_CONTENT LIKE '%' || #{keyword} || '%'</if>
+			<if test="category == 'post_all'.toString()">AND POST_TITLE LIKE '%' || #{keyword} || '%' or 
+                	POST_CONTENT LIKE '%' || #{keyword} || '%' or
+                	USERID LIKE '%' || #{keyword} || '%'</if>
+			<if test="category == 'post_author'.toString()">AND USERID LIKE '%' || #{keyword} || '%'</if>
+		</if>
+
+		
+	</sql>
+    
     
     <!-- FREE_BOARD 테이블에서 게시글 아이디로 검색 -->
     <select id="selectByPostId" resultType="Post"> <!-- DB에서 select 시 반환되는 값의 타입 설정 -->
