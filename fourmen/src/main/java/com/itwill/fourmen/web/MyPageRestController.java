@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.itwill.fourmen.domain.Message;
+import com.itwill.fourmen.dto.mymessage.ConfirmDealDto;
 import com.itwill.fourmen.dto.mymessage.MyMessageDto;
 import com.itwill.fourmen.service.MarketService;
 import com.itwill.fourmen.service.MyPageService;
@@ -36,16 +37,7 @@ public class MyPageRestController {
 	}
 	
 	
-	@PostMapping("/mymessage/confirm-deal")
-	public ResponseEntity<Integer> confirmDeal(@RequestBody Message message) {
-		
-		log.debug("confirmDeal(message={})", message);
-		
-		int result = myPageService.confirmDeal(message);
-		log.debug("거래 확정 결과={}", result);
-		
-		return ResponseEntity.ok(result);
-	}
+
 	
 	
 }

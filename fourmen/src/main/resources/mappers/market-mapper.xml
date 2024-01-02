@@ -196,7 +196,7 @@
     </select>
     
     <update id="confirmDeal">
-        UPDATE market SET is_sold = 'Y' WHERE worksid = #{ workId }
+        UPDATE market SET is_sold = 'Y', buyerid=#{buyerId} WHERE worksid = #{ workId }
     </update>
     
     

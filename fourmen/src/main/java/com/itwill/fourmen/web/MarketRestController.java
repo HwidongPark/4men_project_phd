@@ -17,6 +17,7 @@ import com.itwill.fourmen.domain.WishList;
 import com.itwill.fourmen.domain.WorkImage;
 import com.itwill.fourmen.dto.market.MarketPostDto;
 import com.itwill.fourmen.dto.market.MarketPostRestDto;
+import com.itwill.fourmen.dto.mymessage.ConfirmDealDto;
 import com.itwill.fourmen.service.MarketService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -100,12 +101,12 @@ public class MarketRestController {
 	 * @return
 	 */
 	@PostMapping("/confirm-deal")
-	public ResponseEntity<Integer> confirmDeal(@RequestBody Message message) {
+	public ResponseEntity<Integer> confirmDeal(@RequestBody ConfirmDealDto confirmDealDto) {
 		
-		log.debug("confirmDeal(message={})", message);
+		log.debug("confirmDeal(confirmDealDto={})", confirmDealDto);
 		
-		int result = marketService.confirmDeal(message.getWorkId());
-		log.debug("거리 확정 결과={}", result);
+		int result = marketService.confirmDeal(confirmDealDto);
+		log.debug("거래 확정 결과={}", result);
 		
 		return ResponseEntity.ok(result);
 	}

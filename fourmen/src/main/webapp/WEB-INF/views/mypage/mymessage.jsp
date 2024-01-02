@@ -14,15 +14,15 @@
 		 crossorigin="anonymous">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
         <!-- css 파일 적용 -->
-        <link rel="stylesheet" href="../css/header.css">
-        <link rel="stylesheet" href="../css/footer.css">
-        <link rel="stylesheet" href="../css/forum-table.css">
-        <link rel="stylesheet" href="../css/underheader.css">
-        <link rel="stylesheet" href="../css/pagenation.css">
-        <link rel="stylesheet" href="../css/forum-search-area.css">
-        <link rel="stylesheet" href="../css/forum-kategorie-area.css">
-        <link rel="stylesheet" href="../css/forum-create-new-post.css">
-		<link rel="stylesheet" href="../css/mypage-message.css">
+        <link rel="stylesheet" href="/fourmen/css/header.css">
+        <link rel="stylesheet" href="/fourmen/css/footer.css">
+        <link rel="stylesheet" href="/fourmen/css/forum-table.css">
+        <link rel="stylesheet" href="/fourmen/css/underheader.css">
+        <link rel="stylesheet" href="/fourmen/css/pagenation.css">
+        <link rel="stylesheet" href="/fourmen/css/forum-search-area.css">
+        <link rel="stylesheet" href="/fourmen/css/forum-kategorie-area.css">
+        <link rel="stylesheet" href="/fourmen/css/forum-create-new-post.css">
+		<link rel="stylesheet" href="/fourmen/css/mypage-message.css">
 	</head>
 	
 	<body>
@@ -49,11 +49,27 @@
     <section role="kategorie" class="kategorie" style="border-bottom: 1.5px solid #D8D8D8;">
         <div class="forum-kategorie">
             <ul class="forum-kategorie-board-lists">
-                <li class="forum-kategorie-board">
-                    <a href="freeboard">받은 메세지</a>
+                <li class="forum-kategorie-board">                
+                    <a href="/fourmen/mypage/mymessage/received">
+                        <c:if test="${ category == 'received' }">
+                            <b>
+                        </c:if>
+                        받은 메세지
+                        <c:if test="${ category == 'received' }">
+                            </b>
+                        </c:if>
+                    </a>
                 </li>
                 <li class="forum-kategorie-board">
-                    <a href="queryboard">보낸 메세지</a>
+                    <a href="/fourmen/mypage/mymessage/sent">
+                        <c:if test="${ category == 'sent' }">
+                            <b>
+                        </c:if>
+                        보낸 메세지
+                        <c:if test="${ category == 'sent' }">
+                            </b>
+                        </c:if>
+                    </a>
                 </li>                
             </ul>
         </div>
@@ -77,7 +93,7 @@
 
                 <div class="forum-search-btn-area">
                     <button class="forum-search-btn" type="button">
-                        <img id="forum-search-btn-img" alt="검색버튼" src="../icon/search01.svg">
+                        <img id="forum-search-btn-img" alt="검색버튼" src="../../icon/search01.svg">
                     </button>
                 </div>
             </div>
@@ -101,33 +117,39 @@
                 <th>제목</th>
                 <th>제시 가격</th>
                 <th>보낸이</th>
-                <th>작성일</th>       
+                <th>status</th>       
             </tr>
             </thead>
             <tbody class="table-group-divider">
             
-            <c:forEach begin="0" end="${ messageDtoList.size() - 1 }" step="1" var="index">                 
-            <!-- var: 변수(리스트 값을 저장) / items: 리스트 -->
-            <!-- PostController.java에서 전달된 데이터 사용 (리스트의 이름이 items에 들어가야 함)
-            -> model.addAttribute("freeboard_posts", list); //-> 뷰에 전달되는 데이터. -->
-                <tr>
-                    <td>
-                        <div class="mymessage-image-container">
-                            <img src="/fourmen/uploads/${ messageDtoList[index].postDto.workImages[0].savedFileName }">
-                        </div>
-                    </td>
-                    <td>
-                        <div class="mymessage-title">
-                            ${ messageDtoList[index].title }
-                        </div>
-                    </td>
-                    <td>${ messageDtoList[index].priceOffered }</td>
-                    <td>${ messageDtoList[index].sender }</td>
-                    <td>${ messageDtoList[index].timeSent }</td>
-                </tr>
-                <div class="d-none mymessage-workid">${ messageDtoList[index].workId }</div>
-                <div class="d-none mymessage-id">${ messageDtoList[index].id }</div>             
-            </c:forEach>
+            <c:if test="${ messageDtoList.size() ge 1 }">
+                <c:forEach begin="0" end="${ messageDtoList.size() - 1 }" step="1" var="index">                 
+                <!-- var: 변수(리스트 값을 저장) / items: 리스트 -->
+                <!-- PostController.java에서 전달된 데이터 사용 (리스트의 이름이 items에 들어가야 함)
+                -> model.addAttribute("freeboard_posts", list); //-> 뷰에 전달되는 데이터. -->
+                    <tr>
+                        <td>
+                            <div class="mymessage-image-container">
+                                <img src="/fourmen/uploads/${ messageDtoList[index].postDto.workImages[0].savedFileName }">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="mymessage-title">
+                                ${ messageDtoList[index].title }
+                            </div>
+                        </td>
+                        <td>${ messageDtoList[index].priceOffered }</td>
+                        <td>${ messageDtoList[index].sender }</td>
+                        <td>
+                            <c:if test="${ messageDtoList[index].postDto.isSold == 'Y'}">
+                                <span class="deal-completed">거래완료</span>
+                            </c:if>         
+                        </td>
+                    </tr>
+                    <div class="d-none mymessage-workid">${ messageDtoList[index].workId }</div>
+                    <div class="d-none mymessage-id">${ messageDtoList[index].id }</div>             
+                </c:forEach>
+            </c:if>
             </tbody>
         </table>
     </section>
@@ -157,31 +179,31 @@
             <nav aria-label="Page navigation">
                 <ul class="pagination">
                     <li class="page-item">
-                        <c:url var="firstPage" value="/mypage/mymessage">
+                        <c:url var="firstPage" value="/mypage/mymessage/${ category }">
                             <c:param name="page">1</c:param>
                         </c:url>
                         <a class="page-link-img" href="${ firstPage }" aria-label="first page">
-                            <img id="pagination-img" alt="first page" src="../pagination/pagination01.png">
+                            <img id="pagination-img" alt="first page" src="../../pagination/pagination01.png">
                         </a>
                     </li>
                     <li class="page-item">                        
-                        <c:url var="previousPage" value="/mypage/mymessage">
+                        <c:url var="previousPage" value="/mypage/mymessage/${ category }">
                             <c:param name="page">${ page - 1 }</c:param>
                         </c:url>
                         <c:if test="${ page gt 1 }">
                             <a class="page-link-img" href="${ previousPage }" aria-label="previous">
-                                <img id="pagination-img" alt="previous page" src="../pagination/pagination02.png">
+                                <img id="pagination-img" alt="previous page" src="../../pagination/pagination02.png">
                             </a>
                         </c:if>
                         <c:if test="${ page le 1 }">
                             <span class="page-link-img" aria-label="previous">
-                                <img id="pagination-img" alt="previous page" src="../pagination/pagination02.png">
+                                <img id="pagination-img" alt="previous page" src="../../pagination/pagination02.png">
                             </span>
                         </c:if>
                     </li>
                     <c:forEach begin="${ pagingDto.startPage }" end="${ pagingDto.endPage }" step="1" var="i">
                         <li class="page-item">
-                            <c:url var="moveToPage" value="/mypage/mymessage">
+                            <c:url var="moveToPage" value="/mypage/mymessage/${ category }">
                                 <c:param name="page">${ i }</c:param>
                             </c:url>
                             <a class="page-link" href="${ moveToPage }">${ i }</a>
@@ -189,26 +211,26 @@
                     </c:forEach>
                     
                     <li class="page-item">
-                        <c:url var="nextPage" value="/mypage/mymessage">
+                        <c:url var="nextPage" value="/mypage/mymessage/${ category }">
                             <c:param name="page"> ${ page + 1 }</c:param>
                         </c:url>
                         <c:if test="${ page lt pagingDto.endPage }">
                             <a class="page-link-img" href="${ nextPage }" aria-label="next">
-                                <img id="pagination-img" alt="next page" src="../pagination/pagination03.png">
+                                <img id="pagination-img" alt="next page" src="../../pagination/pagination03.png">
                             </a>
                         </c:if>
                         <c:if test="${ page ge pagingDto.endPage }">
                             <span class="page-link-img" aria-label="next">
-                                <img id="pagination-img" alt="next page" src="../pagination/pagination03.png">                                
+                                <img id="pagination-img" alt="next page" src="../../pagination/pagination03.png">                                
                             </span>
                         </c:if>
                     </li>
                     <li class="page-item">
-                        <c:url var="lastPage" value="/mypage/mymessage">
+                        <c:url var="lastPage" value="/mypage/mymessage/${ category }">
                             <c:param name="page">${ pagingDto.endPage }</c:param>
                         </c:url>
                         <a class="page-link-img" href="${ lastPage }" aria-label="last page">
-                            <img id="pagination-img" alt="last page" src="../pagination/pagination04.png">
+                            <img id="pagination-img" alt="last page" src="../../pagination/pagination04.png">
                         </a>
                     </li>
                 </ul>
