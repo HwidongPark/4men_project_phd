@@ -94,18 +94,6 @@ public class HomeController {
 	}
 
     
-//    @GetMapping("/market")
-//    public void market() {
-//    	log.debug("market()");
-//    }
-    
-//    @GetMapping("/market/detail")
-//    public String marketDetail() {
-//    	log.debug("marketDetail()");
-//    	
-//    	return "/market/detail";
-//    }
-    
     @GetMapping("/admin")
     public void admin() {
     	log.debug("admin()");

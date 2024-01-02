@@ -11,11 +11,9 @@ import lombok.Data;
 @Builder
 public class Qna {
 	private Long qna_id;
-	private Long qna_num;
 	private String qna_title;
 	private String userid;
 	private String qna_content;
 	private LocalDate qna_created_time;
-	private LocalDateTime qna_deleted_time;
 	private Long qna_view_count;
 }

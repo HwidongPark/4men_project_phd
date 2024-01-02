@@ -1,4 +1,4 @@
-package com.itwill.dto;
+package com.itwill.fourmen.dto.market;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

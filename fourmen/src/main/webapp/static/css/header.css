@@ -55,13 +55,11 @@ body {
     display: flex;
     align-items: center;
     background-color: rgb(255, 255, 255);
-    border-bottom: 3px #BDBDBD solid;
-    border-top: 3px #BDBDBD solid;
+    border-bottom: 2px #BDBDBD solid;
+    border-top: 2px #BDBDBD solid;
     padding-top: 0.3rem;
     padding-bottom: 0.3rem;
 }
-
-
 
 /* nav 아이템들 중앙 정렬 시킴 */
 .header-right-container {
@@ -76,7 +74,6 @@ body {
 }
 
 /* 로고 이미지 */
-
 .logo {
     text-decoration: none;
     color: black;
@@ -88,8 +85,6 @@ body {
     margin-top: 1px;
     margin-bottom: 1px;
 }
-
-
 
 /* nav 메뉴 관련 클래스 */
 .nav-btn-lists {
@@ -114,18 +109,111 @@ body {
     padding-top: 1rem;
     padding-bottom: 1rem;
     text-decoration: none;
-    color: black;
-    margin-left: 9px;
-    margin-right: 9px;
+    color: #424242;
+    margin-left: 12px;
+    margin-right: 12px;
 }
 
+.nav-each-btn-list a:hover {
+    display: inline-block;
+    font-weight: bold;
+    font-size: 117%;
+    padding-left: 0.7rem;
+    padding-right: 0.7rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    text-decoration: none;
+    color: black;
+    margin-left: 12px;
+    margin-right: 12px;
+}
+
+.nav-each-btn-list a:focus {
+    display: inline-block;
+    font-weight: bold;
+    font-size: 117%;
+    padding-left: 0.7rem;
+    padding-right: 0.7rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    text-decoration: none;
+    color: black;
+    margin-left: 12px;
+    margin-right: 12px;
+}
+
+.nav-each-btn-list a:active {
+    display: inline-block;
+    font-weight: bold;
+    font-size: 117%;
+    padding-left: 0.7rem;
+    padding-right: 0.7rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    text-decoration: none;
+    color: black;
+    margin-left: 12px;
+    margin-right: 12px;
+}
+
+/*
+.nav-each-btn-list a:hover {
+    display: inline-block;
+    font-size: 1.205rem;
+    padding-left: 0.7rem;
+    padding-right: 0.7rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    text-decoration: none;
+    color: black;
+    margin-left: 12px;
+    margin-right: 12px;
+    text-decoration: underline solid 2.85px;
+    text-underline-offset: 1.495rem;
+    font-weight: bold;
+}
+
+.nav-each-btn-list a:focus {
+    display: inline-block;
+    font-size: 1.205rem;
+    padding-left: 0.7rem;
+    padding-right: 0.7rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    text-decoration: none;
+    color: black;
+    margin-left: 12px;
+    margin-right: 12px;
+    text-decoration: underline solid 2.85px;
+    text-underline-offset: 1.495rem;
+    font-weight: bold;
+}
+
+.nav-each-btn-list a:active {
+    display: inline-block;
+    font-size: 1.205rem;
+    padding-left: 0.7rem;
+    padding-right: 0.7rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    text-decoration: none;
+    color: black;
+    margin-left: 12px;
+    margin-right: 12px;
+    text-decoration: underline solid 2.85px;
+    text-underline-offset: 1.495rem;
+    font-weight: bold;
+}
+*/
+
+/* ** 가상 요소 사용 **
 .nav-each-btn-list a:hover::after {
     height: 0.17rem;
     position: absolute;
     left: 0;
     bottom: -0.65rem;
     width: 100%;
-    background: #111;
+    background: black;
     content: '';
 }
 
@@ -135,23 +223,20 @@ body {
     left: 0;
     bottom: -0.65rem;
     width: 100%;
-    background: #111;
+    background: black;
     content: '';
 }
 
-.nav-button {
-    position: relative;
+.nav-each-btn-list a:active::after {
+    height: 0.17rem;
+    position: absolute;
+    left: 0;
+    bottom: -0.65rem;
+    width: 100%;
+    background: black;
+    content: '';
 }
-
-.nav-button:hover {
-    font-size: 1.165rem;
-    font-weight: 800;
-}
-
-.nav-button:focus {
-    font-size: 1.165rem;
-    font-weight: 800;
-}
+*/
 
 /* 회원 정보 관련 부분(로그인, 회원가입, 로그아웃, 마이페이지, 공지사항) */
 .nav-btn-users {
@@ -167,15 +252,14 @@ body {
     font-size: 0.875rem;
     padding: 0.7rem;
     text-decoration: none;
-    color: black;
+    color: #424242;
 }
-
 
 .nav-button-user:hover {
     font-size: 0.845rem;
     font-weight: bold;
+    color: black;
 }
-
 
 
 /* 내정보 사이드바 관련 */
@@ -186,7 +270,8 @@ body {
 .my-page-close {
     visibility: hidden;
     position: absolute;
-    width: 0px;
+    /* width: 0px; */
+    text-align: right;
     right: 0;
     transform: translateX(100%);
     height: 100%;
@@ -205,8 +290,9 @@ body {
     color: white;
     width: auto;
     height: 100%;
+    transition: all 1s;    
     background-color: rgba(0, 0, 0, 0.5);
-    /* z-index: 999; 다른 요소들보다 위에 표시 */
+    z-index: 999; /* 다른 요소들보다 위에 표시 */
 }
 
 .my-page-list-item {
@@ -219,7 +305,6 @@ body {
     text-decoration: none;
     color: white;
 }
-
 
 /* 미디어 쿼리 */
 @media only screen and (max-width: 768px) {

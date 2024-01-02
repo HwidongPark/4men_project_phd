@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const navItemsList = document.querySelector('ul.nav-btn-lists');
 
      // 내정보 아이콘
-    const myPageIcon = document.querySelector("#my-page-icon");
+    const myPageProfileIcon = document.querySelector("#my-page-profile-icon");
     const myPageOuterContainer = document.querySelector("#my-page-slide-outer-container");
 
 
@@ -20,9 +20,10 @@ document.addEventListener('DOMContentLoaded', function() {
     })
 
     
-    myPageIcon.addEventListener('click', function() {
-        console.log("버튼 누름");
+    myPageProfileIcon.addEventListener('click', function() {
+        console.log("프로필 아이콘 버튼 누름");
         myPageOuterContainer.classList.toggle('my-page-open');
+        myPageOuterContainer.classList.toggle('my-page-close');
     })
     
     

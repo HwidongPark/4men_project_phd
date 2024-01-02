@@ -7,17 +7,17 @@
         <ul class="nav-btn-users">
         	<c:if test="${empty signedInUser}">
             <li class="nav-each-btn-user">
-                <a href="signup" class="nav-button-user">LOGIN</a>
+                <a href="/fourmen/signup" class="nav-button-user">LOGIN</a>
             </li>
             <li class="nav-each-btn-user">
-                <a href="signup" class="nav-button-user">SIGN UP</a>
+                <a href="/fourmen/signup" class="nav-button-user">SIGN UP</a>
             </li>
             </c:if>
             <c:if test="${not empty signedInUser}">
             <li class="nav-each-btn-user">
-            <c:url var="signOutPage" value="signout" />
+            <c:url var="signOutPage" value="/signout" />
             <!-- <c:url var="myPage" value="mypage"/> -->
-				<a id="my-page-icon">
+				<a id="my-page-profile-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
                         <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
                         <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
@@ -36,10 +36,11 @@
     </nav>
 </div>
 
+
 <!-- 사이드바 -->
 <aside id="my-page-slide-outer-container" class="my-page-close">
     <div id="my-page-username">
-        admin 님,
+        ${ sessionScope.signedInUser } 님,
     </div>
     <ul id="my-page-slide-inner-container">
         <li class="my-page-list-item">
@@ -49,10 +50,10 @@
             <a href="#">내 작성 글</a>
         </li>
         <li class="my-page-list-item">
-            <a href="#">내 찜 목록</a>
+            <a href="/fourmen/mypage/wishlist">내 찜 목록</a>
         </li>
         <li class="my-page-list-item">
-            <a href="#">거래요청 관리</a>
+            <a href="/fourmen/mypage/mymessage">거래요청 관리</a>
         </li>
         <li class="my-page-list-item">
             <a href="#">로그아웃</a>
@@ -80,7 +81,9 @@
                 <a href="/fourmen/exhibition" class="nav-button">EXHIBITION</a>
             </li>
             <li class="nav-each-btn-list">
-                <a href="/fourmen/forum/freeboard" class="nav-button">FORUM</a>
+
+            <a href="/fourmen/forum/freeboard" class="nav-button">FORUM</a>
+
             </li>
             <li class="nav-each-btn-list">
                 <a href="#" class="nav-button">ADMIN</a>
@@ -97,3 +100,4 @@
     <div class="header-right-container"></div>
     
 </nav>
+<script src="../js/forum/forum-category-bold-style.js"></script>

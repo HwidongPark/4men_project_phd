@@ -11,11 +11,9 @@ import lombok.Data;
 @Builder
 public class Notice {
 	private Long notice_id;
-	private Long notice_num;
 	private String notice_title;
 	private String userid;
 	private String notice_content;
 	private LocalDate notice_created_time;
-	private LocalDateTime notice_deleted_time;
 	private Long notice_view_count;
 }

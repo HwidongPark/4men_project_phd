@@ -1,0 +1,65 @@
+@charset "UTF-8";
+/* forum-faqboard-detail.css */
+/* forum-faqboard(FAQ게시판)의 상세 페이지에 관한 css */
+
+.faqboard-view-detail {
+    padding: 5rem;
+    margin-left: 10rem;
+    margin-right: 10rem;
+    justify-content: center;
+}
+
+.faqboard-view-detail-title {
+    border-top: 3px solid #A4A4A4;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    font-size: 30px;
+}
+
+.faqboard-view-detail .faqboard-view-detail-info li {
+    display: inline-block;
+}
+
+.faqboard-view-detail-info {
+    padding-bottom: 2rem;
+}
+
+.faqboard-view-detail-content {
+    background-color: #E6E6E6;
+    padding: 2.5rem;
+    height: 20rem;
+    line-height: 150%;
+}
+
+.faqboard-view-detail .faqboard-view-detail-info .faqboard-view-detail-info-label {
+    padding-bottom: 4px;
+}
+
+.faqboard-view-detail .faqboard-view-detail-info input {
+    border: none;
+    pointer-events: none;
+    color: gray;
+}
+
+#faqboard-view-detail-createdTime {
+    width: auto;
+}
+
+#faqboard-view-detail-userId {
+    width: auto;
+}
+
+#faqboard-view-detail-view {
+    width: auto;
+}
+
+#faqboard-view-detail-comment {
+    width: auto;
+}
+/*
+.faqboard-view-detail-content-input {
+    background-color: rgb(192, 192, 192);
+    border: none;
+    padding: 3rem;
+}
+*/

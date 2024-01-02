@@ -1,6 +1,6 @@
 package com.itwill.fourmen.domain;
 
-import com.itwill.dto.MarketPostDto;
+import com.itwill.fourmen.dto.market.MarketPostDto;
 
 import lombok.Builder;
 import lombok.Data;

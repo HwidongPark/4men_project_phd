@@ -5,8 +5,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.itwill.fourmen.domain.Faq;
 import com.itwill.fourmen.domain.Notice;
+import com.itwill.fourmen.dto.post.FaqListItemDto;
+import com.itwill.fourmen.dto.post.FaqSearchDto;
+import com.itwill.fourmen.dto.post.NoticeCreateDto;
 import com.itwill.fourmen.dto.post.NoticeListItemDto;
+import com.itwill.fourmen.dto.post.NoticeSearchDto;
+import com.itwill.fourmen.dto.post.PostCreateDto;
 import com.itwill.fourmen.repository.NoticeDao;
 
 import lombok.extern.slf4j.Slf4j;
@@ -23,7 +29,7 @@ public class NoticeService {
 	public List<NoticeListItemDto> read() {
 		log.debug("read()");
 		// noticeDao의 메서드를 호출해서 notice 목록을 리턴받고, 컨트롤러에게 리턴.
-		List<Notice> list = noticeDao.selectOrderByNoticeNumDesc(); //-> DB에서 가져오는 데이터 타입은 Qna 타입.
+		List<Notice> list = noticeDao.selectOrderByNoticeIdDesc(); //-> DB에서 가져오는 데이터 타입은 Qna 타입.
 		log.debug("공지게시판 포스트 목록 개수 = {}", list.size());
 		
 		return list.stream()
@@ -42,6 +48,47 @@ public class NoticeService {
 		log.debug("noticeboard-detail:{}", notice);
 		
 		return notice;
+	}
+	
+	// 공지게시판 새 글 작성하기...
+	public int create(NoticeCreateDto dto) { // 생성(삽입) 성공한 행의 개수를 리턴하므로 int 타입 사용.
+		log.debug("noticeboard-create(dto={})", dto);
+		
+		// 리포지토리 계층의 메서드를 호출해서 DB 테이블에 데이터를 삽입.
+		int result = noticeDao.noticeboard_insert(dto.toEntity());
+		log.debug("noticeboard-create-result ={}", result);
+		
+		return result;
+	}
+	
+	// 공지게시판 글 삭제하기...
+	public int delete(long notice_id) { // 삭제 성공한 행의 개수를 리턴하므로 int 타입 사용
+		
+		// 리포지토리 계층의 메서드를 호출해서 delete SQL을 실행.
+		int result = noticeDao.noticeboard_delete(notice_id);
+		
+		return result;
+	}
+	
+	// 유저가 공지게시판 게시글의 상세보기를 클릭하면 조회수 증가...
+	public int addView(Long notice_id) {
+		log.debug("addView(faq_id={})", notice_id);
+		
+		int result = noticeDao.noticeboard_addView(notice_id);
+		log.debug("addView 결과={}", result);
+		
+		return result;
+	}
+	
+	// 공지게시판에서 검색하기...
+	public List<NoticeListItemDto> search(NoticeSearchDto dto) {
+		log.debug("search(dto={}", dto);
+		
+		List<Notice> list = noticeDao.noticeboard_search(dto);
+		
+		return list.stream()
+				.map(NoticeListItemDto::fromEntity)
+				.toList();
 	}
 	
 }

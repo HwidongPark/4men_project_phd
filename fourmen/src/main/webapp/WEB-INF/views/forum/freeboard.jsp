@@ -21,7 +21,7 @@
 <link rel="stylesheet" href="../css/pagenation.css">
 <link rel="stylesheet" href="../css/forum-search-area.css">
 <link rel="stylesheet" href="../css/forum-kategorie-area.css">
-<link rel="stylesheet" href="../css/forum-create-new-post.css">
+<link rel="stylesheet" href="../css/forum-under-menubar.css">
 
 </head>
 
@@ -35,7 +35,7 @@
     <div id="underheader-div">
         <div class="container" id="underheadrcontainer">
             <h2 class="commondesign">
-                FORUM
+                자유게시판
             </h2>
         </div>
     </div>
@@ -43,21 +43,21 @@
     <!-- main 시작점 -->
     <main>
     
-    <!-- 게시판 카테고리(자유게시판, 후기게시판, 질문게시판) -->
+    <!-- 게시판 카테고리(자유게시판, 문의게시판, Faq게시판, 공지게시판) -->
     <section role="kategorie" class="kategorie" style="border-bottom: 1.5px solid #D8D8D8;">
         <div class="forum-kategorie">
             <ul class="forum-kategorie-board-lists">
                 <li class="forum-kategorie-board">
-                    <a href="freeboard">자유게시판</a>
+                    <a href="freeboard" class="category-button" onclick="change_category_style(event)">자유게시판</a>
                 </li>
                 <li class="forum-kategorie-board">
-                    <a href="queryboard">Q&A</a>
+                    <a href="qnaboard" class="category-button" onclick="change_category_style(event)">Q&A</a>
                 </li>
                 <li class="forum-kategorie-board">
-                    <a href="faqboard">FAQ</a>
+                    <a href="faqboard" class="category-button" onclick="change_category_style(event)">FAQ</a>
                 </li>
                 <li class="forum-kategorie-board">
-                    <a href="noticeboard">NOTICE</a>
+                    <a href="noticeboard" class="category-button" onclick="change_category_style(event)">NOTICE</a>
                 </li>
             </ul>
         </div>
@@ -67,23 +67,26 @@
     <section role="search" class="search">
         <div class="forum-top-area">
             <div class="forum-search-area">
+                <c:url var="freeboard_searchPage" value="freeboard_search" />
+                <form action="${freeboard_searchPage}" method="get">
                 <div class="forum-search-select-area">
-                    <select class="forum-select-box">
-                        <option class="forum-select-option">전체</option>
-                        <option class="forum-select-option">제목</option>
-                        <option class="forum-select-option">작성자</option>
-                        <option class="forum-select-option">내용</option>
+                    <select class="forum-select-box" name="category">
+                        <option class="forum-select-option" value="post_all">전체</option>
+                        <option class="forum-select-option" value="post_title">제목</option>
+                        <option class="forum-select-option" value="post_author">작성자</option>
+                        <option class="forum-select-option" value="post_content">내용</option>
                     </select>
                 </div>
                 <div class="forum-search-form-area">
-                    <input id=forum-search-input autocomplete="on" placeholder="검색어를 입력하세요." type="text">
+                    <input id="forum-search-input" name="keyword" autocomplete="on" placeholder="검색어를 입력하세요." type="text">
                 </div>
 
                 <div class="forum-search-btn-area">
-                    <button class="forum-search-btn" type="button">
+                    <button class="forum-search-btn" type="submit">
                         <img id="forum-search-btn-img" alt="검색버튼" src="../icon/search01.svg">
                     </button>
                 </div>
+                </form>
             </div>
         </div>
     </section>
@@ -115,8 +118,7 @@
             <!-- PostController.java에서 전달된 데이터 사용 (리스트의 이름이 items에 들어가야 함)
             -> model.addAttribute("freeboard_posts", list); //-> 뷰에 전달되는 데이터. -->
                 <tr>
-                    <td class="d-none">${p.post_id}</td> <!-- 필요하지 않으면 지우자... -->
-                    <!-- <td>${p.post_num}</td> -->
+                    <td class="d-none">${p.post_id}</td>
                     <td></td>
                     <td id="table-td" style="text-align: left; padding-left: 2rem">
                         <c:url var="freeboard_postDetailPage" value="/forum/freeboard-detail">
@@ -205,7 +207,8 @@
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
-    <script src="js/header.js"></script>
+    <script src="../js/header.js"></script>
+    <!-- <script src="../js/forum/forum-category-bold-style.js"></script> -->
 
 </body>
 </html>
