@@ -15,14 +15,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.itwill.dto.MarketCreateDto;
-import com.itwill.dto.MarketPostDto;
-import com.itwill.dto.MarketPostRestDto;
-import com.itwill.dto.MarketSearchDto;
-import com.itwill.dto.PagingDto;
 import com.itwill.fourmen.domain.Market;
+import com.itwill.fourmen.domain.User;
+import com.itwill.fourmen.domain.WishList;
 import com.itwill.fourmen.domain.WorkImage;
+import com.itwill.fourmen.dto.market.MarketCreateDto;
+import com.itwill.fourmen.dto.market.MarketPostDto;
+import com.itwill.fourmen.dto.market.MarketPostRestDto;
+import com.itwill.fourmen.dto.market.MarketSearchDto;
+import com.itwill.fourmen.dto.market.PagingDto;
 import com.itwill.fourmen.repository.MarketDao;
+import com.itwill.fourmen.repository.UserDao;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -33,6 +36,7 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class MarketService {
 	private final MarketDao marketDao;
+	private final UserDao userDao;
 	
 	private int postsPerPage = 2;
 	private int pagesShownInBar = 3;
@@ -129,7 +133,7 @@ public class MarketService {
 	}
 	
 	
-	// TODO: 페이징처리 서비스 완료하기
+	// 페이징처리 서비스 완료하기
 	public List<MarketPostDto> readPagedMarketPosts(int page) {
 		log.debug("readPagedMarketPosts(page={})", page);
 		
@@ -176,8 +180,8 @@ public class MarketService {
 		return pagingDto;
 	}
 	
-	/*
-	 * 
+	/**
+	 * 현재 페이지를 아규먼트로 받아 해당 페이지의 페이지내이션에서 첫, 끝 페이지 등을 계산해서 PagingDto를 반환
 	 */
 	public PagingDto searchPaging(int page, MarketSearchDto dto) {
 		int totNumPosts = marketDao.searchCountTotNumber(dto);
@@ -288,25 +292,15 @@ public class MarketService {
 		log.debug("readMarketPost(workId={})", workId);
 		
 		Market marketPost = marketDao.readMarketPost(workId);
-		log.debug("읽어온 마켓포스트 = {}", marketPost);
+		log.debug("읽어온 마켓포스트 = {}", marketPost);				
+		
+		User user = userDao.selectByUserid(marketPost.getUserId());
+		log.debug("글 올린 유저={}", user);		
 		
 		List<WorkImage> workImages = marketDao.readWorkImagesofPost(marketPost);
 		log.debug("읽어온 마켓포스트의 이미지 리스트 = {}", workImages);
 		
-		MarketPostDto marketPostWithImages = MarketPostDto.builder()
-							.workId(marketPost.getWorkId())
-							.userId(marketPost.getUserId())
-							.title(marketPost.getTitle())
-							.descriptionKor(marketPost.getDescriptionKor())
-							.price(marketPost.getPrice())
-							.yearCreated(marketPost.getYearCreated())
-							.paintingSize(marketPost.getPaintingSize())
-							.isSold(marketPost.getIsSold())
-							.createdTime(marketPost.getCreatedTime())
-							.views(marketPost.getViews())
-							.likes(marketPost.getLikes())
-							.workImages(workImages)
-							.build();
+		MarketPostDto marketPostWithImages = MarketPostDto.fromEntity(marketPost, workImages, user);
 		
 		return marketPostWithImages;							
 		
@@ -495,6 +489,98 @@ public class MarketService {
 			}
 			
 		}
+		
+		return result;
+	}
+	
+	
+	/**
+	 * 로그인된 유저가 보고있는 마켓 게시물을 위시리스트에 추가.
+	 * @return
+	 */
+	public int addWishList(WishList wishList) {
+		int result = 0;
+		
+		log.debug("addWishList(wishList={})", wishList);
+		
+		// marketService의 readWishList 메서드 사용
+		int isExisting = readWishList(wishList);
+		log.debug("이미 찜하기 추가했나?");
+		
+		if (isExisting >= 1) {
+			log.debug("이미 추가되서 돌아감");
+			return result;
+		} else {
+			result = marketDao.addWishList(wishList);
+			log.debug("위시리스트 추가 결과={}", result);
+			
+			// 라이크 추가
+			int addLikeResult = marketDao.addLikes(wishList);
+			log.debug("좋아요 추가 결과={}", addLikeResult);
+			
+			return result;
+		}
+		
+	}
+	
+	
+	/**
+	 * WishList를 아규먼트로 받아 해당 게시글을 찜하기에서 삭제
+	 * @param wishList
+	 * @return 제거 성공 시 1, 실패 시 0
+	 */
+	public int removeWishList(WishList wishList) {
+		
+		log.debug("removeWishList(wishList={})", wishList);
+		
+		int result = 0;
+		result = marketDao.removeWishList(wishList);
+		log.debug("위시리스트 제거 결과={}", result);
+		
+		
+		int subtractLike = marketDao.subtractLikes(wishList);
+		log.debug("좋아요 제거 결과={}", subtractLike);
+		
+		return result;
+	}
+	
+	
+	/**
+	 * 해당 게시물이 이미 위시리스트에 추가돼 있는지 확인하는 메서드.
+	 * @param wishList
+	 * @return 해당유저가 이미 찜해놨다면 1, 아니면 0을 반환
+	 */
+	public int readWishList(WishList wishList) {
+		log.debug("readWishList(wishList={})", wishList);
+		
+		int result = marketDao.readWishList(wishList);
+		log.debug("result={}", result);
+		
+		return result;
+	}
+	
+	
+	/**
+	 * 로그인된 유저의 찜 목록을 돌려줌
+	 * @param signedInUser
+	 * @return
+	 */
+	public List<WishList> readWishList(String signedInUser) {
+		
+		log.debug("readWishList(signedInUser={})", signedInUser);
+		List<WishList> userWishLIst =  marketDao.readWishListOfUser(signedInUser);
+		
+		log.debug("user's wishlist = {}", userWishLIst);
+		
+		return userWishLIst;
+	}
+	
+	
+	public int confirmDeal(Long workId) {
+		log.debug("confirmDeal(workId={})", workId);
+		
+		int result = marketDao.confirmDeal(workId);
+		log.debug("거래 확정 결과={}", result);
 		
 		return result;
 	}
