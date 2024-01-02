@@ -19,11 +19,25 @@
         WHERE recipient = #{signedInUser}
     </select>
     
+    <select id="totNumOfSentMessages" resultType="Integer">
+        SELECT count(*)
+        FROM messages
+        WHERE sender = #{signedInUser}
+    </select>
+    
     <select id="readFirstMessages" resultType="Message">
         SELECT *
         FROM messages
         WHERE reply_to is null
         ORDER BY id DESC
+    </select>
+    
+    <select id="readSentMessage" resultType="Message">
+        SELECT *
+        FROM messages
+        WHERE sender = #{signedInUser}
+        ORDER BY id DESC
+        OFFSET #{startingPage} ROWS FETCH NEXT #{postsPerPage} ROWS ONLY
     </select>
     
     <select id="readReply" resultType="Message">

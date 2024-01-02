@@ -26,6 +26,12 @@ public interface MyPageDao {
 	// 해당 메세지의 부모 메세지를 찾아오는 메서드
 	Message findParentMessage(MyMessageDto messageDto);
 	
+	// 로그인한 유저가 보낸 메세지들의 리스트를 받아오는 메서드
+	List<Message> readSentMessage(ReadMyMessageDto readMyMessageDto);
+	
+	// 로그인한 유저가 보낸 메세지들의 개수를 받아오는 메서드
+	int totNumOfSentMessages(String signedInUser);
+	
 	// 아규먼트로 메세지 id받아서 메세지를 반환
 	Message readMyMessageById(Long id);
 	

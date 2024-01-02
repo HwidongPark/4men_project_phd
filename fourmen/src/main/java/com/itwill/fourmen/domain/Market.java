@@ -18,7 +18,7 @@ public class Market {
 	Integer yearCreated;
 	String paintingSize;
 	String isSold;
-	Long buyerId;
+	String buyerId;
 	LocalDateTime createdTime;
 	Long views;
 	Long likes;

@@ -68,7 +68,7 @@ public class MyPageController {
 	 * @param model
 	 * @return
 	 */
-	@GetMapping("/mymessage")
+	@GetMapping("/mymessage/received")
 	public String myMessage(HttpSession session, HttpServletRequest request, Model model
 			, @RequestParam(name = "page", defaultValue = "1", required = false) int page) {
 		String signedInUser = (String) session.getAttribute("signedInUser");
@@ -77,7 +77,7 @@ public class MyPageController {
 		
 		// 메세지 받은거 다 가져옴
 		List<Message> myMessages = myPageService.readMyMessage(signedInUser, page);
-		log.debug("myMessages={}", myMessages);
+		log.debug("myMessage={}", myMessages);
 		
 		List<MyMessageDto> messageDtoList = new ArrayList<>(); 
 		
@@ -91,7 +91,7 @@ public class MyPageController {
 		log.debug("messageDtoList={}", messageDtoList);		
 		
 		// 페이징 객체 가져옴
-		PagingDto pagingDto = myPageService.pagingMessages(page, signedInUser);
+		PagingDto pagingDto = myPageService.pagingMessages(page, signedInUser, "received");
 		log.debug("pagingDto={}", pagingDto);
 		
 		// 로그인한 유저가 포함된 메세지 번들(메세지, 답변 모두 포함된)
@@ -103,15 +103,39 @@ public class MyPageController {
 		String sDirectory = request.getServletContext().getRealPath("/static/uploads");
 		
 		model.addAttribute("messageDtoList", messageDtoList);
-		model.addAttribute("messageBundles", messageBundles);	// TODO: 일단 유저가 받은 메세지, 답변들 번들 넘겨줌.. 필요없으면 나중에 지우기
+		// TODO: 일단 유저가 받은 메세지, 답변들 번들 넘겨줌.. 필요없으면 나중에 지우기
+		model.addAttribute("messageBundles", messageBundles);
 		model.addAttribute("page", page);
 		model.addAttribute("pagingDto", pagingDto);
 		model.addAttribute("sDirectory", sDirectory);
+		model.addAttribute("category", "received");
 		
 		return "/mypage/mymessage";
 	}
 	
 	
+	@GetMapping("/mymessage/sent")
+	public String showMySentMessages(HttpSession session, HttpServletRequest request, Model model
+			,@RequestParam(name = "page", required = false, defaultValue = "1") int page) {
+		String signedInUser = (String) session.getAttribute("signedInUser");
+		log.debug("showMySentMessages(signedInUser={})", signedInUser);
+		
+		// 로그인한 유저가 보낸 모든 메세지를 읽어옴
+		List<MyMessageDto> messageDtoList = myPageService.readSentMessage(signedInUser, page);
+		
+		// 페이지 객체 가져옴
+		PagingDto pagingDto = myPageService.pagingMessages(page, signedInUser, "sent");
+		log.debug("pagingDto={}", pagingDto);
+		
+		String sDirectory = request.getServletContext().getRealPath("/static/uploads");
+		
+		model.addAttribute("messageDtoList", messageDtoList);
+		model.addAttribute("page", page);
+		model.addAttribute("pagingDto", pagingDto);
+		model.addAttribute("sDirectory", sDirectory);
+		model.addAttribute("category", "sent");
+		return "/mypage/mymessage";
+	}
 	
 	
 	

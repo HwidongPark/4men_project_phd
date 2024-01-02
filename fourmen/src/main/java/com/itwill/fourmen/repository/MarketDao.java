@@ -8,6 +8,7 @@ import com.itwill.fourmen.domain.WishList;
 import com.itwill.fourmen.domain.WorkImage;
 import com.itwill.fourmen.dto.market.MarketPostDto;
 import com.itwill.fourmen.dto.market.MarketSearchDto;
+import com.itwill.fourmen.dto.mymessage.ConfirmDealDto;
 
 public interface MarketDao {
 	
@@ -82,6 +83,6 @@ public interface MarketDao {
 	 
 	 
 	 // 거래 확정 메서드
-	 int confirmDeal(Long workId);
+	 int confirmDeal(ConfirmDealDto confirmDealDto);
 	 
 }
