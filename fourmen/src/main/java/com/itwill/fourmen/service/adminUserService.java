@@ -24,7 +24,7 @@ import com.itwill.fourmen.domain.WishList;
 import com.itwill.fourmen.domain.WorkImage;
 import com.itwill.fourmen.dto.admin.UserUpdateDto;
 import com.itwill.fourmen.dto.admin.exhibitioncreateDto;
-import com.itwill.fourmen.dto.artist.ArtistUpdateDto;
+import com.itwill.fourmen.dto.artist.ArtistDto;
 import com.itwill.fourmen.dto.market.MarketPostDto;
 import com.itwill.fourmen.dto.market.MarketSearchDto;
 import com.itwill.fourmen.dto.market.PagingDto;

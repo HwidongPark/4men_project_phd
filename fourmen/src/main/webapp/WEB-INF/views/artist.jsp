@@ -111,7 +111,7 @@ div#artist {
 						<c:forEach var="img" items ="${artistImg}" varStatus="imgLoop">
 							<c:if test="${loop.index == imgLoop.index}">
 								<c:if test="${a.userid eq img.userid}">
-									<img src="images/char/${img.saved_img}" onerror="this.src='images/char/default_user.png'" class="card-img" alt="test_user"/>
+									<img src="images/char/${img.artist_s_img}" onerror="this.src='images/char/default_user.png'" class="card-img" alt="test_user"/>
 								</c:if>
 							</c:if>
 						</c:forEach>

@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class Artist_Img {
 
 	private String userid;
-	private String original_img;
-	private String saved_img;
+	private String artist_o_img;
+	private String artist_s_img;
 	
 }

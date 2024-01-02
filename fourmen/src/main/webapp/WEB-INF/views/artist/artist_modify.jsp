@@ -74,7 +74,7 @@ div#modify {
 							
 							<tbody class = "table-secondary table-group-divider">
 									<tr>
-										<td><input class = "form-control" id = "original_img" type = "text" name = "original_img" value = "${artist_img.original_img}" onfocus = "this.blur()" readonly /></td>
+										<td><input class = "form-control" id = "original_img" type = "text" name = "original_img" value = "${artist_img.artist_o_img}" onfocus = "this.blur()" readonly /></td>
 										<td><input class = "form-control d-none" id = "isFileDeleted" type = "text" name = "isFileDeleted" value ="NO"  readonly /></td>
 										<td><button class = "btn btn-outline-dark" id = "btnImgDelete" type="button">X</button></td>
 									</tr>

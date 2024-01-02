@@ -7,7 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.itwill.fourmen.domain.Artist;
 import com.itwill.fourmen.domain.Exhibition;
-import com.itwill.fourmen.dto.artist.ArtistUpdateDto;
+import com.itwill.fourmen.dto.artist.ArtistDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

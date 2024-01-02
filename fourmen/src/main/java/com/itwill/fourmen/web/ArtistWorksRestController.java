@@ -16,7 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/works")
-public class ArtistRestController {
+public class ArtistWorksRestController {
 
 	private final ArtistService artistService;
 	

@@ -138,7 +138,7 @@ public class ArtistService {
 			String originalFileName = file.getOriginalFilename();
 			log.debug("originalFileName = {}", originalFileName);
 			
-			dto.setOriginal_img(originalFileName);
+			dto.setArtist_o_img(originalFileName);
 			
 			String fileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
 			log.debug("fileExtension = {}", fileExtension);
@@ -149,8 +149,8 @@ public class ArtistService {
 			log.debug("absolutePath = {}", absolutePath);
 			file.transferTo(new File(absolutePath));
 			
-			dto.setSaved_img(artist_img);
-			
+			dto.setArtist_s_img(artist_img);
+						
 			int registerArtistResult = artistDao.registerArtist(dto.artisToEntity());
 			log.debug("아티스트 등록 = {}", registerArtistResult);
 			
@@ -176,14 +176,14 @@ public class ArtistService {
 		if (!file.isEmpty()) {
 			// 파일이 업로드 되어 있음.
 			// 단순히 원래 있던 프로필 사진을 삭제한다.
-			File exsistFile = new File(sDirectory + File.separator + artist_Img.getSaved_img());
+			File exsistFile = new File(sDirectory + File.separator + artist_Img.getArtist_s_img());
 			boolean existFileIsDeleted = exsistFile.delete();
 			log.debug("Profile IMG DELETE = ", existFileIsDeleted);
 
 			String originalFileName = file.getOriginalFilename();
 			log.debug("originalFileName = {}", originalFileName);
 
-			dto.setOriginal_img(originalFileName);
+			dto.setArtist_o_img(originalFileName);
 
 			// 확장자....!
 			String fileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
@@ -196,7 +196,7 @@ public class ArtistService {
 			log.debug("absolutePath = {}", absolutePath);
 			file.transferTo(new File(absolutePath));
 
-			dto.setSaved_img(artist_img);
+			dto.setArtist_s_img(artist_img);
 			
 			artistDao.updateArtist(dto.artisToEntity());
 			artistDao.updateArtistProfileImg(dto.artistImgToEntity());
@@ -213,7 +213,7 @@ public class ArtistService {
 				log.debug("=============================================================================");
 			} else if(dto.getIsFileDeleted().equals("YES")) {
 				// 업로드된 파일을 지우겠다..
-				File exsistFile = new File(sDirectory + File.separator + artist_Img.getSaved_img());
+				File exsistFile = new File(sDirectory + File.separator + artist_Img.getArtist_s_img());
 				boolean existFileIsDeleted = exsistFile.delete();
 				log.debug("Profile IMG DELETE = ", existFileIsDeleted);
 				
@@ -242,7 +242,7 @@ public class ArtistService {
 	
 		// TOMCAT 서버 (WAS)에서 이미지 삭제.
 		
-		File file = new File(sDirectory + File.separator + artist_Img.getSaved_img());
+		File file = new File(sDirectory + File.separator + artist_Img.getArtist_s_img());
 		boolean isDeleted = file.delete();
 		log.debug("Profile IMG DELETE = ", isDeleted);
 		
