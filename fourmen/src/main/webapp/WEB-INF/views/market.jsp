@@ -99,7 +99,6 @@
             </div>
         </form>
     </section>
-
     <main>
         <!-- 글 작성 버튼 -->
         <div class="market-create-btn-container">

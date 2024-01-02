@@ -48,16 +48,16 @@
         <div class="forum-kategorie">
             <ul class="forum-kategorie-board-lists">
                 <li class="forum-kategorie-board">
-                    <a href="freeboard" class="category-button" onclick="change_category_style(event)">자유게시판</a>
+                    <a href="freeboard" class="category-button">자유게시판</a>
                 </li>
                 <li class="forum-kategorie-board">
-                    <a href="qnaboard" class="category-button" onclick="change_category_style(event)">Q&A</a>
+                    <a href="qnaboard" class="category-button">Q&A</a>
                 </li>
                 <li class="forum-kategorie-board">
-                    <a href="faqboard" class="category-button" onclick="change_category_style(event)">FAQ</a>
+                    <a href="faqboard" class="category-button">FAQ</a>
                 </li>
                 <li class="forum-kategorie-board">
-                    <a href="noticeboard" class="category-button" onclick="change_category_style(event)">NOTICE</a>
+                    <a href="noticeboard" class="category-button">NOTICE</a>
                 </li>
             </ul>
         </div>
@@ -234,7 +234,6 @@
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
     <script src="../js/header.js"></script>
-    <!-- <script src="../js/forum/forum-category-bold-style.js"></script> -->
 
 </body>
 </html>

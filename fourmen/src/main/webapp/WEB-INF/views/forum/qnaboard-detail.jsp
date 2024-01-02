@@ -70,7 +70,7 @@
                     <input id="qnaboard-view-detail-comment" value="1" type="number" readonly="readonly">
                 </li>
             </ul>
-            <div>
+            <div class="qnaboard_md_del_btn">
                 <button id="qnaboard-modify">수정</button>
                 <button id="qnaboard-delete">삭제</button>
             </div>

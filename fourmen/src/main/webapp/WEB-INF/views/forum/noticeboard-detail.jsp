@@ -70,7 +70,7 @@
                     <input id="noticeboard-view-detail-comment" value="1" type="number" readonly="readonly">
                 </li>
             </ul>
-            <div>
+            <div class="noticeboard_md_del_btn">
                 <button id="noticeboard-modify">수정</button>
                 <button id="noticeboard-delete">삭제</button>
             </div>
