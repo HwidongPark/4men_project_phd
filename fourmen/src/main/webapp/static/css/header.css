@@ -47,7 +47,7 @@ table {
 /* 이 밑부터 진짜 CSS */
 /* ***** nav를 포함한 해더. (부트스트랩X)***** */
 body {
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 
@@ -186,7 +186,8 @@ body {
 .my-page-close {
     visibility: hidden;
     position: absolute;
-    width: 0px;
+    /* width: 0px; */
+    text-align: right;
     right: 0;
     transform: translateX(100%);
     height: 100%;
@@ -205,8 +206,9 @@ body {
     color: white;
     width: auto;
     height: 100%;
+    transition: all 1s;    
     background-color: rgba(0, 0, 0, 0.5);
-    /* z-index: 999; 다른 요소들보다 위에 표시 */
+    z-index: 999; /* 다른 요소들보다 위에 표시 */
 }
 
 .my-page-list-item {

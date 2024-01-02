@@ -1,3 +1,4 @@
+<%@page import="org.apache.taglibs.standard.tag.common.xml.JSTLXPathFactory"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
@@ -149,14 +150,26 @@
                                     </span>
                                     ${ marketPost.views }
                                     <!-- 좋아요(찜) -->
-                                    <span class="material-symbols-outlined">
-                                        favorite
-                                    </span>
+                                    <c:set var="isWishListed" value="false" />
+                                    <c:forEach items="${ userWishList }" var="wishList">
+                                        <c:if test="${ wishList.workId eq marketPost.workId }">
+                                            <c:set var="isWishListed" value="true" />
+                                        </c:if>
+                                    </c:forEach>
+                                    
+                                    <c:if test="isWishListed">
+                                        <i class="fa-solid fa-heart"></i>   <!-- 유저가 찜한 글이면 꽉찬 하트 -->                               
+                                    </c:if>
+                                    <c:if test="!isWishListed">
+                                        <span class="material-symbols-outlined">    <!-- 유저가 찜하지 않은 글이면 빈 하트 -->
+                                            favorite
+                                        </span>
+                                    </c:if>                                 
                                     ${ marketPost.likes }
                                 </div>                                
                             </div>
                             <c:if
-                                test="${ not empty marketPost.isSold }">
+                                test="${ marketPost.isSold eq 'Y' }">
                                 <div class="is-sold">
                                     <b>거래 완료</b>
                                 </div>
@@ -168,7 +181,9 @@
         </div>
     </main>
     
+    
     <!-- 게시판 글 페이지네이션(pagination)-->
+    <c:if test="${ pageTitle ne '인기 장터 목록' }">
     <div>
         <nav aria-label="Page navigation">            
             <ul class="pagination">
@@ -260,8 +275,7 @@
             </ul>
         </nav>
     </div>
-    
-    
+    </c:if>
     
     <%@ include file="../fragments/footer.jspf"%>
 

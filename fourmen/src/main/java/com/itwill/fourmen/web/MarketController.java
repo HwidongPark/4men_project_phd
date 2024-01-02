@@ -14,14 +14,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.itwill.dto.MarketCreateDto;
-import com.itwill.dto.MarketPostDto;
-import com.itwill.dto.MarketSearchDto;
-import com.itwill.dto.PagingDto;
 import com.itwill.fourmen.domain.Market;
+import com.itwill.fourmen.domain.User;
+import com.itwill.fourmen.domain.WishList;
+import com.itwill.fourmen.dto.market.MarketCreateDto;
+import com.itwill.fourmen.dto.market.MarketPostDto;
+import com.itwill.fourmen.dto.market.MarketSearchDto;
+import com.itwill.fourmen.dto.market.PagingDto;
 import com.itwill.fourmen.service.MarketService;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import oracle.jdbc.proxy.annotation.GetDelegate;
@@ -32,39 +35,7 @@ import oracle.jdbc.proxy.annotation.GetDelegate;
 @RequestMapping("/market")
 public class MarketController {
 	
-	private final MarketService marketService;	
-	
-//	/**
-//	 * 마켓 메인페이지로 이동하는 컨트롤러 메서드
-//	 * @param model
-//	 * @param request
-//	 */
-//	@GetMapping("")
-//	public void market(Model model, HttpServletRequest request) {
-//		int numOfPopularMarketPosts = 0;
-//		
-//		List<MarketPostDto> marketPosts = marketService.readMarketPosts();	// 최신글 읽어
-//		log.debug("market(postLists={}) GET", marketPosts);
-//		
-//		// TODO: 인기글 8개 읽어옴
-//		if (marketPosts.size() < 8) {
-//			numOfPopularMarketPosts = marketPosts.size();
-//		} else {
-//			numOfPopularMarketPosts = 8;
-//		}
-//		List<MarketPostDto> popularMarketPosts = marketService.readPopularMarketPosts(numOfPopularMarketPosts);
-//		log.debug("popularMarketPosts={}", popularMarketPosts);
-//		
-//		String sDirectory = request.getServletContext().getRealPath("/static/uploads");
-//		log.debug("sDirectory={}", sDirectory);
-//		// market의 게시글 리스트를 뷰로 전달
-//		model.addAttribute("marketPosts", marketPosts);	// 최신글들을 전달..
-//		// TODO: 인기글 8개 전달
-//		model.addAttribute("popularMarketPosts", popularMarketPosts);
-//		model.addAttribute("sDirectory", sDirectory);
-//		model.addAttribute("fileSeparator", File.separator);
-//		
-//	}
+	private final MarketService marketService;
 	
 	
 	/**
@@ -73,7 +44,7 @@ public class MarketController {
 	 * @param request
 	 */
 	@GetMapping("")
-	public void market(@RequestParam(name = "page", required = false, defaultValue = "1") int page, Model model, HttpServletRequest request) {
+	public void market(@RequestParam(name = "page", required = false, defaultValue = "1") int page, Model model, HttpServletRequest request, HttpSession session) {
 		log.debug("market(page={})", page);
 		
 		int numOfPopularMarketPosts = 0;	// 인기글 개수 초기화.. 최대 8개로 제한할거임
@@ -101,6 +72,17 @@ public class MarketController {
 		String servletPath = request.getServletPath();
 		log.debug("servletPath={}", servletPath);
 		
+		// 로그인한 상태라면 좋아요한 게시글 목록 읽어옴
+		String signedInUser = (String) session.getAttribute("signedInUser");		
+		log.debug("마켓리스트갈 때 로그인된 유저={}", signedInUser);
+		if (signedInUser != null) {
+			List<WishList> userWishList = marketService.readWishList(signedInUser);
+			log.debug("userWishList={}", userWishList);
+			model.addAttribute("userWishList", userWishList);
+		}
+				
+		
+		
 		// market의 게시글 리스트를 뷰로 전달
 		// TODO:  변수이름 다시 생각.. 그냥 가도 되기는 함.
 		model.addAttribute("marketPosts", pagedMarketPosts);	// 최신글들을 전달..
@@ -112,6 +94,9 @@ public class MarketController {
 		model.addAttribute("fileSeparator", File.separator);
 		model.addAttribute("servletPath", servletPath);
 		
+		
+		
+		
 	}
 	
 	
@@ -121,14 +106,32 @@ public class MarketController {
 	 * @param model
 	 */
 	@GetMapping("/detail")
-	public void detail(@RequestParam Long workid, Model model) {
-		log.debug("detail(workId={}) GET", workid);
+	public void detail(@RequestParam Long workid, Model model, HttpSession session) {
+		log.debug("detail(workId={}) GET", workid);			
+		
+		// 해당 게시물 읽어옴
 		MarketPostDto marketPost = marketService.readMarketPost(workid);
 		log.debug("marketPostDto = {}", marketPost);
 		
+		// 조회수 추가
 		marketService.addView(workid);
 		
+		// 로그인된 유저가 종아요 눌렀는지 여부 확인
+		String signedInUser = (String) session.getAttribute("signedInUser");
+		WishList wishList = new WishList();
+		wishList.setUserId(signedInUser);
+		wishList.setWorkId(workid);
+		
+		int isWishListed = 0;
+		
+		if (signedInUser != null) {
+			isWishListed = marketService.readWishList(wishList);
+			log.debug("로그인한 유저가 좋아요 눌렀나?={}", isWishListed);
+		}
+		
+		
 		model.addAttribute("marketPost", marketPost);
+		model.addAttribute("isWishListed", isWishListed);
 	}
 	
 	
@@ -161,11 +164,6 @@ public class MarketController {
 	 */
 	@GetMapping("/recent")
 	public String marketRecentList(@RequestParam(name = "page", required = false, defaultValue = "1") int page, Model model, HttpServletRequest request) {
-//		List<MarketPostDto> marketPosts = marketService.readMarketPosts();
-//		log.debug("marketRecentList(postLists={}) GET", marketPosts);
-//		
-//		String sDirectory = request.getServletContext().getRealPath("/static/uploads");
-//		log.debug("sDirectory={}", sDirectory);
 		
 		// 해당 페이지의 포스트들만 가져옴
 		List<MarketPostDto> pagedMarketPosts = marketService.readPagedMarketPosts(page);
@@ -221,8 +219,6 @@ public class MarketController {
 		dto.setPage(page);
 		log.debug("page={}", page);
 		log.debug("search(dto={})", dto);	// TODO: 페이지 처리 저절로 입혀지나 안되나 실험
-//		List<MarketPostDto> marketPosts = marketService.searchPosts(dto);
-//		log.debug("searchedMarketPosts = {}", marketPosts);
 		
 		List<MarketPostDto> pagedMarketPosts = marketService.pagedSearchPosts(dto);
 		log.debug("pagedSearchPosts={}", pagedMarketPosts);

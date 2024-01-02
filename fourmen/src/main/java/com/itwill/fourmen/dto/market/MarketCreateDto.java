@@ -1,4 +1,4 @@
-package com.itwill.dto;
+package com.itwill.fourmen.dto.market;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ public class MarketCreateDto {
 	private String title;
 	private String description;	// kor따로있는데 일단은 이렇게함
 	private List<MultipartFile> files;
-	private String userid;
+	private String userId;
 	private int price;
 	private Double width;
 	private Double height;
@@ -28,7 +28,7 @@ public class MarketCreateDto {
 				.workId(this.workId)
 				.title(this.title)
 				.descriptionKor(description)
-				.userId(this.userid)
+				.userId(this.userId)
 				.price(this.price)
 				.yearCreated(this.yearCreated)
 				.paintingSize(String.format("%.1f x %.1f x %.1f cm", width, height, depth))
