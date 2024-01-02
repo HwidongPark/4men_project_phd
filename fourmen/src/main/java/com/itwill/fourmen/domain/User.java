@@ -17,6 +17,7 @@ public class User {
     private String nickname;
     private String phone;
     private String email;
-    private String artistimg;
     private String grade;
+    private String profile_o_img;
+    private String profile_s_img;
 }

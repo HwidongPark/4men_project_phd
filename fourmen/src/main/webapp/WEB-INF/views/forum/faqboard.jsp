@@ -114,9 +114,13 @@
             </thead>
             <tbody class="table-group-divider">
             <c:forEach var="f" items="${faqboard_posts}">
+
+  
+
             <!-- var: 변수(리스트 값을 저장) / items: 리스트 -->
             <!-- PostController.java에서 전달된 데이터 사용 (리스트의 이름이 items에 들어가야 함)
             -> model.addAttribute("faqboard_posts", list); //-> 뷰에 전달되는 데이터. -->
+
                 <tr>
                     <td class="d-none">${f.faq_id}</td>
                     <td>${f.faq_id}</td>

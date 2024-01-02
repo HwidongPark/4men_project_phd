@@ -14,6 +14,8 @@
 	crossorigin="anonymous">
 <link rel="stylesheet" href="css/header.css">
 <link rel="stylesheet" href="css/footer.css">
+	<link rel="stylesheet" href="css/underheader.css">
+	<link rel="stylesheet" href="css/pagenation.css">	
 
 <style>
 	html, body, div, span, applet, object, iframe,
@@ -216,20 +218,35 @@ table {
 	border:1px solid #42454c;
 }
 
+#exhibition-image{
+	width: 270px;
+	height: 400px;
+}
 	
 </style>
-	<link rel="stylesheet" href="/fourmen/css/pagenation.css">	
+
 </head>
+
+<%@ include file="fragments/navigation.jspf"%>
 <body>
-		 <%@ include file="fragments/navigation.jspf"%>
 		 
+		 
+	<!-- 웹페이지 상단 헤더 아래 부분 -->
+    <div id="underheader-div">
+        <div class="container" id="underheadrcontainer">
+            <h2 class="commondesign">
+                EXHIBITION
+            </h2>
+        </div>
+    </div>
+		 <main class="main-content">
 		 <div class="w-75 m-auto ">
-		 
+	
 		<c:url var="exhibitionSearch" value="/exhibition" />
     	<form action="${exhibitionSearch}" method="get" id="search-form" role="form">
     	
-    	<div class="all-select">
     	
+    	<div class="all-select">
     	<div class="date-select">
     	<label for="date">
   		<input type="date"
@@ -248,13 +265,14 @@ table {
          >
 		</label>
 		</div>
-		
+		 
 		<div class="text-select">
         <select name="category" id="selectCategory">
             <option value="name" name="name"<c:out value="${scri.category eq 'title' ? 'selected' : ''}"/>>전시회</option>
             <option value="location" name="location"<c:out value="${scri.category eq 'location' ? 'selected' : ''}"/>>위치</option>
         </select>
         <input id="search-keyword" type="text" name="keyword" placeholder="검색" value="${scri.keyword}">
+		
 		</form>
 		
  		<button id="btnSearch">
@@ -264,7 +282,7 @@ table {
        </button>
 		</div>
 		</div>   
-			
+	
         
 
     	
@@ -272,14 +290,14 @@ table {
     
         <!-- 각 메뉴들의 내용을 간략하게 보여줌 -->
     
-		<main class="main-content">
+		
         <!-- 훈련과정 간략하게 보여줌 -->
         <div class="gridbox">
             <div class="row row-cols-1 row-cols-md-3 g-4">
              <c:forEach var="exhibition" items="${exhibition}">
                 <div class="col">
                     <div class="card card border-light mb-3">
-                        <img src="${exhibition.photo}" class="card-img-top" alt="...">
+                        <a class="aReserve" href="${exhibition.site}"><img src="image/${exhibition.photo}" class="card-img-top" id="exhibition-image" alt="..."></a>
                         <div class="card-body">
                             <h5 class="card-title text-center">${exhibition.name}</h5>
                             <p class="card-text text-center">${exhibition.startdate}~${exhibition.enddate}</p>
@@ -391,11 +409,11 @@ table {
     </div>
     	
   
-		</main>
+		
 		
 	<div class="m-5"></div>
 		
-		
+	</main>	
 
 		<%@ include file="fragments/footer.jspf" %>
 	
@@ -403,7 +421,18 @@ table {
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
 		crossorigin="anonymous"></script>
+
+	 <script>
+      $(function(){
+        $('#searchBtn').click(function() {
+          self.location = "exhibition" + '${pageMaker.makeQuery(1)}' + "&category=" + $("select option:selected").val() + "&keyword=" + encodeURIComponent($('#search-keyword').val()
+          + "&startdate=" + encodeURIComponent($('#startdate-select').val())+ "&enddate=" + encodeURIComponent($('#enddate-select').val()));
+        });
+      });   
+    </script>
+
     <script src="/fourmen/js/header.js"></script>
+
 	<script src="js/exhibitionjs.js"></script>
 </body>
 </html>

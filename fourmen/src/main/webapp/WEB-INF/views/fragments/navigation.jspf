@@ -64,14 +64,17 @@
 
 <nav class="header-nav">
     <div class="logo-container" style="flex: 1;">
+
         <a href="/fourmen" class="logo">
             <img class="logo" src="/fourmen/logo/logo01.png" alt="4men_logo"/>
+
         </a>
     </div>
     
     <div class="header-list-container">
         <ul class="nav-btn-lists">
             <li class="nav-each-btn-list">
+
                 <a href="/fourmen/artist" class="nav-button">ARTISTS</a>
             </li>
             <li class="nav-each-btn-list">
@@ -82,11 +85,12 @@
             </li>
             <li class="nav-each-btn-list">
 
-            <a href="/fourmen/forum/freeboard" class="nav-button">FORUM</a>
+                <a href="/fourmen/forum/freeboard" class="nav-button">FORUM</a>
+
 
             </li>
             <li class="nav-each-btn-list">
-                <a href="#" class="nav-button">ADMIN</a>
+                <a href="http://localhost:8080/fourmen/admin" class="nav-button">ADMIN</a>
             </li>
         </ul>
         <button class="nav-collapse-btn">

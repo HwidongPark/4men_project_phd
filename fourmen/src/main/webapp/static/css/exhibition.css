@@ -1,0 +1,222 @@
+@charset "UTF-8";
+
+	html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+    img:hover {
+    transform:scale(1.1);
+    transition: transform.5s;
+    }
+    
+    .btnReserve{
+    font-size: 13px;
+    margin: 10px;
+    
+    
+    }
+    .btnReserve:hover{
+    background-color: olive;
+    }
+    
+    .btndelete{
+    font-size: 13px;
+    margin: 10px;
+    }
+    
+    .exhibition-plus-box{
+    width: 100%;
+    margin-bottom: 10px;
+    text-align: right;
+    }
+    
+    .exhibition-plus{
+    font-size: 15px;
+    
+    }
+    
+    
+    
+    #btnDiv {
+    	text-align: center;
+    	width: 100%;
+
+    }
+    
+    .aReserve{
+    text-decoration: none;
+    color: white;
+    }
+    
+    .btnPage{
+        background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;        
+    }
+   	
+   	.girdbox{
+   	display: grid;
+   	grid-template-columns: 1fr 1fr 1fr;
+    width: 100%;
+    margin-bottom: 3em;
+   	}
+   	/* 메인 바디 CSS */
+	.main-content {
+    width: 75%;
+    margin: 0 auto;
+	}
+   	/* 검색에 관한 css */
+	#search-form {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    margin: 3rem auto;
+	}
+
+	#search-form select {
+    border-radius: 0.5em;
+	}
+
+	#search-keyword {
+    width: 50%;
+    margin: 0 0.5em;
+    margin-right: 0.8em;
+    height: 100%;
+    border-radius: 0.5em;
+	}
+
+	#btnSearch {
+    background-color: transparent;
+    border: none
+	}
+	
+	/* 반응형 디자인 */
+@media (max-width: 768px) {
+
+    /* 서치버튼과 캐러샐 간격 조정 */
+    #search-form select {
+        width: auto;
+        font-size: 0.5em;
+    }
+    
+    #search-form {
+        margin: 2rem;
+        font-size:0.8em;
+    }
+
+    /* 훈련과정 h2폰트 사이즈 줄임 */
+    .sample-trainings {
+        font-size: 1.5em;
+    }
+    
+
+    /* 게시물들 한 행당 한 칼럼으로 정리 */
+    .forum-container {
+        flex-direction: column;
+    }
+
+    .forum-subcontainer {
+        width: 100%;
+    }
+
+    .forum-text {
+        font-size: 1.5em;
+    }
+}
+
+	.date-select{
+	text-align: left 10px;
+	margin-bottom: 10px;
+	padding-left: 10px;
+	
+	}
+	.text-select{
+	text-align: center;
+	width: 300px;
+	}
+	.button-select{
+	text-align: center;
+	width: auto;
+    font-size: 0.5em;
+	}
+	#startdate-select, #enddate-select{
+	border-radius: 0.5em;
+	border-color: lightgary;
+	padding: 2px;
+	}
+
+	#exhibition-image{
+	width: 270px;
+	height: 400px;
+}
+	.page_wrap {
+	text-align:center;
+	font-size:0;
+ }
+.page_nation {
+	display:inline-block;
+}
+.page_nation .none {
+	display:none;
+}
+.page_nation a {
+	display:block;
+	margin:0 3px;
+	float:left;
+	border:1px solid #e6e6e6;
+	width:28px;
+	height:28px;
+	line-height:28px;
+	text-align:center;
+	background-color:#fff;
+	font-size:13px;
+	color:#999999;
+	text-decoration:none;
+}
+
+.page_nation a:hover {
+	background-color:#42454c;
+	color:#fff;
+	border:1px solid #42454c;
+}

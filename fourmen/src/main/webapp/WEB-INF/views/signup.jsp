@@ -37,7 +37,7 @@
   <div class="form-container sign-in-container">
   	<c:url var="signinPage" value="signin" />
     <form action="${signinPage}" method="post">
-      <img class="logo" src="logo/logo01.png" alt="4men_logo"/>
+      <a href="/fourmen"><img class="logo" src="logo/logo01.png" alt="4men_logo"/></a>
 	
       <input type="text" name="userid" placeholder="ID" required/>
       <input type="password" name="password" placeholder="Password" required/>
