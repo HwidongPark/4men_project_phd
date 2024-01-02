@@ -82,7 +82,7 @@
                     </select>
                 </div>
                 <div class="forum-search-form-area">
-                    <input id=forum-search-input autocomplete="on" placeholder="검색어를 입력하세요." type="text" name="keyword" id="search-keyworduser" value="${scri.keyword}">
+                    <input maxlength="30" id=forum-search-input autocomplete="on" placeholder="검색어를 입력하세요." type="text" name="keyword" id="search-keyworduser" value="${scri.keyword}">
                 </div>	
 				 
                 <div class="forum-search-btn-area">

@@ -57,7 +57,7 @@
             </ul>
         </div>
     </section>
-    </main>
+   
     
         <section role="kategorie" class="kategorie" style="border-bottom: 1.5px solid #D8D8D8;">
         <div class="forum-kategorie">
@@ -145,32 +145,14 @@
         </table>
     </section>
     
-    <!-- 새글 작성 내비게이션(HOME / MAP / NEW POST) -->
-    <div class="new-post-div">
-        <nav class="new-post-nav">
-            <ul class="new-post-ul">
-                <li id="new-post-li-one" class="new-post-li">
-                    <a href="../">HOME</a>
-                </li>
-                <li id="new-post-li-two" class="new-post-li">
-                    <a href="map">MAP</a>    
-                </li>
-                <li id="new-post-li-three" class="new-post-li">
-                    <a href="freeboard-create">NEW POST</a>
-                </li>
-            </ul>
-        </nav>
-    </div>
+
     
-    
-    
-	            <!-- 게시판 글 페이지네이션(pagination)-->
-    <div>
+		 <div>
         <nav aria-label="Page navigation">            
             <ul class="pagination">
                 <!-- 이전, 처음 페이지 -->
                 <li class="page-item">
-                     <a class="page-link-img" href="exhibitionadmin${pageMaker.makeSearch(pageMaker.startPage)}">
+                     <a class="page-link-img" href="admin${pageMaker.makeSearchAdminUser(pageMaker.startPage)}">
                         <img id="pagination-img" alt="first page" src="/fourmen/pagination/pagination01.png">
                     </a>
                 </li>
@@ -185,10 +167,10 @@
                     </c:when>
                     <c:otherwise>  -->  
                         <li class="page-item">
-                            <c:url var="prevPage" value="exhibitionadmin${pageMaker.makeSearch(pageMaker.startPage)}">
+                            <c:url var="prevPage" value="admin${pageMaker.makeSearchAdminUser(pageMaker.startPage)}">
                                 <c:param name="page" value=""/>
                             </c:url>
-                            <a class="page-link-img" href="exhibitionadmin${pageMaker.makeSearch(pageMaker.startPage)}" aria-label="previous">
+                            <a class="page-link-img" href="admin${pageMaker.makeSearchAdminUser(pageMaker.startPage)}" aria-label="previous">
                                 <img id="pagination-img" alt="previous page" src="/fourmen/pagination/pagination02.png">
                             </a>
                         </li>
@@ -199,7 +181,7 @@
                 <!-- 필요한만큼만 페이지 보여줌 -->
                  <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
                     <li class="page-item">
-                        <a class="page-link"  href="exhibitionadmin${pageMaker.makeSearch(idx)}">${idx}</a>
+                        <a class="page-link"  href="admin${pageMaker.makeSearchAdminUser(idx)}">${idx}</a>
                     </li>
                 </c:forEach>
                 
@@ -214,10 +196,10 @@
                     </c:when>
                     <c:otherwise> --> 
       		<li class="page-item">
-      			<c:url var="nextPage" value="exhibitionadmin${pageMaker.makeSearch(pageMaker.endPage)}">
+      			<c:url var="nextPage" value="admin${pageMaker.makeSearchAdminUser(pageMaker.endPage)}">
                             <c:param name="page" value=""></c:param>
                         </c:url>
-                        <a class="page-link-img" href="exhibitionadmin${pageMaker.makeSearch(pageMaker.endPage)}" aria-label="next">
+                        <a class="page-link-img" href="admin${pageMaker.makeSearchAdminUser(pageMaker.endPage)}" aria-label="next">
                             <img id="pagination-img" alt="next page" src="/fourmen/pagination/pagination03.png">
                         </a>
               </li>
@@ -225,13 +207,15 @@
               </c:choose> --> 
                
                 <li class="page-item">
-                    <a class="page-link-img" href="exhibitionadmin${pageMaker.makeSearch(pageMaker.endPage)}">
+                    <a class="page-link-img" href="admin${pageMaker.makeSearchAdminUser(pageMaker.endPage)}">
                         <img id="pagination-img" alt="last page" src="/fourmen/pagination/pagination04.png">
                     </a>
                 </li>
             </ul>
         </nav>
     </div>
+			
+		</main>
     
     	<%@ include file="fragments/footer.jspf" %>
 	

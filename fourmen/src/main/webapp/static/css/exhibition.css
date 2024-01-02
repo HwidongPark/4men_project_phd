@@ -101,6 +101,27 @@ table {
     width: 100%;
     margin-bottom: 3em;
    	}
+   	
+   	   	.exhibition-all-item {
+   		width: 90%;
+   		margin: 0 auto;
+   	}
+   	
+   	 .image-outer-container {
+   		width: 100%;
+   		height: 0;
+   		padding-bottom: 148%;
+   		position: relative;
+   	}
+   	
+	.image-outer-container img{
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
    	/* 메인 바디 CSS */
 	.main-content {
     width: 75%;
@@ -186,10 +207,8 @@ table {
 	padding: 2px;
 	}
 
-	#exhibition-image{
-	width: 270px;
-	height: 400px;
-}
+
+
 	.page_wrap {
 	text-align:center;
 	font-size:0;

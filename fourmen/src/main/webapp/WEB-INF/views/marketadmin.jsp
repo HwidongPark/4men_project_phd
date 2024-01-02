@@ -101,7 +101,7 @@
                     <option value="titleContentUserId">제목 + 내용 + 작성자</option>
                 </select>
                 <!-- 검색어 input -->
-                <input class="search-keyword" name="keyword">
+                <input maxlength="30" class="search-keyword" name="keyword">
                 <button id="btnSearch">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16"
                         height="16" fill="currentColor" class="bi bi-search"
