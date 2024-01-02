@@ -25,8 +25,8 @@ import com.itwill.fourmen.dto.user.UserSignInDto;
 import com.itwill.fourmen.dto.user.UserSignUpDto;
 
 import com.itwill.fourmen.domain.Artist;
-
-import com.itwill.fourmen.dto.artist.ArtistListItemDto;
+import com.itwill.fourmen.domain.Artist_Img;
+import com.itwill.fourmen.dto.artist.ArtistDto;
 import com.itwill.fourmen.service.ArtistService;
 
 import com.itwill.fourmen.service.ExhibitionService;
@@ -58,10 +58,17 @@ public class HomeController {
     public void artist(Model model) {
     	log.debug("artist()");
     	
-    	List<ArtistListItemDto> artists = artistService.read();
-    	log.debug("Artist = {} " ,artists);
-    	model.addAttribute("artistList", artists);
+//    	List<ArtistListItemDto> artists = artistService.read();
+//    	log.debug("Artist = {} " ,artists);
+//    	model.addAttribute("artistList", artists);
     	
+    	List<ArtistDto> artist = artistService.readArtist();
+    	log.debug("ArtistList = {}", artist);
+    	model.addAttribute("artist", artist);
+    	
+    	List<ArtistDto> artistImg = artistService.readArtistImg();
+    	log.debug("ArtistImgList = {}", artistImg);
+    	model.addAttribute("artistImg", artistImg);
     }
     
     @GetMapping("/forum")

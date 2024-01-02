@@ -13,6 +13,7 @@
 	crossorigin="anonymous">
 <link rel="stylesheet" href="../css/header.css">
 <link rel="stylesheet" href="../css/footer.css">
+<link rel="stylesheet" href="../css/underheader.css">
 
 <style>
 @font-face {
@@ -45,18 +46,29 @@ div#details {
 	<!-- 헤더 파일 include -->
 	<%@ include file="../fragments/navigation.jspf"%>
 
+    <!-- 웹페이지 상단 헤더 아래 부분 -->
+    <div id="underheader-div">
+        <div class="container" id="underheadrcontainer">
+            <h2 class="commondesign">
+                ARTIST_DETAILS
+            </h2>
+        </div>
+    </div>
+
+
+
 	<div id="details" class="my-5 container-fluid w-75">
 
 		<!-- 페이지 상단 아티스트 사진 및 소개 -->
 		<div class="card mb-3 border-0" style="max-width: 100%;">
 			<div class="row g-0">
-				<div class="col-md-6">
-					<img id="artist_img" src="../images/char/${artist.artist_img}" 
-				  onerror="this.src='../images/char/default_user.png'" class="img-fluid rounded-0" alt="${artist.userid}"/>
+				<div class="px-3 col-md-6">
+					<img id="artist_img" src="../images/char/${artist_img.saved_img}" 
+				  onerror="this.src='../images/char/default_user.png'" class="img-fluid rounded-0" alt="artist_img"/>
 				</div>
-				<div class="col-md-6">
+				<div class="px-3 col-md-6">
 					<div class="card-body">
-						<h5 id="userid" class="fs-1 card-title text-success fw-bolder">${artist.userid}</h5>
+						<h5 id="userid" class="fs-1 card-title text-success fw-bolder">${artist.nickname}</h5>
 						<p id="artist_bio_kor" class="fs-5 card-text">${artist.artist_bio_kor}</p> <br><br>
 						<p class="fs-5 card-text">
 							<small id="artist_bio_eng" class="text-body-secondary">${artist.artist_bio_eng}</small>
@@ -71,15 +83,15 @@ div#details {
 			<table class="table table-striped fs-5">
 				<thead>
 					<tr>
-						<th class="col-2" >작품번호</th>
+						<th class="col-2 d-none" >작품번호</th>
 						<th class="col-7" >작품제목</th>
-						<th class="col-3" >등록일자</th>
+						<th class="col-2" >등록일자</th>
 					</tr>
 				</thead>
 				<tbody class="table-group-divider">
 					<c:forEach var="w" items="${worksList}">
 						<tr>
-							<th scope="row">${w.worksid}</th>
+							<th class="d-none" scope="row">${w.worksid}</th>
 							<td>
 								<c:url var="worksPage" value="/artist/artist_works">
 									<c:param name="worksid" value="${w.worksid}" />

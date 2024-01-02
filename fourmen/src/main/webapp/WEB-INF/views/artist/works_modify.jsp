@@ -40,8 +40,8 @@ div#modify {
 	<main class = "my-2">
 		<div class = "card">
 			<c:url var="worksModifyPage" value="/artist/works_modify" />
-			<form class = "card-body" id = "workstModifyForm" action = "${worksModifyPage}"  method="post" enctype="multipart/form-data">
-				
+			<form class="card-body" id="worksModifyForm" action="${worksModifyPage}" method="post" enctype="multipart/form-data" >
+	
 					<div class = "d-none my-2">
 						<label for="userid" class = "form-label">아티스트 아이디</label>
 						<input class = "form-control" id = "userid" type = "text" name = "userid" value = "${artist_works.userid}" readonly />
@@ -49,7 +49,7 @@ div#modify {
 					
 					<div class = "d-none my-2">
 						<label for = "worksid" class = "form-label">작품 번호</label>
-						<input class = "form-control" id = "worksid" type = "text" name = "worksid" value = "${artist_works.worksid}" />
+						<input class = "form-control" id = "worksid" type = "number" name = "worksid" value = "${artist_works.worksid}" />
 					</div>
 					
 					<div class = "my-2">
@@ -72,18 +72,20 @@ div#modify {
 							<thead>
 								<tr>
 									<th class = "d-none">번호</th>
+									<th class = "col-5">사진</th>
 									<th class = "col-5">업로드한 이미지 파일</th>
-									<th class = "col-5">카테고리</th>
-									<th class = "col-2">삭제</th>
+									<th class = "col-1"></th>
+									<th class = "col-1">삭제</th>
 								</tr>
 							</thead>
 							<tbody class = "table-group-divider">
 								<c:forEach var = "a" items="${artist_works_img_list}">
 									<tr>
-										<th class ="d-none" scope = "row">${a.imgid}</th>
+										<th class ="d-none" scope = "row"><input class ="d-none" id = "imgid" type = "text" name ="imgid" value = "${a.imgid}" readonly /></th>
+										<td><img src = "../images/works/${a.saved_file}" style="width:40%; height:40%;"></td>
 										<td>${a.original_file}</td>
-										<td>${a.category}</td>
-										<td><button class = "btn btn-outline-dark" id = "btnImgDelete">삭제</button></td>
+										<td><input class = "form-control d-none" id = "isFileDeleted" type = "text" name = "isFileDeleted" value ="NO" readonly /></td>
+										<td><button class = "btn btn-outline-dark" id = "btnImgDelete" type = "button">X</button></td>
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -91,8 +93,8 @@ div#modify {
 					</div>
 					
 					<div class = "my-2">
-						<label for = "artist_img" class = "form-label">아티스트 사진</label>
-						<input class = "form-control" type = "file" name = "original_file" multiple="multiple" />
+						<label for = "artist_img" class = "form-label">업로드 할 작품 사진</label>
+						<input class = "form-control" type = "file" name = "upload_files" multiple="multiple" />
 					</div>
 					
 					<div class = "my-2">
@@ -116,5 +118,6 @@ div#modify {
 	            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
 	            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
 	            crossorigin="anonymous"></script>
+	 <script src = "../js/works-detail-modify.js"></script>           
 </body>
 </html>

@@ -13,7 +13,7 @@ import lombok.Data;
 public class ArtistWorksListItemDto {
 
 	private String userid;
-	private String worksid;
+	private Long worksid;
 	private String title;
 	private LocalDateTime created_date;
 	

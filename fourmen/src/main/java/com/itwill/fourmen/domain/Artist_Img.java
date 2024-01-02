@@ -1,7 +1,5 @@
 package com.itwill.fourmen.domain;
 
-import java.time.LocalDateTime;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,13 +9,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Artist_Works {
+public class Artist_Img {
 
 	private String userid;
-	private Long worksid;
-	private String title;
-	private String content_kor;
-	private String content_eng;
-	private LocalDateTime created_date;
+	private String original_img;
+	private String saved_img;
 	
 }
