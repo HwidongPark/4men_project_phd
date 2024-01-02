@@ -285,7 +285,10 @@ document.addEventListener('DOMContentLoaded', function() {
             
         } else {    // 모두 입력한 경우에만 메세지 보낼 수 있도록 함
             axios.post('/fourmen/mypage/message', data)
-            .then((response) => {
+            .then((response) => {                
+                if(response.data == 1) { // 메세지 보내기 성공 시
+                    alert('거래요청을 성공적으로 보냈습니다.');
+                }
                 
                 btnCloseModal.click();
                 

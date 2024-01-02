@@ -184,6 +184,8 @@ public class HomeController {
     		User user = userservice.login(dto);
     		if(user !=null) {
     			session.setAttribute("signedInUser", user.getUserid());
+    			session.setAttribute("usergrade", user.getGrade());
+  
     			return (target.equals(""))?"redirect:/" : "redirect:" + target;
     		} else {
     			return "redirect:/signup?result=f&target="+URLEncoder.encode(target,"UTF-8").toString();

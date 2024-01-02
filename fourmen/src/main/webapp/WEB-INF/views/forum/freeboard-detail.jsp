@@ -72,8 +72,10 @@
             </ul>
             
             <div class="freeboard_md_del_btn">
+                <c:if test="${post.userid eq signedInUser}">
                 <button id="freeboard-modify">수정</button>
                 <button id="freeboard-delete">삭제</button>
+                </c:if>
             </div>
             <div>
                 <textarea id="freeboard-view-detail-content" class="freeboard-view-detail-content" readonly="readonly">${post.post_content}</textarea>

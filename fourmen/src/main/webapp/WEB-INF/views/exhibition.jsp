@@ -101,6 +101,28 @@ table {
     width: 100%;
     margin-bottom: 3em;
    	}
+   	
+   	.exhibition-all-item {
+   		width: 90%;
+   		margin: 0 auto;
+   	}
+   	
+   	.image-outer-container {
+   		width: 100%;
+   		height: 0;
+   		padding-bottom: 148%;
+   		position: relative;
+   	}
+   	
+	.image-outer-container img{
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+   	
    	/* 메인 바디 CSS */
 	.main-content {
     width: 75%;
@@ -218,10 +240,7 @@ table {
 	border:1px solid #42454c;
 }
 
-#exhibition-image{
-	width: 270px;
-	height: 400px;
-}
+
 	
 </style>
 
@@ -271,7 +290,7 @@ table {
             <option value="name" name="name"<c:out value="${scri.category eq 'title' ? 'selected' : ''}"/>>전시회</option>
             <option value="location" name="location"<c:out value="${scri.category eq 'location' ? 'selected' : ''}"/>>위치</option>
         </select>
-        <input id="search-keyword" type="text" name="keyword" placeholder="검색" value="${scri.keyword}">
+        <input maxlength="30" id="search-keyword" type="text" name="keyword" placeholder="검색" value="${scri.keyword}">
 		
 		</form>
 		
@@ -292,26 +311,33 @@ table {
     
 		
         <!-- 훈련과정 간략하게 보여줌 -->
-        <div class="gridbox">
-            <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="girdbox">
+            <!--  <div class="row row-cols-1 row-cols-md-3 g-4">-->
              <c:forEach var="exhibition" items="${exhibition}">
-                <div class="col">
-                    <div class="card card border-light mb-3">
-                        <a class="aReserve" href="${exhibition.site}"><img src="image/${exhibition.photo}" class="card-img-top" id="exhibition-image" alt="..."></a>
+             	
+                <!-- <div class="col"> -->
+                    <div class="exhibition-all-item card card border-light mb-3">
+                        <div class="image-outer-container">
+                        	<div class="image-inner-container">
+                        		<a class="aReserve" href="${exhibition.site}">
+                        			<img src="image/${exhibition.photo}" class="card-img-top" id="exhibition-image" alt="...">
+                       			</a>
+                     		</div>
+                    	</div>
                         <div class="card-body">
                             <h5 class="card-title text-center">${exhibition.name}</h5>
                             <p class="card-text text-center">${exhibition.startdate}~${exhibition.enddate}</p>
                             <div id="btnDiv"><button class="btnReserve btn btn-secondary"><a class="aReserve" href="${exhibition.site}">예매하기</a></button></div>
                         </div>
                     </div>
-                    
-                </div>
+                   
+                <!-- </div>  -->
                 </c:forEach>
    
-              </div>
+              <!-- </div> -->
             </div>
     
-   
+  
  <!--  <div class="page_wrap">
    <div class="page_nation">
        <c:if test="${pageMaker.prev}">

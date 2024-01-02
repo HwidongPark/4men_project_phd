@@ -5,10 +5,15 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.itwill.fourmen.board.PageMaker;
+import com.itwill.fourmen.board.SearchCriteria;
+import com.itwill.fourmen.board.SearchCriteriaAdminUser;
 import com.itwill.fourmen.domain.Faq;
 import com.itwill.fourmen.domain.Notice;
 import com.itwill.fourmen.domain.Post;
@@ -51,20 +56,36 @@ public class PostController {
 	private final NoticeService noticeService; // 객체 생성 권한이 Spring FrameWork로 이전됨. (의존성 주입, 제어의 역전)
 	
 	// freeeboard 처리 시작 //
-	@GetMapping("/freeboard") //-> GET 방식의 "/forum/freeboard" 요청 주소를 처리하는 메서드.
-	public void freeboard(Model freeboardModel) {
-		//-> 디스패쳐 서블릿에게 뷰에 전달할 데이터를 저장할 모델 객체를 요청해서 받음.
-		// Model: 데이터를 담는 그릇 역할, map 구조로 저장됨, key와 value로 구성.
+//	@GetMapping("/freeboard") //-> GET 방식의 "/forum/freeboard" 요청 주소를 처리하는 메서드.
+//	public void freeboard(Model freeboardModel) {
+//		//-> 디스패쳐 서블릿에게 뷰에 전달할 데이터를 저장할 모델 객체를 요청해서 받음.
+//		// Model: 데이터를 담는 그릇 역할, map 구조로 저장됨, key와 value로 구성.
+//		
+//		// postService의 메서드를 호출해서 포스트 목록을 만들고 뷰에 전달.
+//		List<PostListItemDto> list = postService.read();
+//		freeboardModel.addAttribute("freeboard_posts", list); //-> 뷰에 전달되는 데이터.
+//		
+//		log.debug("자유게시판 리스트 사이즈 = {}", list.size());
+//		
+//		// 리턴 값이 없으면 요청 경로로 뷰(JSP)를 찾음.
+//		//-> /WEB-INF/views/forum/freeboard.jsp
+//	}
+	
+	 @RequestMapping(value = "/freeboard", method = RequestMethod.GET)
+		public String list(Model model, @ModelAttribute("scri") SearchCriteriaAdminUser scri) throws Exception{
 		
-		// postService의 메서드를 호출해서 포스트 목록을 만들고 뷰에 전달.
-		List<PostListItemDto> list = postService.read();
-		freeboardModel.addAttribute("freeboard_posts", list); //-> 뷰에 전달되는 데이터.
-		
-		log.debug("자유게시판 리스트 사이즈 = {}", list.size());
-		
-		// 리턴 값이 없으면 요청 경로로 뷰(JSP)를 찾음.
-		//-> /WEB-INF/views/forum/freeboard.jsp
-	}
+			
+			model.addAttribute("freeboard_posts", postService.read(scri));
+			
+			PageMaker pageMaker = new PageMaker();
+			pageMaker.setCri(scri);
+			pageMaker.setTotalCount(postService.listCount(scri));
+			
+			model.addAttribute("pageMaker", pageMaker);
+			
+			return "/forum/freeboard";
+			
+		}
 	
 	@GetMapping("/freeboard-create") //-> GET 방식의 "/forum/freeboard-create" 요청 주소를 처리하는 메서드.
 	public void freeboard_create() {
@@ -81,7 +102,8 @@ public class PostController {
 		return "redirect:/forum/freeboard";
 	}
 	
-	@GetMapping("/freeboard-detail")
+	@GetMapping({"/freeboard-detail", "/freeboard-modify"})
+	//-> /freeboard-detail, /freeboard-modify 2개의 요청을 처리하는 메서드!
 	public void freeboard_detail(@RequestParam(name = "post_id") long post_id, Model model) {
 	
 	// 서비스 계층의 메서드를 호출해서 뷰에 전달할 포스트 상세보기 내용을 읽음.

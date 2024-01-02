@@ -53,7 +53,7 @@
             <a href="/fourmen/mypage/wishlist">내 찜 목록</a>
         </li>
         <li class="my-page-list-item">
-            <a href="/fourmen/mypage/mymessage">거래요청 관리</a>
+            <a href="/fourmen/mypage/mymessage/received">거래요청 관리</a>
         </li>
         <li class="my-page-list-item">
             <a href="#">로그아웃</a>
@@ -86,12 +86,12 @@
             <li class="nav-each-btn-list">
 
                 <a href="/fourmen/forum/freeboard" class="nav-button">FORUM</a>
-
-
             </li>
+            <c:if test="${usergrade =='관리자'}">
             <li class="nav-each-btn-list">
                 <a href="http://localhost:8080/fourmen/admin" class="nav-button">ADMIN</a>
             </li>
+            </c:if>
         </ul>
         <button class="nav-collapse-btn">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">

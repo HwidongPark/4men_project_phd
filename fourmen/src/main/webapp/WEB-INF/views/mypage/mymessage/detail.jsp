@@ -120,6 +120,7 @@
         
         <script>
             const workId = ${ messageDto.workId };
+            const buyerId = `${ firstMessageDto.sender }`;
         </script>
         <script src="/fourmen/js/mypage/mymessage-detail.js"></script>
    </body>

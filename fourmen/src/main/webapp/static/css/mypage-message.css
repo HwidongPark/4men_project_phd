@@ -15,3 +15,14 @@
 .mymessage-title:hover {
     color: #adb5bd;
 }
+
+.deal-completed {
+    color: red;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+b {
+  font-weight: 700;
+  font-size: 1.3rem;
+}

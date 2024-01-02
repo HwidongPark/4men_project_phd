@@ -49,12 +49,17 @@ public class MyPageService {
 	 * @param page
 	 * @return
 	 */
-	public PagingDto pagingMessages(int page, String signedInUser) {
+	public PagingDto pagingMessages(int page, String signedInUser, String category) {
+		int totNumOfMessages = 0;
+		if (category.equals("received")) {
+			totNumOfMessages = myPageDao.totNumOfMessages(signedInUser);
+		} else if (category.equals("sent")) {
+			totNumOfMessages = myPageDao.totNumOfSentMessages(signedInUser);
+		}
 		
-		int totNumMessages = myPageDao.totNumOfMessages(signedInUser);
 		int startPage = (int) Math.ceil( ((double) page / pagesShownInBar) - 1 ) * pagesShownInBar + 1 ;
 	
-		int totNumPages = (int) Math.ceil((double) totNumMessages / postsPerPage);	// 총 페이지 개수
+		int totNumPages = (int) Math.ceil((double) totNumOfMessages / postsPerPage);	// 총 페이지 개수
 		int endPage = 0;
 		if ((startPage + pagesShownInBar - 1) >= totNumPages) {
 			endPage = totNumPages;
@@ -277,6 +282,38 @@ public class MyPageService {
 	}
 	
 	
+	// TODO: 내가 보낸 메세지들을 전부 가져옴
+	/**
+	 * 로그인한 유저를 아규먼트로 받아서, 그 유저가 보낸 메세지들의 리스트를 가져옴
+	 * @param signedInUser
+	 * @return
+	 */
+	public List<MyMessageDto> readSentMessage(String signedInUser, int page) {
+		log.debug("readSentMessage(signedInUser={}, page={})", signedInUser, page);
+		
+		ReadMyMessageDto readMyMessageDto = ReadMyMessageDto.builder()
+						.signedInUser(signedInUser)
+						.page(page)
+						.postsPerPage(postsPerPage)
+						.startingPage( (page - 1) * postsPerPage  )
+						.build();
+		
+		List<Message> sentMessages = myPageDao.readSentMessage(readMyMessageDto);
+		log.debug("sentMessages={}", sentMessages);
+		
+		// 내가 보낸 메세지들에 관련된 Post들을 추가
+		List<MyMessageDto> sentMessageDtos = sentMessages.stream().map((element) -> MyMessageDto.fromEntity(element)).toList();
+		for (MyMessageDto sentMessageDto : sentMessageDtos) {
+			
+			MarketPostDto postDto = marketService.readMarketPost(sentMessageDto.getWorkId());
+			sentMessageDto.setPostDto(postDto);
+		}
+		
+		return sentMessageDtos;
+		
+	}
+	
+	
 	
 	/**
 	 * 메세지의 id를 아규먼트로 받아 해당 메세지를 읽어옴
@@ -317,6 +354,11 @@ public class MyPageService {
 	}
 	
 	
+	/**
+	 * 거래확정하는 서비스 메서드. message를 아규먼트로 받아서 거래확정 성공 시 1을, 실패시 0을 리턴
+	 * @param message
+	 * @return 거리확정 성공시 1, 실패시 0 리턴
+	 */
 	public int confirmDeal(Message message) {
 		
 		log.debug("confirmDeal(message={})", message);

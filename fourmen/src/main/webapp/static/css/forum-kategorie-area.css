@@ -19,21 +19,18 @@
 .forum-kategorie .forum-kategorie-board-lists .forum-kategorie-board a:hover {
     font-size: 1.175rem;
     color: black;
-    /* border-bottom: 2.5px solid black; */
     font-weight: bold;
 }
 
 .forum-kategorie .forum-kategorie-board-lists .forum-kategorie-board a:focus {
     font-size: 1.175rem;
     color: black;
-    /* border-bottom: 2.5px solid black; */
     font-weight: bold;
 }
 
 .forum-kategorie .forum-kategorie-board-lists .forum-kategorie-board a:active {
     font-size: 1.175rem;
     color: black;
-    /* border-bottom: 2.5px solid black; */
     font-weight: bold;
 }
 

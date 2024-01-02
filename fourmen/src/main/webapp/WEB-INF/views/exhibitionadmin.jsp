@@ -85,7 +85,7 @@
             <option value="name" name="name"<c:out value="${scri.category eq 'title' ? 'selected' : ''}"/>>전시회</option>
             <option value="location" name="location"<c:out value="${scri.category eq 'location' ? 'selected' : ''}"/>>위치</option>
         </select>
-        <input id="search-keyword" type="text" name="keyword" placeholder="검색" value="${scri.keyword}">
+        <input maxlength="30" id="search-keyword" type="text" name="keyword" placeholder="검색" value="${scri.keyword}">
 		</form>
 		
  		<button id="btnSearch">
@@ -103,16 +103,19 @@
     
 		
         <!-- 훈련과정 간략하게 보여줌 -->
-        <div class="gridbox">
-            <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="girdbox">
+            
              <c:forEach var="exhibition" items="${exhibition}">
-                <div class="col">
-                    <div class="card card border-light mb-3">
-                    	<c:url var="exhibitiondelete" value="/exhibitionadmin/delete"/>
-                        
+               
+                    <div class="exhibition-all-item card card border-light mb-3">
                     	
-                        <a class="aReserve" href="${exhibition.site}"><img src="image/${exhibition.photo}" class="card-img-top" id="exhibition-image" alt="..."></a>
+                        
+                    	<div class="image-outer-container">
+                    	<div class="image-inner-container">
+                        <a class="aReserve" href="${exhibition.site}">
+                        <img src="image/${exhibition.photo}" class="card-img-top" id="exhibition-image" alt="..."></a></div></div>
                         <div class="card-body">
+                        <c:url var="exhibitiondelete" value="/exhibitionadmin/delete"/>
                         <form action="${exhibitiondelete}" method="get" id="exhibition-admin">
                             <h5 class="card-title text-center" id="exhibition-name">${exhibition.name}</h5>
                             </form>
@@ -121,12 +124,12 @@
                         
                     </div>
                     </div>
-                </div>
+                
                 </c:forEach>
-   				</div>
+   			
               </div>
 
-            </main>
+            
             <!-- 게시판 글 페이지네이션(pagination)-->
     <div>
         <nav aria-label="Page navigation">            
@@ -195,7 +198,7 @@
             </ul>
         </nav>
     </div>
-    
+    </main>
     	<%@ include file="fragments/footer.jspf" %>
 	
 	<script

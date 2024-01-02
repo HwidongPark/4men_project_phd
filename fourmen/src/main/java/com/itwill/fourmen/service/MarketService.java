@@ -24,6 +24,7 @@ import com.itwill.fourmen.dto.market.MarketPostDto;
 import com.itwill.fourmen.dto.market.MarketPostRestDto;
 import com.itwill.fourmen.dto.market.MarketSearchDto;
 import com.itwill.fourmen.dto.market.PagingDto;
+import com.itwill.fourmen.dto.mymessage.ConfirmDealDto;
 import com.itwill.fourmen.repository.MarketDao;
 import com.itwill.fourmen.repository.UserDao;
 
@@ -576,10 +577,12 @@ public class MarketService {
 	}
 	
 	
-	public int confirmDeal(Long workId) {
-		log.debug("confirmDeal(workId={})", workId);
+	public int confirmDeal(ConfirmDealDto confirmDealDto) {
+		log.debug("confirmDeal(confirmDealDto={})", confirmDealDto);
 		
-		int result = marketDao.confirmDeal(workId);
+		
+		
+		int result = marketDao.confirmDeal(confirmDealDto);
 		log.debug("거래 확정 결과={}", result);
 		
 		return result;
