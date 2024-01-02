@@ -4,8 +4,81 @@
     "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- QNA_BOARD 테이블에서 CRUD에 필요한 SQL 문장들을 선언 -->
+<!-- namespace: 매퍼 파일에 정의된 SQL 문장들이 어떤 인터페이스와 연결되는지를 지정 -->
+<!-- namespace: 매퍼 파일에 정의된 SQL 문장들이 연결되는 인터페이스의 패키지 경로와 클래스 이름 지정 -->
 <mapper namespace="com.itwill.fourmen.repository.QnaDao">
-    <select id="selectOrderByQnaNumDesc" resultType="Qna">
-        select * from QNA_BOARD order by QNA_NUM desc
+    
+    <!-- QNA_BOARD 테이블 전체 검색, 글 번호 내림차순 정렬 -->
+    <select id="selectOrderByQnaIdDesc" resultType="Qna">
+        select * from QNA_BOARD order by QNA_ID desc
     </select>
+    
+    <!-- QNA_BOARD 테이블에서 아이디로 검색 -->
+    <select id="selectByQnaId" resultType="Qna"> <!-- DB에서 select 시 반환되는 값의 타입 설정 -->
+        select * from QNA_BOARD where QNA_ID = #{qna_id}
+    </select>
+    
+    <!-- QNA_BOARD 테이블에 새 포스트 삽입 -->
+    <insert id="qnaboard_insert">
+        insert into QNA_BOARD (QNA_TITLE, QNA_CONTENT) values (#{qna_title}, #{qna_content})
+        <!-- #{} 부분은 대소문자 구별! (Qna class 에서 작성한 것과 같아야 함 -->
+        <!-- #{} 부분은 입력한 객체의 getter 메서드를 호출한다고 생각하면 됨 -->
+        <!-- ex. #{qna_title} -> Qna 클래스의 getQna_title() 메서드 실행하는 것 -->
+    </insert>
+    
+    <!-- QNA_BOARD 테이블에서 입력한 아이디에 해당하는 포스트 삭제 -->
+    <delete id="qnaboard_delete">
+        delete from QNA_BOARD where QNA_ID = #{qna_id}
+    </delete>
+    
+    <!-- QNA_BOARD 테이블에서 입력한 게시글 아이디에 해당하는 포스트 조회수 1씩 증가 -->
+    <update id='qnaboard_addView'>
+        update QNA_BOARD set QNA_VIEW_COUNT = QNA_VIEW_COUNT + 1 where QNA_ID = ${qna_id}
+    </update>
+    
+    <!-- QNA_BOARD 테이블에서 전체(제목+내용+작성자), 내용, 제목 또는 내용, 작성자로 검색하기 -->
+    <select id="qnaboard_search" resultType="Qna">
+        <!-- <bind> 개념 정리:
+        개념: 외부에서 전달된 파라미터를 이용하여 변수를 생성하는 엘리먼트.
+        조건: MyBatis version 3.2.3 이상에서 사용.
+        동적 쿼리문 안에 작성.
+        name 속성: 작성자가 지정할 변수 이름.
+        value 속성: 받아오는 파라미터 값.
+        -->
+        <bind name="searchKeyword" value="'%' + keyword + '%'" />
+        <!-- keyword 는 어디서 나온 것일까?
+        param.getKeyword()를 호출한 것.
+        QnaSearchDto.java에 필드로 keyword가 선언되어 있음.
+        QnaDao에서 아규먼트로 넘긴 QnaSearchDto에 필드로 선언된 keyword를 get() 메서드로 가져옴.
+        -->
+        select * from QNA_BOARD
+        <!-- where를 태그로 사용 -->
+        <where>
+            <choose>
+                <when test='category eq "qna_title"'>
+                <!-- category 는 어디서 나온 것일까?
+                param.getCategory()를 호출한 것.
+                PostSearchDto.java에 필드로 category가 선언되어 있음.
+                PostDao에서 아규먼트로 넘긴 PostSearchDto에 필드로 선언된 category를 get() 메서드로 가져옴.
+                -->
+                    upper(QNA_TITLE) like upper(#{searchKeyword})
+                </when>
+                <when test='category eq "qna_content"'>
+                    upper(QNA_CONTENT) like upper(#{searchKeyword})
+                </when>
+                <when test='category eq "qna_all"'>
+                    upper(QNA_TITLE) like upper(#{searchKeyword}) 
+                    or
+                    upper(QNA_CONTENT) like upper(#{searchKeyword})
+                    or
+                    upper(USERID) like upper(#{searchKeyword})
+                </when>
+                <when test='category eq "qna_author"'>
+                    upper(USERID) like upper(#{searchKeyword})
+                </when>
+            </choose>
+        </where>
+        order by QNA_ID desc
+    </select>
+    
 </mapper>

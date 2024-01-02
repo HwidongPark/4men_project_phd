@@ -36,6 +36,7 @@
     </nav>
 </div>
 
+
 <!-- 사이드바 -->
 <aside id="my-page-slide-outer-container" class="my-page-close">
     <div id="my-page-username">
@@ -80,7 +81,9 @@
                 <a href="/fourmen/exhibition" class="nav-button">EXHIBITION</a>
             </li>
             <li class="nav-each-btn-list">
-                <a href="/fourmen/forum/freeboard" class="nav-button">FORUM</a>
+
+            <a href="/fourmen/forum/freeboard" class="nav-button">FORUM</a>
+
             </li>
             <li class="nav-each-btn-list">
                 <a href="#" class="nav-button">ADMIN</a>
@@ -97,3 +100,4 @@
     <div class="header-right-container"></div>
     
 </nav>
+<script src="../js/forum/forum-category-bold-style.js"></script>

@@ -10,9 +10,7 @@ import lombok.Data;
 @Data
 @Builder
 public class PostListItemDto {
-	private Long post_rownum;
 	private Long post_id;
-	private Long post_num;
 	private String post_title;
 	private String userid;
 	private String post_content;
@@ -24,7 +22,6 @@ public class PostListItemDto {
 	public static PostListItemDto fromEntity(Post post) {
 		return PostListItemDto.builder()
 				.post_id(post.getPost_id())
-				.post_num(post.getPost_num())
 				.post_title(post.getPost_title())
 				.userid(post.getUserid())
 				.post_content(post.getPost_content())

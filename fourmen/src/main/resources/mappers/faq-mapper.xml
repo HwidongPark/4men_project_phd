@@ -9,13 +9,76 @@
 <mapper namespace="com.itwill.fourmen.repository.FaqDao">
     
     <!-- FAQ_BOARD 테이블 전체 검색, 글 번호 내림차순 정렬 -->
-    <select id="selectOrderByFaqNumDesc" resultType="Faq"> <!-- DB에서 select 시 반환되는 값의 타입 설정 -->
-        select * from FAQ_BOARD order by FAQ_NUM desc
+    <select id="selectOrderByFaqIdDesc" resultType="Faq"> <!-- DB에서 select 시 반환되는 값의 타입 설정 -->
+        select * from FAQ_BOARD order by FAQ_ID desc
     </select>
     
     <!-- FAQ_BOARD 테이블에서 아이디(PK)로 검색 -->
     <select id="selectByFaqId" resultType="Faq"> <!-- DB에서 select 시 반환되는 값의 타입 설정 -->
         select * from FAQ_BOARD where FAQ_ID = #{faq_id}
+    </select>
+    
+    <!-- FAQ_BOARD 테이블에 새 포스트 삽입 -->
+    <insert id="faqboard_insert">
+        insert into FAQ_BOARD (FAQ_TITLE, FAQ_CONTENT) values (#{faq_title}, #{faq_content})
+        <!-- #{} 부분은 대소문자 구별! (Faq class 에서 작성한 것과 같아야 함 -->
+        <!-- #{} 부분은 입력한 객체의 getter 메서드를 호출한다고 생각하면 됨 -->
+        <!-- ex. #{faq_title} -> Faq 클래스의 getFaq_title() 메서드 실행하는 것 -->
+    </insert>
+    
+    <!-- FAQ_BOARD 테이블에서 입력한 아이디에 해당하는 포스트 삭제 -->
+    <delete id="faqboard_delete">
+        delete from FAQ_BOARD where FAQ_ID = #{faq_id}
+    </delete>
+    
+    <!-- FAQ_BOARD 테이블에서 입력한 게시글 아이디에 해당하는 포스트 조회수 1씩 증가 -->
+    <update id='faqboard_addView'>
+        update FAQ_BOARD set FAQ_VIEW_COUNT = FAQ_VIEW_COUNT + 1 where FAQ_ID = ${faq_id}
+    </update>
+
+    <!-- FAQ_BOARD 테이블에서 전체(제목+내용+작성자), 내용, 제목 또는 내용, 작성자로 검색하기 -->
+    <select id="faqboard_search" resultType="Faq">
+        <!-- <bind> 개념 정리:
+        개념: 외부에서 전달된 파라미터를 이용하여 변수를 생성하는 엘리먼트.
+        조건: MyBatis version 3.2.3 이상에서 사용.
+        동적 쿼리문 안에 작성.
+        name 속성: 작성자가 지정할 변수 이름.
+        value 속성: 받아오는 파라미터 값.
+        -->
+        <bind name="searchKeyword" value="'%' + keyword + '%'" />
+        <!-- keyword 는 어디서 나온 것일까?
+        param.getKeyword()를 호출한 것.
+        FaqSearchDto.java에 필드로 keyword가 선언되어 있음.
+        FaqDao에서 아규먼트로 넘긴 FaqSearchDto에 필드로 선언된 keyword를 get() 메서드로 가져옴.
+        -->
+        select * from FAQ_BOARD
+        <!-- where를 태그로 사용 -->
+        <where>
+            <choose>
+                <when test='category eq "faq_title"'>
+                <!-- category 는 어디서 나온 것일까?
+                param.getCategory()를 호출한 것.
+                FaqSearchDto.java에 필드로 category가 선언되어 있음.
+                FaqDao에서 아규먼트로 넘긴 FaqSearchDto에 필드로 선언된 category를 get() 메서드로 가져옴.
+                -->
+                    upper(FAQ_TITLE) like upper(#{searchKeyword})
+                </when>
+                <when test='category eq "faq_content"'>
+                    upper(FAQ_CONTENT) like upper(#{searchKeyword})
+                </when>
+                <when test='category eq "faq_all"'>
+                    upper(FAQ_TITLE) like upper(#{searchKeyword}) 
+                    or
+                    upper(FAQ_CONTENT) like upper(#{searchKeyword})
+                    or
+                    upper(USERID) like upper(#{searchKeyword})
+                </when>
+                <when test='category eq "faq_author"'>
+                    upper(USERID) like upper(#{searchKeyword})
+                </when>
+            </choose>
+        </where>
+        order by FAQ_ID desc
     </select>
     
 </mapper>

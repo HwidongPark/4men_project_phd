@@ -9,41 +9,76 @@
 <mapper namespace="com.itwill.fourmen.repository.PostDao">
 
     <!-- FREE_BOARD 테이블 전체 검색, 글 번호 내림차순 정렬 -->
-    <select id="selectOrderByPostNumDesc" resultType="Post">
-        select * from FREE_BOARD order by ROWNUM desc
+    <select id="selectOrderByPostIdDesc" resultType="Post">
+        select * from FREE_BOARD order by POST_ID desc
     </select>
     
-    <!-- FREE_BOARD 테이블에서 아이디로 검색 -->
+    <!-- FREE_BOARD 테이블에서 게시글 아이디로 검색 -->
     <select id="selectByPostId" resultType="Post"> <!-- DB에서 select 시 반환되는 값의 타입 설정 -->
         select * from FREE_BOARD where POST_ID = #{post_id}
     </select>
     
     <!-- FREE_BOARD 테이블에 새 포스트 삽입 -->
-    <insert id="insert">
+    <insert id="freeboard_insert">
         insert into FREE_BOARD (POST_TITLE, POST_CONTENT) values (#{post_title}, #{post_content})
         <!-- #{} 부분은 대소문자 구별! (Post class 에서 작성한 것과 같아야 함 -->
         <!-- #{} 부분은 입력한 객체의 getter 메서드를 호출한다고 생각하면 됨 -->
         <!-- ex. #{post_title} -> Post 클래스의 getPost_title() 메서드 실행하는 것 -->
     </insert>
     
-    <!-- FREE_BOARD 테이블에서 입력한 아이디에 해당하는 포스트 삭제 -->
+    <!-- FREE_BOARD 테이블에서 입력한 게시글 아이디에 해당하는 포스트 삭제 -->
     <delete id="freeboard_delete">
         delete from FREE_BOARD where POST_ID = #{post_id}
     </delete>
     
-    <!-- FAQ_BOARD 테이블에서 입력한 아이디에 해당하는 포스트 삭제 -->
-    <delete id="faqboard_delete">
-        delete from FAQ_BOARD where FAQ_ID = #{faq_id}
-    </delete>
+    <!-- FREE_BOARD 테이블에서 입력한 게시글 아이디에 해당하는 포스트 조회수 1씩 증가 -->
+    <update id='freeboard_addView'>
+        update FREE_BOARD set POST_VIEW_COUNT = POST_VIEW_COUNT + 1 where POST_ID = ${post_id}
+    </update>
     
-    <!-- FREE_BOARD 테이블에서 입력한 아이디에 해당하는 포스트 삭제 -->
-    <delete id="noticeboard_delete">
-        delete from NOTICE_BOARD where NOTICE_ID = #{notice_id}
-    </delete>
-    
-    <!-- FREE_BOARD 테이블에서 입력한 아이디에 해당하는 포스트 삭제 -->
-    <delete id="qnaboard_delete">
-        delete from QNA_BOARD where QNA_ID = #{qna_id}
-    </delete>
+    <!-- FREE_BOARD 테이블에서 전체(제목+내용), 내용, 제목 또는 내용, 작성자로 검색하기 -->
+    <select id="freeboard_search" resultType="Post">
+        <!-- <bind> 개념 정리:
+        개념: 외부에서 전달된 파라미터를 이용하여 변수를 생성하는 엘리먼트.
+        조건: MyBatis version 3.2.3 이상에서 사용.
+        동적 쿼리문 안에 작성.
+        name 속성: 작성자가 지정할 변수 이름.
+        value 속성: 받아오는 파라미터 값.
+        -->
+        <bind name="searchKeyword" value="'%' + keyword + '%'" />
+        <!-- keyword 는 어디서 나온 것일까?
+        param.getKeyword()를 호출한 것.
+        PostSearchDto.java에 필드로 keyword가 선언되어 있음.
+        PostDao에서 아규먼트로 넘긴 PostSearchDto에 필드로 선언된 keyword를 get() 메서드로 가져옴.
+        -->
+        select * from FREE_BOARD
+        <!-- where를 태그로 사용 -->
+        <where>
+            <choose>
+                <when test='category eq "post_title"'>
+                <!-- category 는 어디서 나온 것일까?
+                param.getCategory()를 호출한 것.
+                PostSearchDto.java에 필드로 category가 선언되어 있음.
+                PostDao에서 아규먼트로 넘긴 PostSearchDto에 필드로 선언된 category를 get() 메서드로 가져옴.
+                -->
+                    upper(POST_TITLE) like upper(#{searchKeyword})
+                </when>
+                <when test='category eq "post_content"'>
+                    upper(POST_CONTENT) like upper(#{searchKeyword})
+                </when>
+                <when test='category eq "post_all"'>
+                    upper(POST_TITLE) like upper(#{searchKeyword}) 
+                    or
+                    upper(POST_CONTENT) like upper(#{searchKeyword})
+                    or
+                    upper(USERID) like upper(#{searchKeyword})
+                </when>
+                <when test='category eq "post_author"'>
+                    upper(USERID) like upper(#{searchKeyword})
+                </when>
+            </choose>
+        </where>
+        order by POST_ID desc
+    </select>
     
 </mapper>

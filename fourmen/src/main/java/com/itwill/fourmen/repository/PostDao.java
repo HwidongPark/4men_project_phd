@@ -3,14 +3,14 @@ package com.itwill.fourmen.repository;
 import java.util.List;
 
 import com.itwill.fourmen.domain.Post;
+import com.itwill.fourmen.dto.post.PostSearchDto;
 
 public interface PostDao {
-	List<Post> selectOrderByPostNumDesc();
+	List<Post> selectOrderByPostIdDesc();
 	Post selectByPostId(long id);
-	int insert(Post post);
+	int freeboard_insert(Post post);
+	int freeboard_update(Post posd);
 	int freeboard_delete(long post_id);
-	int faqboard_delete(long faq_id);
-	int noticeboard_delete(long notice_id);
-	int qnaboard_delete(long qna_id);
-//	List<Post> search(PostSearchDto dto);
+	int freeboard_addView(long post_id);
+	List<Post> freeboard_search(PostSearchDto dto);
 }

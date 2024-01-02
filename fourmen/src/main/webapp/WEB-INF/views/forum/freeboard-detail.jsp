@@ -21,7 +21,7 @@
 <link rel="stylesheet" href="../css/pagenation.css">
 <link rel="stylesheet" href="../css/forum-search-area.css">
 <link rel="stylesheet" href="../css/forum-kategorie-area.css">
-<link rel="stylesheet" href="../css/forum-create-new-post.css">
+<link rel="stylesheet" href="../css/forum-under-menubar.css">
 <link rel="stylesheet" href="../css/forum-freeboard-detail.css">
 
 <!-- 헤더 파일 include -->
@@ -70,17 +70,17 @@
                     <input id="freeboard-view-detail-comment" value="1" type="number" readonly="readonly">
                 </li>
             </ul>
-            <div>
+            
+            <div class="freeboard_md_del_btn">
                 <button id="freeboard-modify">수정</button>
                 <button id="freeboard-delete">삭제</button>
             </div>
-            <div class="freeboard-view-detail-content">
-                <!-- <input class="freeboard-view-detail-content-input" type="text" value="${post.post_content}"> -->
-                ${post.post_content}
+            <div>
+                <textarea id="freeboard-view-detail-content" class="freeboard-view-detail-content" readonly="readonly">${post.post_content}</textarea>
             </div>
         </div>
         <div class="freeboard-view-list-button">
-            <button id="freeboard-view-btnList" type="button">
+            <button id="freeboard-view-btnList" class="btn btn-outline-secondary" type="button">
                 목록
             </button>
         </div>
@@ -96,7 +96,8 @@
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
     <script src="../js/header.js"></script>
-    <script src="../js/freeboard-detail.js"></script>
+    <script src="../js/forum/freeboard-detail.js"></script>
+
 
 </body>
 </html>
