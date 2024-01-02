@@ -57,7 +57,7 @@ body {
     background-color: rgb(255, 255, 255);
     border-bottom: 2px #BDBDBD solid;
     border-top: 2px #BDBDBD solid;
-    padding-top: 0.3rem;
+    padding-top: 0.4rem;
     padding-bottom: 0.3rem;
 }
 
@@ -88,7 +88,7 @@ body {
 
 /* nav 메뉴 관련 클래스 */
 .nav-btn-lists {
-    display: flex;
+    display: flex;  
     justify-content: center;
     flex-wrap: nowrap;
 }

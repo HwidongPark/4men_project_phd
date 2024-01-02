@@ -81,7 +81,8 @@ public class PostController {
 		return "redirect:/forum/freeboard";
 	}
 	
-	@GetMapping("/freeboard-detail")
+	@GetMapping({"/freeboard-detail", "/freeboard-modify"})
+	//-> /freeboard-detail, /freeboard-modify 2개의 요청을 처리하는 메서드!
 	public void freeboard_detail(@RequestParam(name = "post_id") long post_id, Model model) {
 	
 	// 서비스 계층의 메서드를 호출해서 뷰에 전달할 포스트 상세보기 내용을 읽음.

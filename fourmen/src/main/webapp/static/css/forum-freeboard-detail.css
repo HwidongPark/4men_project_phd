@@ -29,7 +29,7 @@
     float: right;
 }
 
-/* TODO: 수정 삭제 버튼 사이에 세로줄 넣기... */
+/* 수정 삭제 버튼 사이에 세로줄 넣기... */
 #freeboard-modify::after {
     position: absolute;
     margin-left: 15px;

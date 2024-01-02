@@ -48,16 +48,16 @@
         <div class="forum-kategorie">
             <ul class="forum-kategorie-board-lists">
                 <li class="forum-kategorie-board">
-                    <a href="freeboard" class="category-button" onclick="change_category_style(event)">자유게시판</a>
+                    <a href="freeboard" class="category-button">자유게시판</a>
                 </li>
                 <li class="forum-kategorie-board">
-                    <a href="qnaboard" class="category-button" onclick="change_category_style(event)">Q&A</a>
+                    <a href="qnaboard" class="category-button">Q&A</a>
                 </li>
                 <li class="forum-kategorie-board">
-                    <a href="faqboard" class="category-button" onclick="change_category_style(event)">FAQ</a>
+                    <a href="faqboard" class="category-button">FAQ</a>
                 </li>
                 <li class="forum-kategorie-board">
-                    <a href="noticeboard" class="category-button" onclick="change_category_style(event)">NOTICE</a>
+                    <a href="noticeboard" class="category-button">NOTICE</a>
                 </li>
             </ul>
         </div>
@@ -119,9 +119,8 @@
             -> model.addAttribute("freeboard_posts", list); //-> 뷰에 전달되는 데이터. -->
                 <tr>
                     <td class="d-none">${n.notice_id}</td>
-                    <td>${n.notice_id}</td>
                     <td></td>
-                    <td id="table-td" style="text-align: left;">
+                    <td id="table-td" style="text-align: left; padding-left: 2rem;">
                         <c:url var="noticeboard_noticeDetailPage" value="/forum/noticeboard-detail">
                             <c:param name="notice_id" value="${n.notice_id}" />
                         </c:url>
@@ -209,7 +208,6 @@
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
     <script src="../js/header.js"></script>
-    <!-- <script src="../js/forum/forum-category-bold-style.js"></script> -->
 
 </body>
 </html>
