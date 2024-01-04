@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.itwill.fourmen.domain.Artist;
 import com.itwill.fourmen.domain.Market;
 import com.itwill.fourmen.domain.User;
 import com.itwill.fourmen.domain.WishList;
@@ -22,13 +23,16 @@ import com.itwill.fourmen.domain.WorkImage;
 import com.itwill.fourmen.dto.market.MarketCreateDto;
 import com.itwill.fourmen.dto.market.MarketPostDto;
 import com.itwill.fourmen.dto.market.MarketPostRestDto;
+import com.itwill.fourmen.dto.market.MarketReadMyPostsDto;
 import com.itwill.fourmen.dto.market.MarketSearchDto;
 import com.itwill.fourmen.dto.market.PagingDto;
 import com.itwill.fourmen.dto.mymessage.ConfirmDealDto;
+import com.itwill.fourmen.repository.ArtistDao;
 import com.itwill.fourmen.repository.MarketDao;
 import com.itwill.fourmen.repository.UserDao;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -38,8 +42,9 @@ import lombok.extern.slf4j.Slf4j;
 public class MarketService {
 	private final MarketDao marketDao;
 	private final UserDao userDao;
+	private final ArtistDao artistDao;
 	
-	private int postsPerPage = 1;
+	private int postsPerPage = 2;
 	private int pagesShownInBar = 2;
 	
 	/**
@@ -165,6 +170,7 @@ public class MarketService {
 	 * @return
 	 */
 	public PagingDto paging(int page) {
+		log.debug("paging(page={})", page);
 		int totNumPosts = marketDao.countTotNumber();
 		int startPage = (int) Math.ceil( ((double) page / pagesShownInBar) - 1 ) * pagesShownInBar + 1 ;
 	
@@ -298,10 +304,12 @@ public class MarketService {
 		User user = userDao.selectByUserid(marketPost.getUserId());
 		log.debug("글 올린 유저={}", user);		
 		
+		Artist artist = artistDao.selectByUserid(user.getUserid());
+		
 		List<WorkImage> workImages = marketDao.readWorkImagesofPost(marketPost);
 		log.debug("읽어온 마켓포스트의 이미지 리스트 = {}", workImages);
 		
-		MarketPostDto marketPostWithImages = MarketPostDto.fromEntity(marketPost, workImages, user);
+		MarketPostDto marketPostWithImages = MarketPostDto.fromEntity(marketPost, workImages, user, artist);
 		
 		return marketPostWithImages;							
 		
@@ -322,27 +330,6 @@ public class MarketService {
 	}
 	
 	
-//	public List<MarketPostDto> searchPosts(MarketSearchDto searchDto) {
-//		log.debug("searchPosts(searchDto={})", searchDto);
-//		
-//		List<Market> marketPosts = marketDao.searchPosts(searchDto);
-//		
-//		List<MarketPostDto> marketPostsWithImages = new ArrayList<>();
-//		
-//		for (Market marketPost : marketPosts) {
-//			// 해당 게시글 이미지 읽어옴
-//			List<WorkImage> workImages = marketDao.readWorkImagesofPost(marketPost);
-//			log.debug("Images of the searchPost={}", workImages);
-//			// DTO생성해서 리스트 추가
-//			MarketPostDto marketPostWithImage = MarketPostDto.fromEntity(marketPost, workImages);
-//			log.debug("(search)marketPostWithImage={}", marketPostWithImage);
-//			
-//			marketPostsWithImages.add(marketPostWithImage);
-//		}
-//		
-//		return marketPostsWithImages;
-//		
-//	}
 	
 	
 	/**
@@ -586,6 +573,37 @@ public class MarketService {
 		log.debug("거래 확정 결과={}", result);
 		
 		return result;
+	}
+	
+	
+	// TODO: 작업 중
+	public List<MarketPostDto> readMyMarketPosts(String signedInUser, int page) {
+		log.debug("readMyMarketPost(signedInUser={}, page={})", signedInUser, page);
+		
+		MarketReadMyPostsDto myPostsDto = new MarketReadMyPostsDto();
+		myPostsDto.setSignedInUser(signedInUser);
+		myPostsDto.setPostsPerPage(postsPerPage);
+		myPostsDto.setStartingPost((page-1) * postsPerPage);
+		
+		List<Market> myMarketPosts = marketDao.readMyMarketPosts(myPostsDto);
+		
+		// 이미지 입힘
+		List<MarketPostDto> marketPostsWithImages = new ArrayList<>();
+		
+		for (Market marketPost : myMarketPosts) {
+			// 해당 게시글 이미지 읽어옴
+			List<WorkImage> workImages = marketDao.readWorkImagesofPost(marketPost);
+			log.debug("Images of the searchPost={}", workImages);
+			// DTO생성해서 리스트 추가
+			MarketPostDto marketPostWithImage = MarketPostDto.fromEntity(marketPost, workImages);
+			log.debug("(search)marketPostWithImage={}", marketPostWithImage);
+			
+			marketPostsWithImages.add(marketPostWithImage);
+		}
+		
+		log.debug("marketPostsWithImages={}", marketPostsWithImages);
+		
+		return marketPostsWithImages;
 	}
 	
 	

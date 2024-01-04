@@ -3,6 +3,7 @@ package com.itwill.fourmen.dto.market;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.itwill.fourmen.domain.Artist;
 import com.itwill.fourmen.domain.Market;
 import com.itwill.fourmen.domain.User;
 import com.itwill.fourmen.domain.WorkImage;
@@ -30,6 +31,7 @@ public class MarketPostDto {
 	private String paintingSize;
 	private String isSold;
 	private String buyerId;
+	private Artist artist;
 	
 	/**
 	 * 게시글 객체와 게시글의 이미지 모델을 합쳐 DTO만들기
@@ -61,9 +63,10 @@ public class MarketPostDto {
 	 * @param market
 	 * @param workImages
 	 * @param user
+	 * @param artist
 	 * @return
 	 */
-	public static MarketPostDto fromEntity(Market market, List<WorkImage> workImages, User user) {
+	public static MarketPostDto fromEntity(Market market, List<WorkImage> workImages, User user, Artist artist) {
 		
 		return MarketPostDto.builder()
 				.userId(market.getUserId())
@@ -76,11 +79,14 @@ public class MarketPostDto {
 				.paintingSize(market.getPaintingSize())
 				.createdTime(market.getCreatedTime())
 				.isSold(market.getIsSold())
+				.buyerId(market.getBuyerId())
 				.views(market.getViews())
 				.likes(market.getLikes())
 				.workImages(workImages)
+				.artist(artist)
 				.build();		
 	}
+	
 	
 	public Market toEntity() {
 		return Market.builder()
@@ -93,7 +99,7 @@ public class MarketPostDto {
 					.yearCreated(yearCreated)
 					.paintingSize(paintingSize)
 					.isSold(isSold)
-					.buyerId(likes)
+					.buyerId(buyerId)
 					.createdTime(createdTime)
 					.views(views)
 					.likes(likes)

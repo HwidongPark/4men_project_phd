@@ -62,7 +62,7 @@ public class MyPageController {
 	
 	
 	/**
-	 * 로그인한 유저가 받은 모든 메세지를 받아서 my message페이지에 전달함
+	 * 로그인한 유저가 받은 모든 메세지를 받아서 mymessage페이지에 전달함
 	 * @param session
 	 * @param request
 	 * @param model
@@ -108,6 +108,7 @@ public class MyPageController {
 		model.addAttribute("page", page);
 		model.addAttribute("pagingDto", pagingDto);
 		model.addAttribute("sDirectory", sDirectory);
+		model.addAttribute("signedInUser", signedInUser);
 		model.addAttribute("category", "received");
 		
 		return "/mypage/mymessage";
@@ -134,6 +135,7 @@ public class MyPageController {
 		model.addAttribute("pagingDto", pagingDto);
 		model.addAttribute("sDirectory", sDirectory);
 		model.addAttribute("category", "sent");
+		model.addAttribute("signedInUser", signedInUser);
 		return "/mypage/mymessage";
 	}
 	

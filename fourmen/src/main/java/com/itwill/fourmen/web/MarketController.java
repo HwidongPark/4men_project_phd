@@ -22,6 +22,7 @@ import com.itwill.fourmen.dto.market.MarketPostDto;
 import com.itwill.fourmen.dto.market.MarketSearchDto;
 import com.itwill.fourmen.dto.market.PagingDto;
 import com.itwill.fourmen.service.MarketService;
+import com.itwill.fourmen.service.UserService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -36,7 +37,7 @@ import oracle.jdbc.proxy.annotation.GetDelegate;
 public class MarketController {
 	
 	private final MarketService marketService;
-	
+	private final UserService userService;
 	
 	/**
 	 * 마켓 메인페이지로 이동하는 컨트롤러 메서드.. 페이징 처리함
@@ -73,14 +74,18 @@ public class MarketController {
 		log.debug("servletPath={}", servletPath);
 		
 		// 로그인한 상태라면 좋아요한 게시글 목록 읽어옴
-		String signedInUser = (String) session.getAttribute("signedInUser");		
+		String signedInUser = (String) session.getAttribute("signedInUser");
+		User user = null;
 		log.debug("마켓리스트갈 때 로그인된 유저={}", signedInUser);
 		if (signedInUser != null) {
 			List<WishList> userWishList = marketService.readWishList(signedInUser);
 			log.debug("userWishList={}", userWishList);
 			model.addAttribute("userWishList", userWishList);
+			
+			// 로그인한 상태라면 로그인한 유저 객체 읽어옴
+			user = userService.selectUserById(signedInUser);
+			log.debug("user={}", user);
 		}
-				
 		
 		
 		// market의 게시글 리스트를 뷰로 전달
@@ -93,7 +98,8 @@ public class MarketController {
 		model.addAttribute("sDirectory", sDirectory);
 		model.addAttribute("fileSeparator", File.separator);
 		model.addAttribute("servletPath", servletPath);
-		
+		// 로그인된 유저가 있다면 
+		model.addAttribute("signedInUser", user);
 		
 		
 		
@@ -130,6 +136,7 @@ public class MarketController {
 		}
 		
 		
+		model.addAttribute("signedInUser", signedInUser);
 		model.addAttribute("marketPost", marketPost);
 		model.addAttribute("isWishListed", isWishListed);
 	}

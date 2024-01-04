@@ -41,5 +41,6 @@ public interface MyPageDao {
 	// 거래확정하는 Dao 메서드
 	int confirmDeal(Message message);
 	
+	int updateMessageForDeletedUser(String signedInUser);
 	
 }
