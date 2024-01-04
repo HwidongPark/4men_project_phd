@@ -5,6 +5,18 @@
 <head>
 <meta charset="UTF-8">
 <title>ADMIN</title>
+<style>
+@font-face {
+    font-family: 'EF_Rebecca';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-EF@1.0/EF_Rebecca.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.commondesign{
+	font-family: 'EF_Rebecca';
+}
+</style>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -46,9 +58,6 @@
                 </li>
                 <li class="forum-kategorie-board">
                     <a href="exhibitionadmin">전시회 관리</a>
-                </li>
-                <li class="forum-kategorie-board">
-                    <a href="forumadmin">게시판 관리</a>
                 </li>
             </ul>
         </div>
@@ -97,7 +106,7 @@
 		</div>   
 			
      	<div class="exhibition-plus-box">
-     	<a href="exhibitionadmin/plus"><button class="exhibition-plus btn btn-success">전시회 추가</button></a>
+     	<a href="exhibitionadmin/plus"><button class="exhibition-plus btn btn-outline-dark">전시회 추가</button></a>
      	</div>
         <!-- 각 메뉴들의 내용을 간략하게 보여줌 -->
     
@@ -120,7 +129,7 @@
                             <h5 class="card-title text-center" id="exhibition-name">${exhibition.name}</h5>
                             </form>
                             <p class="card-text text-center">${exhibition.startdate}~${exhibition.enddate}</p>
-                            <div id="btnDiv"><button id="btndelete" data-exname="${exhibition.name}" class="btndelete btn btn-danger">삭제하기</button></div>
+                            <div id="btnDiv"><button id="btndelete" data-exname="${exhibition.name}" class="btndelete btn btn-dark">삭제하기</button></div>
                         
                     </div>
                     </div>

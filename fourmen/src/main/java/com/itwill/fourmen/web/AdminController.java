@@ -24,11 +24,13 @@ import com.itwill.fourmen.domain.User;
 import com.itwill.fourmen.domain.WishList;
 import com.itwill.fourmen.dto.admin.UserUpdateDto;
 import com.itwill.fourmen.dto.admin.exhibitioncreateDto;
+import com.itwill.fourmen.dto.artist.ArtistDto;
 import com.itwill.fourmen.dto.market.MarketPostDto;
 import com.itwill.fourmen.dto.market.MarketSearchDto;
 import com.itwill.fourmen.dto.market.PagingDto;
 import com.itwill.fourmen.dto.post.PostListItemDto;
 import com.itwill.fourmen.repository.AdminUserDao;
+import com.itwill.fourmen.service.ArtistService;
 import com.itwill.fourmen.service.adminUserService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -42,7 +44,8 @@ import lombok.extern.slf4j.Slf4j;
 public class AdminController {
 	
 	private final adminUserService adminuserservice;
-
+	
+	private final ArtistService artistService;
 	
 	
 	@GetMapping("/admin/detail")
@@ -203,6 +206,36 @@ public String Marketsearchdelete(@RequestParam(name="title") String title) {
 	 
 	 return "redirect:/marketadmin";   
 	    }
+
+
+@GetMapping("/artistadmin")
+public void artist(Model model, HttpSession session) {
+	log.debug("artist()");
+	
+	String signedInUser = (String) session.getAttribute("signedInUser");
+	if(!(signedInUser==null)) {
+		User user = adminuserservice.selectById(signedInUser);
+		model.addAttribute("user",user);
+		
+		List<ArtistDto> artist = artistService.readArtist();
+    	log.debug("ArtistList = {}", artist);
+    	model.addAttribute("artist", artist);
+    	
+    	List<ArtistDto> artistImg = artistService.readArtistImg();
+    	log.debug("ArtistImgList = {}", artistImg);
+    	model.addAttribute("artistImg", artistImg);
+		
+	} else {
+		List<ArtistDto> artist = artistService.readArtist();
+    	log.debug("ArtistList = {}", artist);
+    	model.addAttribute("artist", artist);
+    	
+    	List<ArtistDto> artistImg = artistService.readArtistImg();
+    	log.debug("ArtistImgList = {}", artistImg);
+    	model.addAttribute("artistImg", artistImg);
+	}
+	
+}
 
 //@GetMapping("/forumadmin")
 //// freeeboard 처리 시작 //

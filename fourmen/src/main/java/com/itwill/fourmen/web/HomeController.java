@@ -28,9 +28,12 @@ import com.itwill.fourmen.dto.user.UserSignUpDto;
 import com.itwill.fourmen.domain.Artist;
 import com.itwill.fourmen.domain.Artist_Img;
 import com.itwill.fourmen.dto.artist.ArtistDto;
+import com.itwill.fourmen.dto.market.MarketPostDto;
 import com.itwill.fourmen.service.ArtistService;
 
 import com.itwill.fourmen.service.ExhibitionService;
+import com.itwill.fourmen.service.HomeService;
+import com.itwill.fourmen.service.MarketService;
 import com.itwill.fourmen.service.UserService;
 import com.itwill.fourmen.service.adminUserService;
 
@@ -51,10 +54,39 @@ public class HomeController {
 	
 	private final adminUserService adminuserservice;
 
+	private final HomeService homeservice;
+    
+	private final MarketService marketservice;
 	
-    @GetMapping("/")
-    public String home() {
-    	log.debug("home()");
+	@GetMapping("/")
+    public String home(Model model,HttpSession session) {
+		List<MarketPostDto> market = marketservice.readPopularMarketPosts();
+		model.addAttribute("market",market);
+    	
+		
+    	String signedInUser = (String) session.getAttribute("signedInUser");
+    	if(!(signedInUser==null)) {
+    		User user = adminuserservice.selectById(signedInUser);
+    		model.addAttribute("user",user);
+    		
+    		List<ArtistDto> artist = artistService.readArtistTop4();
+        	log.debug("ArtistList = {}", artist);
+        	model.addAttribute("artist", artist);
+        	
+        	List<ArtistDto> artistImg = artistService.readArtistImg();
+        	log.debug("ArtistImgList = {}", artistImg);
+        	model.addAttribute("artistImg", artistImg);
+    		
+    	} else {
+    		List<ArtistDto> artist = artistService.readArtistTop4();
+        	log.debug("ArtistList = {}", artist);
+        	model.addAttribute("artist", artist);
+        	
+        	List<ArtistDto> artistImg = artistService.readArtistImg();
+        	log.debug("ArtistImgList = {}", artistImg);
+        	model.addAttribute("artistImg", artistImg);
+    	}
+		
         return "home"; // view(JSP)의 경로를 리턴
     }
     
