@@ -157,6 +157,16 @@ public class ArtistService {
 			
 			int registerArtistImgResult = artistDao.registerArtistImg(dto.artistImgToEntity());
 			log.debug("아티스트 사진 등록 = {}", registerArtistImgResult);
+		} else {
+			
+			int registerArtistResult  = artistDao.registerArtist(dto.artisToEntity());
+			log.debug("아티스트 등록 = {}", registerArtistResult);
+			
+			log.debug("IMG dto = {}", dto.artistImgToEntity());
+			
+			int registerArtistImgResult = artistDao.registerArtistImgNull(dto.artistImgToEntity());
+			
+			log.debug("아티스트 사진 등록 = {}", registerArtistImgResult);
 		}
 	}
 	

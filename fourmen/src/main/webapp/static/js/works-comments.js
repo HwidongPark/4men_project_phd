@@ -40,10 +40,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	console.log(modal);
 
+	const modalReply = new bootstrap.Modal('div#replyCommentModal', { backdrop: true});
+	
+	console.log(modalReply);
+	
 	const btnUpdateComment = document.querySelector('button#btnUpdateComment');
 	console.log(btnUpdateComment);
 	
 	btnUpdateComment.addEventListener('click', updateComment);
+	
+	const btnReplyComment = document.querySelector('button#btnReplyComment');
+	console.log(btnReplyComment);
+	
+	btnReplyComment.addEventListener('click', registerReplyComment);
 	
 	async function updateComment(e) {
 		
@@ -80,6 +89,45 @@ document.addEventListener('DOMContentLoaded', () => {
 			});
 	}
 
+	async function registerReplyComment(e){
+		
+		const worksid = document.querySelector('input#worksid').value;
+		const comment_content = document.querySelector('textarea#modalReplyCommentText').value;
+		const comment_writer = document.querySelector('input#replyCommentWriter').value;
+		const parent_comment_id = document.querySelector('input#modalReplyCommentId').value;
+		
+		console.log(worksid);
+		console.log(comment_content);
+		console.log(comment_writer);
+		console.log(parent_comment_id);
+		
+		if(comment_content == ''){
+			alert('댓글을 입력하세요');
+			return;
+		}
+		if(!confirm('답글을 저장할까요??')){
+			return;
+		}
+		
+		const data  = {worksid, comment_content, comment_writer, parent_comment_id}
+		console.log(data);
+		 // POST 방식으로 전달
+		await
+			axios.post(`../api/comment`, data)
+			.then((response) => {
+				console.log(response);
+				if(response.data === 1){
+					alert('댓글 등록 했습니다...!');
+
+					modalReply.hide();
+					
+					getAllComments();
+				}
+			}).catch((error) => {
+				console.log(error);
+			});
+	} // end of registerReplyComment
+	
 	function registerComment(e) {
 		const worksid = document.querySelector('input#worksid').value;
 		const comment_content = document.querySelector('textarea#comment_content').value;
@@ -106,7 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			});
 	}// end of RegisterComment Funtion
 
-
+	
 	function getAllComments() {
 		// 댓글 목록을 요청하기 위한 WORKSID 
 		const worksid = document.querySelector('input#worksid').value;
@@ -128,36 +176,58 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		let htmlStr = '';
 		for (let comment of data) {
-			console.log(comment);
+			console.log('for문을 돌린 결과 = ' + comment);
 
 			const currentTime = new Date(comment.modified_time);
 			const koreanTime = new Date(currentTime.getTime() + (9 * 60 * 60 * 1000));
 			const formattedTime = koreanTime.toLocaleString('ko-KR', {timeZone: 'Asia/Seoul'});
 	
-			htmlStr += `
-			<div class = "card card-body my-2">
-			
-					<div class="pb-2 border-bottom">
-						<span class = "d-none">${comment.comment_id}</span>
-						<span class = "fs-5 fw-bold">${comment.comment_writer}</span>
-						<span class = "ps-2 text-secondary">${formattedTime}</span>	
-					</div>
-				
-				<div class = "my-3 p-2"><span class = "fs-5">${comment.comment_content}</span></div>		
-			`;
-
-			if (comment.comment_writer === 'TEST') {
+			if(comment.parent_comment_id === 0){
 				htmlStr += `
-					<div class = "mt-1 d-grid gap-1 d-md-flex justify-content-md-end">
-						<button class="btnCommentDelete btn btn-outline-secondary btn-sm"
-						data-id="${comment.comment_id}">삭제</button>
-						<button class="btnCommentModify btn btn-outline-secondary btn-sm"
-						data-id="${comment.comment_id}">수정</button>
-					</div>`;
-			}
-			htmlStr += '</div>';
+					<div class = "card card-body my-2">
+					
+							<div class="pb-2 border-bottom">
+								<span class = "d-none">${comment.comment_id}</span>
+								<span class = "fs-5 fw-bold">${comment.comment_writer}</span>
+								<span class = "ps-2 text-secondary">${formattedTime}</span>	
+							</div>
+						
+							<div class = "my-3 p-2"><span class = "fs-5">${comment.comment_content}</span></div>
+						
+							<div class = "gap-1 d-flex justify-content-md-end">
+						`;
+
+						if(signedInUser !== null){
+							htmlStr += `
+									<button class = "btnCommentReply btn btn-outline-secondary btn-sm"
+									data-id="${comment.comment_id}">답글 달기</button>	
+								`
+						}
+				
+						htmlStr += `<div>`;
+						if (comment.comment_writer === signedInUser || signedInUser === 'admin') {
+						htmlStr += ` 
+									<button class="btnCommentDelete btn btn-outline-secondary btn-sm"
+									data-id="${comment.comment_id}">삭제</button>
+									<button class="btnCommentModify btn btn-outline-secondary btn-sm"
+									data-id="${comment.comment_id}">수정</button>
+								</div>`;
+						}
+					htmlStr += '</div>';	
+				}	
 		}
 		divComments.innerHTML = htmlStr;
+		const btnReply = document.querySelectorAll('button.btnCommentReply');
+		for(let btn of btnReply) {
+			if(signedInUser){
+				btn.addEventListener('click', replyCommentModal);
+			} else {
+				 btn.addEventListener('click', () => {
+			            alert('답글은 로그인한 유저만 가능합니다...!');
+			        });
+			} 
+		}
+		
 		const btnDeletes = document.querySelectorAll('button.btnCommentDelete');
 		for (let btn of btnDeletes) {
 			btn.addEventListener('click', deleteComment);
@@ -218,6 +288,26 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 		
 	}// end of showCommentModal
+	
+	async function replyCommentModal(e) {
+		
+		const comment_id = e.target.getAttribute('data-id');
+		
+		try{
+			 const response = await axios.get(`../api/comment/${comment_id}`);
+		        console.log(response);
+
+		        const comment_Id = response.data.comment_id;
+		        
+		        document.querySelector('input#modalReplyCommentId').value = comment_Id;
+		        
+		        modalReply.show(); // 대댓글을 작성할 모달 창을 보여줍니다.
+		        
+		} catch(error) {
+			console.log(error);
+		}
+			
+	}
 	
 	const btnDeleteAllComments = document.querySelector('button#btnDelete');
 	btnDeleteAllComments.addEventListener('click', (e) => {

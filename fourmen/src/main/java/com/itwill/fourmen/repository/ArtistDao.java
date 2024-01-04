@@ -46,6 +46,8 @@ public interface ArtistDao {
 	
 	int registerArtistImg (Artist_Img artist_Img);
 	
+	int registerArtistImgNull (Artist_Img artist_Img);
+	
 	int createWorks(Artist_Works artist_Works);
 	
 	int createWorksImg(Artist_Works_Img artist_Works_Img);

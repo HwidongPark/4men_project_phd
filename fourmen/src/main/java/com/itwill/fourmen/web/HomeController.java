@@ -65,7 +65,11 @@ public class HomeController {
     	String signedInUser = (String) session.getAttribute("signedInUser");
     	if(!(signedInUser==null)) {
     		User user = adminuserservice.selectById(signedInUser);
-    		model.addAttribute("user",user);
+    		model.addAttribute("user", user);
+    		
+    		Artist signedInArtist = artistService.details(signedInUser);
+    		log.debug("sigendInArtist = {}",signedInArtist);
+    		model.addAttribute("signedInArtist",signedInArtist);
     		
     		List<ArtistDto> artist = artistService.readArtist();
         	log.debug("ArtistList = {}", artist);
