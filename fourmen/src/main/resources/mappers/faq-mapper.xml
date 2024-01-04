@@ -9,9 +9,70 @@
 <mapper namespace="com.itwill.fourmen.repository.FaqDao">
     
     <!-- FAQ_BOARD 테이블 전체 검색, 글 번호 내림차순 정렬 -->
-    <select id="selectOrderByFaqIdDesc" resultType="Faq"> <!-- DB에서 select 시 반환되는 값의 타입 설정 -->
-        select * from FAQ_BOARD order by FAQ_ID desc
+    <!-- <select id="selectOrderByFaqIdDesc" resultType="Faq">
+    select * from FAQ_BOARD order by FAQ_ID desc </select> -->
+    
+    <select id="selectOrderByFaqIdDesc" resultType="Faq"
+        parameterType="com.itwill.fourmen.board.Criteria">
+
+        SELECT FAQ_ID, FAQ_TITLE, USERID, FAQ_CONTENT,
+        FAQ_CREATED_TIME, FAQ_VIEW_COUNT
+
+        FROM (
+
+        SELECT FAQ_ID,
+
+        FAQ_TITLE,
+
+        USERID,
+
+        FAQ_CONTENT,
+
+        FAQ_CREATED_TIME,
+
+        FAQ_VIEW_COUNT,
+
+        ROW_NUMBER() OVER(ORDER BY FAQ_ID DESC) AS RNUM
+
+        from
+        FAQ_BOARD
+
+        where 1=1
+        <include refid="search"></include>
+
+        ) MP
+
+        WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
+
+        ORDER BY FAQ_ID DESC
+
     </select>
+
+
+    <select id="listCount" resultType="int">
+
+
+        SELECT COUNT(FAQ_ID)
+
+        FROM FAQ_BOARD
+        where 1=1
+        <include refid="search"></include>
+
+    </select>
+
+    <sql id="search">
+        <if test="category != null">
+            <if test="category == 'faq_title'.toString()">AND FAQ_TITLE LIKE '%' || #{keyword} || '%'
+            </if>
+            <if test="category == 'faq_content'.toString()">AND FAQ_CONTENT LIKE '%' || #{keyword} || '%'
+            </if>
+            <if test="category == 'faq_all'.toString()">AND FAQ_TITLE LIKE '%' || #{keyword} || '%' or
+                FAQ_CONTENT LIKE '%' || #{keyword} || '%' or
+                USERID LIKE
+                '%' || #{keyword} || '%'</if>
+            <if test="category == 'faq_author'.toString()">AND USERID LIKE '%' || #{keyword} || '%'</if>
+        </if>
+    </sql>
     
     <!-- FAQ_BOARD 테이블에서 아이디(PK)로 검색 -->
     <select id="selectByFaqId" resultType="Faq"> <!-- DB에서 select 시 반환되는 값의 타입 설정 -->
@@ -20,7 +81,7 @@
     
     <!-- FAQ_BOARD 테이블에 새 포스트 삽입 -->
     <insert id="faqboard_insert">
-        insert into FAQ_BOARD (FAQ_TITLE, FAQ_CONTENT) values (#{faq_title}, #{faq_content})
+        insert into FAQ_BOARD (USERID, FAQ_TITLE, FAQ_CONTENT) values (#{userid}, #{faq_title}, #{faq_content})
         <!-- #{} 부분은 대소문자 구별! (Faq class 에서 작성한 것과 같아야 함 -->
         <!-- #{} 부분은 입력한 객체의 getter 메서드를 호출한다고 생각하면 됨 -->
         <!-- ex. #{faq_title} -> Faq 클래스의 getFaq_title() 메서드 실행하는 것 -->
@@ -80,5 +141,12 @@
         </where>
         order by FAQ_ID desc
     </select>
+    
+    <!-- 게시글 수정: 특정 게시글 아이디의 제목과 내용 업데이트 -->
+    <update id='update'>
+        update FAQ_BOARD
+        set FAQ_TITLE = #{faq_title}, FAQ_CONTENT = #{faq_content}
+        where FAQ_ID = #{faq_id}
+    </update>
     
 </mapper>

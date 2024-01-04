@@ -92,7 +92,7 @@
     </section>
     
     <!-- board-list-content 게시판 글 리스트 테이블 -->
-    <section class="freeboard-list" style="padding: 3.5rem 18.5rem 0rem 18.5rem;">
+    <section class="noticeboard-list" style="padding: 3.5rem 18.5rem 0rem 18.5rem;">
         <table class="table">
             <colgroup>
             
@@ -147,53 +147,53 @@
                     <c:url var="siteMapPage" value="#" />
                     <a href="${siteMapPage}">MAP</a>    
                 </li>
+                <c:if test="${signedInUser ne null}">
                 <li id="new-post-li-three" class="new-post-li">
                     <c:url var="noticeboardCreatePage" value="/forum/noticeboard-create" />
                     <a href="${noticeboardCreatePage}">NEW POST</a>
                 </li>
+                </c:if>
             </ul>
         </nav>
     </div>
-    
-    <!-- 게시판 글 페이지네이션(pagination)-->
+
+        <!-- 게시판 글 페이지네이션(pagination)-->
         <div>
             <nav aria-label="Page navigation">
                 <ul class="pagination">
+                    <!-- 처음 페이지 -->
                     <li class="page-item">
-                        <a class="page-link-img" href="#" aria-label="first page">
-                            <img id="pagination-img" alt="first page" src="../pagination/pagination01.png">
+                        <a class="page-link-img" href="noticeboard${pageMaker.makeSearchAdminUser(1)}">
+                            <img id="pagination-img" alt="first page" src="/fourmen/pagination/pagination01.png">
                         </a>
                     </li>
+                    <!-- 이전 페이지 -->
                     <li class="page-item">
-                        <a class="page-link-img" href="#" aria-label="previous">
-                            <img id="pagination-img" alt="previous page" src="../pagination/pagination02.png">
+                        <a class="page-link-img" href="noticeboard${pageMaker.makeSearchAdminUser(page-1)}" aria-label="previous"> 
+                            <img id="pagination-img" alt="previous page" src="/fourmen/pagination/pagination02.png">
                         </a>
                     </li>
+
+                    <!-- 필요한 만큼만 페이지 보여줌 -->
+                    <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+                        <li class="page-item">
+                            <a class="page-link" href="noticeboard${pageMaker.makeSearchAdminUser(idx)}">${idx}</a>
+                        </li>
+                    </c:forEach>
+                    
+                    <!-- 다음 페이지 -->
                     <li class="page-item">
-                        <a class="page-link" href="#">1</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">2</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">3</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">4</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">5</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link-img" href="#" aria-label="next">
-                            <img id="pagination-img" alt="next page" src="../pagination/pagination03.png">
+                        <a class="page-link-img" href="noticeboard${pageMaker.makeSearchAdminUser(page+1)}" aria-label="next"> 
+                            <img id="pagination-img" alt="next page" src="/fourmen/pagination/pagination03.png">
                         </a>
                     </li>
+                    <!-- 마지막 페이지 -->
                     <li class="page-item">
-                        <a class="page-link-img" href="#" aria-label="last page">
-                            <img id="pagination-img" alt="last page" src="../pagination/pagination04.png">
+                        <a class="page-link-img" href="noticeboard${pageMaker.makeSearchAdminUser(pageMaker.tempEndPage)}">
+                            <img id="pagination-img" alt="last page" src="/fourmen/pagination/pagination04.png">
                         </a>
                     </li>
+
                 </ul>
             </nav>
         </div>

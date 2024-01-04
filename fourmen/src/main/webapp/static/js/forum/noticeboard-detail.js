@@ -1,7 +1,7 @@
 /**
  * noticeboard-detail.js
  * /forum/noticeboard-detail.jsp에 포함.
- * 포스트 삭제, 업데이트 기능.
+ * 포스트 삭제, 업데이트 페이지로 이동하는 기능.
  * 목록 버튼 클릭하면 이전 페이지로 돌아가기...
  */
 
@@ -14,11 +14,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // 목록 버튼 찾기.
     const btnList = document.querySelector('button#noticeboard-view-btnList');
     
-    // 수정 버튼 찾기
-    const btnModify = document.querySelector('button#noticeboard-modify');
-    
     // 삭제 버튼 찾기
-    const btnDelete = document.querySelector('button#noticeboard-delete');
+    const btnDelete = document.querySelector('button#noticeboard-detail-delete');
     
     // 목록 버튼에 클릭 이벤트 핸들러(리스너)를 등록.
     btnList.addEventListener('click', () => {

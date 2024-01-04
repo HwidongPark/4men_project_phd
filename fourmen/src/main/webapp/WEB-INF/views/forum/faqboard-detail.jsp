@@ -46,7 +46,7 @@
     
     <section role="faqboard-view"> <!-- 게시글이 보이는 부분... -->
         <div class="faqboard-view-detail"> <!-- 제목 / 작성정보 / 내용을 묶는 div -->
-            <div class="faqboard-view-detail-title">
+            <div class="faqboard-view-detail-title"> <!-- 제목 -->
                 ${faq.faq_title}
             </div>
             <div class="d-none"> <!-- 게시글 고유 아이디를 보이지 않게 가림 -->
@@ -71,10 +71,16 @@
                 </li>
             </ul>
             <div class="faqboard_md_del_btn">
-                <button id="faqboard-modify">수정</button>
-                <button id="faqboard-delete">삭제</button>
+                <!-- 작성자 아이디와 로그인 사용자 아이디가 같을 때와 관리자(admin)만 버튼을 보여줌 -->
+                <c:if test="${faq.userid eq signedInUser || user.grade }">
+                    <c:url var="postModifyPage" value="/forum/faqboard-modify">
+                        <c:param name="faq_id" value="${faq.faq_id}" />
+                    </c:url>
+                    <a href="${postModifyPage}" id="faqboard-detail-modify">수정</a> <!-- 수정 버튼 -->
+                    <button id="faqboard-detail-delete" type="button">삭제</button> <!-- 삭제 버튼 -->
+                </c:if>
             </div>
-            <div>
+            <div> <!-- 내용 -->
                 <textarea id="faqboard-view-detail-content" class="faqboard-view-detail-content" readonly="readonly">${faq.faq_content}</textarea>
             </div>
         </div>

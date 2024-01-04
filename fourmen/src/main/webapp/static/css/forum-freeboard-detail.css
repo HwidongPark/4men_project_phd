@@ -9,11 +9,37 @@
     justify-content: center;
 }
 
+/* 상세보기 페이지의 제목 부분 div */
 .freeboard-view-detail-title {
+    border-top: 3px solid #A4A4A4;
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+    font-size: 30px;
+}
+
+/* 수정 페이지의 제목 부분 div */
+.freeboard-view-modify-title {
     border-top: 3px solid #A4A4A4;
     padding-top: 2rem;
     padding-bottom: 2rem;
     font-size: 30px;
+    width: 100%;
+    box-sizing: border-box; /* 내부 padding과 border를 포함한 전체 너비를 설정 */
+}
+
+/* 수정 페이지의 제목 부분 input */
+#freeboard-view-modify-title {
+    width: 100%; /* input 요소도 div의 크기에 맞게 설정 */
+    box-sizing: border-box; /* 내부 padding과 border를 포함한 전체 너비를 설정 */
+    background-color: #E6E6E6;
+    border: none;
+    padding: 0 0 0 0;
+}
+
+/* 수정 페이지 제목 부분 선택하면 테두리 제거 및 배경 색상 주기*/
+#freeboard-view-modify-title:focus {
+    outline: none;
+    background-color: #E6E6E6;
 }
 
 .freeboard-view-detail-info {
@@ -29,36 +55,69 @@
     float: right;
 }
 
-/* 수정 삭제 버튼 사이에 세로줄 넣기... */
-#freeboard-modify::after {
+/* 상세보기 페이지의 수정 삭제 사이에 세로줄 넣기... */
+#freeboard-detail-modify::after {
     position: absolute;
-    margin-left: 15px;
+    margin-left: 17px;
+    margin-top: 7px;
     width: 0.075rem;
     height: 1.05rem;
     background: #585858;
     content: '';
+    pointer-events: none;
 }
 
-/* 삭제 버튼 */
-#freeboard-delete {
-    margin-left: 7px;
+/* 상세보기 페이지의 삭제 버튼 */
+#freeboard-detail-delete {
+    padding: 0;
+    margin-left: 20px;
     border: none;
     background-color: transparent;
+    margin-top: 6px;
 }
 
-/* 수정 버튼 */
-#freeboard-modify {
+/* 상세보기 페이지의 수정 a 태그 */
+#freeboard-detail-modify {
     margin-right: 7px;
-    border: none;
-    background-color: transparent;
+    text-decoration: none;
+    color: black;
+    margin-top: 3px;
 }
 
-/* 삭제 버튼 부모 요소(div)에 가운데 정렬 설정(버튼 가운데 정렬) */
-.freeboard-view-list-button{
+/* 수정 페이지의 수정완료 삭제 사이에 세로줄 넣기... */
+#btn-freeboard-modify::after {
+    position: absolute;
+    margin-left: 15px;
+    margin-top: 1.5px;
+    width: 0.075rem;
+    height: 1.05rem;
+    background: #585858;
+    content: '';
+    pointer-events: none;
+}
+
+/* 수정 페이지의 삭제 버튼 */
+#btn-freeboard-delete {
+    border: none;
+    background-color: transparent;
+    margin-top: 6px;
+    padding: 0 0 0 0;
+}
+
+/* 수정 페이지의 수정완료 버튼 */
+#btn-freeboard-modify {
+    margin-right: 20px;
+    border: none;
+    background-color: transparent;
+    margin-top: 6px;
+}
+
+/* 목록 버튼 부모 요소(div)에 가운데 정렬 설정(버튼 가운데 정렬) */
+.freeboard-view-list-button {
     text-align: center;
 }
 
-/* 삭제 버튼 */
+/* 목록 버튼 */
 #freeboard-view-btnList {
     border: 2px solid #D8D8D8;
     padding: 0.5rem 1.75rem 0.5rem;
@@ -66,9 +125,10 @@
 
 /* 자유게시판 본문 */
 .freeboard-view-detail-content {
+    margin-bottom: 1.25rem;
     background-color: #E6E6E6;
     padding: 2.5rem;
-    height: 25rem;
+    height: 30rem;
     line-height: 160%;
     width: 100%;
     border: none;

@@ -9,9 +9,70 @@
 <mapper namespace="com.itwill.fourmen.repository.QnaDao">
     
     <!-- QNA_BOARD 테이블 전체 검색, 글 번호 내림차순 정렬 -->
-    <select id="selectOrderByQnaIdDesc" resultType="Qna">
-        select * from QNA_BOARD order by QNA_ID desc
+    <!-- <select id="selectOrderByQnaIdDesc" resultType="Qna">
+    select * from QNA_BOARD order by QNA_ID desc </select> -->
+    
+    <select id="selectOrderByQnaIdDesc" resultType="Qna"
+        parameterType="com.itwill.fourmen.board.Criteria">
+
+        SELECT QNA_ID, QNA_TITLE, USERID, QNA_CONTENT,
+        QNA_CREATED_TIME, QNA_VIEW_COUNT
+
+        FROM (
+
+        SELECT QNA_ID,
+
+        QNA_TITLE,
+
+        USERID,
+
+        QNA_CONTENT,
+
+        QNA_CREATED_TIME,
+
+        QNA_VIEW_COUNT,
+
+        ROW_NUMBER() OVER(ORDER BY QNA_ID DESC) AS RNUM
+
+        from
+        QNA_BOARD
+
+        where 1=1
+        <include refid="search"></include>
+
+        ) MP
+
+        WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
+
+        ORDER BY QNA_ID DESC
+
     </select>
+
+
+    <select id="listCount" resultType="int">
+
+
+        SELECT COUNT(QNA_ID)
+
+        FROM QNA_BOARD
+        where 1=1
+        <include refid="search"></include>
+
+    </select>
+
+    <sql id="search">
+        <if test="category != null">
+            <if test="category == 'qna_title'.toString()">AND QNA_TITLE LIKE '%' || #{keyword} || '%'
+            </if>
+            <if test="category == 'qna_content'.toString()">AND QNA_CONTENT LIKE '%' || #{keyword} || '%'
+            </if>
+            <if test="category == 'qna_all'.toString()">AND QNA_TITLE LIKE '%' || #{keyword} || '%' or
+                QNA_CONTENT LIKE '%' || #{keyword} || '%' or
+                USERID LIKE
+                '%' || #{keyword} || '%'</if>
+            <if test="category == 'qna_author'.toString()">AND USERID LIKE '%' || #{keyword} || '%'</if>
+        </if>
+    </sql>
     
     <!-- QNA_BOARD 테이블에서 아이디로 검색 -->
     <select id="selectByQnaId" resultType="Qna"> <!-- DB에서 select 시 반환되는 값의 타입 설정 -->
@@ -20,7 +81,7 @@
     
     <!-- QNA_BOARD 테이블에 새 포스트 삽입 -->
     <insert id="qnaboard_insert">
-        insert into QNA_BOARD (QNA_TITLE, QNA_CONTENT) values (#{qna_title}, #{qna_content})
+        insert into QNA_BOARD (USERID, QNA_TITLE, QNA_CONTENT) values (#{userid}, #{qna_title}, #{qna_content})
         <!-- #{} 부분은 대소문자 구별! (Qna class 에서 작성한 것과 같아야 함 -->
         <!-- #{} 부분은 입력한 객체의 getter 메서드를 호출한다고 생각하면 됨 -->
         <!-- ex. #{qna_title} -> Qna 클래스의 getQna_title() 메서드 실행하는 것 -->
@@ -58,8 +119,8 @@
                 <when test='category eq "qna_title"'>
                 <!-- category 는 어디서 나온 것일까?
                 param.getCategory()를 호출한 것.
-                PostSearchDto.java에 필드로 category가 선언되어 있음.
-                PostDao에서 아규먼트로 넘긴 PostSearchDto에 필드로 선언된 category를 get() 메서드로 가져옴.
+                QnaSearchDto.java에 필드로 category가 선언되어 있음.
+                QnaDao에서 아규먼트로 넘긴 QnaSearchDto에 필드로 선언된 category를 get() 메서드로 가져옴.
                 -->
                     upper(QNA_TITLE) like upper(#{searchKeyword})
                 </when>
@@ -80,5 +141,12 @@
         </where>
         order by QNA_ID desc
     </select>
+    
+    <!-- 게시글 수정: 특정 게시글 아이디의 제목과 내용 업데이트 -->
+    <update id='update'>
+        update QNA_BOARD
+        set QNA_TITLE = #{qna_title}, QNA_CONTENT = #{qna_content}
+        where QNA_ID = #{qna_id}
+    </update>
     
 </mapper>
