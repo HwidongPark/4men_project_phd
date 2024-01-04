@@ -24,6 +24,10 @@
     border: none;
 }
 
+.pagenation-current-page {
+    color: #495057;
+}
+
 .pagination .page-link:focus,
 .pagination .page-item:focus,
 .pagination .page-link:hover,

@@ -28,6 +28,9 @@ public interface MarketDao {
 	// 전체 포스트 개수 읽어오기
 	Integer countTotNumber();
 	
+	// 인기글 전체 개수 가져오기
+	Integer getTotPopularNum();
+	
 	// 검색 전체 포스트 개수 읽어오기
 	Integer searchCountTotNumber(MarketSearchDto dto);
 	

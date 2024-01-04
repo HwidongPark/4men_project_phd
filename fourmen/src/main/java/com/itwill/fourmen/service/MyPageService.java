@@ -25,8 +25,8 @@ public class MyPageService {
 	private final MyPageDao myPageDao;
 	private final MarketService marketService;
 	
-	private int postsPerPage = 3;
-	private int pagesShownInBar = 3;
+	private int postsPerPage = 10;
+	private int pagesShownInBar = 5;
 		
 	
 	/**

@@ -22,9 +22,9 @@
             <input type="text" name="recipient" class="form-control mb-2" value="${ messageDto.sender }" readonly>
             <input class="d-none" name="sender" value="${ signedInUser }"> <!-- 보내는 사람 (나) -->
             <label class="mb-1">제목</label>
-            <input type="text" name="title" class="form-control mb-2" value="Re: ${ messageDto.title }" required>
+            <input type="text" name="title" class="form-control mb-2" value="Re: ${ messageDto.title }" maxlength="50" required>
             <label class="mb-1">내용</label>
-            <textarea id="message-detail-content" name="content" class="form-control" rows="22" required></textarea>
+            <textarea id="message-detail-content" name="content" class="form-control" rows="22" maxlength="1000" required></textarea>
             <div class="mb-4">
                 <a href="/fourmen/market/detail?workid=${ messageDto.workId }" class="mx-2">&gt;&gt;&gt;게시글 보러가기</a>
             </div>
@@ -32,7 +32,7 @@
                 <label>상대 제안 가격</label>
                 <input type="number" name="price" value="${ messageDto.priceOffered }" readonly> <!-- price는 상대방이 제시했'던' 가격 -->
                 <label>내 제시 가격</label>
-                <input type="number" name="priceOffered" required>  <!-- priceOffered는 내가 새로 제시하는 가격 -->
+                <input id="offered-price" type="number" name="priceOffered" required>  <!-- priceOffered는 내가 새로 제시하는 가격 -->
             </div>
 
             <button id="mymessage-reply-send" class="btn btn-primary my-4">답장 보내기</button>                 

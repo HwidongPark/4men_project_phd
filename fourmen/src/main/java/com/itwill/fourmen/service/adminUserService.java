@@ -69,8 +69,12 @@ public class adminUserService {
 	 
 	 public int userdelete(String userid) {
 		 // TODO: 보낸사람이 userid일 경우 모두 '삭제된유저' 로 업데이트
-		 int resultForMessage = myPageDao.updateMessageForDeletedUser(userid);
+		 int resultForMessage = myPageDao.updateMessageForDeletedUserSender(userid);
 		 log.debug("resultForDeletedUser={}", resultForMessage);
+		 
+		 
+		 // 받는사람이 userid일 경우 모두 '삭제된 유저'로 업데이트
+		 int resultDeletingRecipient = myPageDao.updateMessageForDeletedUserRecipient(userid);
 		 
 		 int result = adminuserdao.userdelete(userid);
 		 

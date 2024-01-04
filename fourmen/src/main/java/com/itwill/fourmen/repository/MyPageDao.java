@@ -41,6 +41,10 @@ public interface MyPageDao {
 	// 거래확정하는 Dao 메서드
 	int confirmDeal(Message message);
 	
-	int updateMessageForDeletedUser(String signedInUser);
+	// 유저 탈퇴시 유저가 보낸사람인 경우 탈퇴한 회원으로 메세지 테이블 내 변경
+	int updateMessageForDeletedUserSender(String signedInUser);
+	
+	// 유저 탈퇴 시 유저가 받는사람인 경우 탈퇴한 회원으로 메세지 테이블 내 변경
+	int updateMessageForDeletedUserRecipient(String signedInUser);
 	
 }

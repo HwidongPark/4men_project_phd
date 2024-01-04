@@ -17,10 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.itwill.fourmen.domain.Market;
 import com.itwill.fourmen.domain.User;
 import com.itwill.fourmen.domain.WishList;
+import com.itwill.fourmen.dto.artist.ArtistDto;
 import com.itwill.fourmen.dto.market.MarketCreateDto;
 import com.itwill.fourmen.dto.market.MarketPostDto;
 import com.itwill.fourmen.dto.market.MarketSearchDto;
 import com.itwill.fourmen.dto.market.PagingDto;
+import com.itwill.fourmen.service.ArtistService;
 import com.itwill.fourmen.service.MarketService;
 import com.itwill.fourmen.service.UserService;
 
@@ -38,6 +40,7 @@ public class MarketController {
 	
 	private final MarketService marketService;
 	private final UserService userService;
+	private final ArtistService artistService;
 	
 	/**
 	 * 마켓 메인페이지로 이동하는 컨트롤러 메서드.. 페이징 처리함
@@ -57,13 +60,27 @@ public class MarketController {
 		PagingDto pagingDto = marketService.paging(page);	// 페이지처리할 dto받아옴
 		log.debug("pagingDto={}", pagingDto);
 		
-		int totNumPosts = marketService.countTotNumber();	// 전체 포스트 개수 가져옴
-		// 인기글 8개 읽어옴.. 예는 전체 포스트에서 가져온거 사용,,
-		if (totNumPosts < 8) {
-			numOfPopularMarketPosts = totNumPosts;
+//		int totNumPosts = marketService.countTotNumber();	// 전체 포스트 개수 가져옴
+//		// 인기글 8개 읽어옴.. 예는 전체 포스트에서 가져온거 사용,,
+//		if (totNumPosts < 8) {
+//			numOfPopularMarketPosts = totNumPosts;
+//		} else {
+//			numOfPopularMarketPosts = 8;
+//		}
+		
+		// 인기글 전체 개수 가져옴
+		marketService.getTotPopularNum();
+		
+		int totPopularPosts = marketService.getTotPopularNum();
+		if (totPopularPosts < 8) {
+			numOfPopularMarketPosts = totPopularPosts;			
 		} else {
 			numOfPopularMarketPosts = 8;
 		}
+		
+		
+		
+		
 		List<MarketPostDto> popularMarketPosts = marketService.readPopularMarketPosts(numOfPopularMarketPosts);	// 인기포스트 가져옴(서비스호출)
 		log.debug("popularMarketPosts={}", popularMarketPosts);
 		
@@ -119,6 +136,9 @@ public class MarketController {
 		MarketPostDto marketPost = marketService.readMarketPost(workid);
 		log.debug("marketPostDto = {}", marketPost);
 		
+		// 마켓 포스트 올린 유저의 아티스트 정보 가져옴
+		ArtistDto artistDto = artistService.getArtist(marketPost.getUserId());
+		
 		// 조회수 추가
 		marketService.addView(workid);
 		
@@ -136,6 +156,7 @@ public class MarketController {
 		}
 		
 		
+		model.addAttribute("artistDto", artistDto);
 		model.addAttribute("signedInUser", signedInUser);
 		model.addAttribute("marketPost", marketPost);
 		model.addAttribute("isWishListed", isWishListed);
@@ -170,7 +191,7 @@ public class MarketController {
 	 * @return
 	 */
 	@GetMapping("/recent")
-	public String marketRecentList(@RequestParam(name = "page", required = false, defaultValue = "1") int page, Model model, HttpServletRequest request) {
+	public String marketRecentList(@RequestParam(name = "page", required = false, defaultValue = "1") int page, Model model, HttpServletRequest request, HttpSession session) {
 		
 		// 해당 페이지의 포스트들만 가져옴
 		List<MarketPostDto> pagedMarketPosts = marketService.readPagedMarketPosts(page);
@@ -182,7 +203,21 @@ public class MarketController {
 		String sDirectory = request.getServletContext().getRealPath("/static/uploads");
 		log.debug("sDirectory={}", sDirectory);
 		
+		// recent게시판의 요청주소를 저장
 		String servletPath = request.getServletPath();
+		
+		
+		// 로그인한 상태라면 좋아요한 게시글 목록 읽어옴
+		String signedInUser = (String) session.getAttribute("signedInUser");
+		log.debug("최신리스트 갈 때 로그인된 유저={}", signedInUser);
+		
+		if (signedInUser != null) {
+			List<WishList> userWishList = marketService.readWishList(signedInUser);
+			log.debug("userWishList={}", userWishList);
+			model.addAttribute("userWishList", userWishList);
+		}
+		
+		
 		
 		// market의 게시글 리스트를 뷰로 전달
 		model.addAttribute("marketPosts", pagedMarketPosts);
@@ -191,6 +226,7 @@ public class MarketController {
 		model.addAttribute("pageTitle", "최신 장터 목록");
 		model.addAttribute("pagingDto", pagingDto);
 		model.addAttribute("servletPath", servletPath);
+		model.addAttribute("page", page);
 		
 		return "/market/list";
 	}
@@ -203,13 +239,25 @@ public class MarketController {
 	 * @return
 	 */
 	@GetMapping("/popular")
-	public String marketPopularList(Model model, HttpServletRequest request) {
+	public String marketPopularList(Model model, HttpServletRequest request, HttpSession session) {
 		// TODO: 서비스, DAO만들기.. 밥먹고나서
 		List<MarketPostDto> marketPosts = marketService.readPopularMarketPosts();
 		log.debug("marketPopularList(marketPosts={})", marketPosts);
 		
 		String sDirectory = request.getServletContext().getRealPath("/static/uploads");
 		log.debug("sDirectory={}", sDirectory);
+		
+		
+		// 로그인한 상태라면 좋아요한 게시글 목록 읽어옴
+		String signedInUser = (String) session.getAttribute("signedInUser");
+		log.debug("최신리스트 갈 때 로그인된 유저={}", signedInUser);
+		
+		if (signedInUser != null) {
+			List<WishList> userWishList = marketService.readWishList(signedInUser);
+			log.debug("userWishList={}", userWishList);
+			model.addAttribute("userWishList", userWishList);
+		}
+		
 		
 		model.addAttribute("marketPosts", marketPosts);
 		model.addAttribute("sDirectory", sDirectory);
@@ -221,7 +269,7 @@ public class MarketController {
 	
 	
 	@GetMapping("/search")
-	public String search(@RequestParam(name = "page", required = false, defaultValue = "1") int page, Model model, MarketSearchDto dto,HttpServletRequest request) {
+	public String search(@RequestParam(name = "page", required = false, defaultValue = "1") int page, Model model, MarketSearchDto dto,HttpServletRequest request, HttpSession session) {
 		log.debug("search(dto={})", dto);
 		dto.setPage(page);
 		log.debug("page={}", page);
@@ -237,6 +285,18 @@ public class MarketController {
 		String sDirectory = request.getServletContext().getRealPath("/static/uploads");
 		String servletPath = request.getServletPath();
 		
+		// 로그인한 상태라면 좋아요한 게시글 목록 읽어옴
+		String signedInUser = (String) session.getAttribute("signedInUser");
+		log.debug("최신리스트 갈 때 로그인된 유저={}", signedInUser);
+		
+		if (signedInUser != null) {
+			List<WishList> userWishList = marketService.readWishList(signedInUser);
+			log.debug("userWishList={}", userWishList);
+			model.addAttribute("userWishList", userWishList);
+		}
+		
+		
+		model.addAttribute("page", page);
 		model.addAttribute("marketPosts", pagedMarketPosts);
 		model.addAttribute("sDirectory", sDirectory);
 		model.addAttribute("fileSeparator", File.separator);

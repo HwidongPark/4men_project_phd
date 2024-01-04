@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     const form = document.querySelector('#myinfo-form');
     
+    const myInfoPhone = document.querySelector('#myinfo-phone');
     
     const fileInput = document.querySelector('#myinfo-profile-image-file');
     
@@ -43,6 +44,26 @@ document.addEventListener('DOMContentLoaded', function() {
            // TODO:함수받아서 해도 될듯
         }
     }
+    
+    
+    // number타입 글자 수 제한하는 함수
+    const limitNumberLength = function(maxLength, element, event) {
+
+        if (element.value.length > maxLength) {
+            element.value = element.value.slice(0,maxLength-1) + event.data;
+            
+             
+        }
+        
+    }
+    
+    
+    // 전화번호 글자 수 제한
+    myInfoPhone.addEventListener('input', function(event) {
+        
+        limitNumberLength(15, myInfoPhone, event);
+        
+    });
     
     
     // 업데이트 이벤트 리스너
