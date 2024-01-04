@@ -89,7 +89,7 @@
             </li>
             <c:if test="${usergrade =='관리자'}">
             <li class="nav-each-btn-list">
-                <a href="http://localhost:8080/fourmen/admin" class="nav-button">ADMIN</a>
+                <a href="/fourmen/admin" class="nav-button">ADMIN</a>
             </li>
             </c:if>
         </ul>

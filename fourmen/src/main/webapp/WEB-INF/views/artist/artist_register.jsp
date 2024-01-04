@@ -56,19 +56,19 @@ div#modify {
 					<!-- 로그인 했을 때 유저의 닉네임을 아티스트의 아이디로 지정 -->
 					<div>
 						<label for = "artistNickName" class ="form-label">아티스트 닉네임</label>
-						<input class = "form-control" id="nickname" type = "text" name = "nickname"/>
+						<input class = "form-control" id="nickname" type = "text" name = "nickname" placeholder = "사진에 표기될 아티스트 닉네임을 입력하세요." required/>
 					</div>
 					
 					<div class="my-2">
 						<label for="artist_bio_kor" class="form-label">소개글_한글</label>
 						<textarea class="form-control" id="artist_bio_kor"
-							name="artist_bio_kor">${artist.artist_bio_kor}</textarea>
+							name="artist_bio_kor" placeholder = "한글 소개글을 작성해주세요." required>${artist.artist_bio_kor}</textarea>
 					</div>
 
 					<div class="my-2">
 						<label for="artist_bio_kor" class="form-label">소개글_영어</label>
 						<textarea class="form-control" id="artist_bio_eng"
-							name="artist_bio_eng">${artist.artist_bio_eng}</textarea>
+							name="artist_bio_eng" placeholder = "영문 소개글을 작성해주세요." required>${artist.artist_bio_eng}</textarea>
 					</div>
 
 					<div class="my-2">

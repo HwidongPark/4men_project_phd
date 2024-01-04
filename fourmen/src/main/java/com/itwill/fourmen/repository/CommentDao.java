@@ -6,9 +6,15 @@ import com.itwill.fourmen.domain.Comments;
 
 public interface CommentDao {
 
-	List<Comments> selectByWorksId(long worksid);
+	List<Comments> selectByWorksId(long worksid);	
+	
+	Long getMaxGroupNum (long worksid);
+	
+	Long getMaxGroupDepth (long c_group_level);
 	
 	Comments getComment(long comment_id);
+	
+	int updateParentCommentContentSetNull(long comment_id);
 	
 	int registerComment(Comments comments);
 	
@@ -17,4 +23,8 @@ public interface CommentDao {
 	int deleteAllCommentsByWorksId(long worksid);
 	
 	int updateComment(Comments comments);
+	
+	int increaseAccAnswer(long parent_comment_id);
+	
+	int decreaseAccAnswer(long parent_comment_id);
 }
