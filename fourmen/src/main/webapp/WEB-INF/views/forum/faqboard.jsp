@@ -151,7 +151,7 @@
                     <c:url var="siteMapPage" value="#" />
                     <a href="${siteMapPage}">MAP</a>    
                 </li>
-                <c:if test="${signedInUser ne null}">
+                <c:if test="${signedInUser ne null and user.grade eq '관리자'}">
                 <li id="new-post-li-three" class="new-post-li">
                     <c:url var="faqboardCreatePage" value="/forum/faqboard-create" />
                     <a href="${faqboardCreatePage}">NEW POST</a>

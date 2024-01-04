@@ -85,8 +85,13 @@ public class PostController {
 //	}
 	
 	@RequestMapping(value = "/freeboard", method = RequestMethod.GET)
-	public String freeboard_list(Model model, @ModelAttribute("scri") SearchCriteriaAdminUser scri, @RequestParam(name = "page", required = false, defaultValue = "1") int page) throws Exception {
-
+	public String freeboard_list(Model model, @ModelAttribute("scri") SearchCriteriaAdminUser scri, @RequestParam(name = "page", required = false, defaultValue = "1") int page, HttpSession session) throws Exception {
+		String signedInUser = (String) session.getAttribute("signedInUser");
+	   	if(!(signedInUser==null)) {
+	   		User user = adminuserservice.selectById(signedInUser);
+	   		model.addAttribute("user", user);
+	   	}
+		
 		model.addAttribute("freeboard_posts", postService.read(scri));
 
 		PageMaker pageMaker = new PageMaker();
@@ -100,14 +105,14 @@ public class PostController {
 	}
 	
 	@GetMapping("/freeboard-create") //-> GET 방식의 "/forum/freeboard-create" 요청 주소를 처리하는 메서드.
-	public void freeboard_create(Model model ,HttpSession session) {
+	public void freeboard_create(Model model, HttpSession session) {
 		log.debug("GET_FREEBOARD - create()");
 		String signedInUser = (String) session.getAttribute("signedInUser");
 		model.addAttribute("signedInUser", signedInUser);
 	}
 	
 	@PostMapping("/freeboard-create") //-> POST 방식의 "/forum/freeboard-create" 요청 주소를 처리하는 메서드.
-	public String freeboard_create(PostCreateDto dto) { //-> String 타입 사용: 이 메서드가 클라이언트에게 리턴하는 값이 URL 경로를 나타내기 때문.
+	public String freeboard_create(PostCreateDto dto, HttpSession session, Model model) { //-> String 타입 사용: 이 메서드가 클라이언트에게 리턴하는 값이 URL 경로를 나타내기 때문.
 		log.debug("POST_FREEBOARD - create(dto={}", dto);
 		
 		// 서비스 계층의 메서드를 호출해서 새 포스트 작성 서비스를 수행.
@@ -195,8 +200,13 @@ public class PostController {
 //	}
 	
 	@RequestMapping(value = "/qnaboard", method = RequestMethod.GET)
-	public String qnaboard_list(Model model, @ModelAttribute("scri") SearchCriteriaAdminUser scri, @RequestParam(name = "page", required = false, defaultValue = "1") int page) throws Exception {
-
+	public String qnaboard_list(Model model, @ModelAttribute("scri") SearchCriteriaAdminUser scri, @RequestParam(name = "page", required = false, defaultValue = "1") int page, HttpSession session) throws Exception {
+		String signedInUser = (String) session.getAttribute("signedInUser");
+	   	if(!(signedInUser==null)) {
+	   		User user = adminuserservice.selectById(signedInUser);
+	   		model.addAttribute("user", user);
+	   	}
+		
 		model.addAttribute("qnaboard_posts", qnaService.read(scri));
 
 		PageMaker pageMaker = new PageMaker();
@@ -303,8 +313,13 @@ public class PostController {
 //	}
 	
 	@RequestMapping(value = "/faqboard", method = RequestMethod.GET)
-	public String faqboard_list(Model model, @ModelAttribute("scri") SearchCriteriaAdminUser scri, @RequestParam(name = "page", required = false, defaultValue = "1") int page) throws Exception {
-
+	public String faqboard_list(Model model, @ModelAttribute("scri") SearchCriteriaAdminUser scri, @RequestParam(name = "page", required = false, defaultValue = "1") int page, HttpSession session) throws Exception {
+		String signedInUser = (String) session.getAttribute("signedInUser");
+	   	if(!(signedInUser==null)) {
+	   		User user = adminuserservice.selectById(signedInUser);
+	   		model.addAttribute("user", user);
+	   	}
+		
 		model.addAttribute("faqboard_posts", faqService.read(scri));
 
 		PageMaker pageMaker = new PageMaker();
@@ -411,8 +426,13 @@ public class PostController {
 //	}
 	
 	@RequestMapping(value = "/noticeboard", method = RequestMethod.GET)
-	public String noticeboard_list(Model model, @ModelAttribute("scri") SearchCriteriaAdminUser scri, @RequestParam(name = "page", required = false, defaultValue = "1") int page) throws Exception {
-
+	public String noticeboard_list(Model model, @ModelAttribute("scri") SearchCriteriaAdminUser scri, @RequestParam(name = "page", required = false, defaultValue = "1") int page, HttpSession session) throws Exception {
+		String signedInUser = (String) session.getAttribute("signedInUser");
+	   	if(!(signedInUser==null)) {
+	   		User user = adminuserservice.selectById(signedInUser);
+	   		model.addAttribute("user", user);
+	   	}
+		
 		model.addAttribute("noticeboard_posts", noticeService.read(scri));
 
 		PageMaker pageMaker = new PageMaker();
