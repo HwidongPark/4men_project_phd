@@ -14,6 +14,8 @@ public interface ArtistDao {
 
 	List<Artist> selectOrderByUseridDesc();
 	
+	List<Artist> selectOrderByUseridDescTop4();
+	
 	List<Artist_Img> selectUserImgByUserid();
 	
 	// worksid 찾아오기

@@ -6,6 +6,16 @@
 <meta charset="UTF-8">
 <title>ADMIN</title>
 <style>
+@font-face {
+    font-family: 'EF_Rebecca';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-EF@1.0/EF_Rebecca.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.commondesign{
+	font-family: 'EF_Rebecca';
+}
 .btndelete{
     font-size: 13px;
     margin: 10px;
@@ -69,9 +79,7 @@
                 <li class="forum-kategorie-board">
                     <a href="exhibitionadmin">전시회 관리</a>
                 </li>
-                   <li class="forum-kategorie-board">
-                    <a href="forumadmin">게시판 관리</a>
-                </li>
+       
             </ul>
         </div>
     </section>
@@ -182,7 +190,7 @@
                                 </div>
                                 
                             </c:if>
-                            <div id=btnDiv><button id="btndelete" data-exname="${popularMarketPost.title}" class="btndelete btn btn-danger">삭제</button></div>
+                            <div id=btnDiv><button id="btndelete" data-exname="${popularMarketPost.title}" class="btndelete btn btn-outline-dark">삭제</button></div>
                         </div>
                     </div>
                     

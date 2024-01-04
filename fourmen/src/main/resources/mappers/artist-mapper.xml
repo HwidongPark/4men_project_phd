@@ -17,6 +17,14 @@
 		select * from ARTIST order by NICKNAME desc
 	</select>
 	
+	<select id = "selectOrderByUseridDescTop4" resultType = "Artist">
+		SELECT
+			*
+		FROM
+			(select * from ARTIST order by NICKNAME desc)
+		WHERE rownum <![CDATA[<=]]>4
+	</select>
+	
 	<select id = "selectUserImgByUserid" resultType = "Artist_Img">
 		select * from ARTIST_IMG order by USERID desc
 	</select>

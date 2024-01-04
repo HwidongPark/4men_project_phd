@@ -122,9 +122,12 @@ div#details {
 					</c:url>
 					<a href="${WorksAddPage}" class="btn btn-outline-dark">작품 추가</a>
 				</c:if>
-				<c:if test = "${signedInUser eq artist.userid || user.grade eq '관리자'}">
+				<c:if test = "${signedInUser eq artist.userid}">
 					<button class ="btn btn-outline-dark me-md-2" id = "btnDelete" value = "삭제">아티스트 삭제</button>
 				</c:if> 
+				<c:if test="${user.grade eq '관리자'}">
+					<button class ="btn btn-outline-dark me-md-2" data-exname="${artist.userid}" id ="btnAdmin" value = "삭제">아티스트 삭제</button>
+				</c:if>
 			</c:if>
 			
 			<c:if test = "${empty signedInUser}">
@@ -141,6 +144,7 @@ div#details {
 		integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
 		crossorigin="anonymous"></script>
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>		
-	<script src = "../js/artist-delete.js"></script>	
+	<script src = "../js/artist-delete.js"></script>
+	<script src = "../js/artistadmin-delete.js"></script>	
 </body>
 </html>

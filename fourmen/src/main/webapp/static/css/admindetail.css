@@ -88,13 +88,15 @@
 	height: 100%;
 }
 .detailbutton{
-	display: flex;
-	float: right;
 	padding-right: 25%;
 	padding-top: 10px;
+	text-align:right;
 }
 .btn{
 	margin-right: 5px;
+}
+.detail-end{
+	margin:30px;
 }
 .radioselect{
 	margin: 5px;

@@ -6,6 +6,18 @@
 <head>
 <meta charset="UTF-8">
 <title>회원정보</title>
+<style>
+@font-face {
+    font-family: 'EF_Rebecca';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-EF@1.0/EF_Rebecca.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.commondesign{
+	font-family: 'EF_Rebecca';
+}
+</style>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -32,7 +44,7 @@
         </div>
     </div>
     
-    	<main>
+    <main>	
 			  <!-- 게시판 카테고리(자유게시판, 후기게시판, 질문게시판) -->
     <section role="kategorie" class="kategorie" style="border-bottom: 1.5px solid #D8D8D8;">
         <div class="forum-kategorie">
@@ -48,9 +60,6 @@
                 </li>
                 <li class="forum-kategorie-board">
                     <a href="../exhibitionadmin">전시회 관리</a>
-                </li>
-                <li class="forum-kategorie-board">
-                    <a href="../forumadmin">게시판 관리</a>
                 </li>
             </ul>
         </div>
@@ -140,13 +149,18 @@
         </div>
            
     </div>
+    
    	</form>
-   	 <div class="detailbutton">
-            <button class="btn btn-danger" id="btndelete">탈퇴</button>
-            <button class="btn btn-success" id="btnupdate">회원수정</button>
-            </div>
+   			
+   		 <div class="detailbutton">
+            <button class="btn btn-dark" id="btndelete">탈퇴</button>
+            <button class="btn btn-outline-secondary" id="btnupdate">회원수정</button>
+         </div>	
+   
+    
     </main>
     
+
     <%@ include file="../fragments/footer.jspf" %>
 	
 	<script

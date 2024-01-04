@@ -46,6 +46,17 @@ public class ArtistService {
 		return list.stream().map(ArtistDto::fromEntity).toList();
 	}// end of read() method
 	
+	public List<ArtistDto> readArtistTop4() {
+		log.debug("ArtistService read()");
+		
+		List<Artist> list = artistDao.selectOrderByUseridDescTop4();
+		
+		log.debug("List = {}",list);
+		log.debug("Number OF LIST = {}", list.size());
+		
+		return list.stream().map(ArtistDto::fromEntity).toList();
+	}// end of read() method
+	
 	public List<ArtistDto> readArtistImg() {
 		log.debug("ArtistService - read()");
 		

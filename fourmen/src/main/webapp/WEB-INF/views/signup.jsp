@@ -6,7 +6,18 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입</title>
+<style>
+@font-face {
+    font-family: 'EF_Rebecca';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-EF@1.0/EF_Rebecca.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
 
+.fontchange{
+	font-family: 'EF_Rebecca';
+}
+</style>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -21,7 +32,7 @@
   <div class="form-container sign-up-container">
   	<c:url var="signUpPage" value="signup" />
     <form action="${signUpPage}" method="post">
- 		<h1>Create Account</h1>	
+ 		<h1 class="fontchange">Create Account</h1>	
       <input type="text" id="userid" name="userid" placeholder="ID" required/>
       <div class="checkIdResult" id="checkIdResult"></div>
       <input type="password" id="password" name="password" placeholder="Password" required/>
@@ -37,7 +48,7 @@
   <div class="form-container sign-in-container">
   	<c:url var="signinPage" value="signin" />
     <form action="${signinPage}" method="post">
-      <a href="/fourmen"><img class="logo" src="logo/logo01.png" alt="4men_logo"/></a>
+      <a href="/fourmen"><img class="logo" src="logo/logofinal.png" alt="4men_logo"/></a>
 	
       <input maxlength="30" type="text" name="userid" placeholder="ID" required/>
       <input maxlength="30" type="password" name="password" placeholder="Password" required/>
@@ -50,12 +61,12 @@
   <div class="overlay-container">
     <div class="overlay">
       <div class="overlay-panel overlay-left">
-        <h1>Login</h1>
+        <h1 class="fontchange">Login</h1>
         <p>회원이시라면 로그인해주세요 </p>
         <button class="ghost" id="signIn">Sign In</button>
       </div>
       <div class="overlay-panel overlay-right">
-        <h1>Create Account</h1>
+        <h1 class="fontchange">Create Account</h1>
         <p>회원이 아니시라면 회원가입해주세요</p>
         <button class="ghost" id="signUp">Sign Up</button>
       </div>

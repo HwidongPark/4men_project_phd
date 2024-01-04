@@ -6,6 +6,16 @@
 <meta charset="UTF-8">
 <title>ADMIN</title>
 <style>
+@font-face {
+    font-family: 'EF_Rebecca';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-EF@1.0/EF_Rebecca.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.commondesign{
+	font-family: 'EF_Rebecca';
+}
 	#startdate-select, #enddate-select{
 	border-radius: 0.5em;
 	border-color: #dee2e6;;
@@ -17,9 +27,7 @@
 	 padding: 20px;
 	}
 	.exhibition-plus{
-	border: none;
     border-radius: 7px;
-    background-color: #E6E6E6;
     padding: 0.5rem;
     width:100%;
 	}
@@ -31,7 +39,7 @@
 	integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
 	crossorigin="anonymous">
 <link rel="stylesheet" href="../css/header.css">
-<link rel="stylesheet" href="..css/footer.css">
+<link rel="stylesheet" href="../css/footer.css">
 <link rel="stylesheet" href="../css/forum-table.css">
 	<link rel="stylesheet" href="../css/underheader.css">
 	<link rel="stylesheet" href="../css/pagenation.css">	
@@ -54,19 +62,16 @@
         <div class="forum-kategorie">
             <ul class="forum-kategorie-board-lists">
                 <li class="forum-kategorie-board">
-                    <a href="../admin">회원조회</a>
+                    <a href="/fourmen/admin">회원조회</a>
                 </li>
                 <li class="forum-kategorie-board">
-                    <a href="artistadmin">아티스트 관리</a>
+                    <a href="/fourmen/artistadmin">아티스트 관리</a>
                 </li>
                 <li class="forum-kategorie-board">
-                    <a href="marketadmin">마켓 관리</a>
+                    <a href="/fourmen/marketadmin">마켓 관리</a>
                 </li>
                 <li class="forum-kategorie-board">
-                    <a href="../exhibitionadmin">전시회 관리</a>
-                </li>
-                 <li class="forum-kategorie-board">
-                    <a href="../forumadmin">게시판 관리</a>
+                    <a href="/fourmen/exhibitionadmin">전시회 관리</a>
                 </li>
             </ul>
         </div>
@@ -121,8 +126,8 @@
 		</div>
 		    
                
-                    <a href="../exhibitionadmin"><button id="btn-exhibition-cancel" class="btn btn-secondary" type="button">취소</button></a>
-                    <button id="btn-exhibition-plus" type="button" class="btn btn-success">추가</button>
+                    <a href="../exhibitionadmin"><button id="btn-exhibition-cancel" class="btn btn-light border border-dark" type="button">취소</button></a>
+                    <button id="btn-exhibition-plus" type="button" class="btn btn-dark">추가</button>
                </form>
             
             </div>    

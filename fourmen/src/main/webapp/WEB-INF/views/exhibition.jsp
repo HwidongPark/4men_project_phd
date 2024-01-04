@@ -18,7 +18,17 @@
 	<link rel="stylesheet" href="css/pagenation.css">	
 
 <style>
-	html, body, div, span, applet, object, iframe,
+@font-face {
+    font-family: 'EF_Rebecca';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-EF@1.0/EF_Rebecca.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.commondesign{
+	font-family: 'EF_Rebecca';
+}
+html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
 del, dfn, em, img, ins, kbd, q, s, samp,
@@ -61,7 +71,7 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
-    img:hover {
+   #exhibition-image:hover {
     transform:scale(1.1);
     transition: transform.5s;
     }
@@ -70,22 +80,21 @@ table {
     font-size: 13px;
     margin: 10px;
     
-    
     }
-    .btnReserve:hover{
-    background-color: olive;
-    }
-    
+	.aReserve{
+	color:white;
+	text-decoration: none;
+	}
+	.btnReserve:hover{
+	background-color: black;
+	}
+
     #btnDiv {
+    
     	text-align: center;
     	width: 100%;
+    }
 
-    }
-    
-    .aReserve{
-    text-decoration: none;
-    color: white;
-    }
     
     .btnPage{
         background-color: Transparent;
@@ -258,13 +267,15 @@ table {
             </h2>
         </div>
     </div>
+    
+    
 		 <main class="main-content">
 		 <div class="w-75 m-auto ">
 	
 		<c:url var="exhibitionSearch" value="/exhibition" />
     	<form action="${exhibitionSearch}" method="get" id="search-form" role="form">
     	
-    	
+    	<!-- 전시회 날짜선택 -->
     	<div class="all-select">
     	<div class="date-select">
     	<label for="date">
@@ -285,6 +296,7 @@ table {
 		</label>
 		</div>
 		 
+		 <!-- 전시회 카테고리 -->
 		<div class="text-select">
         <select name="category" id="selectCategory">
             <option value="name" name="name"<c:out value="${scri.category eq 'title' ? 'selected' : ''}"/>>전시회</option>
@@ -294,6 +306,7 @@ table {
 		
 		</form>
 		
+		<!-- 검색버튼 -->
  		<button id="btnSearch">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                 <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
@@ -304,18 +317,13 @@ table {
 	
         
 
-    	
     
-    
-        <!-- 각 메뉴들의 내용을 간략하게 보여줌 -->
     
 		
-        <!-- 훈련과정 간략하게 보여줌 -->
+        <!-- 반복으로 db에서 exhibition 가져오기 -->
         <div class="girdbox">
-            <!--  <div class="row row-cols-1 row-cols-md-3 g-4">-->
              <c:forEach var="exhibition" items="${exhibition}">
              	
-                <!-- <div class="col"> -->
                     <div class="exhibition-all-item card card border-light mb-3">
                         <div class="image-outer-container">
                         	<div class="image-inner-container">
@@ -330,40 +338,11 @@ table {
                             <div id="btnDiv"><button class="btnReserve btn btn-secondary"><a class="aReserve" href="${exhibition.site}">예매하기</a></button></div>
                         </div>
                     </div>
-                   
-                <!-- </div>  -->
                 </c:forEach>
-   
-              <!-- </div> -->
             </div>
     
   
- <!--  <div class="page_wrap">
-   <div class="page_nation">
-       <c:if test="${pageMaker.prev}">
 
-        <a href="exhibition${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a>
-
-    </c:if> 
-
-
-
-    <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
-
-        <a class="" id="boardnumber" href="exhibition${pageMaker.makeQuery(idx)}">${idx}</a>
-
-    </c:forEach>
-
-
-
-    <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-
-        <a href="exhibition${pageMaker.makeQuery(pageMaker.endPage + 1)}">다음</a>
-
-    </c:if> 
-    
-   </div>
-</div>-->
 
 <!-- 게시판 글 페이지네이션(pagination)-->
     <div>
