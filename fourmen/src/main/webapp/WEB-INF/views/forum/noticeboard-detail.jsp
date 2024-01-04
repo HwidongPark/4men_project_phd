@@ -46,7 +46,7 @@
     
     <section role="noticeboard-view"> <!-- 게시글이 보이는 부분... -->
         <div class="noticeboard-view-detail"> <!-- 제목 / 작성정보 / 내용을 묶는 div -->
-            <div class="noticeboard-view-detail-title">
+            <div class="noticeboard-view-detail-title"> <!-- 제목 -->
                 ${notice.notice_title}
             </div>
             <div class="d-none"> <!-- 게시글 고유 아이디를 보이지 않게 가림 -->
@@ -71,10 +71,16 @@
                 </li>
             </ul>
             <div class="noticeboard_md_del_btn">
-                <button id="noticeboard-modify">수정</button>
-                <button id="noticeboard-delete">삭제</button>
+            <!-- 작성자 아이디와 로그인 사용자 아이디가 같을 때와 관리자(admin)만 버튼을 보여줌 -->
+            <c:if test="${notice.userid eq signedInUser}">
+                <c:url var="postModifyPage" value="/forum/noticeboard-modify">
+                    <c:param name="notice_id" value="${notice.notice_id}" />
+                </c:url>
+                <a href="${postModifyPage}" id="noticeboard-detail-modify">수정</a> <!-- 수정 버튼 -->
+                <button id="noticeboard-detail-delete" type="button">삭제</button> <!-- 삭제 버튼 -->
+            </c:if>
             </div>
-            <div>
+            <div> <!-- 내용 -->
                 <textarea id="noticeboard-view-detail-content" class="noticeboard-view-detail-content" readonly="readonly">${notice.notice_content}</textarea>
             </div>
         </div>

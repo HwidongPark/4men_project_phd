@@ -27,6 +27,8 @@
 <!-- 헤더 파일 include -->
 <%@ include file="../fragments/navigation.jspf"%>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 </head>
 
 <!-- body 시작점 -->
@@ -46,8 +48,8 @@
     
     <section role="freeboard-view"> <!-- 게시글이 보이는 부분... -->
         <div class="freeboard-view-detail"> <!-- 제목 / 작성정보 / 내용을 묶는 div -->
-            <div class="freeboard-view-detail-title">
-                ${post.post_title}
+            <div class="freeboard-view-modify-title"> <!-- 제목 -->
+                <input id="freeboard-view-modify-title" name="post_title" type="text" maxlength="40" placeholder="제목을 입력하세요 (공백 포함 40자)" onkeyup="return input_maxlength(this)" value="${post.post_title}"/>
             </div>
             <div class="d-none"> <!-- 게시글 고유 아이디를 보이지 않게 가림 -->
                 <input id="post_id" name="post_id" value="${post.post_id}">
@@ -68,15 +70,17 @@
             </ul>
             
             <div class="freeboard_md_del_btn">
+                <!-- 작성자 아이디와 로그인 사용자 아이디가 같을 때만 버튼을 보여줌 -->
                 <c:if test="${post.userid eq signedInUser}">
-                    <button id="freeboard-delete">삭제</button>
-                    <button id="freeboard-modify">수정완료</button>
+                    <button id="btn-freeboard-modify">수정완료</button> <!-- 수정 완료 버튼 -->
+                    <button id="btn-freeboard-delete">삭제</button> <!-- 삭제 버튼 -->
                 </c:if>
             </div>
-            <div>
-                <textarea id="freeboard-view-detail-content" name="freeboard-view-detail-content" class="freeboard-view-detail-content">${post.post_content}</textarea>
+            <div> <!-- 내용 -->
+                <textarea id="freeboard-view-detail-content" name="post_content" class="freeboard-view-detail-content">${post.post_content}</textarea>
             </div>
         </div>
+        
         <div class="freeboard-view-list-button">
             <button id="freeboard-view-btnList" class="btn btn-outline-secondary" type="button">
                 목록
@@ -93,9 +97,14 @@
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="../js/header.js"></script>
-    <script src="../js/forum/freeboard-detail.js"></script>
-
+    <script src="../js/forum/freeboard-modify.js"></script>
+    <script>
+        var len = $('#freeboard-view-modify-title').val().length;
+        $('#freeboard-view-modify-title').focus();
+        $('#freeboard-view-modify-title')[0].setSelectionRange(len, len);
+    </script>
 
 </body>
 </html>

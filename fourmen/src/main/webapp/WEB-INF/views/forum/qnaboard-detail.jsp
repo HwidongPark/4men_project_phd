@@ -30,7 +30,7 @@
 </head>
 
 <!-- body 시작점 -->
-<body>
+<body>  
     
     <!-- 웹페이지 상단 헤더 아래 부분 -->
     <div id="underheader-div">
@@ -71,10 +71,16 @@
                 </li>
             </ul>
             <div class="qnaboard_md_del_btn">
-                <button id="qnaboard-modify">수정</button>
-                <button id="qnaboard-delete">삭제</button>
+                <!-- 작성자 아이디와 로그인 사용자 아이디가 같을 때와 관리자(admin)만 버튼을 보여줌 -->
+                <c:if test="${qna.userid eq signedInUser}">
+                    <c:url var="postModifyPage" value="/forum/qnaboard-modify">
+                        <c:param name="qna_id" value="${qna.qna_id}" />
+                    </c:url>
+                <a href="${postModifyPage}" id="qnaboard-detail-modify">수정</a> <!-- 수정 버튼 -->
+                <button id="qnaboard-detail-delete" type="button">삭제</button> <!-- 삭제 버튼 -->
+                </c:if>
             </div>
-            <div>
+            <div> <!-- 내용 -->
                 <textarea id="qnaboard-view-detail-content" class="qnaboard-view-detail-content" readonly="readonly">${qna.qna_content}</textarea>
             </div>
         </div>

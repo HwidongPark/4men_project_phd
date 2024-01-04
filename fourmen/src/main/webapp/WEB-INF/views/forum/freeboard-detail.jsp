@@ -46,7 +46,7 @@
     
     <section role="freeboard-view"> <!-- 게시글이 보이는 부분... -->
         <div class="freeboard-view-detail"> <!-- 제목 / 작성정보 / 내용을 묶는 div -->
-            <div class="freeboard-view-detail-title">
+            <div class="freeboard-view-detail-title"> <!-- 제목 -->
                 ${post.post_title}
             </div>
             <div class="d-none"> <!-- 게시글 고유 아이디를 보이지 않게 가림 -->
@@ -72,12 +72,16 @@
             </ul>
             
             <div class="freeboard_md_del_btn">
-                <c:if test="${post.userid eq signedInUser}">
-                <button id="freeboard-modify">수정</button>
-                <button id="freeboard-delete">삭제</button>
+                <!-- 작성자 아이디와 로그인 사용자 아이디가 같을 때와 관리자(admin)만 버튼을 보여줌 -->
+                <c:if test="${post.userid eq signedInUser || user.grade eq '관리자'}">
+                    <c:url var="postModifyPage" value="/forum/freeboard-modify">
+                        <c:param name="post_id" value="${post.post_id}" />
+                    </c:url>
+                    <a href="${postModifyPage}" id="freeboard-detail-modify">수정</a> <!-- 수정 버튼 -->
+                    <button id="freeboard-detail-delete" type="button">삭제</button> <!-- 삭제 버튼 -->
                 </c:if>
             </div>
-            <div>
+            <div> <!-- 내용 -->
                 <textarea id="freeboard-view-detail-content" class="freeboard-view-detail-content" readonly="readonly">${post.post_content}</textarea>
             </div>
         </div>

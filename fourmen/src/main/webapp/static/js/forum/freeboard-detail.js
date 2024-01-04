@@ -1,7 +1,7 @@
 /**
  * freeboard-detail.js
  * /forum/freeboard-detail.jsp에 포함.
- * 포스트 삭제, 업데이트 기능.
+ * 포스트 삭제, 업데이트 페이지로 이동하는 기능.
  * 목록 버튼 클릭하면 이전 페이지로 돌아가기...
  */
 
@@ -14,11 +14,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // 목록 버튼 찾기.
     const btnList = document.querySelector('button#freeboard-view-btnList');
     
-    // 수정 버튼 찾기
-    const btnModify = document.querySelector('button#freeboard-modify');
-    
     // 삭제 버튼 찾기
-    const btnDelete = document.querySelector('button#freeboard-delete');
+    const btnDelete = document.querySelector('button#freeboard-detail-delete');
     
     // 목록 버튼에 클릭 이벤트 핸들러(리스너)를 등록.
     btnList.addEventListener('click', () => {
@@ -42,4 +39,11 @@ document.addEventListener('DOMContentLoaded', () => {
     //-> postID.value는 포스트 고유 아이디(번호)를 나타냄.
     //-> localhost:8081/fourmen/delete?id=(포스트 고유 아이디(번호)) 요청이 서버로 전달됨.
     });
+    
+    // 수정 버튼에 클릭 이벤트 핸들러(리스너)를 등록.
+    // 수정 버튼을 누르면 freeboard-modify.jsp로 이동하도록 함
+    btnModify.addEventListener('click', () => {
+        location.href = `freeboard-modify/modify?post_id=${postId.value}`;
+    });
+    
 });

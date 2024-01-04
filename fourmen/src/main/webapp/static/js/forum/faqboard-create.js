@@ -11,7 +11,7 @@ function input_maxlength(obj) {
     let remainingLength = maxCharacters - currentLength;
     
     if (currentLength > maxCharacters) {
-        alert('글자 수 제한을 초과했습니다! (30자)');
+        alert('글자 수 제한을 초과했습니다! (공백 포함 40자)');
         obj.value = obj.value.substring(0, maxCharacters);
         remainingLength = 0;
     }
@@ -24,7 +24,7 @@ function textarea_maxlength(obj) {
     let remainingLength = maxCharacters - currentLength;
     
     if (currentLength > maxCharacters) {
-        alert('글자 수 제한을 초과했습니다! (1000자)');
+        alert('글자 수 제한을 초과했습니다! (공백 포함 1000자)');
         obj.value = obj.value.substring(0, maxCharacters);
         remainingLength = 0;
     }
@@ -57,6 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // 스타일 추가
     remainingCharsDisplay.style.textAlign = 'right'; // 글자수 표시 요소를 오른쪽 정렬
+    remainingCharsDisplay.style.marginBottom = '17.5px'; // 글자수 표시 요소에 마진 설정
 
     // 요소 추가
     document.getElementById('faqboard-create-content').appendChild(remainingCharsDisplay);
