@@ -55,7 +55,7 @@ public class Criteria {
     }
 
     
-
+    // 현재 페이지 번호를 반환하는 메서드.
     public int getPage() {
 
         return page;
@@ -63,7 +63,7 @@ public class Criteria {
     }
 
     
-
+    // 페이지의 시작 행 인덱스를 계산하여 반환하는 메서드.
     public int getPageStart() {
 
         return (this.page - 1) * perPageNum;
@@ -71,7 +71,7 @@ public class Criteria {
     }
 
     
-
+    // 한 페이지에 표시될 데이터의 개수를 반환하는 메서드.
     public int getPerPageNum() {
 
         return this.perPageNum;
@@ -79,7 +79,7 @@ public class Criteria {
     }
 
     
-
+    // 페이지의 시작 행 인덱스를 계산하여 반환하는 메서드.
     public int getRowStart() {
 
         rowStart = ((page - 1) * perPageNum) + 1;
@@ -89,7 +89,7 @@ public class Criteria {
     }
 
     
-
+    // 한 페이지에 표시될 데이터의 개수를 반환하는 메서드.
     public int getRowEnd() {
 
         rowEnd = rowStart + perPageNum - 1;

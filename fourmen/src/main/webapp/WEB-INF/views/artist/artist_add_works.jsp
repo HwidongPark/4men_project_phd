@@ -49,17 +49,17 @@ div#modify {
 					
 					<div class = "my-2">
 						<label for="title" class = "form-label">작품 제목</label>
-						<input class = "form-control" id = "title" type = "text" name = "title"  placeholder = "작품 제목을 입력하세요."/>
+						<input class = "form-control" id = "title" type = "text" name = "title"  placeholder = "작품 제목을 입력하세요." required/>
 					</div>
 					
 					<div class = "my-2">
 						<label for="content_kor" class = "form-label">소개글_한글</label>
-						<textarea class = "form-control" id = "content_kor" name = "content_kor" placeholder = "한글 소개글을 작성해 주세요."></textarea>
+						<textarea class = "form-control" id = "content_kor" name = "content_kor" placeholder = "한글 소개글을 작성해 주세요." required></textarea>
 					</div>
 					
 					<div class = "my-2">
 						<label for="content_kor" class = "form-label">소개글_영어</label>
-						<textarea class = "form-control" id = "content_eng" name = "content_eng" placeholder = "영문 소개글을 작성해 주세요."></textarea>
+						<textarea class = "form-control" id = "content_eng" name = "content_eng" placeholder = "영문 소개글을 작성해 주세요." required></textarea>
 					</div>
 					
 					<div class = "my-2">

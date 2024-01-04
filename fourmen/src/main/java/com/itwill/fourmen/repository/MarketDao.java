@@ -7,6 +7,7 @@ import com.itwill.fourmen.domain.Market;
 import com.itwill.fourmen.domain.WishList;
 import com.itwill.fourmen.domain.WorkImage;
 import com.itwill.fourmen.dto.market.MarketPostDto;
+import com.itwill.fourmen.dto.market.MarketReadMyPostsDto;
 import com.itwill.fourmen.dto.market.MarketSearchDto;
 import com.itwill.fourmen.dto.mymessage.ConfirmDealDto;
 
@@ -84,5 +85,8 @@ public interface MarketDao {
 	 
 	 // 거래 확정 메서드
 	 int confirmDeal(ConfirmDealDto confirmDealDto);
+	 
+	 // 내 작성 마켓 게시글 찾아오는 메서드
+	 List<Market> readMyMarketPosts(MarketReadMyPostsDto myPostsDto);
 	 
 }

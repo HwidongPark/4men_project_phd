@@ -73,6 +73,10 @@
 		insert into ARTIST_IMG values (#{userid}, #{artist_o_img}, #{artist_s_img})
 	</insert>
 	
+	<insert id = "registerArtistImgNull">
+		insert into ARTIST_IMG values (#{userid}, NULL , NULL)
+	</insert>
+	
 	<insert id = "createWorks">
 		insert into WORKS (USERID, TITLE, CONTENT_KOR, CONTENT_ENG) values (#{userid}, #{title}, #{content_kor}, #{content_eng})
 	</insert>

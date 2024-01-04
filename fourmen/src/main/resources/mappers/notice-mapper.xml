@@ -9,9 +9,70 @@
 <mapper namespace="com.itwill.fourmen.repository.NoticeDao">
     
     <!-- NOTICE_BOARD 테이블 전체 검색, 글 번호 내림차순 정렬 -->
-    <select id="selectOrderByNoticeIdDesc" resultType="Notice"> <!-- DB에서 select 시 반환되는 값의 타입 설정 -->
-        select * from NOTICE_BOARD order by NOTICE_ID desc
+    <!--  <select id="selectOrderByNoticeIdDesc" resultType="Notice">
+    select * from NOTICE_BOARD order by NOTICE_ID desc </select> -->
+    
+    <select id="selectOrderByNoticeIdDesc" resultType="Notice"
+        parameterType="com.itwill.fourmen.board.Criteria">
+
+        SELECT NOTICE_ID, NOTICE_TITLE, USERID, NOTICE_CONTENT,
+        NOTICE_CREATED_TIME, NOTICE_VIEW_COUNT
+
+        FROM (
+
+        SELECT NOTICE_ID,
+
+        NOTICE_TITLE,
+
+        USERID,
+
+        NOTICE_CONTENT,
+
+        NOTICE_CREATED_TIME,
+
+        NOTICE_VIEW_COUNT,
+
+        ROW_NUMBER() OVER(ORDER BY NOTICE_ID DESC) AS RNUM
+
+        from
+        NOTICE_BOARD
+
+        where 1=1
+        <include refid="search"></include>
+
+        ) MP
+
+        WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
+
+        ORDER BY NOTICE_ID DESC
+
     </select>
+
+
+    <select id="listCount" resultType="int">
+
+
+        SELECT COUNT(NOTICE_ID)
+
+        FROM NOTICE_BOARD
+        where 1=1
+        <include refid="search"></include>
+
+    </select>
+
+    <sql id="search">
+        <if test="category != null">
+            <if test="category == 'notice_title'.toString()">AND NOTICE_TITLE LIKE '%' || #{keyword} || '%'
+            </if>
+            <if test="category == 'notice_content'.toString()">AND NOTICE_CONTENT LIKE '%' || #{keyword} || '%'
+            </if>
+            <if test="category == 'notice_all'.toString()">AND NOTICE_TITLE LIKE '%' || #{keyword} || '%' or
+                NOTICE_CONTENT LIKE '%' || #{keyword} || '%' or
+                USERID LIKE
+                '%' || #{keyword} || '%'</if>
+            <if test="category == 'notice_author'.toString()">AND USERID LIKE '%' || #{keyword} || '%'</if>
+        </if>
+    </sql>
     
     <!-- NOTICE_BOARD 테이블에서 아이디로 검색 -->
     <select id="selectByNoticeId" resultType="Notice"> <!-- DB에서 select 시 반환되는 값의 타입 설정 -->
@@ -20,7 +81,7 @@
     
     <!-- NOTICE_BOARD 테이블에 새 포스트 삽입 -->
     <insert id="noticeboard_insert">
-        insert into NOTICE_BOARD (NOTICE_TITLE, NOTICE_CONTENT) values (#{notice_title}, #{notice_content})
+        insert into NOTICE_BOARD (USERID, NOTICE_TITLE, NOTICE_CONTENT) values (#{userid}, #{notice_title}, #{notice_content})
         <!-- #{} 부분은 대소문자 구별! (Notice class 에서 작성한 것과 같아야 함 -->
         <!-- #{} 부분은 입력한 객체의 getter 메서드를 호출한다고 생각하면 됨 -->
         <!-- ex. #{notice_title} -> Notice 클래스의 getNotice_title() 메서드 실행하는 것 -->
@@ -80,4 +141,12 @@
         </where>
         order by NOTICE_ID desc
     </select>
+    
+    <!-- 게시글 수정: 특정 게시글 아이디의 제목과 내용 업데이트 -->
+    <update id='update'>
+        update NOTICE_BOARD
+        set NOTICE_TITLE = #{notice_title}, NOTICE_CONTENT = #{notice_content}
+        where NOTICE_ID = #{notice_id}
+    </update>
+    
 </mapper>

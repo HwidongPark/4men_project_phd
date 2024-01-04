@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // workId
     const workId = document.querySelector('#workid');
-    console.log(workid.innerText);
+    // console.log(workId.value);
     
     // 게사자 아이디
     const writerId = document.querySelector('#artist-userid');
@@ -234,8 +234,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 거래요청 버튼 클릭    
     btnRequestDeal.addEventListener('click', function() {
-                
-        if (signedInUser == "") {    // 로그인 안했을 시 로그인시킴
+        if (isSold == 'Y') {
+            modalBody.setAttribute('id', '');
+            
+            alert('이미 거래 완료된 상품입니다.');
+            
+            location.reload();
+            
+        } else if (signedInUser == "") {    // 로그인 안했을 시 로그인시킴
             const target = encodeURIComponent(`/fourmen/market/detail?workid=${ workId.value }`);
             console.log(`target=${target}`);
             

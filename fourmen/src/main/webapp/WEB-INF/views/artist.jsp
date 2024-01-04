@@ -94,22 +94,26 @@ div#artist {
     </div>
     
 
-	<div id="works" class="mb-5 container-fluid w-75">
+		<div id="works" class="mb-5 container-fluid w-75">
 			<div class = "d-grid d-md-flex justify-content-md-end">
 				<c:if test = "${not empty signedInUser}">
 					<c:if test = "${user.grade eq '아티스트'}">
-						<c:url var = "registerArtist" value = "/artist/artist_register"></c:url>
-							<a href="${registerArtist}" class = "mb-3 btn btn-outline-dark">아티스트 추가</a>
+						<c:if test = "${user.userid ne signedInArtist.userid}">
+							<c:url var = "registerArtist" value = "/artist/artist_register"></c:url>
+								<a href="${registerArtist}" class = "mb-3 btn btn-outline-dark">아티스트 추가</a>
+						</c:if>	
 					</c:if>	
 				</c:if>		
 			</div>
 	
 		<div id = "artist_container">
 			<c:forEach var="a" items="${artist}" varStatus = "loop">
+			<c:if test = "${a.userid ne 'admin'}">
+					
 				<c:url var="artist_details" value="/artist/artist_details">
 					<c:param name="userid" value="${a.userid}"/>
 				</c:url>
-				
+
 				<a href="${artist_details}">
 					<div class="card text-bg-light">
 						<c:forEach var="img" items ="${artistImg}">
@@ -123,6 +127,7 @@ div#artist {
 						</div>
 					</div>
 				</a>
+			</c:if>	
 			</c:forEach>
 		</div>
 	</div>	

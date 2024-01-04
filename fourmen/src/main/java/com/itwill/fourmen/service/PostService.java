@@ -5,11 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.itwill.fourmen.board.SearchCriteria;
 import com.itwill.fourmen.board.SearchCriteriaAdminUser;
 import com.itwill.fourmen.domain.Post;
 import com.itwill.fourmen.dto.post.PostCreateDto;
 import com.itwill.fourmen.dto.post.PostListItemDto;
+import com.itwill.fourmen.dto.post.PostModifyDto;
 import com.itwill.fourmen.dto.post.PostSearchDto;
 import com.itwill.fourmen.repository.PostDao;
 
@@ -21,22 +21,22 @@ public class PostService {
 	// PostDao 주입받기.
 	@Autowired
 	private PostDao postDao; // 객체 생성 권한이 Spring FrameWork로 이전. (의존성 주입 / 제어의 역전)
-	//-> Spring Container가 가지고 있는 빈(bean = 객체) 중에서 타입에 맞는 객체를 주입해 줌.
-	
+	// -> Spring Container가 가지고 있는 빈(bean = 객체) 중에서 타입에 맞는 객체를 주입해 줌.
+
 	// 자유게시판 글 목록 보여주기...
 	public List<Post> read(SearchCriteriaAdminUser scri) {
 		log.debug("read()");
 		// postDao의 메서드를 호출해서 포스트(자유게시판) 목록을 리턴받고, 컨트롤러에게 리턴.
-		List<Post> list= postDao.selectOrderByPostIdDesc(scri); //-> DB에서 가져오는 데이터 타입은 Post 타입.
+		List<Post> list = postDao.selectOrderByPostIdDesc(scri); // -> DB에서 가져오는 데이터 타입은 Post 타입.
 		return list;
 
 	}
-	
-	 public int listCount(SearchCriteriaAdminUser scri) {
 
-	        return postDao.listCount(scri);
+	public int listCount(SearchCriteriaAdminUser scri) {
 
-	    }
+		return postDao.listCount(scri);
+
+	}
 	
 	// 자유게시판 선택한 글 상세내용 보여주기...
 	public Post detail(Long id) { // 전달받은 id 값에 해당하는 포스트를 리턴하므로 Post 타입 사용.
@@ -89,5 +89,16 @@ public class PostService {
 				.map(PostListItemDto::fromEntity)
 				.toList();
 	}
+
+	// 자유게시판 글 수정하기...
+	public int update(PostModifyDto dto, long post_id) {
+		log.debug("update(dto={})", dto);
+			
+		// 리포지토리 계층의 메서드를 호출해서 post_board 테이블에서 게시글 1개를 업데이트.
+		int result = postDao.update(dto.toEntity());
+		log.debug("게시글 업데이트 결과 = {}", result);
+			
+		return result;
+	} 
 	
 }

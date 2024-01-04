@@ -1,7 +1,11 @@
+<%@page import="java.net.URLEncoder"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c"  uri="jakarta.tags.core"%>
+<%@ taglib prefix="fn" uri="jakarta.tags.functions" %>
+
 <style>
+
 @font-face {
     font-family: 'EF_Rebecca';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-EF@1.0/EF_Rebecca.woff2') format('woff2');
@@ -36,10 +40,10 @@
                 </a>
                 <a href="${signOutPage}" class="nav-button-user">LOGOUT</a>
             </li>
-      		</c:if>
             <li class="nav-each-btn-user">
-                <a href="mypage" class="nav-button-user">MY PAGE</a>
+                <a href="/fourmen/mypage/myinfo" class="nav-button-user">MY PAGE</a>
             </li>
+      		</c:if>
             <li class="nav-each-btn-user">
                 <a href="noticeboard" class="nav-button-user">NOTICE</a>
             </li>
@@ -55,11 +59,16 @@
     </div>
     <ul id="my-page-slide-inner-container">
         <li class="my-page-list-item">
-            <a href="#">내 정보</a>
+            <a href="/fourmen/mypage/myinfo">내 정보</a>
         </li>
-        <li class="my-page-list-item">
-            <a href="#">내 작성 글</a>
-        </li>
+        <c:if test="${ usergrade == '아티스트' }">
+            <li class="my-page-list-item">
+                <c:url var="myArtistPage" value="/artist/artist_details">
+                    <c:param name="userid" value="${ signedInUser }" />
+                </c:url>
+                <a href="${ myArtistPage }">내 아티스트 페이지</a>
+            </li>
+        </c:if>
         <li class="my-page-list-item">
             <a href="/fourmen/mypage/wishlist">내 찜 목록</a>
         </li>
@@ -67,7 +76,7 @@
             <a href="/fourmen/mypage/mymessage/received">거래요청 관리</a>
         </li>
         <li class="my-page-list-item">
-            <a href="#">로그아웃</a>
+            <a href="${signOutPage}">로그아웃</a>
         </li>
     </ul>
 </aside>
@@ -83,7 +92,7 @@
     </div>
     
     <div class="header-list-container">
-        <ul class="nav-btn-lists">
+        <ul class="nav-btn-lists nav-lists-hide">
             <li class="nav-each-btn-list">
 
                 <a href="/fourmen/artist" class="nav-button">ARTISTS</a>
@@ -100,7 +109,7 @@
             </li>
             <c:if test="${usergrade =='관리자'}">
             <li class="nav-each-btn-list">
-                <a href="http://localhost:8080/fourmen/admin" class="nav-button">ADMIN</a>
+                <a href="/fourmen/admin" class="nav-button">ADMIN</a>
             </li>
             </c:if>
         </ul>

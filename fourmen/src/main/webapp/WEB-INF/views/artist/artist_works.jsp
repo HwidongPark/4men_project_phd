@@ -119,13 +119,12 @@ html {
 							<!-- 댓글 입력 text-area -->
 							<textarea class="form-control" id = "comment_content" autofocus></textarea>
 							<!-- 댓글 작성자 아이디 현재는 default 작성자 TEST  -->
-							<input class = "d-none" id = "comment_writer" value = "TEST" />
+							<input class = "d-none" id = "comment_writer" value = "${signedInUser}" />
 						</div>
 						<div class="my-2 d-grid d-md-flex justify-content-md-end">
-							<button class="btn btn-sm btn-secondary" id="btnAddComment">감상평 등록</button>
+							<button class="btn btn-outline-secondary" id="btnAddComment">감상평 등록</button>
 						</div>
 					</div>
-
 					<div class="my-2" id="comments">감상평 보기</div>
 				</div>
 			</div>
@@ -154,6 +153,30 @@ html {
 				</div>
 			</div>
 		</div>
+		<!-- 답글 모달 -->
+		<div id="replyCommentModal" class="modal" tabindex="-1">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">답글 달기</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"
+							aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<input class="d-none" id="modalReplyCommentId" />
+						<input class="d-none" id="replyCommentWriter" value="${signedInUser}" />
+						<textarea class="form-control" id="modalReplyCommentText"></textarea>
+						<!-- 수정할 부분 -->
+					</div>
+					<div class="modal-footer">
+						<button type="btnReplyBack" class="btn btn-secondary"
+							data-bs-dismiss="modal">취소</button>
+						<button id="btnReplyComment" type="button"
+							class="btn btn-primary">답글 달기</button>
+					</div>
+				</div>
+			</div>
+		</div>
 		<!-- end of modal -->
 		
 		<!-- 뒤로가기 및 위로 올라가기 버튼 -->
@@ -168,16 +191,17 @@ html {
 
 		</div>
 		
-		<div class = "mt-4 card-footer d-grid gap-2 d-md-flex justify-content-md-end">
-			<!-- 수정 버튼 -->
-			<c:url var = "worksModifyPage" value = "/artist/works_modify">
-				<c:param name = "worksid" value = "${artist_works.worksid}" />
-			</c:url>
-			<a href="${worksModifyPage}" class="btn btn-outline-dark me-md-2">작품 수정</a>
-			<!-- 작품 삭제 버튼 -->
-			<button class="btn btn-outline-dark" id="btnDelete">작품 삭제</button>
-		</div>
-
+		<c:if test = "${signedInUser eq artist_works.userid }">
+			<div class = "mt-4 card-footer d-grid gap-2 d-md-flex justify-content-md-end">
+				<!-- 수정 버튼 -->
+				<c:url var = "worksModifyPage" value = "/artist/works_modify">
+					<c:param name = "worksid" value = "${artist_works.worksid}" />
+				</c:url>
+				<a href="${worksModifyPage}" class="btn btn-outline-dark me-md-2">작품 수정</a>
+				<!-- 작품 삭제 버튼 -->
+				<button class="btn btn-outline-dark" id="btnDelete">작품 삭제</button>
+			</div>
+		</c:if>
 	</div>
 
 	<%@ include file="../fragments/footer.jspf"%>
@@ -187,6 +211,11 @@ html {
 		integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
 		crossorigin="anonymous"></script>
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>	
+	
+	<script>
+        const signedInUser = '${signedInUser}';
+    </script>
+	
 	<script src="../js/works-comments.js"></script>
 	<script src="../js/works-modify.js"></script>
 

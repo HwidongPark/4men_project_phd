@@ -34,7 +34,7 @@
     <div id="underheader-div">
         <div class="container" id="underheadrcontainer">
             <h2 class="commondesign">
-                FORUM
+                FAQ
             </h2>
         </div>
     </div>
@@ -69,17 +69,14 @@
             <c:url var="faqboardCreatePage" value="/forum/faqboard-create" />
             <form id="faqboard-create-form" action="/forum/faqboard-create" method="post" enctype="multipart/form-data">
                 <div id="faqboard-create-title">
-                    <input id="faq_title" name="faq_title" type="text" placeholder="제목을 입력하세요 (30자)" maxlength="30" onkeyup="return input_maxlength(this)" />
+                    <input id="faq_title" name="faq_title" type="text" placeholder="제목을 입력하세요 (공백 포함 40자)" maxlength="40" onkeyup="return input_maxlength(this)" />
                 </div>
                 <div id="faqboard-create-content">
-                    <textarea id="faq_content" name="faq_content" placeholder="내용을 입력하세요 (1000자)"  maxlength="1000" onkeyup="return textarea_maxlength(this)"></textarea>
+                    <textarea id="faq_content" name="faq_content" placeholder="내용을 입력하세요 (공백 포함 1000자)"  maxlength="1000" onkeyup="return textarea_maxlength(this)"></textarea>
                 </div>
                 <!-- 작성자 아이디는 로그인한 사용자 아이디로 + 보이지 않도록 설정 -->
                 <div id="faqboard-create-author" class="d-none">
-                    <input type="text" name="author" value="${signedInUser}" readonly />
-                </div>
-                <div id="faqboard-create-file">
-                    <input id="faqboard-add-file" type="file" name="original_file" multiple="multiple" onchange="showFileName()" />
+                    <input type="text" name="user_id" value="${signedInUser}" readonly />
                 </div>
             </form>
                 <div id="faqboard-create-forUnderbar"></div>

@@ -48,11 +48,15 @@
                     <button class="btn btn-secondary">거래 완료된 상품</button>
                 </c:when>
                 <c:otherwise>
-                    <button id="mymessage-make-deal" class="btn btn-success">거래 확정</button>
+                    <c:if test="${ signedInUser != messageDto.sender }">
+                        <button id="mymessage-make-deal" class="btn btn-success">거래 확정</button>
+                    </c:if>
                 </c:otherwise>
                 
-            </c:choose>
-            <button id="mymessage-reply" class="btn btn-primary">답장하기</button>
+            </c:choose>            
+            <c:if test="${ messageDto.sender != '탈퇴한 회원' && messageDto.sender != signedInUser }">
+                <button id="mymessage-reply" class="btn btn-primary">답장하기</button>
+            </c:if>                
         </div>
         
         <!-- 서로 주고받은 메세지를 보여줌 -->

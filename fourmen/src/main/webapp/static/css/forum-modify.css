@@ -1,0 +1,13 @@
+@charset "UTF-8";
+/* forum-modify.css */
+/* forum 모든 게시판 수정 페이지에 관한 css */
+
+.input #noticeboard-view-detail-title {
+    border: none;
+}
+
+.button #noticeboard-modify {
+    margin-left: 7px;
+    border: none;
+    background-color: transparent;
+}

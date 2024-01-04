@@ -5,14 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.itwill.fourmen.board.SearchCriteriaAdminUser;
 import com.itwill.fourmen.domain.Faq;
-import com.itwill.fourmen.domain.Qna;
 import com.itwill.fourmen.dto.post.FaqCreateDto;
 import com.itwill.fourmen.dto.post.FaqListItemDto;
+import com.itwill.fourmen.dto.post.FaqModifyDto;
 import com.itwill.fourmen.dto.post.FaqSearchDto;
-import com.itwill.fourmen.dto.post.PostCreateDto;
-import com.itwill.fourmen.dto.post.QnaLIstItemDto;
-import com.itwill.fourmen.dto.post.QnaSearchDto;
 import com.itwill.fourmen.repository.FaqDao;
 
 import lombok.extern.slf4j.Slf4j;
@@ -26,17 +24,18 @@ public class FaqService {
 	//-> Spring Container가 가지고 있는 빈(bean = 객체) 중에서 타입에 맞는 객체를 주입해 줌.
 	
 	// Faq게시판 글 목록 보여주기...
-	public List<FaqListItemDto> read() {
+	public List<Faq> read(SearchCriteriaAdminUser scri) {
 		log.debug("read()");
-		// faqDao의 메서드를 호출해서 faq 목록을 리턴받고, 컨트롤러에게 리턴.
-		List<Faq> list = faqDao.selectOrderByFaqIdDesc(); //-> DB에서 가져오는 데이터 타입은 Qna 타입.
-		log.debug("Qna(문의게시판) 포스트 목록 개수 = {}", list.size());
-		
-		return list.stream()
-				.map(FaqListItemDto::fromEntity) //-> 람다 표현식을 간단하게 작성. (사용 조건에 주의)
-				// map((x) -> QnaListItemDto.fromEntity(x)): 람다 표현식.
-				// 일종의 필터링 과정을 거치는 코드.
-				.toList();
+		// faqDao의 메서드를 호출해서 포스트 목록을 리턴받고, 컨트롤러에게 리턴.
+		List<Faq> list = faqDao.selectOrderByFaqIdDesc(scri); // -> DB에서 가져오는 데이터 타입은 Post 타입.
+		return list;
+
+	}
+	
+	public int listCount(SearchCriteriaAdminUser scri) {
+
+		return faqDao.listCount(scri);
+
 	}
 	
 	// Faq게시판 선택한 글 상세내용 보여주기...
@@ -90,5 +89,18 @@ public class FaqService {
 				.map(FaqListItemDto::fromEntity)
 				.toList();
 	}
+
+	// Faq게시판 글 수정하기...
+	public int update(FaqModifyDto dto, long faq_id) {
+		log.debug("update(dto={})", dto);
+		
+		// 리포지토리 계층의 메서드를 호출해서 faq_board 테이블에서 게시글 1개를 업데이트.
+		int result = faqDao.update(dto.toEntity());
+		log.debug("게시글 업데이트 결과 = {}", result);
+		
+		return result;
+	} 
+	
+	
 	
 }

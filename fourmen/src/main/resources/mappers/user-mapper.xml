@@ -22,4 +22,16 @@
 		select * from USERS
 		where USERID = #{userid} and PASSWORD = #{password}
 	</select>
+    
+    <update id="updateUserInfo">
+        UPDATE users
+            SET
+        nickname = #{nickname},
+        phone = #{phone},
+        email = #{email}
+        <if test="profile_o_img != null">,profile_o_img = #{profile_o_img, jdbcType=VARCHAR}</if>
+        <if test="profile_s_img != null">,profile_s_img = #{profile_s_img, jdbcType=VARCHAR}</if>        
+            WHERE
+        userid = #{userid}
+    </update>
 </mapper>

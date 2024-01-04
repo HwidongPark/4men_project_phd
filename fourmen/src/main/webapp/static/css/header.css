@@ -21,7 +21,6 @@ time, mark, audio, video {
 	border: 0;
 	font-size: 100%;
 	font: inherit;
-	vertical-align: middle;
 }
 
 /* HTML5 display-role reset for older browsers (CSS 초기화) */
@@ -286,6 +285,7 @@ body {
 .my-page-open {
     visibility: visible;
     position: absolute;
+    
     right: 0;
     text-align: right;
     font-weight: 800;
@@ -295,7 +295,7 @@ body {
     width: auto;
     height: 100%;
     transition: all 1s;    
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgb(0, 0, 0);
     z-index: 999; /* 다른 요소들보다 위에 표시 */
 }
 
@@ -316,7 +316,6 @@ body {
     .header-nav {
         flex-direction: column;
         align-items: start;
-        /* height: 3.5rem; */
         height: auto;
     }
 
@@ -326,7 +325,7 @@ body {
 		height: 3.5rem;
 		display: block;
 		position: relative;
-		left: -30px;
+		left: -16px;
 	}
 	
     .logo img{
@@ -338,11 +337,11 @@ body {
         display: block;
         position: absolute;
         right: 10px;
-        top: 1.3rem;
+        top: 3.7rem;
         
     }
     
-    .nav-list-container {
+    .header-list-container {
 		width: 100%;
 	}
     
@@ -350,6 +349,7 @@ body {
         display: flex;
         flex-direction: column;
         align-items: center;
+        width: 100%;
     }
     
     /* 토글버튼 누를 시 nav-items 보여줌 */
@@ -357,14 +357,14 @@ body {
 		display: none;
 	}
     
-
-    .nav-btn-lists {
-        flex-direction: column;
-    }
-
     .nav-each-btn-list a {
         padding: 0.5rem;
         font-size: 0.8rem;
+    }
+    
+    .nav-each-btn-list a:hover {
+        font-size: 1rem;
+
     }
 
     .nav-btn-users {
