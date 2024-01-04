@@ -70,6 +70,10 @@
         VALUES (#{sender}, #{recipient}, #{workId}, #{title}, #{content}, #{priceOffered}, #{price}, #{replyTo})
     </insert>
     
+    <update id="updateMessageForDeletedUser">
+        UPDATE messages SET sender = '탈퇴한 회원' WHERE sender = #{signedInUser}
+    </update>
+    
     
     
 </mapper>

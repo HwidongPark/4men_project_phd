@@ -14,10 +14,17 @@
 
 .mymessage-title:hover {
     color: #adb5bd;
+    cursor: pointer;
 }
 
 .deal-completed {
     color: red;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.deal-sold-by-another {
+    color: blue;
     font-size: 0.8rem;
     font-weight: 700;
 }

@@ -27,7 +27,7 @@
 	    .then((response) => {
 	        console.log('받아오기 성공',response.data);
 	        marketPost = response.data;
-            
+           
 	        
 	    })
 	    .catch((error) => {

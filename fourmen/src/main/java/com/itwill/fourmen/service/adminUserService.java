@@ -28,7 +28,7 @@ import com.itwill.fourmen.dto.market.MarketPostDto;
 import com.itwill.fourmen.dto.market.MarketSearchDto;
 import com.itwill.fourmen.dto.market.PagingDto;
 import com.itwill.fourmen.repository.AdminUserDao;
-
+import com.itwill.fourmen.repository.MyPageDao;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -40,6 +40,7 @@ public class adminUserService {
 	private final AdminUserDao adminuserdao;
 	private int postsPerPage = 12;
 	private int pagesShownInBar = 10;
+	private final MyPageDao myPageDao;
 	
 	public List<User> adminuserlist(SearchCriteriaAdminUser scri){
 		
@@ -61,12 +62,16 @@ public class adminUserService {
 	 public int userUpdate(UserUpdateDto dto) {
 		 log.debug("userUpdate(dto={})", dto);
 		 
-		 int result =adminuserdao.userUpdate(dto.toEntity());
+		 int result = adminuserdao.userUpdate(dto.toEntity());
 	 
 		 return result;
 	 	}
 	 
 	 public int userdelete(String userid) {
+		 // TODO: 보낸사람이 userid일 경우 모두 '삭제된유저' 로 업데이트
+		 int resultForMessage = myPageDao.updateMessageForDeletedUser(userid);
+		 log.debug("resultForDeletedUser={}", resultForMessage);
+		 
 		 int result = adminuserdao.userdelete(userid);
 		 
 		 return result;

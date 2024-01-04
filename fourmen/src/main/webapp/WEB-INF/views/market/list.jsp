@@ -10,65 +10,42 @@
 <title>Fourmen</title>
 
 
-<link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-    crossorigin="anonymous">
-
-<link rel="stylesheet" href="/fourmen/css/header.css">
-<link rel="stylesheet" href="/fourmen/css/market-board.css">
-<link rel="stylesheet" href="/fourmen/css/footer.css">
-<link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-<link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-<link rel="stylesheet" href="/fourmen/css/pagenation.css">    
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+        crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="/fourmen/css/header.css">
+    <link rel="stylesheet" href="/fourmen/css/market-board.css">
+    <link rel="stylesheet" href="/fourmen/css/footer.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="/fourmen/css/underheader.css">
+    <link rel="stylesheet" href="/fourmen/css/pagenation.css">
+    
+    <script src="https://kit.fontawesome.com/5b5cfeea7f.js" crossorigin="anonymous"></script> 
 
 </head>
 
 <body>
     <%@include file="../fragments/navigation.jspf"%>
-
+    
+    <!-- 웹페이지 상단 헤더 아래 부분 -->
+    <div id="underheader-div">
+        <div class="container" id="underheadrcontainer">
+            <h2 class="commondesign">
+                마켓
+            </h2>
+        </div>
+    </div>
+    
     <section role="search" class="search-container">
         <c:url var="searchPage" value="/market/search"/>
         <form id="search-form" action="${ searchPage }">
             <div class="search-detail-container">
-                <!-- 검색 카테고리 내역 -->
-                상세 검색:<br> <input type="checkbox" id="oriental"
-                    name="category"> <label for="oriental">동양화</label>
-                <input type="checkbox" id="western" name="category">
-                <label for="western">서양화</label> <input type="checkbox"
-                    id="portrait" name="category"> <label
-                    for="portrait">초상화</label> <input type="checkbox"
-                    id="statue" name="category"> <label
-                    for="statue">조각</label> <input type="checkbox"
-                    id="modern-art" name="category"> <label
-                    for="modern-art">현대미술</label> <input type="checkbox"
-                    id="oriental" class="expand" name="category">
-                <label for="oriental" class="expand">동양화</label> <input
-                    type="checkbox" id="western" class="expand"
-                    name="category"> <label for="western"
-                    class="expand">서양화</label> <input type="checkbox"
-                    id="portrait" class="expand" name="category">
-                <label for="portrait" class="expand">초상화</label> <input
-                    type="checkbox" id="statue" class="expand"
-                    name="category"> <label for="statue"
-                    class="expand">조각</label> <input type="checkbox"
-                    id="modern-art" class="expand" name="category">
-                <label for="modern-art" class="expand">현대미술</label>
-
-                <!-- 버튼 누르면 전체 카테고리 내역 확장해서 보여줌 -->
-                <button class="search-form-btn" type="button">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16"
-                        height="16" fill="currentColor"
-                        class="bi bi-plus-lg" viewBox="0 0 16 16">
-                          <path fill-rule="evenodd"
-                            d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2" />
-                        </svg>
-                </button>
-                <br>
-
                 <!-- 가격대 설정 -->
                 <div class="price-range-container">
                     <label for="low-price-border">가격대</label>
@@ -103,7 +80,9 @@
         <!-- 글 작성 버튼 -->
         <div class="market-create-btn-container">
             <c:url var="createMarketPost" value="/market/create" />
-            <button class="btn btn-outline-success">글 작성</button>
+            <c:if test="${ usergrade == '아티스트' }">
+                <button class="btn btn-outline-secondary">글 작성</button>
+            </c:if>
         </div>
         
         <!-- 게시판 -->
@@ -144,7 +123,7 @@
                                     <fmt:formatNumber type="number" maxFractionDigits="2" value="${marketPost.price }" />원
                                 </div>
                                 <div class="market-views-and-likes">
-                                      <!-- 조회수 -->
+                                    <!-- 조회수 -->
                                     <span class="material-symbols-outlined">
                                         visibility
                                     </span>
@@ -157,14 +136,12 @@
                                         </c:if>
                                     </c:forEach>
                                     
-                                    <c:if test="isWishListed">
-                                        <i class="fa-solid fa-heart"></i>   <!-- 유저가 찜한 글이면 꽉찬 하트 -->                               
+                                    <c:if test="${ isWishListed }">
+                                        <i class="fa-solid fa-heart fa-sm market-filled-heart"></i>                             
                                     </c:if>
-                                    <c:if test="!isWishListed">
-                                        <span class="material-symbols-outlined">    <!-- 유저가 찜하지 않은 글이면 빈 하트 -->
-                                            favorite
-                                        </span>
-                                    </c:if>                                 
+                                    <c:if test="${ !isWishListed }">
+                                        <i class="fa-regular fa-heart fa-sm market-empty-heart"></i> 
+                                    </c:if>
                                     ${ marketPost.likes }
                                 </div>                                
                             </div>
@@ -283,7 +260,11 @@
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
-
+    
+    <script>
+        const signedInUser = `${ signedInUser}`;
+        const grade = `${ usergrade }`;        
+    </script>
     <script src="/fourmen/js/market/market-board.js"></script>
 
     <script src="/fourmen/js/header.js"></script>

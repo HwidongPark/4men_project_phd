@@ -27,6 +27,7 @@ public class MyPageService {
 	
 	private int postsPerPage = 3;
 	private int pagesShownInBar = 3;
+		
 	
 	/**
 	 * 메세지 객체를 아규먼트로 받아 메세지 보내는 서비스 메서드.

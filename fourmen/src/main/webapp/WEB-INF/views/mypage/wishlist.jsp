@@ -19,7 +19,8 @@
         <link rel="stylesheet" href="../css/forum-search-area.css">
         <link rel="stylesheet" href="../css/forum-kategorie-area.css">
         <link rel="stylesheet" href="../css/forum-create-new-post.css">
-		
+        <link rel="stylesheet" href="/fourmen/css/mypage-message.css">
+        
 	</head>
 	
 
@@ -41,112 +42,86 @@
     <!-- main 시작점 -->
     <main>
     
-    <!-- 게시판 카테고리(자유게시판, 후기게시판, 질문게시판) -->
-    <section role="kategorie" class="kategorie" style="border-bottom: 1.5px solid #D8D8D8;">
-        <div class="forum-kategorie">
-            <ul class="forum-kategorie-board-lists">
-                <li class="forum-kategorie-board">
-                    <a href="freeboard">자유게시판</a>
-                </li>
-                <li class="forum-kategorie-board">
-                    <a href="queryboard">Q&A</a>
-                </li>
-                <li class="forum-kategorie-board">
-                    <a href="faqboard">FAQ</a>
-                </li>
-                <li class="forum-kategorie-board">
-                    <a href="noticeboard">NOTICE</a>
-                </li>
-            </ul>
-        </div>
-    </section>
     
-    <!-- 게시글 검색창 -->
-    <section role="search" class="search">
-        <div class="forum-top-area">
-            <div class="forum-search-area">
-                <div class="forum-search-select-area">
-                    <select class="forum-select-box">
-                        <option class="forum-select-option">전체</option>
-                        <option class="forum-select-option">제목</option>
-                        <option class="forum-select-option">작성자</option>
-                        <option class="forum-select-option">내용</option>
-                    </select>
-                </div>
-                <div class="forum-search-form-area">
-                    <input id=forum-search-input autocomplete="on" placeholder="검색어를 입력하세요." type="text">
-                </div>
-
-                <div class="forum-search-btn-area">
-                    <button class="forum-search-btn" type="button">
-                        <img id="forum-search-btn-img" alt="검색버튼" src="../icon/search01.svg">
-                    </button>
+        <!-- 게시글 검색창 -->
+        <section role="search" class="search">
+            <div class="forum-top-area">
+                <div class="forum-search-area">
+                    <div class="forum-search-select-area">
+                        <select class="forum-select-box">
+                            <option class="forum-select-option">전체</option>
+                            <option class="forum-select-option">제목</option>
+                            <option class="forum-select-option">작성자</option>
+                            <option class="forum-select-option">내용</option>
+                        </select>
+                    </div>
+                    <div class="forum-search-form-area">
+                        <input id=forum-search-input autocomplete="on" placeholder="검색어를 입력하세요." type="text">
+                    </div>
+    
+                    <div class="forum-search-btn-area">
+                        <button class="forum-search-btn" type="button">
+                            <img id="forum-search-btn-img" alt="검색버튼" src="../icon/search01.svg">
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
-    
-    <!-- board-list-content 게시판 글 리스트 테이블 -->
-    <section class="freeboard-list" style="padding: 3.5rem 18.5rem 0rem 18.5rem;">
-        <table class="table">
-            <colgroup>
-
-                <col style="width: 50%;">
-                <col style="width: 10%;">
-                <col style="width: 15%;">
-                <col style="width: 15%;">
-                <col style="width: 10%;">
-            </colgroup>
-            <thead>
-            <tr>
-                <!-- <th>번호</th> -->
-                <th>제목</th>
-                <th>가격</th>
-                <th>작성자</th>
-                <th>작성일</th>
-                <th>조회</th>
-            </tr>
-            </thead>
-            <tbody class="table-group-divider">
-            <c:forEach var="wishListPost" items="${wishListPosts}">
-            <!-- var: 변수(리스트 값을 저장) / items: 리스트 -->
-            <!-- PostController.java에서 전달된 데이터 사용 (리스트의 이름이 items에 들어가야 함)
-            -> model.addAttribute("freeboard_posts", list); //-> 뷰에 전달되는 데이터. -->
+        </section>
+        
+        <!-- board-list-content 게시판 글 리스트 테이블 -->
+        <section class="freeboard-list" style="padding: 3.5rem 18.5rem 0rem 18.5rem;">
+            <table class="table">
+                <colgroup>
+                    <col style="width: 15%;">
+                    <col style="width: 50%;">
+                    <col style="width: 10%;">
+                    <col style="width: 10%;">
+                    <col style="width: 10%;">
+                </colgroup>
+                <thead>
                 <tr>
-                    <td>
-                        <a href="/fourmen/market/detail?workid=${ wishListPost.workId }">
-                            ${ wishListPost.title }
-                        </a>
-                    </td>
-                    <td>${ wishListPost.price }</td>
-                    <td>${ wishListPost.userId }</td>
-                    <td>${ wishListPost.createdTime }</td>
-                    <td>${ wishListPost.views }</td>
+                    <!-- <th>번호</th> -->
+                    <th></th>
+                    <th>제목</th>
+                    <th>가격</th>
+                    <th>작성자</th>
+                    <th>status</th>
                 </tr>
-            </c:forEach>
-            </tbody>
-        </table>
-    </section>
+                </thead>
+                <tbody class="table-group-divider">
+                <c:forEach var="wishListPost" items="${wishListPosts}">
+                <!-- var: 변수(리스트 값을 저장) / items: 리스트 -->
+                <!-- PostController.java에서 전달된 데이터 사용 (리스트의 이름이 items에 들어가야 함)
+                -> model.addAttribute("freeboard_posts", list); //-> 뷰에 전달되는 데이터. -->
+                    <tr>
+                       <td>
+                            <div class="mymessage-image-container">
+                                <img src="/fourmen/uploads/${ wishListPost.workImages[0].savedFileName }">
+                            </div>
+                        </td>
+                        <td>
+                            <a href="/fourmen/market/detail?workid=${ wishListPost.workId }">
+                                ${ wishListPost.title }
+                            </a>
+                        </td>
+                        <td>${ wishListPost.price }</td>
+                        <td>${ wishListPost.userId }</td>
+                        <td>
+                            <c:choose>
+                                <c:when test="${ wishListPost.isSold == 'Y' }">
+                                    <span class="deal-completed">거래 완료</span>
+                                </c:when>
+                                <c:otherwise>
+                                    <span style="font-weight: 700;">거래 중</span>
+                                </c:otherwise>
+                            </c:choose>
+                        </td>
+                    </tr>
+                </c:forEach>
+                </tbody>
+            </table>
+        </section>
     
-    <!-- 새 글 작성 내비게이션(HOME / MAP / NEW POST) -->
-    <div class="new-post-div">
-        <nav class="new-post-nav">
-            <ul class="new-post-ul">
-                <li id="new-post-li-one" class="new-post-li">
-                    <c:url var="homePage" value="/" />
-                    <a href="${homePage}">HOME</a>
-                </li>
-                <li id="new-post-li-two" class="new-post-li">
-                    <c:url var="siteMapPage" value="#" />
-                    <a href="${siteMapPage}">MAP</a>    
-                </li>
-                <li id="new-post-li-three" class="new-post-li">
-                    <c:url var="freeboardCreatePage" value="/forum/freeboard-create" />
-                    <a href="${freeboardCreatePage}">NEW POST</a>
-                </li>
-            </ul>
-        </nav>
-    </div>
     
     <!-- 게시판 글 페이지네이션(pagination)-->
         <div>

@@ -67,91 +67,79 @@
                      <div id="artist">
                         <input id="artist-userid" value="${ marketPost.userId }" type="hidden" />
                         <em><a href="#" id="artist-name">${ marketPost.nickname }</a></em>
-                        <div id="artist-bio">
-                            저는 어렸을때부터 코끼리 그림을 그렸던 예술가입니다. 저의 작품은 매우 질이 좋습니다. 저의 그림실력은 뛰어납니다.
-                            지금이 저의 작품을 살 절호의 기회입니다. 지금 저의 작품은 비록 5만원이지만, 훗날 사람들이 저의 진가를 알아보고 가격이 뛸 것이라 생각합니다.
-                            저의 작품은 2013년 당시의 비트코인과 같습니다. 저의 페이지에 들어와서 포트폴리오를 확인해보세요
-                            저는 어렸을때부터 코끼리 그림을 그렸던 예술가입니다. 저의 작품은 매우 질이 좋습니다. 저의 그림실력은 뛰어납니다.
-                            지금이 저의 작품을 살 절호의 기회입니다. 지금 저의 작품은 비록 5만원이지만, 훗날 사람들이 저의 진가를 알아보고 가격이 뛸 것이라 생각합니다.
-                            저의 작품은 2013년 당시의 비트코인과 같습니다. 저의 페이지에 들어와서 포트폴리오를 확인해보세요
-                            저는 어렸을때부터 코끼리 그림을 그렸던 예술가입니다. 저의 작품은 매우 질이 좋습니다. 저의 그림실력은 뛰어납니다.
-                            지금이 저의 작품을 살 절호의 기회입니다. 지금 저의 작품은 비록 5만원이지만, 훗날 사람들이 저의 진가를 알아보고 가격이 뛸 것이라 생각합니다.
-                            저의 작품은 2013년 당시의 비트코인과 같습니다. 저의 페이지에 들어와서 포트폴리오를 확인해보세요
-                            저는 어렸을때부터 코끼리 그림을 그렸던 예술가입니다. 저의 작품은 매우 질이 좋습니다. 저의 그림실력은 뛰어납니다.
-                            지금이 저의 작품을 살 절호의 기회입니다. 지금 저의 작품은 비록 5만원이지만, 훗날 사람들이 저의 진가를 알아보고 가격이 뛸 것이라 생각합니다.
-                            저의 작품은 2013년 당시의 비트코인과 같습니다. 저의 페이지에 들어와서 포트폴리오를 확인해보세요
-                            저는 어렸을때부터 코끼리 그림을 그렸던 예술가입니다. 저의 작품은 매우 질이 좋습니다. 저의 그림실력은 뛰어납니다.
-                            지금이 저의 작품을 살 절호의 기회입니다. 지금 저의 작품은 비록 5만원이지만, 훗날 사람들이 저의 진가를 알아보고 가격이 뛸 것이라 생각합니다.
-                            저의 작품은 2013년 당시의 비트코인과 같습니다. 저의 페이지에 들어와서 포트폴리오를 확인해보세요
-                            저는 어렸을때부터 코끼리 그림을 그렸던 예술가입니다. 저의 작품은 매우 질이 좋습니다. 저의 그림실력은 뛰어납니다.
-                            지금이 저의 작품을 살 절호의 기회입니다. 지금 저의 작품은 비록 5만원이지만, 훗날 사람들이 저의 진가를 알아보고 가격이 뛸 것이라 생각합니다.
-                            저의 작품은 2013년 당시의 비트코인과 같습니다. 저의 페이지에 들어와서 포트폴리오를 확인해보세요
-                            저는 어렸을때부터 코끼리 그림을 그렸던 예술가입니다. 저의 작품은 매우 질이 좋습니다. 저의 그림실력은 뛰어납니다.
-                            지금이 저의 작품을 살 절호의 기회입니다. 지금 저의 작품은 비록 5만원이지만, 훗날 사람들이 저의 진가를 알아보고 가격이 뛸 것이라 생각합니다.
-                            저의 작품은 2013년 당시의 비트코인과 같습니다. 저의 페이지에 들어와서 포트폴리오를 확인해보세요
-                            저는 어렸을때부터 코끼리 그림을 그렸던 예술가입니다. 저의 작품은 매우 질이 좋습니다. 저의 그림실력은 뛰어납니다.
-                            지금이 저의 작품을 살 절호의 기회입니다. 지금 저의 작품은 비록 5만원이지만, 훗날 사람들이 저의 진가를 알아보고 가격이 뛸 것이라 생각합니다.
-                            저의 작품은 2013년 당시의 비트코인과 같습니다. 저의 페이지에 들어와서 포트폴리오를 확인해보세요
+                        <div id="artist-bio">                                                                                                               
+                            ${ marketPost.artist.artist_bio_kor }
+                            <br><br>
+                            ${ marketPost.artist.artist_bio_eng }
                         </div>
                         <button class="btn-read-more">Read More</button> 
                     </div> 
                 </div>
                 <div class="text-center">
-                <!-- Button trigger modal -->
-                <button type="button" id="market-request-deal" class="btn btn-secondary my-1 btn-rounded"
-                    data-bs-toggle="modal" data-bs-target="#requestDeal">
-                    거래요청 쪽지 보내기
-                </button><br />
-                
-                <!-- Modal -->
-                <div class="modal fade modal-to-show" tabindex="-1"
-                    aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel">
-                                    거래요청 쪽지 보내기
-                                </h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form method="post" action="/fourmen/mypage/message" id="request-deal-form">
-                                    <div class="modal-label">
-                                        <label class="mb-1">제목</label>
-                                    </div>
-                                    <input id="market-message-title" type="text" name="title" class="form-control mb-2" required/>
-                                    <div class="modal-label">
-                                        <label class="mb-1">내용</label>
-                                    </div>
-                                    <textarea id="market-message-content" class="form-control mb-2" name="content" rows="10" required></textarea>
-                                    <div>
-                                        <label class="mb-1">제시 가격</label>
-                                        <input id="market-message-price-offered" type="number" name="price_offered" value="${ marketPost.price }" class="form-control" required/>
-                                    </div>
-                                    <input type="hidden" name="workId" value="${ marketPost.workId }">
-                                    <input type="hidden" name="recipient" value="${ marketPost.userId }">
-                                    <input type="hidden" name="sender" value="${ signedInUser }">
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" id="market-request-deal-close" class="btn btn-secondary" data-bs-dismiss="modal">
-                                    닫기
-                                </button>
-                                <button id="market-send-request" type="button" class="btn btn-primary">
-                                    거래 요청
-                                </button>
+                    <!-- Button trigger modal -->
+                    <button type="button" id="market-request-deal" class="btn btn-secondary my-1 btn-rounded"
+                        data-bs-toggle="modal" data-bs-target="#requestDeal">
+                        거래요청 쪽지 보내기
+                    </button><br />
+                    
+                    <!-- Modal -->
+                    <div class="modal fade modal-to-show" tabindex="-1"
+                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">
+                                        거래요청 쪽지 보내기
+                                    </h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form method="post" action="/fourmen/mypage/message" id="request-deal-form">
+                                        <div class="modal-label">
+                                            <label class="mb-1">제목</label>
+                                        </div>
+                                        <input id="market-message-title" type="text" name="title" class="form-control mb-2" required/>
+                                        <div class="modal-label">
+                                            <label class="mb-1">내용</label>
+                                        </div>
+                                        <textarea id="market-message-content" class="form-control mb-2" name="content" rows="10" required></textarea>
+                                        <div>
+                                            <label class="mb-1">제시 가격</label>
+                                            <input id="market-message-price-offered" type="number" name="price_offered" value="${ marketPost.price }" class="form-control" required/>
+                                        </div>
+                                        <input type="hidden" name="workId" value="${ marketPost.workId }">
+                                        <input type="hidden" name="recipient" value="${ marketPost.userId }">
+                                        <input type="hidden" name="sender" value="${ signedInUser }">
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" id="market-request-deal-close" class="btn btn-secondary" data-bs-dismiss="modal">
+                                        닫기
+                                    </button>
+                                    <button id="market-send-request" type="button" class="btn btn-primary">
+                                        거래 요청
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <c:if test="${ isWishListed le 0 }">
-                        <button id="market-add-to-wishlist" class="btn btn-danger btn-rounded">찜하기</button>
-                        <button id="market-remove-from-wishlist" class="btn btn-success btn-rounded d-none">찜 취소</button>
-                    </c:if>
-                    <c:if test="${ isWishListed ge 1 }">
-                        <button id="market-add-to-wishlist" class="btn btn-danger btn-rounded d-none">찜하기</button>
-                        <button id="market-remove-from-wishlist" class="btn btn-success btn-rounded">찜 취소</button>
-                    </c:if>
+                    <c:choose>
+                        <c:when test="${ marketPost.isSold == 'Y' }">
+                            <button class="btn btn-dark btn-rounded">이미 거래 종료된 물건</button>
+                            <button id="market-add-to-wishlist" class="btn btn-danger btn-rounded d-none">찜하기</button>
+                            <button id="market-remove-from-wishlist" class="btn btn-success btn-rounded d-none">찜 취소</button>
+                        </c:when>
+                        <c:otherwise>
+                            <c:if test="${ isWishListed le 0 }">
+                                <button id="market-add-to-wishlist" class="btn btn-danger btn-rounded">찜하기</button>
+                                <button id="market-remove-from-wishlist" class="btn btn-success btn-rounded d-none">찜 취소</button>
+                            </c:if>
+                            <c:if test="${ isWishListed ge 1 }">
+                                <button id="market-add-to-wishlist" class="btn btn-danger btn-rounded d-none">찜하기</button>
+                                <button id="market-remove-from-wishlist" class="btn btn-success btn-rounded">찜 취소</button>
+                            </c:if>
+                        </c:otherwise>
+                    </c:choose>          
                 </div>
             </div>
         </section>
@@ -169,18 +157,22 @@
             </div>
         </section>
         <!-- 수정 삭제 버튼 -->
-        <div class="container text-right my-3 d-grid gap-2 d-md-flex justify-content-md-end market-btn-container">
-            
-            <form action="/fourmen/market/delete" method="post">
-                <input id="workid" name="workid" class="d-none" type="text" value="${ marketPost.workId }">                     
-                <input type="submit" value="삭제" id="market-btn-delete" class="btn btn-outline-danger mr-2"/>
-            </form>
-            
-            <form action="/fourmen/market/update" method="post">
-                <input id="workid" name="workid" class="d-none" type="text" value="${ marketPost.workId }">
-                <button id="market-btn-update" class="btn btn-outline-primary">수정</button>
-            </form>
-        </div>
+        <c:if test="${ signedInUser == marketPost.userId }">
+            <div class="container text-right my-3 d-grid gap-2 d-md-flex justify-content-md-end market-btn-container">
+                <form action="/fourmen/market/delete" method="post">
+                    <input id="workid" name="workid" class="d-none" type="text" value="${ marketPost.workId }">                     
+                    <input type="submit" value="삭제" id="market-btn-delete" class="btn btn-outline-danger mr-2"/>
+                </form>
+                
+                <form action="/fourmen/market/update" method="post">
+                    <input id="workid" name="workid" class="d-none" type="text" value="${ marketPost.workId }">
+                    <button id="market-btn-update" class="btn btn-outline-primary">수정</button>
+                </form>
+            </div>
+        </c:if>
+        <!-- JavaScript에서 사용하기 위해서.. -->
+        <input id="workid" name="workid" class="d-none" type="text" value="${ marketPost.workId }">                     
+        
         
         <%@ include file="../fragments/footer.jspf" %>
         
@@ -190,6 +182,7 @@
 		
         <script>
             const signedInUser = '${signedInUser}';
+            const isSold = `${ marketPost.isSold }`;
         </script>
         <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
         <script src="../js/line-control.js"></script>

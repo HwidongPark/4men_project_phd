@@ -49,7 +49,7 @@
     
     
     <select id="readWorkImagesofPost" resultType="WorkImage">
-        SELECT * FROM images WHERE worksid= #{workId}
+        SELECT * FROM images WHERE worksid= #{workId} AND category = 'market'
     </select>
     
     
@@ -145,20 +145,29 @@
     </select>
     
     
+    <select id="readMyMarketPosts" resultType="Market">
+        SELECT *
+        FROM market
+        WHERE userid = #{signedInUser}
+        ORDER BY worksid DESC
+        OFFSET #{ startingPost } ROWS FETCH NEXT #{ postsPerPage } ROWS ONLY
+    </select>
+    
+    
     <delete id="deleteMarketPost">
         DELETE FROM market WHERE worksid = #{ workId }
     </delete>
     
     <delete id="deleteWorkImages">
-        DELETE FROM images WHERE worksid = #{ workId }
+        DELETE FROM images WHERE worksid = #{ workId } AND category = 'market'
     </delete>
     
     <delete id="deleteImage">
-        DELETE FROM images WHERE imgid = #{ imgId }
+        DELETE FROM images WHERE imgid = #{ imgId } AND category = 'market'
     </delete>
     
     <select id="readImage" resultType="WorkImage">
-        SELECT * FROM images WHERE imgid = #{ imgId }
+        SELECT * FROM images WHERE imgid = #{ imgId } AND category = 'market'
     </select>
     
     <update id="updateMarketPost">
