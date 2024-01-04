@@ -38,6 +38,12 @@ function textarea_maxlength(obj) {
 // addEventListener: HTML 문서가 로드되면 실행할 함수 등록.
 document.addEventListener('DOMContentLoaded', () => {
     // 이벤트 처리에 사용될 요소 찾기...
+    // 포스트 제목을 가지고 있는 요소를 찾음.
+    const notice_title = document.querySelector('input#noticeboard-view-modify-title');
+
+    // 포스트 내용을 가지고 있는 요소를 찾음.
+    const notice_content = document.querySelector('textarea#noticeboard-view-detail-content');
+    
     // 포스트 번호(id)를 가지고 있는 요소를 찾음.
     const notice_id = document.querySelector('input#notice_id').value;
     
@@ -49,6 +55,29 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // 목록 버튼 찾기.
     const btnList = document.querySelector('button#noticeboard-view-btnList');
+    
+    // 현재 글자수와 남은 글자수를 표시할 요소 생성
+    const maxCharacters = parseInt(notice_content.getAttribute("maxlength"));
+    const remainingCharsDisplay = document.createElement('div');
+    remainingCharsDisplay.id = 'remaining-chars';
+    remainingCharsDisplay.textContent = '총 ' + notice_content.value.length + '자' + ' / ' + maxCharacters + '자';
+
+    // 스타일 추가
+    remainingCharsDisplay.style.textAlign = 'right'; // 글자수 표시 요소를 오른쪽 정렬
+    remainingCharsDisplay.style.marginBottom = '17.5px'; // 글자수 표시 요소에 마진 설정
+
+    // 요소 추가
+    document.querySelector('.noticeboard-view-detail').appendChild(remainingCharsDisplay);
+
+    // notice_content에 이벤트 핸들러(리스너) 등록
+    notice_content.addEventListener('input', () => {
+        textarea_maxlength(notice_content);
+    });
+
+    // notice_title에 이벤트 핸들러(리스너) 등록
+    notice_title.addEventListener('input', () => {
+        input_maxlength(notice_title);
+    });
     
     // 목록 버튼에 클릭 이벤트 핸들러(리스너)를 등록.
     btnList.addEventListener('click', () => {
@@ -99,34 +128,4 @@ document.addEventListener('DOMContentLoaded', () => {
     
     });
 
-    // ** 이벤트 처리에 사용될 요소 찾기. **
-    // 포스트 제목을 가지고 있는 요소를 찾음.
-    const notice_title = document.getElementById('noticeboard-view-modify-title');
-
-    // 포스트 내용을 가지고 있는 요소를 찾음.
-    const notice_content = document.getElementById('noticeboard-view-detail-content');
-
-    // 현재 글자수와 남은 글자수를 표시할 요소 생성
-    const maxCharacters = parseInt(notice_content.getAttribute("maxlength"));
-    const remainingCharsDisplay = document.createElement('div');
-    remainingCharsDisplay.id = 'remaining-chars';
-    remainingCharsDisplay.textContent = '총 ' + notice_content.value.length + '자' + ' / ' + maxCharacters + '자';
-
-    // 스타일 추가
-    remainingCharsDisplay.style.textAlign = 'right'; // 글자수 표시 요소를 오른쪽 정렬
-    remainingCharsDisplay.style.marginBottom = '17.5px'; // 글자수 표시 요소에 마진 설정
-
-    // 요소 추가
-    document.querySelector('.noticeboard-view-detail').appendChild(remainingCharsDisplay);
-
-    // notice_content에 이벤트 핸들러(리스너) 등록
-    notice_content.addEventListener('input', () => {
-        textarea_maxlength(notice_content);
-    });
-
-    // notice_title에 이벤트 핸들러(리스너) 등록
-    notice_title.addEventListener('input', () => {
-        input_maxlength(notice_title);
-    });
-    
 });

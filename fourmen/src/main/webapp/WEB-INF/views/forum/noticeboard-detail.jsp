@@ -65,18 +65,17 @@
                     <label class="noticeboard-view-detail-info-label">조회</label>
                     <input id="noticeboard-view-detail-view" value="${notice.notice_view_count}" type="number" readonly="readonly">
                 </li>
-                <li>
-                    <label class="noticeboard-view-detail-info-label">댓글</label>
-                    <input id="noticeboard-view-detail-comment" value="1" type="number" readonly="readonly">
-                </li>
             </ul>
             <div class="noticeboard_md_del_btn">
-            <!-- 작성자 아이디와 로그인 사용자 아이디가 같을 때와 관리자(admin)만 버튼을 보여줌 -->
+            <!-- 작성자 아이디와 로그인 사용자 아이디가 같을 때만 수정 버튼을 보여줌 -->
             <c:if test="${notice.userid eq signedInUser}">
-                <c:url var="postModifyPage" value="/forum/noticeboard-modify">
+                <c:url var="postModifyPage" value="/forum/noticeboard-modify">  
                     <c:param name="notice_id" value="${notice.notice_id}" />
                 </c:url>
                 <a href="${postModifyPage}" id="noticeboard-detail-modify">수정</a> <!-- 수정 버튼 -->
+            </c:if>
+            <!-- 작성자 아이디와 로그인 사용자 아이디가 같을 때 그리고 관리자(admin)만 삭제 버튼을 보여줌 -->
+            <c:if test="${notice.userid eq signedInUser || user.grade eq '관리자'}">
                 <button id="noticeboard-detail-delete" type="button">삭제</button> <!-- 삭제 버튼 -->
             </c:if>
             </div>

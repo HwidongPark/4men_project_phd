@@ -226,8 +226,14 @@ public class PostController {
 	
 	@GetMapping({"/qnaboard-detail", "/qnaboard-modify"})
 	//-> /qnaboard-detail, /qnaboard-modify 2개의 요청을 처리하는 메서드!
-	public void qnaboard_detail(@RequestParam(name = "qna_id") long qna_id, Model model) {
+	public void qnaboard_detail(@RequestParam(name = "qna_id") long qna_id, Model model, HttpSession session) {
 	
+	String signedInUser = (String) session.getAttribute("signedInUser");
+   	if(!(signedInUser==null)) {
+	   	User user = adminuserservice.selectById(signedInUser);
+	   	model.addAttribute("user",user);
+	}	
+
 	// 서비스 계층의 메서드를 호출해서 뷰에 전달할 포스트 상세보기 내용을 읽음.
 	Qna qna = qnaService.detail(qna_id);
 	
@@ -328,8 +334,14 @@ public class PostController {
 	
 	@GetMapping({"/faqboard-detail", "/faqboard-modify"})
 	//-> /faqboard-detail, /faqboard-modify 2개의 요청을 처리하는 메서드!
-	public void faqboard_detail(@RequestParam(name = "faq_id") long faq_id, Model model) {
+	public void faqboard_detail(@RequestParam(name = "faq_id") long faq_id, Model model, HttpSession session) {
 	
+	String signedInUser = (String) session.getAttribute("signedInUser");
+	if(!(signedInUser==null)) {
+		User user = adminuserservice.selectById(signedInUser);
+	   	model.addAttribute("user",user);
+	}
+
 	// 서비스 계층의 메서드를 호출해서 뷰에 전달할 포스트 상세보기 내용을 읽음.
 	Faq faq = faqService.detail(faq_id);
 	
@@ -430,8 +442,14 @@ public class PostController {
 	
 	@GetMapping({"/noticeboard-detail", "/noticeboard-modify"})
 	//-> /noticeboard-detail, /noticeboard-modify 2개의 요청을 처리하는 메서드!
-	public void noticeboard_detail(@RequestParam(name = "notice_id") long notice_id, Model model) {
+	public void noticeboard_detail(@RequestParam(name = "notice_id") long notice_id, Model model, HttpSession session) {
 	
+	String signedInUser = (String) session.getAttribute("signedInUser");
+	if(!(signedInUser==null)) {
+	   	User user = adminuserservice.selectById(signedInUser);
+	   	model.addAttribute("user",user);
+	}
+	   	
 	// 서비스 계층의 메서드를 호출해서 뷰에 전달할 포스트 상세보기 내용을 읽음.
 	Notice notice = noticeService.detail(notice_id);
 	
