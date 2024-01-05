@@ -46,7 +46,7 @@
 	</select>
 	
 	<select id = "selectWorksImgByWorksid" resultType = "Artist_Works_Img">
-		select * from IMAGES where WORKSID = #{worksid} order by IMGID
+		select * from IMAGES where WORKSID = #{worksid} AND category = 'WORKS' order by IMGID
 	</select>
 	
 	<select id ="selectWorksImgByImgId" resultType = "Artist_Works_Img">

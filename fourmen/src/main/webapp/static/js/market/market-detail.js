@@ -11,6 +11,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const modalBody = document.querySelector('.modal-to-show');
     const requestDealForm = document.querySelector('#request-deal-form');
     
+    const messageTitle = document.querySelector('#market-message-title');
+    const messageContent = document.querySelector('#market-message-content');
+    const messagePriceOffered = document.querySelector('#market-message-price-offered');
+    
     // 모달 거래요청 보내기 버튼
     const btnSendRequest = document.querySelector('#market-send-request');
     // 모달 닫기 버튼
@@ -50,6 +54,18 @@ document.addEventListener('DOMContentLoaded', function() {
     let scrollbarPosition = 0;
     
 	
+    // number타입 글자 수 제한하는 함수
+    const limitNumberLength = function(maxLength, element, event) {
+
+        if (element.value.length > maxLength) {
+            element.value = element.value.slice(0,maxLength-1) + event;
+            
+             
+        }
+        
+    }
+	
+	
     // 해당 사진에 테두리로 보여주기
     const giveSlidePhotoBorder = (direction) => {
 		switch(direction) {
@@ -82,7 +98,7 @@ document.addEventListener('DOMContentLoaded', function() {
             button.disabled = isTrue;
         })
     }
-
+    
 
     // 모든 사진 다 보여주기
     const showAllPhotos = () => {
@@ -269,9 +285,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // 거래요청 보내기 버튼 클릭
     btnSendRequest.addEventListener('click', function() {
-        const messageTitle = document.querySelector('#market-message-title');
-        const messageContent = document.querySelector('#market-message-content');
-        const messagePriceOffered = document.querySelector('#market-message-price-offered');
         
         console.log(`제시가격=${messagePriceOffered.value}`);
         
@@ -309,6 +322,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
         
     });
+    
+    
+    
+    messagePriceOffered.addEventListener('input', function(event) {
+        
+        limitNumberLength(11, messagePriceOffered, event.data);
+        
+    });
+    
     
     
 }); // DOMLoaded 이벤트리스너 끝

@@ -44,8 +44,8 @@ public class MarketService {
 	private final UserDao userDao;
 	private final ArtistDao artistDao;
 	
-	private int postsPerPage = 2;
-	private int pagesShownInBar = 2;
+	private int postsPerPage = 8;
+	private int pagesShownInBar = 5;
 	
 	/**
 	 * 포스트 작성하는 메서드. market테이블과 work_images테이블에 데이터 insert
@@ -225,6 +225,23 @@ public class MarketService {
 	
 	
 	/**
+	 * 전체 인기글 개수 가져옴. 20개가 max임
+	 * @return
+	 */
+	public Integer getTotPopularNum() {
+		Integer result = marketDao.getTotPopularNum();
+		
+		log.debug("인기 게시물 총 개수= {}", result);
+		
+		if (result == null) {
+			result = 0;
+		}
+		
+		return result;
+	}
+	
+	
+	/**
 	 * 인기 포스트의 목록, 해당 포스트에 따른 사진의 목록을 읽어와서 MarketPostDto의 리스트를 리턴
 	 * @return
 	 */
@@ -269,7 +286,7 @@ public class MarketService {
 	 * @return
 	 */
 	public List<MarketPostDto> readPopularMarketPosts(int numOfPosts) {
-		log.debug("readPopularMarketPosts()");
+		log.debug("readPopularMarketPosts(numOfPosts={})", numOfPosts);
 		List<Market> marketPosts = marketDao.readPopularMarketPosts();
 		log.debug("readPopularMarketPosts(postLists={})", marketPosts);
 		log.debug("가져온 게시물 개수 = {}", marketPosts.size());

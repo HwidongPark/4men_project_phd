@@ -8,7 +8,30 @@
      const messageId = document.querySelector('#messageId');
      const messageWorkid = document.querySelector('.mymessage-workid');
      
-     console.log(`buyerId=${buyerId}`);
+     const offeredPrice = document.querySelector('#offered-price');
+     
+     // console.log(`buyerId=${buyerId}`);
+     
+     
+    // number타입 글자 수 제한하는 함수
+    const limitNumberLength = function(maxLength, element, event) {
+
+        if (element.value.length > maxLength) {
+            element.value = element.value.slice(0,maxLength-1) + event.data;
+            
+             
+        }
+        
+    }
+    
+    
+    // 제안가격 입력글자 수 제한
+    offeredPrice.addEventListener('input', function(event) {
+       
+       limitNumberLength(11, offeredPrice, event);
+        
+    });
+     
           
      // 답변하기 버튼 event listener
      btnReply.addEventListener('click', function() {

@@ -266,7 +266,15 @@
                         <c:url var="moveToPage" value="${ servletPath }">
                             <c:param name="page" value="${ pageNum }"/>
                         </c:url>
-                        <a class="page-link" href="${ moveToPage }">${ pageNum }</a>
+                        <a class="page-link" href="${ moveToPage }">
+                            <c:if test="${ pageNum == page }">
+                                <span class="pagenation-current-page">
+                            </c:if>
+                            ${ pageNum }
+                            <c:if test="${ pageNum == page }">
+                                </span>
+                            </c:if>
+                        </a>
                     </li>
                 </c:forEach>
                 

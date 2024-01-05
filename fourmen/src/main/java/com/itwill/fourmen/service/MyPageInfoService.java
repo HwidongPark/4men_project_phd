@@ -21,8 +21,8 @@ import lombok.extern.slf4j.Slf4j;
 public class MyPageInfoService {
 	
 	private final MyPageInfoDao myPageInfoDao;
-	private int postsPerPage = 2;
-	private int pagesShownInBar = 2;
+	private int postsPerPage = 8;
+	private int pagesShownInBar = 5;
 	
 	/**
 	 * 프로필 사진 업로드할 때 그냥 임시로 파일 저장 후, savedFileName을 반환

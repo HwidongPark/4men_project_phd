@@ -66,7 +66,7 @@
                 <div id="seller-description">
                      <div id="artist">
                         <input id="artist-userid" value="${ marketPost.userId }" type="hidden" />
-                        <em><a href="#" id="artist-name">${ marketPost.nickname }</a></em>
+                        <em><a href="/fourmen/artist/artist_details?userid=${ artistDto.userid }" id="artist-name">${ artistDto.nickname }</a></em>
                         <div id="artist-bio">                                                                                                               
                             ${ marketPost.artist.artist_bio_kor }
                             <br><br>
@@ -98,11 +98,11 @@
                                         <div class="modal-label">
                                             <label class="mb-1">제목</label>
                                         </div>
-                                        <input id="market-message-title" type="text" name="title" class="form-control mb-2" required/>
+                                        <input id="market-message-title" type="text" name="title" class="form-control mb-2" maxlength="50" required/>
                                         <div class="modal-label">
                                             <label class="mb-1">내용</label>
                                         </div>
-                                        <textarea id="market-message-content" class="form-control mb-2" name="content" rows="10" required></textarea>
+                                        <textarea id="market-message-content" class="form-control mb-2" name="content" rows="10" maxlength="1000" required></textarea>
                                         <div>
                                             <label class="mb-1">제시 가격</label>
                                             <input id="market-message-price-offered" type="number" name="price_offered" value="${ marketPost.price }" class="form-control" required/>
@@ -157,7 +157,7 @@
             </div>
         </section>
         <!-- 수정 삭제 버튼 -->
-        <c:if test="${ signedInUser == marketPost.userId }">
+        <c:if test="${ signedInUser == marketPost.userId && marketPost.isSold != 'Y' }">
             <div class="container text-right my-3 d-grid gap-2 d-md-flex justify-content-md-end market-btn-container">
                 <form action="/fourmen/market/delete" method="post">
                     <input id="workid" name="workid" class="d-none" type="text" value="${ marketPost.workId }">                     

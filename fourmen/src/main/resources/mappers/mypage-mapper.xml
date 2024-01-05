@@ -70,8 +70,12 @@
         VALUES (#{sender}, #{recipient}, #{workId}, #{title}, #{content}, #{priceOffered}, #{price}, #{replyTo})
     </insert>
     
-    <update id="updateMessageForDeletedUser">
+    <update id="updateMessageForDeletedUserSender">
         UPDATE messages SET sender = '탈퇴한 회원' WHERE sender = #{signedInUser}
+    </update>
+    
+    <update id="updateMessageForDeletedUserRecipient">
+        UPDATE messages SET recipient = '탈퇴한 회원' WHERE recipient = #{signedInUser}
     </update>
     
     

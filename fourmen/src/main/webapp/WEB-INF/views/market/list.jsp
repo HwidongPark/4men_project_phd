@@ -137,10 +137,10 @@
                                     </c:forEach>
                                     
                                     <c:if test="${ isWishListed }">
-                                        <i class="fa-solid fa-heart fa-sm market-filled-heart"></i>                             
+                                        <i class="fa-solid fa-heart  market-filled-heart"></i>                             
                                     </c:if>
                                     <c:if test="${ !isWishListed }">
-                                        <i class="fa-regular fa-heart fa-sm market-empty-heart"></i> 
+                                        <i class="fa-regular fa-heart market-empty-heart"></i>  
                                     </c:if>
                                     ${ marketPost.likes }
                                 </div>                                
@@ -211,7 +211,15 @@
                             <c:param name="minPrice" value="${ param.minPrice }" />
                             <c:param name="maxPrice" value="${ param.maxPrice }"/>
                         </c:url>
-                        <a class="page-link" href="${ moveToPage }">${ pageNum }</a>
+                        <a class="page-link" href="${ moveToPage }">
+                            <c:if test="${ pageNum == page }">
+                                <span class="pagenation-current-page">
+                            </c:if>
+                            ${ pageNum }
+                            <c:if test="${ pageNum == page }">
+                                </span>
+                            </c:if>
+                        </a>
                     </li>
                 </c:forEach>
                 
