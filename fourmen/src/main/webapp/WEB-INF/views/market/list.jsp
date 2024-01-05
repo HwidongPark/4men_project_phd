@@ -7,8 +7,21 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Fourmen</title>
-
+<title>Artists Archive</title>
+ <style>
+@font-face {
+    font-family: 'NEXON Lv1 Gothic OTF';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+.gfont{
+	font-family: 'NEXON Lv1 Gothic OTF';
+}
+.marketname{
+	color: black;
+}
+</style>
 
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
@@ -26,8 +39,9 @@
     <link rel="stylesheet" href="/fourmen/css/underheader.css">
     <link rel="stylesheet" href="/fourmen/css/pagenation.css">
     
-    <script src="https://kit.fontawesome.com/5b5cfeea7f.js" crossorigin="anonymous"></script> 
+    
 
+<script src="https://kit.fontawesome.com/5b5cfeea7f.js" crossorigin="anonymous"></script> 
 </head>
 
 <body>
@@ -37,12 +51,12 @@
     <div id="underheader-div">
         <div class="container" id="underheadrcontainer">
             <h2 class="commondesign">
-                마켓
+                MARKET
             </h2>
         </div>
     </div>
     
-    <section role="search" class="search-container">
+    <section role="search" class="search-container gfont">
         <c:url var="searchPage" value="/market/search"/>
         <form id="search-form" action="${ searchPage }">
             <div class="search-detail-container">
@@ -78,7 +92,7 @@
 
     <main>
         <!-- 글 작성 버튼 -->
-        <div class="market-create-btn-container">
+        <div class="market-create-btn-container gfont">
             <c:url var="createMarketPost" value="/market/create" />
             <c:if test="${ usergrade == '아티스트' }">
                 <button class="btn btn-outline-secondary">글 작성</button>
@@ -87,12 +101,12 @@
         
         <!-- 게시판 -->
         <div class="list-item-category-title">
-            <h2>
+            <h2 class="bigname">
                 ${ pageTitle }
             </h2>
         </div>
 
-        <div class="list-container">
+        <div class="list-container gfont">
             <!-- JSTL로 포스트 적용... -->
             <c:if test="${ not empty marketPosts }">
                 <c:forEach var="marketPost" items="${ marketPosts }">
@@ -113,7 +127,7 @@
                             <!-- 제목, 조회수, 좋아요 포함 -->
                             <div class="market-item-title my-2">
                                 <div>
-                                    <a href="${ marketPostLink }"><b>${ marketPost.title }</b></a>
+                                    <a class="marketname" href="${ marketPostLink }"><b>${ marketPost.title }</b></a>
                                 </div>
                             </div>
 
@@ -160,8 +174,8 @@
     
     
     <!-- 게시판 글 페이지네이션(pagination)-->
-    <c:if test="${ pageTitle ne '인기 장터 목록' }">
-    <div>
+    <c:if test="${ pageTitle ne 'Hot Items' }">
+    <div class="gfont">
         <nav aria-label="Page navigation">            
             <ul class="pagination">
                 <!-- 이전, 처음 페이지 -->

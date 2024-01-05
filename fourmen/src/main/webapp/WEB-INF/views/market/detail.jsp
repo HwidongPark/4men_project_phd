@@ -7,7 +7,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>Fourmen</title>
+		<title>Artists Archive</title>
 		
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" 
 		integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
@@ -18,11 +18,22 @@
          <link rel="stylesheet" href="../css/header.css">
          <link rel="stylesheet" href="../css/market-detail.css">
          <link rel="stylesheet" href="../css/footer.css">
-		
+		<style>
+		@font-face {
+    font-family: 'NEXON Lv1 Gothic OTF';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+.gfont {
+	font-family: 'NEXON Lv1 Gothic OTF';
+	margin-top: 50px;
+}
+		</style>
 	</head>
 	<body>
 		<%@ include file="../fragments/navigation.jspf" %>
-		
+		<div class="gfont">
         <section class="product-container">
             
             <!-- JSTL로 사진 대체 -->
@@ -116,7 +127,7 @@
                                     <button type="button" id="market-request-deal-close" class="btn btn-secondary" data-bs-dismiss="modal">
                                         닫기
                                     </button>
-                                    <button id="market-send-request" type="button" class="btn btn-primary">
+                                    <button id="market-send-request" type="button" class="btn btn-dark">
                                         거래 요청
                                     </button>
                                 </div>
@@ -161,18 +172,18 @@
             <div class="container text-right my-3 d-grid gap-2 d-md-flex justify-content-md-end market-btn-container">
                 <form action="/fourmen/market/delete" method="post">
                     <input id="workid" name="workid" class="d-none" type="text" value="${ marketPost.workId }">                     
-                    <input type="submit" value="삭제" id="market-btn-delete" class="btn btn-outline-danger mr-2"/>
+                    <input type="submit" value="삭제" id="market-btn-delete" class="btn btn-outline-secondary mr-2"/>
                 </form>
                 
                 <form action="/fourmen/market/update" method="post">
                     <input id="workid" name="workid" class="d-none" type="text" value="${ marketPost.workId }">
-                    <button id="market-btn-update" class="btn btn-outline-primary">수정</button>
+                    <button id="market-btn-update" class="btn btn-dark">수정</button>
                 </form>
             </div>
         </c:if>
         <!-- JavaScript에서 사용하기 위해서.. -->
         <input id="workid" name="workid" class="d-none" type="text" value="${ marketPost.workId }">                     
-        
+        </div>
         
         <%@ include file="../fragments/footer.jspf" %>
         

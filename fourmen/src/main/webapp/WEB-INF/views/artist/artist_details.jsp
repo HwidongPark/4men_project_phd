@@ -5,7 +5,7 @@
 <html>
 <head>
 <title>FOURMEN</title>
-<meta charset="UTF-8">
+<meta charset="Artists Archive">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -17,15 +17,26 @@
 
 <style>
 @font-face {
-    font-family: 'Pretendard-Regular';
-    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
-    font-weight: 400;
+    font-family: 'EF_Rebecca';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-EF@1.0/EF_Rebecca.woff2') format('woff2');
+    font-weight: normal;
     font-style: normal;
 }
-div#details {
-	
-	font-family: 'Pretendard-Regular';
+
+.commondesign{
+	font-family: 'EF_Rebecca';
 }
+@font-face {
+    font-family: 'NEXON Lv1 Gothic OTF';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.gfont{
+font-family: 'NEXON Lv1 Gothic OTF';
+}
+
 
 
 @media (max-width: 1200px) {
@@ -37,6 +48,10 @@ div#details {
         flex: 0 0 100%;
         max-width: 100%;
     }
+}
+.worksnum{
+	text-decoration: none;
+	color: black;
 }
 
 </style>
@@ -56,7 +71,7 @@ div#details {
     </div>
 
 
-
+	<div class="gfont">
 	<div id="details" class="my-5 container-fluid w-75">
 
 		<!-- 페이지 상단 아티스트 사진 및 소개 -->
@@ -98,7 +113,7 @@ div#details {
 								<c:url var="worksPage" value="/artist/artist_works">
 									<c:param name="worksid" value="${w.worksid}" />
 								</c:url>
-								<a href="${worksPage}">${w.title}</a>
+								<a class="worksnum" href="${worksPage}">${w.title}</a>
 							</td>
 							<td>${w.getFormattedCreatedDate()}</td>
 						</tr>
@@ -136,7 +151,7 @@ div#details {
 		</div>
 
 	</div>
-
+	</div>
 	<%@ include file="../fragments/footer.jspf"%>
 
 	<script
@@ -146,5 +161,6 @@ div#details {
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>		
 	<script src = "../js/artist-delete.js"></script>
 	<script src = "../js/artistadmin-delete.js"></script>	
+	<script src="../js/header.js"></script>
 </body>
 </html>

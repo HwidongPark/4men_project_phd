@@ -16,6 +16,16 @@
 .commondesign{
 	font-family: 'EF_Rebecca';
 }
+
+@font-face {
+    font-family: 'NEXON Lv1 Gothic OTF';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+.gfont{
+	font-family: 'NEXON Lv1 Gothic OTF';
+}
 .btndelete{
     font-size: 13px;
     margin: 10px;
@@ -25,6 +35,9 @@
     	width: 100%;
 
     }
+ .marketname{
+	color: black;
+}
 </style>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
@@ -52,7 +65,7 @@
 
 <%@ include file="fragments/navigation.jspf"%>
 <body>
-			 
+	<div class="gfont"> 
 	<!-- 웹페이지 상단 헤더 아래 부분 -->
     <div id="underheader-div">
         <div class="container" id="underheadrcontainer">
@@ -147,7 +160,7 @@
                                 <div>
                                 <c:url var="marketadmindelete" value="/marketadmin/delete"/>
                                 <form action="${marketadmindelete}" method="get" id="market-admin-delete">
-                                    <a href="${ marketPostLink }"><b>${ popularMarketPost.title }</b></a>
+                                    <a class="marketname" href="${ marketPostLink }"><b>${ popularMarketPost.title }</b></a>
                                    </form>
                                 </div>
                             </div>
@@ -274,7 +287,7 @@
             </ul>
         </nav>
     </div>
-    
+    </div>	
     
 
     <%@ include file="fragments/footer.jspf"%>

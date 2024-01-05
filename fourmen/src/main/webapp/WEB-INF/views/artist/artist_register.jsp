@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>FOURMEN</title>
+<title>Artists Archive</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -15,17 +15,15 @@
 <link rel="stylesheet" href="../css/footer.css">
 
 <style>
-@font-face {
-	font-family: 'Pretendard-Regular';
-	src:
-		url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff')
-		format('woff');
-	font-weight: 400;
-	font-style: normal;
-}
 
+@font-face {
+    font-family: 'NEXON Lv1 Gothic OTF';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 div#modify {
-	font-family: 'Pretendard-Regular';
+	font-family: 'NEXON Lv1 Gothic OTF';
 }
 </style>
 
@@ -78,7 +76,7 @@ div#modify {
 					</div>
 
 					<div class="my-2">
-						<input class="form-control btn btn-outline-primary" type="submit"
+						<input class="form-control btn btn-outline-dark" type="submit"
 							id="btnUpdate" value="등록" />
 					</div>
 
@@ -99,5 +97,6 @@ div#modify {
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
 		crossorigin="anonymous"></script>
+		<script src="../js/header.js"></script>
 </body>
 </html>

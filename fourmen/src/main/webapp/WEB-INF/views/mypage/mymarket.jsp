@@ -6,7 +6,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Fourmen</title>
+        <title>My page</title>
         
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" 
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
@@ -22,7 +22,11 @@
         <link rel="stylesheet" href="../css/pagenation.css">    
         <link rel="stylesheet" href="../css/forum-kategorie-area.css">
         <link rel="stylesheet" href="/fourmen/css/market-board.css">
-        
+       <style>
+       .marketname{
+	color: black;
+}
+       </style> 
         
     </head>
     <body>
@@ -36,7 +40,7 @@
         </div>
     </div>
     
-    <main>
+    <main class="gfont">
         <!-- 게시판 카테고리(자유게시판, 후기게시판, 질문게시판) -->
         <section role="kategorie" class="kategorie" style="border-bottom: 1.5px solid #D8D8D8;">
             <div class="forum-kategorie">
@@ -50,9 +54,9 @@
                     <li class="forum-kategorie-board">
                         <b><a href="/fourmen/mypage/mymarket">마켓 작성글 보기</a></b>
                     </li>
-                    <li class="forum-kategorie-board">
+                   <!--   <li class="forum-kategorie-board">
                         <a href="../exhibitionadmin">게시판 작성글 보기</a>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
         </section>
@@ -79,7 +83,7 @@
                             <!-- 제목, 조회수, 좋아요 포함 -->
                             <div class="market-item-title my-2">
                                 <div>
-                                    <a href="${ marketPostLink }"><b>${ marketPost.title }</b></a>
+                                    <a class="marketname" href="${ marketPostLink }"><b>${ marketPost.title }</b></a>
                                 </div>
                             </div>
 

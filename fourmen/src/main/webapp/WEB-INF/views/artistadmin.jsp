@@ -29,14 +29,17 @@
 	font-family: 'EF_Rebecca';
 }
 @font-face {
-    font-family: 'Pretendard-Regular';
-    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
-    font-weight: 400;
+    font-family: 'NEXON Lv1 Gothic OTF';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff') format('woff');
+    font-weight: normal;
     font-style: normal;
+}
+.gfont{
+	font-family: 'NEXON Lv1 Gothic OTF';
 }
 
 div#works{
-	font-family: 'Pretendart-Regular';
+	font-family: 'NEXON Lv1 Gothic OTF';
 }
 
 div#artist_container {
@@ -106,7 +109,7 @@ div#artist {
 			  <!-- 게시판 카테고리(자유게시판, 후기게시판, 질문게시판) -->
     <section role="kategorie" class="kategorie" style="border-bottom: 1.5px solid #D8D8D8;">
         <div class="forum-kategorie">
-            <ul class="forum-kategorie-board-lists">
+            <ul class="forum-kategorie-board-lists gfont">
                 <li class="forum-kategorie-board">
                     <a href="admin">회원조회</a>
                 </li>
@@ -157,5 +160,6 @@ div#artist {
 		crossorigin="anonymous"></script>
 		
 		<script src='js/main.js'></script>
+		<script src="/fourmen/js/header.js"></script>
 </body>
 </html>

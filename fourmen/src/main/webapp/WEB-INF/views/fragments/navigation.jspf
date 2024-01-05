@@ -15,9 +15,20 @@
 .fontnav{
 	font-family: 'EF_Rebecca';
 }
+
+@font-face {
+    font-family: 'NEXON Lv1 Gothic OTF';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+.gfont{
+	font-family: 'NEXON Lv1 Gothic OTF';
+}
 </style>
 
-<div>
+
+<div class="gfont">
     <nav>
         <ul class="nav-btn-users">
         	<c:if test="${empty signedInUser}">
@@ -53,7 +64,7 @@
 
 
 <!-- 사이드바 -->
-<aside id="my-page-slide-outer-container" class="my-page-close">
+<aside id="my-page-slide-outer-container" class="my-page-close gfont">
     <div id="my-page-username">
         ${ sessionScope.signedInUser } 님,
     </div>
@@ -80,6 +91,7 @@
         </li>
     </ul>
 </aside>
+
 
 <div class="fontnav">
 <nav class="header-nav">

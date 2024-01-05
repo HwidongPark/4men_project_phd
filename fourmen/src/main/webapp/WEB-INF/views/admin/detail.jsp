@@ -143,7 +143,7 @@
 			
             </div>
             <div class="card img-card">
-            	<img src="${user.profile_s_img}" id="profile_s_img" class="card-img" alt="...">
+            	<img src="../image/${user.profile_s_img}" id="profile_s_img" class="card-img" alt="...">
             </div>
             
         </div>

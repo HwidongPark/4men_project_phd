@@ -4,7 +4,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>Fourmen</title>
+		<title>My page</title>
 		
 		
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
@@ -40,7 +40,7 @@
     </div>
     
     <!-- main 시작점 -->
-    <main>
+    <main class="gfont">
     
     
         <!-- 게시글 검색창 -->
