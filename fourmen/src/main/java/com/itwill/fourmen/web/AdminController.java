@@ -31,6 +31,7 @@ import com.itwill.fourmen.dto.market.PagingDto;
 import com.itwill.fourmen.dto.post.PostListItemDto;
 import com.itwill.fourmen.repository.AdminUserDao;
 import com.itwill.fourmen.service.ArtistService;
+import com.itwill.fourmen.service.MarketService;
 import com.itwill.fourmen.service.adminUserService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -46,6 +47,7 @@ public class AdminController {
 	private final adminUserService adminuserservice;
 	
 	private final ArtistService artistService;
+	private final MarketService marketService;
 	
 	
 	@GetMapping("/admin/detail")
@@ -111,53 +113,95 @@ public class AdminController {
 		 return "redirect:/exhibitionadmin";
 	 };
 	 
+//	 @GetMapping("/marketadmin")
+//		public void market(@RequestParam(name = "page", required = false, defaultValue = "1") int page, Model model, HttpServletRequest request, HttpSession session) {
+//			log.debug("market(page={})", page);
+//			
+//			int numOfPopularMarketPosts = 0;	// 인기글 개수 초기화.. 최대 8개로 제한할거임
+//			
+//			// 해당 페이지의 포스트들만 가져옴
+//			List<MarketPostDto> pagedMarketPosts = adminuserservice.readPagedMarketPosts(page);
+//			log.debug("pagedMarketPosts={}", pagedMarketPosts);
+//			
+//			PagingDto pagingDto = adminuserservice.paging(page);	// 페이지처리할 dto받아옴
+//			log.debug("pagingDto={}", pagingDto);
+//			
+//			int totNumPosts = adminuserservice.countTotNumber();	// 전체 포스트 개수 가져옴
+//			// 인기글 8개 읽어옴.. 예는 전체 포스트에서 가져온거 사용,,
+//			if (totNumPosts > 0) {
+//				numOfPopularMarketPosts = totNumPosts;
+//			} else {
+//				numOfPopularMarketPosts = 0;
+//			}
+//			List<MarketPostDto> popularMarketPosts = adminuserservice.readPopularMarketPosts(numOfPopularMarketPosts);	// 인기포스트 가져옴(서비스호출)
+//			log.debug("popularMarketPosts={}", popularMarketPosts);
+//			
+//			String sDirectory = request.getServletContext().getRealPath("/static/uploads");
+//			log.debug("sDirectory={}", sDirectory);
+//			
+//			String servletPath = request.getServletPath();
+//			log.debug("servletPath={}", servletPath);
+//			
+//			// 로그인한 상태라면 좋아요한 게시글 목록 읽어옴
+//			String signedInUser = (String) session.getAttribute("signedInUser");		
+//			log.debug("마켓리스트갈 때 로그인된 유저={}", signedInUser);
+//			if (signedInUser != null) {
+//				List<WishList> userWishList = adminuserservice.readWishList(signedInUser);
+//				log.debug("userWishList={}", userWishList);
+//				model.addAttribute("userWishList", userWishList);
+//			}
+//			// market의 게시글 리스트를 뷰로 전달
+//			// TODO:  변수이름 다시 생각.. 그냥 가도 되기는 함.
+//			model.addAttribute("marketPosts", pagedMarketPosts);	// 최신글들을 전달..
+//			model.addAttribute("pagingDto", pagingDto);	// 아래 페이징 처리할 dto전달
+//			// TODO: 인기글 8개 전달
+//			model.addAttribute("page", page);
+//			model.addAttribute("popularMarketPosts", popularMarketPosts);
+//			model.addAttribute("sDirectory", sDirectory);
+//			model.addAttribute("fileSeparator", File.separator);
+//			model.addAttribute("servletPath", servletPath);
+//			
+//					
+//	 }
+	 
+	 
 	 @GetMapping("/marketadmin")
 		public void market(@RequestParam(name = "page", required = false, defaultValue = "1") int page, Model model, HttpServletRequest request, HttpSession session) {
 			log.debug("market(page={})", page);
 			
-			int numOfPopularMarketPosts = 0;	// 인기글 개수 초기화.. 최대 8개로 제한할거임
-			
 			// 해당 페이지의 포스트들만 가져옴
-			List<MarketPostDto> pagedMarketPosts = adminuserservice.readPagedMarketPosts(page);
+			List<MarketPostDto> pagedMarketPosts = marketService.readPagedMarketPosts(page);
 			log.debug("pagedMarketPosts={}", pagedMarketPosts);
 			
-			PagingDto pagingDto = adminuserservice.paging(page);	// 페이지처리할 dto받아옴
+			PagingDto pagingDto = marketService.paging(page);	// 페이지처리할 dto받아옴
 			log.debug("pagingDto={}", pagingDto);
-			
-			int totNumPosts = adminuserservice.countTotNumber();	// 전체 포스트 개수 가져옴
-			// 인기글 8개 읽어옴.. 예는 전체 포스트에서 가져온거 사용,,
-			if (totNumPosts > 0) {
-				numOfPopularMarketPosts = totNumPosts;
-			} else {
-				numOfPopularMarketPosts = 0;
-			}
-			List<MarketPostDto> popularMarketPosts = adminuserservice.readPopularMarketPosts(numOfPopularMarketPosts);	// 인기포스트 가져옴(서비스호출)
-			log.debug("popularMarketPosts={}", popularMarketPosts);
 			
 			String sDirectory = request.getServletContext().getRealPath("/static/uploads");
 			log.debug("sDirectory={}", sDirectory);
 			
+			// recent게시판의 요청주소를 저장
 			String servletPath = request.getServletPath();
-			log.debug("servletPath={}", servletPath);
+			
 			
 			// 로그인한 상태라면 좋아요한 게시글 목록 읽어옴
-			String signedInUser = (String) session.getAttribute("signedInUser");		
-			log.debug("마켓리스트갈 때 로그인된 유저={}", signedInUser);
+			String signedInUser = (String) session.getAttribute("signedInUser");
+			log.debug("최신리스트 갈 때 로그인된 유저={}", signedInUser);
+			
 			if (signedInUser != null) {
-				List<WishList> userWishList = adminuserservice.readWishList(signedInUser);
+				List<WishList> userWishList = marketService.readWishList(signedInUser);
 				log.debug("userWishList={}", userWishList);
 				model.addAttribute("userWishList", userWishList);
 			}
+			
+			
+			
 			// market의 게시글 리스트를 뷰로 전달
-			// TODO:  변수이름 다시 생각.. 그냥 가도 되기는 함.
-			model.addAttribute("marketPosts", pagedMarketPosts);	// 최신글들을 전달..
-			model.addAttribute("pagingDto", pagingDto);	// 아래 페이징 처리할 dto전달
-			// TODO: 인기글 8개 전달
-			model.addAttribute("page", page);
-			model.addAttribute("popularMarketPosts", popularMarketPosts);
+			model.addAttribute("marketPosts", pagedMarketPosts);
 			model.addAttribute("sDirectory", sDirectory);
 			model.addAttribute("fileSeparator", File.separator);
+			model.addAttribute("pagingDto", pagingDto);
 			model.addAttribute("servletPath", servletPath);
+			model.addAttribute("page", page);
 			
 					
 	 }
@@ -177,7 +221,7 @@ public String search(@RequestParam(name = "page", required = false, defaultValue
 	log.debug("search(dto={})", dto);
 	dto.setPage(page);
 	log.debug("page={}", page);
-	log.debug("search(dto={})", dto);	// TODO: 페이지 처리 저절로 입혀지나 안되나 실험
+	log.debug("search(dto={})", dto);
 	
 	List<MarketPostDto> pagedMarketPosts = adminuserservice.pagedSearchPosts(dto);
 	log.debug("pagedSearchPosts={}", pagedMarketPosts);
@@ -189,6 +233,7 @@ public String search(@RequestParam(name = "page", required = false, defaultValue
 	String sDirectory = request.getServletContext().getRealPath("/static/uploads");
 	String servletPath = request.getServletPath();
 	
+	model.addAttribute("page", page);
 	model.addAttribute("marketPosts", pagedMarketPosts);
 	model.addAttribute("sDirectory", sDirectory);
 	model.addAttribute("fileSeparator", File.separator);

@@ -114,7 +114,7 @@ div#artist {
                     <a href="admin">회원조회</a>
                 </li>
                 <li class="forum-kategorie-board">
-                    <a href="artistadmin">아티스트 관리</a>
+                    <a href="artistadmin" class="forum-kategori-current-selected">아티스트 관리</a>
                 </li>
                 <li class="forum-kategorie-board">
                     <a href="marketadmin">마켓 관리</a>

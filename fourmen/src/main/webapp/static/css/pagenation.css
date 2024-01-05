@@ -25,7 +25,9 @@
 }
 
 .pagenation-current-page {
-    color: #495057;
+    /*color: #495057;*/
+    color: black;
+    font-size: 1.05rem;
 }
 
 .pagination .page-link:focus,

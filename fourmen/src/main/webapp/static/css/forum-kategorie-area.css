@@ -67,3 +67,9 @@
     padding-top: 3rem;
     padding-bottom: 1rem;
 }
+
+.forum-kategori-current-selected {
+    font-size: 1.2rem;
+    color: black;
+    font-weight: bold;
+}

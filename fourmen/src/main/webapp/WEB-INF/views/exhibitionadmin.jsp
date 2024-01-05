@@ -66,7 +66,7 @@
                     <a href="marketadmin">마켓 관리</a>
                 </li>
                 <li class="forum-kategorie-board">
-                    <a href="exhibitionadmin">전시회 관리</a>
+                    <a href="exhibitionadmin" class="forum-kategori-current-selected">전시회 관리</a>
                 </li>
             </ul>
         </div>
@@ -167,9 +167,25 @@
                     </li>
 
                     <!-- 필요한 만큼만 페이지 보여줌 -->
-                    <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+                    <!--<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
                         <li class="page-item">
                             <a class="page-link" href="exhibitionadmin${pageMaker.makeSearch(idx)}">${idx}</a>
+                        </li>
+                    </c:forEach>-->
+                    
+                    <!-- 필요한 만큼만 페이지 보여줌 -->
+                    <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+                        <li class="page-item">
+                            <c:url var="toPage" value="exhibitionadmin${pageMaker.makeSearch(idx)}"/>
+                            <a class="page-link" href="${toPage}">
+                                <c:if test="${page eq idx}">
+                                    <span class="pagenation-current-page">
+                                </c:if>
+                                ${idx}
+                                <c:if test="${page eq idx}">
+                                    </span>
+                                </c:if>
+                            </a>
                         </li>
                     </c:forEach>
                     
