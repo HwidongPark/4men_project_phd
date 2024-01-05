@@ -38,7 +38,7 @@
     <div id="underheader-div">
         <div class="container" id="underheadrcontainer">
             <h2 class="commondesign">
-                자유게시판
+                FREEBOARD
             </h2>
         </div>
     </div>

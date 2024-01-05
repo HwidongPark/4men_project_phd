@@ -48,10 +48,10 @@
         <div class="forum-kategorie">
             <ul class="forum-kategorie-board-lists">
                 <li class="forum-kategorie-board">
-                    <a href="freeboard" class="category-button">자유게시판</a>
+                    <a href="freeboard" class="category-button">FREEBOARD</a>
                 </li>
                 <li class="forum-kategorie-board">
-                    <a href="qnaboard" class="category-button">QUALIFY</a>
+                    <a href="qnaboard" class="category-button forum-kategori-current-selected">QUALIFY</a>
                 </li>
                 <li class="forum-kategorie-board">
                     <a href="faqboard" class="category-button">FAQ</a>
@@ -202,7 +202,15 @@
                             <c:param name="keyword" value="${ param.keyword }"/>
                         </c:url>
                         <li class="page-item">
-                            <a class="page-link" href="${ toPage }">${idx}</a>
+                            <a class="page-link" href="${ toPage }">
+                                <c:if test="${ page == idx }">
+                                    <span class="pagenation-current-page">
+                                </c:if>
+                                ${idx}
+                                <c:if test="${ page == idx }">
+                                    <span class="pagenation-current-page">
+                                </c:if>
+                            </a>
                         </li>
                     </c:forEach>
                     

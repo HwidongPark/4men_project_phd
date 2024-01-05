@@ -49,7 +49,7 @@
             <div class="forum-kategorie">
                 <ul class="forum-kategorie-board-lists">
                     <li class="forum-kategorie-board"><a
-                        href="freeboard" class="category-button">자유게시판</a>
+                        href="freeboard" class="category-button forum-kategori-current-selected">FREEBOARD</a>
                     </li>
                     <li class="forum-kategorie-board"><a
                         href="qnaboard" class="category-button">QUALIFY</a>
@@ -188,9 +188,25 @@
                     </li>
 
                     <!-- 필요한 만큼만 페이지 보여줌 -->
-                    <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+                    <!--<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
                         <li class="page-item">
                             <a class="page-link" href="freeboard${pageMaker.makeSearchAdminUser(idx)}">${idx}</a>
+                        </li>
+                    </c:forEach>->
+                    
+                    <!-- 필요한 만큼만 페이지 보여줌 -->
+                    <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+                        <li class="page-item">
+                            <c:url var="toPage" value="freeboard${pageMaker.makeSearchAdminUser(idx)}"/>
+                            <a class="page-link" href="${toPage}">
+                                <c:if test="${page eq idx}">
+                                    <span class="pagenation-current-page">
+                                </c:if>
+                                ${idx}
+                                <c:if test="${page eq idx}">
+                                    </span>
+                                </c:if>
+                            </a>
                         </li>
                     </c:forEach>
                     

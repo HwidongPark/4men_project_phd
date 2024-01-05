@@ -47,7 +47,7 @@
         <div class="forum-kategorie">
             <ul class="forum-kategorie-board-lists">
                 <li class="forum-kategorie-board">
-                    <a href="freeboard" class="category-button" onclick="change_category_style(event)">자유게시판</a>
+                    <a href="freeboard" class="category-button" onclick="change_category_style(event)">FREEBOARD</a>
                 </li>
                 <li class="forum-kategorie-board">
                     <a href="qnaboard" class="category-button" onclick="change_category_style(event)">QUALIFY</a>
@@ -56,7 +56,7 @@
                     <a href="faqboard" class="category-button" onclick="change_category_style(event)">FAQ</a>
                 </li>
                 <li class="forum-kategorie-board">
-                    <a href="noticeboard" class="category-button" onclick="change_category_style(event)">NOTICE</a>
+                    <a href="noticeboard" class="category-button forum-kategori-current-selected" onclick="change_category_style(event)">NOTICE</a>
                 </li>
             </ul>
         </div>

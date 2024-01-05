@@ -59,7 +59,7 @@ font-family: 'NEXON Lv1 Gothic OTF';
         <div class="forum-kategorie">
             <ul class="forum-kategorie-board-lists">
                 <li class="forum-kategorie-board">
-                    <a href="admin">회원조회</a>
+                    <a href="admin" class="forum-kategori-current-selected">회원조회</a>
                 </li>
                 <li class="forum-kategorie-board">
                     <a href="artistadmin">아티스트 관리</a>
@@ -179,9 +179,25 @@ font-family: 'NEXON Lv1 Gothic OTF';
                     </li>
 
                     <!-- 필요한 만큼만 페이지 보여줌 -->
-                    <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+                    <!--<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
                         <li class="page-item">
                             <a class="page-link" href="admin${pageMaker.makeSearchAdminUser(idx)}">${idx}</a>
+                        </li>
+                    </c:forEach>-->
+                    
+                    <!-- 필요한 만큼만 페이지 보여줌 -->
+                    <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+                        <li class="page-item">
+                            <c:url var="toPage" value="admin${pageMaker.makeSearchAdminUser(idx)}"/>
+                            <a class="page-link" href="${toPage}">
+                                <c:if test="${page eq idx}">
+                                    <span class="pagenation-current-page">
+                                </c:if>
+                                ${idx}
+                                <c:if test="${page eq idx}">
+                                    </span>
+                                </c:if>
+                            </a>
                         </li>
                     </c:forEach>
                     

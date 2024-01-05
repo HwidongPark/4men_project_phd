@@ -18,6 +18,9 @@
     	width: 100%;
 
     }
+    .titlecolor{
+    color: black;
+    }
 </style>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
@@ -57,7 +60,7 @@
 		
 		
 			  <!-- 게시판 카테고리(자유게시판, 후기게시판, 질문게시판) -->
-    <section role="kategorie" class="kategorie" style="border-bottom: 1.5px solid #D8D8D8;">
+    <section role="kategorie" class="kategorie gfont" style="border-bottom: 1.5px solid #D8D8D8;">
         <div class="forum-kategorie">
             <ul class="forum-kategorie-board-lists">
                 <li class="forum-kategorie-board">
@@ -72,15 +75,13 @@
                 <li class="forum-kategorie-board">
                     <a href="../exhibitionadmin">전시회 관리</a>
                 </li>
-                   <li class="forum-kategorie-board">
-                    <a href="../forumadmin">게시판 관리</a>
-                </li>
+         
             </ul>
         </div>
     </section>
 	
 	
-	    <section role="search" class="search-container">
+	    <section role="search" class="search-container gfont">
         <c:url var="searchPage" value="/marketadmin/search"/>
         <form id="search-form" action="${ searchPage }">
             <div class="search-detail-container">
@@ -120,7 +121,7 @@
         
        
 
-        <div class="list-container">
+        <div class="list-container gfont">
             <!-- JSTL로 포스트 적용... -->
             <c:if test="${ not empty marketPosts }">
                 <c:forEach var="marketPost" items="${ marketPosts }">
@@ -143,7 +144,7 @@
                                 <div>
                                     <c:url var="marketadmindelete" value="/marketadmin/delete"/>
                                 	<form action="${marketadmindelete}" method="get" id="market-admin-delete">
-                                    <a href="${ marketPostLink }"><b>${ marketPost.title }</b></a>
+                                    <a class="titlecolor" href="${ marketPostLink }"><b>${ marketPost.title }</b></a>
                                     </form>
                                 </div>
                             </div>
@@ -185,7 +186,7 @@
                                     <b>거래 완료</b>
                                 </div>
                             </c:if>
-                            <div id=btnDiv><button id="btndelete" data-exname="${ marketPost.title }" class="btndelete btn btn-danger">삭제</button></div>
+                            <div id=btnDiv><button id="btndelete" data-exname="${ marketPost.title }" class="btndelete btn btn-outline-dark">삭제</button></div>
                         </div>
                     </div>
                 </c:forEach>
@@ -199,76 +200,100 @@
     </main>
     
     
-    <!-- 게시판 글 페이지네이션(pagination)-->
-    <div>
-        <nav aria-label="Page navigation">            
-            <ul class="pagination">
-                <!-- 이전, 처음 페이지 -->
-                <li class="page-item">
-                    <c:url var="firstPage" value="${ servletPath }" />
-                    <a class="page-link-img" href="${ firstPage }" aria-label="first page">
-                        <img id="pagination-img" alt="first page" src="/fourmen/pagination/pagination01.png">
-                    </a>
-                </li>
-                <c:choose>
-                    <c:when  test="${ page le 1 }">
-                        <li class="page-item">
-                            <span class="page-link-img" aria-label="previous">
-                                <img id="pagination-img" alt="previous page" src="/fourmen/pagination/pagination02.png">
-                            </span>
-                        </li>
-                    </c:when>
-                    <c:otherwise>
-                        <li class="page-item">
-                            <c:url var="prevPage" value="${ servletPath }">
-                                <c:param name="page" value="${ page - 1 }"/>
-                            </c:url>
-                            <a class="page-link-img" href="${prevPage }" aria-label="previous">
-                                <img id="pagination-img" alt="previous page" src="/fourmen/pagination/pagination02.png">
-                            </a>
-                        </li>
-                    </c:otherwise>
-                </c:choose>
-                
-                <!-- 필요한만큼만 페이지 보여줌 -->
-                <c:forEach var="pageNum" begin="${ pagingDto.startPage }" end="${ pagingDto.endPage }" step="1">
+        <!-- 게시판 글 페이지네이션(pagination)-->
+       <div class="gfont">
+            <nav aria-label="Page navigation">            
+                <ul class="pagination">
+                    <!-- 이전, 처음 페이지 -->
                     <li class="page-item">
-                        <c:url var="moveToPage" value="${ servletPath }">
-                            <c:param name="page" value="${ pageNum }"/>
+                        <c:url var="firstPage" value="${ servletPath }">
+                            <c:param name="page" value="1"/>
+                            <c:param name="minPrice" value="${ param.minPrice }"/>
+                            <c:param name="maxPrice" value="${ param.maxPrice }"/>
+                            <c:param name="keyword" value="${ param.keyword }"/>
+                            <c:param name="searchCategory" value="${ param.searchCategory }"/>
                         </c:url>
-                        <a class="page-link" href="${ moveToPage }">${ pageNum }</a>
-                    </li>
-                </c:forEach>
-                
-                <!-- 다음 마지막 페이지 -->
-                <c:choose>
-                    <c:when test="${ page ge pagingDto.totNumPages }">
-                        <li class="page-item">
-                            <span class="page-link-img" aria-label="next">
-                                <img id="pagination-img" alt="next page" src="/fourmen/pagination/pagination03.png">
-                            </span>
-                        </li>
-                    </c:when>
-                    <c:otherwise>
-                        <c:url var="nextPage" value="${ servletPath }">
-                            <c:param name="page" value="${ page + 1 }"></c:param>
-                        </c:url>
-                        <a class="page-link-img" href="${ nextPage }" aria-label="next">
-                            <img id="pagination-img" alt="next page" src="/fourmen/pagination/pagination03.png">
+                        <a class="page-link-img" href="${ firstPage }" aria-label="first page">
+                            <img id="pagination-img" alt="first page" src="/fourmen/pagination/pagination01.png">
                         </a>
-                    </c:otherwise>
-                </c:choose>
-                <c:url var="lastPage" value="${ servletPath }">
-                    <c:param name="page" value="${ pagingDto.totNumPages }"/>
-                </c:url>
-                <li class="page-item">
-                    <a class="page-link-img" href="${ lastPage }" aria-label="last page">
-                        <img id="pagination-img" alt="last page" src="/fourmen/pagination/pagination04.png">
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </div>
+                    </li>
+                    <c:choose>
+                        <c:when  test="${ page le 1 }">
+                            <li class="page-item">
+                                <span class="page-link-img" aria-label="previous">
+                                    <img id="pagination-img" alt="previous page" src="/fourmen/pagination/pagination02.png">
+                                </span>
+                            </li>
+                        </c:when>
+                        <c:otherwise>
+                            <li class="page-item">
+                                <c:url var="prevPage" value="${ servletPath }">
+                                    <c:param name="page" value="${ page - 1 }"/>
+                                    <c:param name="minPrice" value="${ param.minPrice }"/>
+                                    <c:param name="maxPrice" value="${ param.maxPrice }"/>
+                                    <c:param name="keyword" value="${ param.keyword }"/>                        
+                                    <c:param name="searchCategory" value="${ param.searchCategory }"/>
+                                </c:url>
+                                <a class="page-link-img" href="${prevPage }" aria-label="previous">
+                                    <img id="pagination-img" alt="previous page" src="/fourmen/pagination/pagination02.png">
+                                </a>
+                            </li>
+                        </c:otherwise>
+                    </c:choose>
+                    
+                    <!-- 필요한만큼만 페이지 보여줌 -->
+                    <c:forEach var="pageNum" begin="${ pagingDto.startPage }" end="${ pagingDto.endPage }" step="1">
+                        <li class="page-item">
+                            <c:url var="moveToPage" value="${ servletPath }">
+                                <c:param name="page" value="${ pageNum }"/>
+                                <c:param name="minPrice" value="${ param.minPrice }"/>
+                                <c:param name="maxPrice" value="${ param.maxPrice }"/>
+                                <c:param name="keyword" value="${ param.keyword }"/>                            
+                                <c:param name="searchCategory" value="${ param.searchCategory }"/>
+                            </c:url>
+                            <a class="page-link" href="${ moveToPage }">${ pageNum }</a>
+                        </li>
+                    </c:forEach>
+                    
+                    
+                    
+                    <!-- 다음 마지막 페이지 -->
+                    <c:choose>
+                        <c:when test="${ page ge pagingDto.totNumPages }">
+                            <li class="page-item">
+                                <span class="page-link-img" aria-label="next">
+                                    <img id="pagination-img" alt="next page" src="/fourmen/pagination/pagination03.png">
+                                </span>
+                            </li>
+                        </c:when>
+                        <c:otherwise>
+                            <c:url var="nextPage" value="${ servletPath }">
+                                <c:param name="page" value="${ page + 1 }"></c:param>
+                                <c:param name="minPrice" value="${ param.minPrice }"/>
+                                <c:param name="maxPrice" value="${ param.maxPrice }"/>
+                                <c:param name="keyword" value="${ param.keyword }"/> 
+                                <c:param name="searchCategory" value="${ param.searchCategory }"/>
+                            </c:url>
+                            <a class="page-link-img" href="${ nextPage }" aria-label="next">
+                                <img id="pagination-img" alt="next page" src="/fourmen/pagination/pagination03.png">
+                            </a>
+                        </c:otherwise>
+                    </c:choose>
+                    <c:url var="lastPage" value="${ servletPath }">
+                        <c:param name="page" value="${ pagingDto.totNumPages }"/>
+                        <c:param name="minPrice" value="${ param.minPrice }"/>
+                        <c:param name="maxPrice" value="${ param.maxPrice }"/>
+                        <c:param name="keyword" value="${ param.keyword }"/> 
+                        <c:param name="searchCategory" value="${ param.searchCategory }"/>
+                    </c:url>
+                    <li class="page-item">
+                        <a class="page-link-img" href="${ lastPage }" aria-label="last page">
+                            <img id="pagination-img" alt="last page" src="/fourmen/pagination/pagination04.png">
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
     
     
 
