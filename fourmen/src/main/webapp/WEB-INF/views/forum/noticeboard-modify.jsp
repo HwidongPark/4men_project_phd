@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Fourmen</title>
+<title>Artists Archive</title>
 <link
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
     rel="stylesheet"
@@ -44,7 +44,7 @@
     </div>
     
     <!-- main 시작점 -->
-    <main>
+    <main class="gfont">
     
     <section role="noticeboard-view"> <!-- 게시글이 보이는 부분... -->
         <div class="noticeboard-view-detail"> <!-- 제목 / 작성정보 / 내용을 묶는 div -->

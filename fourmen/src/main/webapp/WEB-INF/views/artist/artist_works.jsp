@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>FOURMEN</title>
+<title>Artists Archive</title>
 <meta charset="UTF-8" name="viewport"
 	content="width=device-width, initial-scale=1" />
 <link
@@ -17,14 +17,24 @@
 <link rel="stylesheet" href="../css/underheader.css">
 <style>
 @font-face {
-    font-family: 'Pretendard-Regular';
-    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
-    font-weight: 400;
+    font-family: 'EF_Rebecca';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-EF@1.0/EF_Rebecca.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.commondesign{
+	font-family: 'EF_Rebecca';
+}
+@font-face {
+    font-family: 'NEXON Lv1 Gothic OTF';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff') format('woff');
+    font-weight: normal;
     font-style: normal;
 }
 
 div#works {
-	font-family: 'Pretendard-Regular';
+	font-family: 'NEXON Lv1 Gothic OTF'
 	margin: 0 auto;
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
@@ -33,7 +43,8 @@ div#works {
 }
 
 div#works-bottom{
-	font-family: 'Pretendard-Regular';
+	font-family: 'NEXON Lv1 Gothic OTF'
+
 }
 
 .card .card-img {
@@ -73,6 +84,7 @@ html {
         </div>
     </div>
     
+    
 	<div id="works" class="my-5 container-fluid container-xl w-75">
 
 		<div class="card border-0">
@@ -105,7 +117,8 @@ html {
 			</c:if>
 		</div>
 	</div>
-
+	
+	<div class="bottomwithcomment"> 
 	<div id="works-bottom" class="my-5 p-0 container-fluid container-xl w-75">
 		<!--  댓글 작성 -->
 		<div class="my-4 card border-light mb-3" id="comment">
@@ -203,7 +216,8 @@ html {
 			</div>
 		</c:if>
 	</div>
-
+	</div>
+	
 	<%@ include file="../fragments/footer.jspf"%>
 
 	<script
@@ -218,6 +232,7 @@ html {
 	
 	<script src="../js/works-comments.js"></script>
 	<script src="../js/works-modify.js"></script>
+	<script src="../js/header.js"></script>
 
 </body>
 </html>

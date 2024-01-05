@@ -26,3 +26,14 @@ h2.commondesign::before {
 #underheader-div {
     padding: 3.75rem 0 3.75rem 0;
 }
+
+@font-face {
+    font-family: 'EF_Rebecca';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-EF@1.0/EF_Rebecca.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.commondesign, .bigname{
+	font-family: 'EF_Rebecca';
+}

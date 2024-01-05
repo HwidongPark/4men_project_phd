@@ -44,8 +44,10 @@ public class MarketService {
 	private final UserDao userDao;
 	private final ArtistDao artistDao;
 	
+
 	private int postsPerPage = 8;
 	private int pagesShownInBar = 5;
+
 	
 	/**
 	 * 포스트 작성하는 메서드. market테이블과 work_images테이블에 데이터 insert

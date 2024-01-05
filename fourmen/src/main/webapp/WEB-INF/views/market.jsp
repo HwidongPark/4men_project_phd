@@ -7,7 +7,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Fourmen</title>
+    <title>Artists Archive</title>
 
 
     <link
@@ -25,7 +25,23 @@
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="/fourmen/css/underheader.css">
     <link rel="stylesheet" href="/fourmen/css/pagenation.css">
-    
+    <style>
+ 
+
+@font-face {
+    font-family: 'NEXON Lv1 Gothic OTF';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+.search-container, .market-create-btn-container, .pagination, .list-container{
+	font-family: 'NEXON Lv1 Gothic OTF';
+}
+.marketname{
+	color: black;
+}
+
+    </style>
     <script src="https://kit.fontawesome.com/5b5cfeea7f.js" crossorigin="anonymous"></script>
 </head>
 
@@ -36,7 +52,7 @@
     <div id="underheader-div">
         <div class="container" id="underheadrcontainer">
             <h2 class="commondesign">
-                마켓
+               	MARKET
             </h2>
         </div>
     </div>
@@ -79,13 +95,13 @@
         <div class="market-create-btn-container">
             <c:url var="createMarketPost" value="/market/create" />
             <c:if test="${ usergrade == '아티스트' }">
-                <button class="btn btn-outline-secondary">글 작성</button>
+                <button class="btn btn-outline-dark">글 작성</button>
             </c:if>
         </div>
         <div class="list-item-category-title">
             <h2>
                 <c:url var="popularMarketList" value="/market/popular"/>
-                <a href="${ popularMarketList }">인기 리스트</a>
+                <a class="bigname" href="${ popularMarketList }">Hot Items</a>
             </h2>
         </div>
         <div class="list-container">
@@ -110,7 +126,7 @@
                             <div class="market-item-title my-2">
                             <!-- TODO: 여기 못오고 있음 -->
                                 <div>
-                                    <a href="${ marketPostLink }"><b>${ popularMarketPost.title }</b></a>
+                                    <a class="marketname" href="${ marketPostLink }"><b>${ popularMarketPost.title }</b></a>
                                 </div>
                             </div>
 
@@ -159,7 +175,7 @@
         <div class="list-item-category-title">
             <h2>
                 <c:url var="recentMarketList" value="/market/recent"/>
-                <a href="${ recentMarketList }">최신 리스트</a>
+                <a class="bigname" href="${ recentMarketList }">Recent Items</a>
             </h2>
         </div>
         <div class="list-container">
@@ -183,7 +199,7 @@
                             <!-- 제목, 조회수, 좋아요 포함 -->
                             <div class="market-item-title my-2">
                                 <div>
-                                    <a href="${ marketPostLink }"><b>${ marketPost.title }</b></a>
+                                    <a class="marketname" href="${ marketPostLink }"><b>${ marketPost.title }</b></a>
                                 </div>
                             </div>
 
@@ -230,7 +246,7 @@
     
     
     <!-- 게시판 글 페이지네이션(pagination)-->
-    <div>
+    <div class="pagination">
         <nav aria-label="Page navigation">            
             <ul class="pagination">
                 <!-- 이전, 처음 페이지 -->

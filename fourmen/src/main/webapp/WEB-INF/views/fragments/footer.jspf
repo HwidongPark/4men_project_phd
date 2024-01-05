@@ -1,10 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c"  uri="jakarta.tags.core"%>
+<style>
+@font-face {
+    font-family: 'NEXON Lv1 Gothic OTF';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+.gfont{
+	font-family: 'NEXON Lv1 Gothic OTF';
+}
+</style>
 <div class="place">
 </div>
 
-<footer class="view-footer">
+<footer class="view-footer gfont">
 <ul class="footer-top-area">
 <li class="name footer-li"><h1><a class="white">ARTISTS<br>ARCHIVE<br></a></h1></li>
 <li class="d-museum footer-li"><strong class="whitebox box">A</strong> <strong class="whitebox box">ARCHIVE</strong><p class="location top">서울 서초구 남부순환로 2406.<p class="location"> T. 02.580.1300 </p></li>

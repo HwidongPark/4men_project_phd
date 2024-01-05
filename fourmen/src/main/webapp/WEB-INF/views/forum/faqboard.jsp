@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Fourmen</title>
+<title>Artists Archive</title>
 <link
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
     rel="stylesheet"
@@ -41,7 +41,7 @@
     </div>
     
     <!-- main 시작점 -->
-    <main>
+    <main class="gfont">
     
     <!-- 게시판 카테고리(자유게시판, 문의게시판, Faq게시판, 공지게시판) -->
     <section role="kategorie" class="kategorie" style="border-bottom: 1.5px solid #D8D8D8;">

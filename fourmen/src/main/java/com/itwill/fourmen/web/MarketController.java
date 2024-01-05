@@ -223,7 +223,7 @@ public class MarketController {
 		model.addAttribute("marketPosts", pagedMarketPosts);
 		model.addAttribute("sDirectory", sDirectory);
 		model.addAttribute("fileSeparator", File.separator);
-		model.addAttribute("pageTitle", "최신 장터 목록");
+		model.addAttribute("pageTitle", "Recent Items");
 		model.addAttribute("pagingDto", pagingDto);
 		model.addAttribute("servletPath", servletPath);
 		model.addAttribute("page", page);
@@ -262,7 +262,7 @@ public class MarketController {
 		model.addAttribute("marketPosts", marketPosts);
 		model.addAttribute("sDirectory", sDirectory);
 		model.addAttribute("fileSeparator", File.separator);
-		model.addAttribute("pageTitle", "인기 장터 목록");
+		model.addAttribute("pageTitle", "Hot Items");
 		
 		return "/market/list";
 	}
@@ -302,7 +302,7 @@ public class MarketController {
 		model.addAttribute("fileSeparator", File.separator);
 		model.addAttribute("pagingDto", pagingDto);
 		model.addAttribute("servletPath", servletPath);
-		model.addAttribute("pageTitle", "검색 결과");
+		model.addAttribute("pageTitle", "Search Results");
 		
 		
 		return "/market/list";

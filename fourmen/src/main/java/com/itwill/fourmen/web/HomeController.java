@@ -130,7 +130,7 @@ public class HomeController {
 
 
     @RequestMapping(value = "/exhibition", method = RequestMethod.GET)
-	public String list(Model model, @ModelAttribute("scri") SearchCriteria scri) throws Exception{
+	public String list(Model model, @ModelAttribute("scri") SearchCriteria scri, @RequestParam(name = "page", required = false, defaultValue = "1") int page) throws Exception{
 	
 		
 		model.addAttribute("exhibition", exhibitionService.list(scri));
@@ -140,6 +140,7 @@ public class HomeController {
 		pageMaker.setTotalCount(exhibitionService.listCount(scri));
 		
 		model.addAttribute("pageMaker", pageMaker);
+		model.addAttribute("page", page);
 		
 		return "/exhibition";
 		
@@ -161,7 +162,7 @@ public class HomeController {
     
 
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
-	public String adminuserlist(Model model, @ModelAttribute("scri") SearchCriteriaAdminUser scri) throws Exception{
+	public String adminuserlist(Model model, @ModelAttribute("scri") SearchCriteriaAdminUser scri, @RequestParam(name = "page", required = false, defaultValue = "1") int page) throws Exception{
 	
 		
 		model.addAttribute("adminuserlist",adminuserservice.adminuserlist(scri));
@@ -171,6 +172,7 @@ public class HomeController {
 		pageMaker.setTotalCount(adminuserservice.listCount(scri));
 		
 		model.addAttribute("pageMaker", pageMaker);
+		model.addAttribute("page", page);
 		
 		return "/admin";
 		

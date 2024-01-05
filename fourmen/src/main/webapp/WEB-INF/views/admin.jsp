@@ -12,11 +12,19 @@
     font-weight: normal;
     font-style: normal;
 }
+@font-face {
+    font-family: 'NEXON Lv1 Gothic OTF';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 
 .commondesign{
 	font-family: 'EF_Rebecca';
 }
-
+.gfont{
+font-family: 'NEXON Lv1 Gothic OTF';
+}
 </style>
 
 <link
@@ -152,74 +160,48 @@
     </section>
 		
 		
-		 <div>
-        <nav aria-label="Page navigation">            
-            <ul class="pagination">
-                <!-- 이전, 처음 페이지 -->
-                <li class="page-item">
-                     <a class="page-link-img" href="admin${pageMaker.makeSearchAdminUser(pageMaker.startPage)}">
-                        <img id="pagination-img" alt="first page" src="/fourmen/pagination/pagination01.png">
-                    </a>
-                </li>
-                
-              <!--   <c:choose>
-                    <c:when  test="${ page le 1 }">
-                        <li class="page-item">
-                            <span class="page-link-img" aria-label="previous">
-                                <img id="pagination-img" alt="previous page" src="/fourmen/pagination/pagination02.png">
-                            </span>
-                        </li>
-                    </c:when>
-                    <c:otherwise>  -->  
-                        <li class="page-item">
-                            <c:url var="prevPage" value="admin${pageMaker.makeSearchAdminUser(pageMaker.startPage)}">
-                                <c:param name="page" value=""/>
-                            </c:url>
-                            <a class="page-link-img" href="admin${pageMaker.makeSearchAdminUser(pageMaker.startPage)}" aria-label="previous">
-                                <img id="pagination-img" alt="previous page" src="/fourmen/pagination/pagination02.png">
-                            </a>
-                        </li>
-                  <!--  </c:otherwise>
-                </c:choose>  --> 
-                
-            
-                <!-- 필요한만큼만 페이지 보여줌 -->
-                 <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+		
+        <!-- 게시판 글 페이지네이션(pagination)-->
+        <div>
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    <!-- 처음 페이지 -->
                     <li class="page-item">
-                        <a class="page-link"  href="admin${pageMaker.makeSearchAdminUser(idx)}">${idx}</a>
+                        <a class="page-link-img" href="admin${pageMaker.makeSearchAdminUser(1)}">
+                            <img id="pagination-img" alt="first page" src="/fourmen/pagination/pagination01.png">
+                        </a>
                     </li>
-                </c:forEach>
-                
-                <!-- 다음 마지막 페이지 -->
-               <!--  <c:choose>
-                    <c:when  test="${ page ge pageMaker.endPage }">
+                    <!-- 이전 페이지 -->
+                    <li class="page-item">
+                        <a class="page-link-img" href="admin${pageMaker.makeSearchAdminUser(page-1)}" aria-label="previous"> 
+                            <img id="pagination-img" alt="previous page" src="/fourmen/pagination/pagination02.png">
+                        </a>
+                    </li>
+
+                    <!-- 필요한 만큼만 페이지 보여줌 -->
+                    <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
                         <li class="page-item">
-                            <span class="page-link-img" aria-label="previous">
-                                <img id="pagination-img" alt="previous page" src="/fourmen/pagination/pagination03.png">
-                            </span>
+                            <a class="page-link" href="admin${pageMaker.makeSearchAdminUser(idx)}">${idx}</a>
                         </li>
-                    </c:when>
-                    <c:otherwise> --> 
-      		<li class="page-item">
-      			<c:url var="nextPage" value="admin${pageMaker.makeSearchAdminUser(pageMaker.endPage)}">
-                            <c:param name="page" value=""></c:param>
-                        </c:url>
-                        <a class="page-link-img" href="admin${pageMaker.makeSearchAdminUser(pageMaker.endPage)}" aria-label="next">
+                    </c:forEach>
+                    
+                    <!-- 다음 페이지 -->
+                    <li class="page-item">
+                        <a class="page-link-img" href="admin${pageMaker.makeSearchAdminUser(page+1)}" aria-label="next"> 
                             <img id="pagination-img" alt="next page" src="/fourmen/pagination/pagination03.png">
                         </a>
-              </li>
-             <!--  </c:otherwise>
-              </c:choose> --> 
-               
-                <li class="page-item">
-                    <a class="page-link-img" href="admin${pageMaker.makeSearchAdminUser(pageMaker.endPage)}">
-                        <img id="pagination-img" alt="last page" src="/fourmen/pagination/pagination04.png">
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </div>
-			
+                    </li>
+                    <!-- 마지막 페이지 -->
+                    <li class="page-item">
+                        <a class="page-link-img" href="admin${pageMaker.makeSearchAdminUser(pageMaker.tempEndPage)}">
+                            <img id="pagination-img" alt="last page" src="/fourmen/pagination/pagination04.png">
+                        </a>
+                    </li>
+
+                </ul>
+            </nav>
+        </div>
+		
 		</main>
 		
 		
@@ -238,6 +220,7 @@
       });   
       </script>
       <script src="js/adminuser.js"></script>
+      <script src="/fourmen/js/header.js"></script>
       
 </body>
 </html>

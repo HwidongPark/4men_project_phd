@@ -4,7 +4,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Fourmen</title>
+        <title>My page</title>
         
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" 
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
@@ -29,7 +29,7 @@
         </div>
     </div>
     
-        <main>
+        <main class="gfont">
               <!-- 게시판 카테고리(자유게시판, 후기게시판, 질문게시판) -->
     <section role="kategorie" class="kategorie" style="border-bottom: 1.5px solid #D8D8D8;">
         <div class="forum-kategorie">
@@ -43,9 +43,9 @@
                 <li class="forum-kategorie-board">
                     <a href="/fourmen/mypage/mymarket">마켓 작성글 보기</a>
                 </li>
-                <li class="forum-kategorie-board">
+                <!-- <li class="forum-kategorie-board">
                     <a href="#">게시판 작성글 보기</a>
-                </li>
+                </li>-->
             </ul>
         </div>
     </section>

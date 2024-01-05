@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>FOURMEN</title>
+<title>Artists Archive</title>
 
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
@@ -172,15 +172,15 @@ div#artist_container {
           <div class="carousel-item active img-size-control">
 
 
-            <img src="picture/반고흐01.jpg"
+            <img src="picture/hand.png"
              class="d-block w-100 carousel-img-size" alt="...">
           </div>
           <div class="carousel-item img-size-control">
-            <img src="picture/반고흐02.jpg"
+            <img src="picture/background.png"
             class="d-block w-100 carousel-img-size" alt="...">
           </div>
           <div class="carousel-item img-size-control">
-            <img src="picture/르누아르01.jpg"
+            <img src="picture/인간들.jpg"
 
              class="d-block w-100 carousel-img-size" alt="...">
           </div>

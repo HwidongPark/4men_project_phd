@@ -75,7 +75,7 @@ public class AdminController {
 	
 	
 	 @RequestMapping(value = "/exhibitionadmin", method = RequestMethod.GET)
-		public String list(Model model, @ModelAttribute("scri") SearchCriteria scri) throws Exception{
+		public String list(Model model, @ModelAttribute("scri") SearchCriteria scri,@RequestParam(name = "page", required = false, defaultValue = "1") int page) throws Exception{
 		
 			
 			model.addAttribute("exhibition", adminuserservice.Exhibitonadmin(scri));
@@ -85,6 +85,7 @@ public class AdminController {
 			pageMaker.setTotalCount(adminuserservice.ExhibitionadminlistCount(scri));
 			
 			model.addAttribute("pageMaker", pageMaker);
+			model.addAttribute("page", page);
 			
 			return "/exhibitionadmin";
 			

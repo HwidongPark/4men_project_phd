@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>people example</title>
+<title>Artists Archive</title>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
@@ -18,16 +18,26 @@
 <link rel="stylesheet" href="css/underheader.css">
 
 <style>
-
 @font-face {
-    font-family: 'Pretendard-Regular';
-    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
-    font-weight: 400;
+    font-family: 'EF_Rebecca';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-EF@1.0/EF_Rebecca.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.commondesign{
+	font-family: 'EF_Rebecca';
+}
+@font-face {
+    font-family: 'NEXON Lv1 Gothic OTF';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff') format('woff');
+    font-weight: normal;
     font-style: normal;
 }
 
 div#works{
-	font-family: 'Pretendart-Regular';
+	font-family: 'NEXON Lv1 Gothic OTF';
+	margin-top: 60px;
 }
 
 div#artist_container {
@@ -73,6 +83,7 @@ div#artist {
 .card .card-img-overlay h5 {
     color: white; /* 텍스트의 색상을 흰색으로 변경 */
 }
+
 </style>
 
 </head>
@@ -140,5 +151,6 @@ div#artist {
 		crossorigin="anonymous"></script>
 		
 		<script src='js/main.js'></script>
+		<script src="/fourmen/js/header.js"></script>
 </body>
 </html>
