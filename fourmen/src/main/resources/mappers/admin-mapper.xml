@@ -196,7 +196,7 @@
     
     
     <select id="readWorkImagesofPost" resultType="WorkImage">
-        SELECT * FROM images WHERE worksid= #{workId}
+        SELECT * FROM images WHERE worksid= #{workId} AND category = 'market'
     </select>
     
      <select id="searchPosts" resultType="Market">

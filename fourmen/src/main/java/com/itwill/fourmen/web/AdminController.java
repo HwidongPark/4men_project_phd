@@ -125,10 +125,10 @@ public class AdminController {
 			
 			int totNumPosts = adminuserservice.countTotNumber();	// 전체 포스트 개수 가져옴
 			// 인기글 8개 읽어옴.. 예는 전체 포스트에서 가져온거 사용,,
-			if (totNumPosts < 8) {
+			if (totNumPosts > 0) {
 				numOfPopularMarketPosts = totNumPosts;
 			} else {
-				numOfPopularMarketPosts = 8;
+				numOfPopularMarketPosts = 0;
 			}
 			List<MarketPostDto> popularMarketPosts = adminuserservice.readPopularMarketPosts(numOfPopularMarketPosts);	// 인기포스트 가져옴(서비스호출)
 			log.debug("popularMarketPosts={}", popularMarketPosts);
