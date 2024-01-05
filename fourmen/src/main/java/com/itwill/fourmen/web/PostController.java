@@ -22,6 +22,7 @@ import com.itwill.fourmen.domain.Notice;
 import com.itwill.fourmen.domain.Post;
 import com.itwill.fourmen.domain.Qna;
 import com.itwill.fourmen.domain.User;
+import com.itwill.fourmen.dto.market.PagingDto;
 import com.itwill.fourmen.dto.post.FaqCreateDto;
 import com.itwill.fourmen.dto.post.FaqListItemDto;
 import com.itwill.fourmen.dto.post.FaqModifyDto;
@@ -45,6 +46,7 @@ import com.itwill.fourmen.service.QnaService;
 import com.itwill.fourmen.service.UserService;
 import com.itwill.fourmen.service.adminUserService;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -199,25 +201,52 @@ public class PostController {
 //		//-> /WEB-INF/views/forum/qnaboard.jsp
 //	}
 	
+//	@RequestMapping(value = "/qnaboard", method = RequestMethod.GET)
+//	public String qnaboard_list(Model model, @ModelAttribute("scri") SearchCriteriaAdminUser scri, @RequestParam(name = "page", required = false, defaultValue = "1") int page, HttpSession session) throws Exception {
+//		String signedInUser = (String) session.getAttribute("signedInUser");
+//	   	if(!(signedInUser==null)) {
+//	   		User user = adminuserservice.selectById(signedInUser);
+//	   		model.addAttribute("user", user);
+//	   	}
+//		
+//		model.addAttribute("qnaboard_posts", qnaService.read(scri));
+//
+//		PageMaker pageMaker = new PageMaker();
+//		pageMaker.setCri(scri);
+//		pageMaker.setTotalCount(qnaService.listCount(scri));
+//
+//		model.addAttribute("pageMaker", pageMaker);
+//		model.addAttribute("page", page);
+//
+//		return "/forum/qnaboard";
+//	}
+	
+	
 	@RequestMapping(value = "/qnaboard", method = RequestMethod.GET)
-	public String qnaboard_list(Model model, @ModelAttribute("scri") SearchCriteriaAdminUser scri, @RequestParam(name = "page", required = false, defaultValue = "1") int page, HttpSession session) throws Exception {
+	public String qnaboard_list(Model model, @RequestParam(name = "page", required = false, defaultValue = "1") int page, HttpSession session) throws Exception {
 		String signedInUser = (String) session.getAttribute("signedInUser");
 	   	if(!(signedInUser==null)) {
 	   		User user = adminuserservice.selectById(signedInUser);
 	   		model.addAttribute("user", user);
 	   	}
 		
-		model.addAttribute("qnaboard_posts", qnaService.read(scri));
+	   	
+	   	List<Qna> qnaboard_posts = qnaService.read(page);
+	   	log.debug("qna최신글 리스트 = {}", qnaboard_posts);
+	   	model.addAttribute("qnaboard_posts", qnaboard_posts);
+	   	
+	   	
+	   	// 전체 포스트 개수
+	   	int totNumQnaPosts = qnaService.totQnaPosts();
+	   	log.debug("전체 qna게시글 개수={}", totNumQnaPosts);
+	   	PagingDto pagingDto = qnaService.paging(page, totNumQnaPosts);
 
-		PageMaker pageMaker = new PageMaker();
-		pageMaker.setCri(scri);
-		pageMaker.setTotalCount(qnaService.listCount(scri));
-
-		model.addAttribute("pageMaker", pageMaker);
+		model.addAttribute("pagingDto", pagingDto);
 		model.addAttribute("page", page);
 
 		return "/forum/qnaboard";
 	}
+	
 	
 	@GetMapping("/qnaboard-create") //-> GET 방식의 "/forum/qnaboard-create" 요청 주소를 처리하는 메서드.
 	public void qnaboard_create() {
@@ -277,19 +306,79 @@ public class PostController {
 		return "redirect:/forum/qnaboard";
 	}
 	
+//	@GetMapping("qnaboard_search") //-> GET 방식의 "forum/qnaboard_search" 요청 주소를 처리하는 메서드.
+//	public String search(QnaSearchDto dto, Model model, @ModelAttribute("scri") SearchCriteriaAdminUser scri, @RequestParam(name = "page", required = false, defaultValue = "1")int page
+//			,HttpServletRequest request) {
+//    	log.debug("search(dto={})", dto);
+//    
+//		// 서비스 계층의 메서드를 호출해서 검색 서비스를 수행.
+//    	List<QnaLIstItemDto> list = qnaService.search(dto, page);
+//    	int totNumSearchList = qnaService.searchTotNumber(dto);
+//    	
+//    	scri.setPerPageNum(9);
+//    	scri.setPage(page);
+//    	log.debug("scri, page = {}", scri.getPage());
+//    	log.debug("scri, porPageNum= {}", scri.getPerPageNum());
+//    	
+//		PageMaker pageMaker = new PageMaker();
+//		pageMaker.setCri(scri);
+//		pageMaker.setTotalCount(totNumSearchList);
+//		
+//		String servletPath = request.getServletPath();
+//		
+//		
+//		model.addAttribute("pageMaker", pageMaker);
+//		model.addAttribute("page", page);
+//    	
+//    	// 검색 결과를 뷰에 전달하기 위해서 모델 속성(attribute)에 추가.
+//    	model.addAttribute("qnaboard_posts", list);
+//    	model.addAttribute("pageMaker", pageMaker);
+//    	model.addAttribute("page", page);
+//    	model.addAttribute("servletPath", servletPath);
+//    	
+//    	log.debug("pageMaker={}", pageMaker);
+//    	log.debug("scri={}", scri);
+//    	log.debug("listSize={}", list.size());
+//    
+//    	
+//    	return "forum/qnaboard"; //-> 뷰의 경로(/WEB-INF/views/forum/qnaboard.jsp)
+//    	//-> servlet-context에서 prefix 부분이 /WEB-INF/views/ 였으므로.
+//	}
+	
+	
 	@GetMapping("qnaboard_search") //-> GET 방식의 "forum/qnaboard_search" 요청 주소를 처리하는 메서드.
-	public String search(QnaSearchDto dto, Model model) {
+	public String search(QnaSearchDto dto, Model model, @RequestParam(name = "page", required = false, defaultValue = "1")int page, HttpServletRequest request) {
     	log.debug("search(dto={})", dto);
-    
+    	
 		// 서비스 계층의 메서드를 호출해서 검색 서비스를 수행.
-    	List<QnaLIstItemDto> list = qnaService.search(dto);
-    
+    	List<QnaLIstItemDto> list = qnaService.search(dto, page);
+    	int totNumSearchList = qnaService.searchTotNumber(dto);
+		
+		String servletPath = request.getServletPath();
+		
+		PagingDto pagingDto = qnaService.paging(page, totNumSearchList);
+		
+		// model.addAttribute("pageMaker", pageMaker);
+		model.addAttribute("page", page);
+    	
     	// 검색 결과를 뷰에 전달하기 위해서 모델 속성(attribute)에 추가.
     	model.addAttribute("qnaboard_posts", list);
+    	
+    	
+    	model.addAttribute("pagingDto", pagingDto);
+    	model.addAttribute("page", page);
+    	model.addAttribute("servletPath", servletPath);
+    	
+    	// log.debug("pageMaker={}", pageMaker);
+    	log.debug("listSize={}", list.size());
+    
     	
     	return "forum/qnaboard"; //-> 뷰의 경로(/WEB-INF/views/forum/qnaboard.jsp)
     	//-> servlet-context에서 prefix 부분이 /WEB-INF/views/ 였으므로.
 	}
+	
+	
+	
 	// qnaboard 처리 끝 //
 	
 	

@@ -51,7 +51,7 @@
                     <a href="freeboard" class="category-button">자유게시판</a>
                 </li>
                 <li class="forum-kategorie-board">
-                    <a href="qnaboard" class="category-button">Q&A</a>
+                    <a href="qnaboard" class="category-button">QUALIFY</a>
                 </li>
                 <li class="forum-kategorie-board">
                     <a href="faqboard" class="category-button">FAQ</a>
@@ -78,7 +78,7 @@
                     </select>
                 </div>
                 <div class="forum-search-form-area">
-                    <input id="forum-search-input" name="keyword" autocomplete="on" placeholder="검색어를 입력하세요." type="text">
+                    <input id="forum-search-input" name="keyword" autocomplete="on" placeholder="검색어를 입력하세요." type="text" maxlength="500">
                 </div>
 
                 <div class="forum-search-btn-area">

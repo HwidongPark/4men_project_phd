@@ -35,7 +35,7 @@
     <div id="underheader-div">
         <div class="container" id="underheadrcontainer">
             <h2 class="commondesign">
-                Q&A
+                QUALIFY
             </h2>
         </div>
     </div>
@@ -51,7 +51,7 @@
                     <a href="freeboard" class="category-button">자유게시판</a>
                 </li>
                 <li class="forum-kategorie-board">
-                    <a href="qnaboard" class="category-button">Q&A</a>
+                    <a href="qnaboard" class="category-button">QUALIFY</a>
                 </li>
                 <li class="forum-kategorie-board">
                     <a href="faqboard" class="category-button">FAQ</a>
@@ -78,7 +78,7 @@
                     </select>
                 </div>
                 <div class="forum-search-form-area">
-                    <input id="forum-search-input" name="keyword" autocomplete="on" placeholder="검색어를 입력하세요." type="text">
+                    <input id="forum-search-input" name="keyword" autocomplete="on" placeholder="검색어를 입력하세요." type="text" maxlength="500">
                 </div>
 
                 <div class="forum-search-btn-area">
@@ -156,40 +156,85 @@
             </ul>
         </nav>
     </div>
-
+ 
         <!-- 게시판 글 페이지네이션(pagination)-->
         <div>
             <nav aria-label="Page navigation">
                 <ul class="pagination">
                     <!-- 처음 페이지 -->
                     <li class="page-item">
-                        <a class="page-link-img" href="qnaboard${pageMaker.makeSearchAdminUser(1)}">
+                        <c:url var="firstPage" value="${ servletPath }">
+                            <c:param name="page" value="1" />
+                            <c:param name="category" value="${ param.category }"/>
+                            <c:param name="keyword" value="${ param.keyword }"/>
+                        </c:url>
+                        <a class="page-link-img" href="${ firstPage }">
                             <img id="pagination-img" alt="first page" src="/fourmen/pagination/pagination01.png">
                         </a>
                     </li>
                     <!-- 이전 페이지 -->
                     <li class="page-item">
-                        <a class="page-link-img" href="qnaboard${pageMaker.makeSearchAdminUser(page-1)}" aria-label="previous"> 
-                            <img id="pagination-img" alt="previous page" src="/fourmen/pagination/pagination02.png">
-                        </a>
+                        <c:url var="prevPage" value="${ servletPath }">
+                            <c:param name="page" value="${ page - 1 }" />
+                            <c:param name="category" value="${ param.category }"/>
+                            <c:param name="keyword" value="${ param.keyword }"/>
+                        </c:url>
+                        <c:choose>
+                            <c:when test="${ page le 1 }">
+                                <span class="page-link-img" aria-label="previous"> 
+                                    <img id="pagination-img" alt="previous page" src="/fourmen/pagination/pagination02.png">
+                                </span>
+                            </c:when>
+                            <c:otherwise>
+                                <a class="page-link-img" href="${ prevPage }" aria-label="previous"> 
+                                    <img id="pagination-img" alt="previous page" src="/fourmen/pagination/pagination02.png">
+                                </a>
+                            </c:otherwise>
+                        </c:choose>
+
                     </li>
 
                     <!-- 필요한 만큼만 페이지 보여줌 -->
-                    <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+                    <c:forEach begin="${pagingDto.startPage}" end="${pagingDto.endPage}" var="idx">
+                        <c:url var="toPage" value="${ servletPath }">
+                            <c:param name="page" value="${ idx }" />
+                            <c:param name="category" value="${ param.category }"/>
+                            <c:param name="keyword" value="${ param.keyword }"/>
+                        </c:url>
                         <li class="page-item">
-                            <a class="page-link" href="qnaboard${pageMaker.makeSearchAdminUser(idx)}">${idx}</a>
+                            <a class="page-link" href="${ toPage }">${idx}</a>
                         </li>
                     </c:forEach>
                     
                     <!-- 다음 페이지 -->
                     <li class="page-item">
-                        <a class="page-link-img" href="qnaboard${pageMaker.makeSearchAdminUser(page+1)}" aria-label="next"> 
-                            <img id="pagination-img" alt="next page" src="/fourmen/pagination/pagination03.png">
-                        </a>
+                        <c:url var="nextPage" value="${ servletPath }">
+                            <c:param name="page" value="${ page + 1 }" />
+                            <c:param name="category" value="${ param.category }"/>
+                            <c:param name="keyword" value="${ param.keyword }"/>
+                        </c:url>
+                        <c:choose>
+                            <c:when test="${ page ge pagingDto.totNumPages }">
+                                <span class="page-link-img" aria-label="next"> 
+                                    <img id="pagination-img" alt="next page" src="/fourmen/pagination/pagination03.png">
+                                </span>
+                            </c:when>
+                            <c:otherwise>
+                                <a class="page-link-img" href="${ nextPage }" aria-label="next"> 
+                                    <img id="pagination-img" alt="next page" src="/fourmen/pagination/pagination03.png">
+                                </a>
+                            </c:otherwise>
+                        </c:choose>
+
                     </li>
                     <!-- 마지막 페이지 -->
                     <li class="page-item">
-                        <a class="page-link-img" href="qnaboard${pageMaker.makeSearchAdminUser(pageMaker.tempEndPage)}">
+                        <c:url var="lastPage" value="${ servletPath }">
+                            <c:param name="page" value="${ pagingDto.totNumPages }" />
+                            <c:param name="category" value="${ param.category }"/>
+                            <c:param name="keyword" value="${ param.keyword }"/>
+                        </c:url>
+                        <a class="page-link-img" href="${ lastPage }">
                             <img id="pagination-img" alt="last page" src="/fourmen/pagination/pagination04.png">
                         </a>
                     </li>
@@ -197,7 +242,9 @@
                 </ul>
             </nav>
         </div>
-
+        
+        
+        
     </main>
     
     <!-- 푸터 파일 include -->

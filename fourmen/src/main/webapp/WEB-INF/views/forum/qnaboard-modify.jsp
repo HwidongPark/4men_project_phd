@@ -38,7 +38,7 @@
     <div id="underheader-div">
         <div class="container" id="underheadrcontainer">
             <h2 class="commondesign">
-                Q&A
+                QUALIFY
             </h2>
         </div>
     </div>
