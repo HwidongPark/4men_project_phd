@@ -12,40 +12,16 @@
     <!-- <select id="selectOrderByQnaIdDesc" resultType="Qna">
     select * from QNA_BOARD order by QNA_ID desc </select> -->
     
-    <select id="selectOrderByQnaIdDesc" resultType="Qna"
-        parameterType="com.itwill.fourmen.board.Criteria">
-
-        SELECT QNA_ID, QNA_TITLE, USERID, QNA_CONTENT,
-        QNA_CREATED_TIME, QNA_VIEW_COUNT
-
-        FROM (
-
-        SELECT QNA_ID,
-
-        QNA_TITLE,
-
-        USERID,
-
-        QNA_CONTENT,
-
-        QNA_CREATED_TIME,
-
-        QNA_VIEW_COUNT,
-
-        ROW_NUMBER() OVER(ORDER BY QNA_ID DESC) AS RNUM
-
-        from
-        QNA_BOARD
-
-        where 1=1
-        <include refid="search"></include>
-
-        ) MP
-
-        WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
-
-        ORDER BY QNA_ID DESC
-
+    <select id="selectOrderByQnaIdDesc" resultType="Qna">
+        SELECT *
+        FROM qna_board
+        ORDER BY qna_id DESC
+        OFFSET #{rowStart} ROWS FETCH NEXT #{postsPerPage} ROWS ONLY
+    </select>
+    
+    <select id="readTotQnaPosts" resultType="Integer">
+        SELECT count(*)
+        FROM qna_board
     </select>
 
 
@@ -139,8 +115,48 @@
                 </when>
             </choose>
         </where>
-        order by QNA_ID desc
+        ORDER BY qna_id DESC
+        OFFSET #{ rowStart } ROWS FETCH NEXT #{ postsPerPage } ROWS ONLY
+        
     </select>
+    
+    <!-- 검색한 총 게시글의 개수를 가져옴 -->
+    <select id="searchTotNumber" resultType="Integer">
+        <bind name="searchKeyword" value="'%' + keyword + '%'" />
+        <!-- keyword 는 어디서 나온 것일까?
+        param.getKeyword()를 호출한 것.
+        QnaSearchDto.java에 필드로 keyword가 선언되어 있음.
+        QnaDao에서 아규먼트로 넘긴 QnaSearchDto에 필드로 선언된 keyword를 get() 메서드로 가져옴.
+        -->
+        select count(*) from QNA_BOARD
+        <!-- where를 태그로 사용 -->
+        <where>
+            <choose>
+                <when test='category eq "qna_title"'>
+                <!-- category 는 어디서 나온 것일까?
+                param.getCategory()를 호출한 것.
+                QnaSearchDto.java에 필드로 category가 선언되어 있음.
+                QnaDao에서 아규먼트로 넘긴 QnaSearchDto에 필드로 선언된 category를 get() 메서드로 가져옴.
+                -->
+                    upper(QNA_TITLE) like upper(#{searchKeyword})
+                </when>
+                <when test='category eq "qna_content"'>
+                    upper(QNA_CONTENT) like upper(#{searchKeyword})
+                </when>
+                <when test='category eq "qna_all"'>
+                    upper(QNA_TITLE) like upper(#{searchKeyword}) 
+                    or
+                    upper(QNA_CONTENT) like upper(#{searchKeyword})
+                    or
+                    upper(USERID) like upper(#{searchKeyword})
+                </when>
+                <when test='category eq "qna_author"'>
+                    upper(USERID) like upper(#{searchKeyword})
+                </when>
+            </choose>
+        </where>
+    </select>
+    
     
     <!-- 게시글 수정: 특정 게시글 아이디의 제목과 내용 업데이트 -->
     <update id='update'>

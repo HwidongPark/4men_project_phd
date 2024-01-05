@@ -77,7 +77,7 @@
                 </c:if>
             </div>
             <div> <!-- 내용 -->
-                <textarea id="faqboard-view-detail-content" name="faq_content" class="faqboard-view-detail-content">${faq.faq_content}</textarea>
+                <textarea id="faqboard-view-detail-content" name="faq_content" class="faqboard-view-detail-content" maxlength="1000" placeholder="내용을 입력하세요 (공백 포함 1000자)" onkeyup="return textarea_maxlength(this)">${faq.faq_content}</textarea>
             </div>
         </div>
         

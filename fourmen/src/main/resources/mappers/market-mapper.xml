@@ -24,6 +24,17 @@
         FROM market
     </select>
     
+    <select id="getTotPopularNum" resultType="Integer">
+        SELECT count(*)
+        FROM (
+                SELECT *
+                FROM market
+                WHERE is_sold != 'Y' OR is_sold IS NULL
+                ORDER BY (views + 10 * likes) DESC
+            )
+        WHERE ROWNUM &lt;= 20
+    </select>
+    
     
     <insert id="insertWorkImage">
         INSERT INTO images (worksid, category, original_file, saved_file) VALUES (#{workId}, 'market', #{originalFileName}, #{savedFileName})
@@ -42,6 +53,7 @@
         FROM (
             SELECT *
             FROM market
+            WHERE is_sold != 'Y' OR is_sold IS NULL
             ORDER BY (views + 10 * likes) DESC
         )
         WHERE ROWNUM &lt;= 20

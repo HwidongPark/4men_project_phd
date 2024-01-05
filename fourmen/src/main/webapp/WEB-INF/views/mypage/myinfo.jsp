@@ -63,15 +63,15 @@
                                 <label class="mb-1">등급</label>
                                 <input name="grade" value="${ user.grade }" class="myinfo-not-modifiable form-control mb-2" readonly>                                
                                 <label class="mb-1">닉네임</label>
-                                <input name="nickname" value="${ user.nickname }" class="form-control mb-2">
+                                <input name="nickname" value="${ user.nickname }" class="form-control mb-2" maxlength="50">
                                 <label class="mb-1">전화번호</label>
-                                <input name="phone" type="number" value="${ user.phone }" class="form-control mb-2">
+                                <input id="myinfo-phone" name="phone" type="number" value="${ user.phone }" class="form-control mb-2">
                                 <label class="mb-1">이메일</label>
-                                <input name="email" type="email" value="${ user.email }" class="form-control mb-2">
+                                <input name="email" type="email" value="${ user.email }" class="form-control mb-2" maxlength="33">
                                 <label class="mb-1">비밀번호</label>
-                                <input id="password" name="password" type="password" class="form-control mb-2">                    
+                                <input id="password" name="password" type="password" class="form-control mb-2" maxlength="25">                    
                                 <label class="mb-1">비밀번호 확인</label>
-                                <input id="passwordConfirm" name="passwordConfirm" type="password" class="form-control mb-2">
+                                <input id="passwordConfirm" name="passwordConfirm" type="password" class="form-control mb-2" maxlength="25">
                                 <input id="realPassword" type="hidden" value=${ user.password }>
                             </div>
                         </div>
@@ -117,13 +117,13 @@
                             <div class="card-body">
                                 <form id="formChangePassword" method="post" action="/mypage/myinfo/changepassword">
                                     <label class="mb-1">현재 비밀번호</label>
-                                    <input id="modalPassword" type="password" name="currentPassword" class="form-control mb-2" required>
+                                    <input id="modalPassword" type="password" name="currentPassword" class="form-control mb-2" maxlength="25" required>
                                     <label class="mb-1">현재 비밀번호 확인</label>
-                                    <input id="modalPasswordConfirm" type="password" name="currentPasswordConfirm" class="form-control mb-5" required>
+                                    <input id="modalPasswordConfirm" type="password" name="currentPasswordConfirm" class="form-control mb-5" maxlength="25" required>
                                     <label class="mb-1">새 비밀번호</label>
-                                    <input id="modalNewPassword" type="password" name="newPassword" class="form-control mb-2" required>
+                                    <input id="modalNewPassword" type="password" name="newPassword" class="form-control mb-2" maxlength="25" required>
                                     <label class="mb-1">새 비밀번호 확인</label>
-                                    <input id="modalNewPasswordConfirm" type="password" name="newPasswordConfirm" class="form-control mb-4" required>
+                                    <input id="modalNewPasswordConfirm" type="password" name="newPasswordConfirm" class="form-control mb-4" maxlength="25" required>
                                 </form>
                             </div>
                         </div>

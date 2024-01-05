@@ -3,7 +3,7 @@
 /* forum-qnaboard(문의게시판)의 상세 페이지에 관한 css */
 
 .qnaboard-view-detail {
-    padding: 5rem 5rem 2.5rem 5rem ;
+    padding: 5rem 5rem 1rem 5rem ;
     margin-left: 10rem;
     margin-right: 10rem;
     justify-content: center;
@@ -25,15 +25,6 @@
     font-size: 30px;
     width: 100%;
     box-sizing: border-box; /* 내부 padding과 border를 포함한 전체 너비를 설정 */
-}
-
-/* 수정 페이지의 제목 부분 input */
-#qnaboard-view-modify-title {
-    width: 100%; /* input 요소도 div의 크기에 맞게 설정 */
-    box-sizing: border-box; /* 내부 padding과 border를 포함한 전체 너비를 설정 */
-    background-color: #E6E6E6;
-    border: none;
-    padding: 0 0 0 0;
 }
 
 /* 수정 페이지의 제목 부분 input */

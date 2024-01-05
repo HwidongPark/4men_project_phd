@@ -34,10 +34,16 @@ function textarea_maxlength(obj) {
     const remainingCharsDisplay = document.getElementById('remaining-chars');
     remainingCharsDisplay.textContent = '총 ' + currentLength + '자' + ' / ' + maxCharacters + '자';
 }
-
+    
 // addEventListener: HTML 문서가 로드되면 실행할 함수 등록.
 document.addEventListener('DOMContentLoaded', () => {
-    // 이벤트 처리에 사용될 요소 찾기...
+    // ** 이벤트 처리에 사용될 요소 찾기. **
+    // 포스트 제목을 가지고 있는 요소를 찾음.
+    const qna_title = document.querySelector('input#qnaboard-view-modify-title');
+
+    // 포스트 내용을 가지고 있는 요소를 찾음.
+    const qna_content = document.querySelector('textarea#qnaboard-view-detail-content');
+    
     // 포스트 번호(id)를 가지고 있는 요소를 찾음.
     const qna_id = document.querySelector('input#qna_id').value;
     
@@ -49,6 +55,29 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // 목록 버튼 찾기.
     const btnList = document.querySelector('button#qnaboard-view-btnList');
+
+    // 현재 글자수와 남은 글자수를 표시할 요소 생성
+    const maxCharacters = parseInt(qna_content.getAttribute("maxlength"));
+    const remainingCharsDisplay = document.createElement('div');
+    remainingCharsDisplay.id = 'remaining-chars';
+    remainingCharsDisplay.textContent = '총 ' + qna_content.value.length + '자' + ' / ' + maxCharacters + '자';
+
+    // 스타일 추가
+    remainingCharsDisplay.style.textAlign = 'right'; // 글자수 표시 요소를 오른쪽 정렬
+    remainingCharsDisplay.style.marginBottom = '17.5px'; // 글자수 표시 요소에 마진 설정
+
+    // 요소 추가
+    document.querySelector('.qnaboard-view-detail').appendChild(remainingCharsDisplay);
+
+    // qna_content에 이벤트 핸들러(리스너) 등록
+    qna_content.addEventListener('input', () => {
+        textarea_maxlength(qna_content);
+    });
+
+    // qna_title에 이벤트 핸들러(리스너) 등록
+    qna_title.addEventListener('input', () => {
+        input_maxlength(qna_title);
+    });
     
     // 목록 버튼에 클릭 이벤트 핸들러(리스너)를 등록.
     btnList.addEventListener('click', () => {
@@ -67,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
     btnModify.addEventListener('click', () => {
         // 이벤트 처리에 사용될 요소 찾기...
         // 포스트 제목을 가지고 있는 요소를 찾음.
-        const qna_title = document.querySelector('input#qnaboard-view-detail-title').value;
+        const qna_title = document.querySelector('input#qnaboard-view-modify-title').value;
 
         // 포스트 내용을 가지고 있는 요소를 찾음.
         const qna_content = document.querySelector('textarea#qnaboard-view-detail-content').value;
@@ -97,36 +126,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }); // 실패 응답일 때 실행할 콜백 등록.
         } // end function registerComment
         
-    });
-    
-    // ** 이벤트 처리에 사용될 요소 찾기. **
-    // 포스트 제목을 가지고 있는 요소를 찾음.
-    const qna_title = document.getElementById('qnaboard-view-modify-title');
-
-    // 포스트 내용을 가지고 있는 요소를 찾음.
-    const qna_content = document.getElementById('qnaboard-view-detail-content');
-
-    // 현재 글자수와 남은 글자수를 표시할 요소 생성
-    const maxCharacters = parseInt(qna_content.getAttribute("maxlength"));
-    const remainingCharsDisplay = document.createElement('div');
-    remainingCharsDisplay.id = 'remaining-chars';
-    remainingCharsDisplay.textContent = '총 ' + qna_content.value.length + '자' + ' / ' + maxCharacters + '자';
-
-    // 스타일 추가
-    remainingCharsDisplay.style.textAlign = 'right'; // 글자수 표시 요소를 오른쪽 정렬
-    remainingCharsDisplay.style.marginBottom = '17.5px'; // 글자수 표시 요소에 마진 설정
-
-    // 요소 추가
-    document.querySelector('.qnaboard-view-detail').appendChild(remainingCharsDisplay);
-
-    // qna_content에 이벤트 핸들러(리스너) 등록
-    qna_content.addEventListener('input', () => {
-        textarea_maxlength(qna_content);
-    });
-
-    // qna_title에 이벤트 핸들러(리스너) 등록
-    qna_title.addEventListener('input', () => {
-        input_maxlength(qna_title);
     });
     
 });

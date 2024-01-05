@@ -44,7 +44,15 @@
                     <div class="row">
                         <div class="col">
                             <label>내 제시 가격</label>
-                            <input type="text" value="${ messageDto.postDto.price }" readonly>
+                            <c:choose>
+                                <c:when test="${ messageDto.price != null }">
+                                    <input id="offered-price" type="text" value="${ messageDto.price }" readonly>
+                                </c:when>
+                                <c:otherwise>
+                                    <input id="offered-price" type="text" value="${ messageDto.postDto.price }" readonly>
+                                </c:otherwise>
+                            </c:choose>
+                            
                         </div>
                         <div class="col">
                             <label>상대 제안 가격</label>
@@ -111,7 +119,14 @@
                                 <td>${ firstMessageDto.replies[realIndex].timeSent }</td>                        
                             </tr>
                         </c:forEach>
-                        <tr>
+                        <c:choose>
+                            <c:when test="${ messageDto.id eq firstMessageDto.id }">
+                                <tr class="table-secondary">
+                            </c:when>
+                            <c:otherwise>
+                                <tr>
+                            </c:otherwise>
+                        </c:choose>
                             <td>${ firstMessageDto.sender }</td>
                             <td>
                                 <c:choose>

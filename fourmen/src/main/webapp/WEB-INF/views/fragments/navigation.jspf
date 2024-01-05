@@ -56,7 +56,7 @@
             </li>
       		</c:if>
             <li class="nav-each-btn-user">
-                <a href="noticeboard" class="nav-button-user">NOTICE</a>
+                <a href="/fourmen/forum/noticeboard" class="nav-button-user">NOTICE</a>
             </li>
         </ul>
     </nav>

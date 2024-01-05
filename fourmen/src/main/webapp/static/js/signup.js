@@ -36,6 +36,14 @@ signInButton.addEventListener('click', () => {
 	const inputEmail = document.querySelector('input#email');
 	inputEmail.addEventListener('change',checkEmail);
 	
+	window.addEventListener('keyup', function() {
+        if(idChecked && pwdChecked && nameChecked && nicknameChecked && phoneChecked && emailChecked){
+            btnSignup.classList.remove('disabled');
+        } else {
+            btnSignup.classList.add('disabled');
+        }
+    })
+	
 	async function checkUserid(e){
 		const userid=e.target.value;
 		const uri = `checkid?userid=${userid}`;
@@ -60,11 +68,7 @@ signInButton.addEventListener('click', () => {
 			alert('올바른 아이디 형태가 아닙니다');
 			return;
 		}
-		if(idChecked && pwdChecked && nameChecked && nicknameChecked && phoneChecked && emailChecked){
-			btnSignup.classList.remove('disabled');
-		} else {
-			btnSignup.classList.add('disabled');
-		}
+
 	}
 	
 	function checkPassword(e){

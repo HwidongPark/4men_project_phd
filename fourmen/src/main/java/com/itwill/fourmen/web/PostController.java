@@ -22,6 +22,7 @@ import com.itwill.fourmen.domain.Notice;
 import com.itwill.fourmen.domain.Post;
 import com.itwill.fourmen.domain.Qna;
 import com.itwill.fourmen.domain.User;
+import com.itwill.fourmen.dto.market.PagingDto;
 import com.itwill.fourmen.dto.post.FaqCreateDto;
 import com.itwill.fourmen.dto.post.FaqListItemDto;
 import com.itwill.fourmen.dto.post.FaqModifyDto;
@@ -45,6 +46,7 @@ import com.itwill.fourmen.service.QnaService;
 import com.itwill.fourmen.service.UserService;
 import com.itwill.fourmen.service.adminUserService;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -85,8 +87,13 @@ public class PostController {
 //	}
 	
 	@RequestMapping(value = "/freeboard", method = RequestMethod.GET)
-	public String freeboard_list(Model model, @ModelAttribute("scri") SearchCriteriaAdminUser scri, @RequestParam(name = "page", required = false, defaultValue = "1") int page) throws Exception {
-
+	public String freeboard_list(Model model, @ModelAttribute("scri") SearchCriteriaAdminUser scri, @RequestParam(name = "page", required = false, defaultValue = "1") int page, HttpSession session) throws Exception {
+		String signedInUser = (String) session.getAttribute("signedInUser");
+	   	if(!(signedInUser==null)) {
+	   		User user = adminuserservice.selectById(signedInUser);
+	   		model.addAttribute("user", user);
+	   	}
+		
 		model.addAttribute("freeboard_posts", postService.read(scri));
 
 		PageMaker pageMaker = new PageMaker();
@@ -100,14 +107,14 @@ public class PostController {
 	}
 	
 	@GetMapping("/freeboard-create") //-> GET 방식의 "/forum/freeboard-create" 요청 주소를 처리하는 메서드.
-	public void freeboard_create(Model model ,HttpSession session) {
+	public void freeboard_create(Model model, HttpSession session) {
 		log.debug("GET_FREEBOARD - create()");
 		String signedInUser = (String) session.getAttribute("signedInUser");
 		model.addAttribute("signedInUser", signedInUser);
 	}
 	
 	@PostMapping("/freeboard-create") //-> POST 방식의 "/forum/freeboard-create" 요청 주소를 처리하는 메서드.
-	public String freeboard_create(PostCreateDto dto) { //-> String 타입 사용: 이 메서드가 클라이언트에게 리턴하는 값이 URL 경로를 나타내기 때문.
+	public String freeboard_create(PostCreateDto dto, HttpSession session, Model model) { //-> String 타입 사용: 이 메서드가 클라이언트에게 리턴하는 값이 URL 경로를 나타내기 때문.
 		log.debug("POST_FREEBOARD - create(dto={}", dto);
 		
 		// 서비스 계층의 메서드를 호출해서 새 포스트 작성 서비스를 수행.
@@ -194,20 +201,52 @@ public class PostController {
 //		//-> /WEB-INF/views/forum/qnaboard.jsp
 //	}
 	
+//	@RequestMapping(value = "/qnaboard", method = RequestMethod.GET)
+//	public String qnaboard_list(Model model, @ModelAttribute("scri") SearchCriteriaAdminUser scri, @RequestParam(name = "page", required = false, defaultValue = "1") int page, HttpSession session) throws Exception {
+//		String signedInUser = (String) session.getAttribute("signedInUser");
+//	   	if(!(signedInUser==null)) {
+//	   		User user = adminuserservice.selectById(signedInUser);
+//	   		model.addAttribute("user", user);
+//	   	}
+//		
+//		model.addAttribute("qnaboard_posts", qnaService.read(scri));
+//
+//		PageMaker pageMaker = new PageMaker();
+//		pageMaker.setCri(scri);
+//		pageMaker.setTotalCount(qnaService.listCount(scri));
+//
+//		model.addAttribute("pageMaker", pageMaker);
+//		model.addAttribute("page", page);
+//
+//		return "/forum/qnaboard";
+//	}
+	
+	
 	@RequestMapping(value = "/qnaboard", method = RequestMethod.GET)
-	public String qnaboard_list(Model model, @ModelAttribute("scri") SearchCriteriaAdminUser scri, @RequestParam(name = "page", required = false, defaultValue = "1") int page) throws Exception {
+	public String qnaboard_list(Model model, @RequestParam(name = "page", required = false, defaultValue = "1") int page, HttpSession session) throws Exception {
+		String signedInUser = (String) session.getAttribute("signedInUser");
+	   	if(!(signedInUser==null)) {
+	   		User user = adminuserservice.selectById(signedInUser);
+	   		model.addAttribute("user", user);
+	   	}
+		
+	   	
+	   	List<Qna> qnaboard_posts = qnaService.read(page);
+	   	log.debug("qna최신글 리스트 = {}", qnaboard_posts);
+	   	model.addAttribute("qnaboard_posts", qnaboard_posts);
+	   	
+	   	
+	   	// 전체 포스트 개수
+	   	int totNumQnaPosts = qnaService.totQnaPosts();
+	   	log.debug("전체 qna게시글 개수={}", totNumQnaPosts);
+	   	PagingDto pagingDto = qnaService.paging(page, totNumQnaPosts);
 
-		model.addAttribute("qnaboard_posts", qnaService.read(scri));
-
-		PageMaker pageMaker = new PageMaker();
-		pageMaker.setCri(scri);
-		pageMaker.setTotalCount(qnaService.listCount(scri));
-
-		model.addAttribute("pageMaker", pageMaker);
+		model.addAttribute("pagingDto", pagingDto);
 		model.addAttribute("page", page);
 
 		return "/forum/qnaboard";
 	}
+	
 	
 	@GetMapping("/qnaboard-create") //-> GET 방식의 "/forum/qnaboard-create" 요청 주소를 처리하는 메서드.
 	public void qnaboard_create() {
@@ -226,8 +265,14 @@ public class PostController {
 	
 	@GetMapping({"/qnaboard-detail", "/qnaboard-modify"})
 	//-> /qnaboard-detail, /qnaboard-modify 2개의 요청을 처리하는 메서드!
-	public void qnaboard_detail(@RequestParam(name = "qna_id") long qna_id, Model model) {
+	public void qnaboard_detail(@RequestParam(name = "qna_id") long qna_id, Model model, HttpSession session) {
 	
+	String signedInUser = (String) session.getAttribute("signedInUser");
+   	if(!(signedInUser==null)) {
+	   	User user = adminuserservice.selectById(signedInUser);
+	   	model.addAttribute("user",user);
+	}	
+
 	// 서비스 계층의 메서드를 호출해서 뷰에 전달할 포스트 상세보기 내용을 읽음.
 	Qna qna = qnaService.detail(qna_id);
 	
@@ -261,19 +306,79 @@ public class PostController {
 		return "redirect:/forum/qnaboard";
 	}
 	
+//	@GetMapping("qnaboard_search") //-> GET 방식의 "forum/qnaboard_search" 요청 주소를 처리하는 메서드.
+//	public String search(QnaSearchDto dto, Model model, @ModelAttribute("scri") SearchCriteriaAdminUser scri, @RequestParam(name = "page", required = false, defaultValue = "1")int page
+//			,HttpServletRequest request) {
+//    	log.debug("search(dto={})", dto);
+//    
+//		// 서비스 계층의 메서드를 호출해서 검색 서비스를 수행.
+//    	List<QnaLIstItemDto> list = qnaService.search(dto, page);
+//    	int totNumSearchList = qnaService.searchTotNumber(dto);
+//    	
+//    	scri.setPerPageNum(9);
+//    	scri.setPage(page);
+//    	log.debug("scri, page = {}", scri.getPage());
+//    	log.debug("scri, porPageNum= {}", scri.getPerPageNum());
+//    	
+//		PageMaker pageMaker = new PageMaker();
+//		pageMaker.setCri(scri);
+//		pageMaker.setTotalCount(totNumSearchList);
+//		
+//		String servletPath = request.getServletPath();
+//		
+//		
+//		model.addAttribute("pageMaker", pageMaker);
+//		model.addAttribute("page", page);
+//    	
+//    	// 검색 결과를 뷰에 전달하기 위해서 모델 속성(attribute)에 추가.
+//    	model.addAttribute("qnaboard_posts", list);
+//    	model.addAttribute("pageMaker", pageMaker);
+//    	model.addAttribute("page", page);
+//    	model.addAttribute("servletPath", servletPath);
+//    	
+//    	log.debug("pageMaker={}", pageMaker);
+//    	log.debug("scri={}", scri);
+//    	log.debug("listSize={}", list.size());
+//    
+//    	
+//    	return "forum/qnaboard"; //-> 뷰의 경로(/WEB-INF/views/forum/qnaboard.jsp)
+//    	//-> servlet-context에서 prefix 부분이 /WEB-INF/views/ 였으므로.
+//	}
+	
+	
 	@GetMapping("qnaboard_search") //-> GET 방식의 "forum/qnaboard_search" 요청 주소를 처리하는 메서드.
-	public String search(QnaSearchDto dto, Model model) {
+	public String search(QnaSearchDto dto, Model model, @RequestParam(name = "page", required = false, defaultValue = "1")int page, HttpServletRequest request) {
     	log.debug("search(dto={})", dto);
-    
+    	
 		// 서비스 계층의 메서드를 호출해서 검색 서비스를 수행.
-    	List<QnaLIstItemDto> list = qnaService.search(dto);
-    
+    	List<QnaLIstItemDto> list = qnaService.search(dto, page);
+    	int totNumSearchList = qnaService.searchTotNumber(dto);
+		
+		String servletPath = request.getServletPath();
+		
+		PagingDto pagingDto = qnaService.paging(page, totNumSearchList);
+		
+		// model.addAttribute("pageMaker", pageMaker);
+		model.addAttribute("page", page);
+    	
     	// 검색 결과를 뷰에 전달하기 위해서 모델 속성(attribute)에 추가.
     	model.addAttribute("qnaboard_posts", list);
+    	
+    	
+    	model.addAttribute("pagingDto", pagingDto);
+    	model.addAttribute("page", page);
+    	model.addAttribute("servletPath", servletPath);
+    	
+    	// log.debug("pageMaker={}", pageMaker);
+    	log.debug("listSize={}", list.size());
+    
     	
     	return "forum/qnaboard"; //-> 뷰의 경로(/WEB-INF/views/forum/qnaboard.jsp)
     	//-> servlet-context에서 prefix 부분이 /WEB-INF/views/ 였으므로.
 	}
+	
+	
+	
 	// qnaboard 처리 끝 //
 	
 	
@@ -297,8 +402,13 @@ public class PostController {
 //	}
 	
 	@RequestMapping(value = "/faqboard", method = RequestMethod.GET)
-	public String faqboard_list(Model model, @ModelAttribute("scri") SearchCriteriaAdminUser scri, @RequestParam(name = "page", required = false, defaultValue = "1") int page) throws Exception {
-
+	public String faqboard_list(Model model, @ModelAttribute("scri") SearchCriteriaAdminUser scri, @RequestParam(name = "page", required = false, defaultValue = "1") int page, HttpSession session) throws Exception {
+		String signedInUser = (String) session.getAttribute("signedInUser");
+	   	if(!(signedInUser==null)) {
+	   		User user = adminuserservice.selectById(signedInUser);
+	   		model.addAttribute("user", user);
+	   	}
+		
 		model.addAttribute("faqboard_posts", faqService.read(scri));
 
 		PageMaker pageMaker = new PageMaker();
@@ -328,8 +438,14 @@ public class PostController {
 	
 	@GetMapping({"/faqboard-detail", "/faqboard-modify"})
 	//-> /faqboard-detail, /faqboard-modify 2개의 요청을 처리하는 메서드!
-	public void faqboard_detail(@RequestParam(name = "faq_id") long faq_id, Model model) {
+	public void faqboard_detail(@RequestParam(name = "faq_id") long faq_id, Model model, HttpSession session) {
 	
+	String signedInUser = (String) session.getAttribute("signedInUser");
+	if(!(signedInUser==null)) {
+		User user = adminuserservice.selectById(signedInUser);
+	   	model.addAttribute("user",user);
+	}
+
 	// 서비스 계층의 메서드를 호출해서 뷰에 전달할 포스트 상세보기 내용을 읽음.
 	Faq faq = faqService.detail(faq_id);
 	
@@ -399,8 +515,13 @@ public class PostController {
 //	}
 	
 	@RequestMapping(value = "/noticeboard", method = RequestMethod.GET)
-	public String noticeboard_list(Model model, @ModelAttribute("scri") SearchCriteriaAdminUser scri, @RequestParam(name = "page", required = false, defaultValue = "1") int page) throws Exception {
-
+	public String noticeboard_list(Model model, @ModelAttribute("scri") SearchCriteriaAdminUser scri, @RequestParam(name = "page", required = false, defaultValue = "1") int page, HttpSession session) throws Exception {
+		String signedInUser = (String) session.getAttribute("signedInUser");
+	   	if(!(signedInUser==null)) {
+	   		User user = adminuserservice.selectById(signedInUser);
+	   		model.addAttribute("user", user);
+	   	}
+		
 		model.addAttribute("noticeboard_posts", noticeService.read(scri));
 
 		PageMaker pageMaker = new PageMaker();
@@ -430,8 +551,14 @@ public class PostController {
 	
 	@GetMapping({"/noticeboard-detail", "/noticeboard-modify"})
 	//-> /noticeboard-detail, /noticeboard-modify 2개의 요청을 처리하는 메서드!
-	public void noticeboard_detail(@RequestParam(name = "notice_id") long notice_id, Model model) {
+	public void noticeboard_detail(@RequestParam(name = "notice_id") long notice_id, Model model, HttpSession session) {
 	
+	String signedInUser = (String) session.getAttribute("signedInUser");
+	if(!(signedInUser==null)) {
+	   	User user = adminuserservice.selectById(signedInUser);
+	   	model.addAttribute("user",user);
+	}
+	   	
 	// 서비스 계층의 메서드를 호출해서 뷰에 전달할 포스트 상세보기 내용을 읽음.
 	Notice notice = noticeService.detail(notice_id);
 	
