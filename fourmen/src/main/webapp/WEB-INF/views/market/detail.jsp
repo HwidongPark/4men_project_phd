@@ -19,21 +19,19 @@
          <link rel="stylesheet" href="../css/market-detail.css">
          <link rel="stylesheet" href="../css/footer.css">
 		<style>
-		@font-face {
-    font-family: 'NEXON Lv1 Gothic OTF';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-.gfont {
-	font-family: 'NEXON Lv1 Gothic OTF';
-	margin-top: 50px;
-}
+    		@font-face {
+            font-family: 'NEXON Lv1 Gothic OTF';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+             }
+            .gfont {
+            	font-family: 'NEXON Lv1 Gothic OTF';
+            }
 		</style>
 	</head>
-	<body>
+	<body class="gfont">
 		<%@ include file="../fragments/navigation.jspf" %>
-		<div class="gfont">
         <section class="product-container">
             
             <!-- JSTL로 사진 대체 -->
@@ -183,7 +181,6 @@
         </c:if>
         <!-- JavaScript에서 사용하기 위해서.. -->
         <input id="workid" name="workid" class="d-none" type="text" value="${ marketPost.workId }">                     
-        </div>
         
         <%@ include file="../fragments/footer.jspf" %>
         

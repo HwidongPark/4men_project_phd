@@ -107,14 +107,9 @@
                         <td>${ wishListPost.price }</td>
                         <td>${ wishListPost.userId }</td>
                         <td>
-                            <c:choose>
-                                <c:when test="${ wishListPost.isSold == 'Y' }">
-                                    <span class="deal-completed">거래 완료</span>
-                                </c:when>
-                                <c:otherwise>
-                                    <span style="font-weight: 700;">거래 중</span>
-                                </c:otherwise>
-                            </c:choose>
+                            <c:if test="${ wishListPost.isSold == 'Y' }">
+                                <span class="deal-completed">거래 완료</span>
+                            </c:if>
                         </td>
                     </tr>
                 </c:forEach>

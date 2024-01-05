@@ -24,7 +24,7 @@ em {
 section.product-container {
     width: 85%;
     /* min-width: 1016px; */
-	margin: 1em auto 2em auto;
+	margin: 3em auto 2em auto;
 	display: grid;
 	grid-template-columns: 3fr 2fr;
 }
