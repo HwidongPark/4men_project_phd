@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
     btnModify.addEventListener('click', () => {
         // 이벤트 처리에 사용될 요소 찾기...
         // 포스트 제목을 가지고 있는 요소를 찾음.
-        const post_title = document.querySelector('input#freeboard-view-detail-title').value;
+        const post_title = document.querySelector('input#freeboard-view-modify-title').value;
 
         // 포스트 내용을 가지고 있는 요소를 찾음.
         const post_content = document.querySelector('textarea#freeboard-view-detail-content').value;
@@ -101,10 +101,10 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // ** 이벤트 처리에 사용될 요소 찾기. **
     // 포스트 제목을 가지고 있는 요소를 찾음.
-    const post_title = document.getElementById('freeboard-view-modify-title');
+    const post_title = document.querySelector('input#freeboard-view-modify-title');
 
     // 포스트 내용을 가지고 있는 요소를 찾음.
-    const post_content = document.getElementById('freeboard-view-detail-content');
+    const post_content = document.querySelector('textarea#freeboard-view-detail-content');
 
     // 현재 글자수와 남은 글자수를 표시할 요소 생성
     const maxCharacters = parseInt(post_content.getAttribute("maxlength"));

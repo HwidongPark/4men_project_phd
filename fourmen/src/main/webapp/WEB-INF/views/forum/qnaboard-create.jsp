@@ -34,7 +34,7 @@
     <div id="underheader-div">
         <div class="container" id="underheadrcontainer">
             <h2 class="commondesign">
-                QNA
+                QUALIFY
             </h2>
         </div>
     </div>
@@ -50,7 +50,7 @@
                     <a href="freeboard" class="category-button" onclick="change_category_style(event)">자유게시판</a>
                 </li>
                 <li class="forum-kategorie-board">
-                    <a href="qnaboard" class="category-button" onclick="change_category_style(event)">Q&A</a>
+                    <a href="qnaboard" class="category-button" onclick="change_category_style(event)">QUALIFY</a>
                 </li>
                 <li class="forum-kategorie-board">
                     <a href="faqboard" class="category-button" onclick="change_category_style(event)">FAQ</a>

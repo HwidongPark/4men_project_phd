@@ -38,7 +38,7 @@
     <div id="underheader-div">
         <div class="container" id="underheadrcontainer">
             <h2 class="commondesign">
-                Q&A
+                QUALIFY
             </h2>
         </div>
     </div>
@@ -77,7 +77,7 @@
                 </c:if>
             </div>
             <div> <!-- 내용 -->
-                <textarea id="qnaboard-view-detail-content" name="qnaboard_content" class="qnaboard-view-detail-content">${qna.qna_content}</textarea>
+                <textarea id="qnaboard-view-detail-content" name="qnaboard_content" class="qnaboard-view-detail-content" maxlength="1000" placeholder="내용을 입력하세요 (공백 포함 1000자)" onkeyup="return textarea_maxlength(this)">${qna.qna_content}</textarea>
             </div>
         </div>
         

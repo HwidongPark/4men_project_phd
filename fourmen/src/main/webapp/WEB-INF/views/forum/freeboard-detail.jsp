@@ -65,21 +65,21 @@
                     <label class="freeboard-view-detail-info-label">조회</label>
                     <input id="freeboard-view-detail-view" value="${post.post_view_count}" type="number" readonly="readonly">
                 </li>
-                <li>
-                    <label class="freeboard-view-detail-info-label">댓글</label>
-                    <input id="freeboard-view-detail-comment" value="1" type="number" readonly="readonly">
-                </li>
             </ul>
             
             <div class="freeboard_md_del_btn">
-                <!-- 작성자 아이디와 로그인 사용자 아이디가 같을 때와 관리자(admin)만 버튼을 보여줌 -->
-                <c:if test="${post.userid eq signedInUser || user.grade eq '관리자'}">
+                <!-- 작성자 아이디와 로그인 사용자 아이디가 같을 때만 수정 버튼을 보여줌 -->
+                <c:if test="${post.userid eq signedInUser}">
                     <c:url var="postModifyPage" value="/forum/freeboard-modify">
                         <c:param name="post_id" value="${post.post_id}" />
                     </c:url>
                     <a href="${postModifyPage}" id="freeboard-detail-modify">수정</a> <!-- 수정 버튼 -->
+                </c:if>
+                <!-- 작성자 아이디와 로그인 사용자 아이디가 같을 때 그리고 관리자(admin)만 삭제 버튼을 보여줌 -->
+                <c:if test="${post.userid eq signedInUser || user.grade eq '관리자'}">
                     <button id="freeboard-detail-delete" type="button">삭제</button> <!-- 삭제 버튼 -->
                 </c:if>
+                
             </div>
             <div> <!-- 내용 -->
                 <textarea id="freeboard-view-detail-content" class="freeboard-view-detail-content" readonly="readonly">${post.post_content}</textarea>

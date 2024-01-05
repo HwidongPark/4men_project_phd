@@ -26,6 +26,7 @@ public class PostService {
 	// 자유게시판 글 목록 보여주기...
 	public List<Post> read(SearchCriteriaAdminUser scri) {
 		log.debug("read()");
+		log.debug("scri={}", scri);
 		// postDao의 메서드를 호출해서 포스트(자유게시판) 목록을 리턴받고, 컨트롤러에게 리턴.
 		List<Post> list = postDao.selectOrderByPostIdDesc(scri); // -> DB에서 가져오는 데이터 타입은 Post 타입.
 		return list;
