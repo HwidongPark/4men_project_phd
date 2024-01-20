@@ -48,10 +48,10 @@
         <div class="forum-kategorie">
             <ul class="forum-kategorie-board-lists">
                 <li class="forum-kategorie-board">
-                    <a href="freeboard" class="category-button">FREEBOARD</a>
+                    <a href="freeboard" class="category-button">자유게시판</a>
                 </li>
                 <li class="forum-kategorie-board">
-                    <a href="qnaboard" class="category-button">QUALIFY</a>
+                    <a href="qnaboard" class="category-button">등업게시판</a>
                 </li>
                 <li class="forum-kategorie-board">
                     <a href="faqboard" class="category-button forum-kategori-current-selected">FAQ</a>

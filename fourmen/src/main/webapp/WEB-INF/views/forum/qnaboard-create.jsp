@@ -47,10 +47,10 @@
         <div class="forum-kategorie">
             <ul class="forum-kategorie-board-lists">
                 <li class="forum-kategorie-board">
-                    <a href="freeboard" class="category-button" onclick="change_category_style(event)">FREEBOARD</a>
+                    <a href="freeboard" class="category-button" onclick="change_category_style(event)">자유게시판</a>
                 </li>
                 <li class="forum-kategorie-board">
-                    <a href="qnaboard" class="category-button forum-kategori-current-selected" onclick="change_category_style(event)">QUALIFY</a>
+                    <a href="qnaboard" class="category-button forum-kategori-current-selected" onclick="change_category_style(event)">등업게시판</a>
                 </li>
                 <li class="forum-kategorie-board">
                     <a href="faqboard" class="category-button" onclick="change_category_style(event)">FAQ</a>
@@ -75,7 +75,7 @@
                     <textarea id="qna_content" name="qna_content" placeholder="내용을 입력하세요 (공백 포함 1000자)" maxlength="1000" onkeyup="return textarea_maxlength(this)"></textarea>
                 </div>
                 <!-- 작성자 아이디는 로그인한 사용자 아이디로 + 보이지 않도록 설정 -->
-                <div id="qnaboard-create-author" class="d-none">
+                <div id="qnaboard-create-author">
                     <input type="text" name="user_id" value="${signedInUser}" readonly />
                 </div>
             </form>

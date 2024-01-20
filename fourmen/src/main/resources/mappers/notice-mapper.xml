@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- NOTICE_BOARD 테이블에서 CRUD에 필요한 SQL 문장들을 선언 -->
 <!-- namespace: 매퍼 파일에 정의된 SQL 문장들이 어떤 인터페이스와 연결되는지를 지정 -->
