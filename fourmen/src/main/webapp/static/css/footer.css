@@ -1,34 +1,134 @@
-footer {
-    margin-top: 5rem;
-    padding-bottom: 5rem;
-    background-color: #edf2f4;
+@charset "UTF-8";
+.place{
+	margin: 50px;
 }
 
-.footer-links-container {
+.view-footer{
+	background: black;
+	color: white;
+	padding: 3.625rem 0;
+	width: 100%;
+	position: relative;
+	    min-width: 80rem;
+}
+
+.footer-top-area{
+padding: 0 0 2.8125rem;
+width: 80rem;
     margin: 0 auto;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    list-style-type: none;
+  
+}
+.footer-menu{
+	display: block;
+	margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 0px;	
+}
+.footer-ul{
+display: block;
+margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+    
 }
 
-.footer-links {
-    justify-content: center;
+.footer-info, .footer-info2{
+display: block;
+	margin-block-start: 0em;
+    margin-block-end: 5px;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 0px;	
 }
 
-.footer-links a {
-    text-decoration: none;
-    margin: 0 0.5em;
-    color: black;
+
+.footer-li{
+	display: inline-block;
+    vertical-align: top;
+}
+.name{
+	font-size: 25px;
+}
+.location{
+	font-size: 15px;
+	padding-top: 10px;
+	color: darkgray;
+}
+.top{
+	padding-top: 30px;
+}
+.d-museum{
+	    width: 11.875rem;
+    margin-left: 5.625rem;
 }
 
-.footer-links-container p {
-    margin-top: 1em;
+.daelim-museum{
+	    width: 11.875rem;
+    margin-left: 6.75rem;
 }
 
-/* hover효과 */
-.footer-links a:hover {
-    text-decoration: underline;
+.guseulmoa{
+	    width: 11.875rem;
+    margin-left: 5.625rem;
+}
 
-    color: #086cb3;
+.footer-util-area{
+    width: 11.8125rem;
+    margin-left: 4.375rem;
+	
+}
+.whitebox{
+	background-color: white;
+	color: black;
+	padding-right: 3px;
+	padding-left: 3px;
+	padding-bottom: 0.5px;
+	font-size: 14px;
+}
+
+#logo{
+	height: 40px;
+	width: 180px;
+}
+#instagram{
+	width: 35px;
+	height: 35px;
+	margin-right: 10px;
+}
+#youtube{
+		width: 35px;
+	height: 35px;
+}
+.link{
+	font-size: 15px;
+	padding :5px;
+}
+.white{
+	text-decoration: none;
+	color: white;
+}
+.footer-bottom-area{
+	width: 80rem;
+    padding: 2.8125rem 0 0;
+    margin: 0 auto;
+    border-top: 1px solid #282929;
+}
+.underli{
+	margin:5px;
+	font-size: 14px;
+}
+
+.footer-info-area{
+	margin-top: 30px;
+	font-size: 14px;
+	color: gray;
+}
+.copyrights{
+	font-size:14px;
+	margin-top: 20px;
 }

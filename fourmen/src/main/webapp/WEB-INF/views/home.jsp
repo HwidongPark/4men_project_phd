@@ -5,27 +5,164 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>FOURMEN</title>
+<title>Artists Archive</title>
 
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
 	rel="stylesheet"
 	integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
 	crossorigin="anonymous">
-<link rel="stylesheet" href="css/header.css">
-<link rel="stylesheet" href="css/app.css">
-<link rel="stylesheet" href="css/footer.css">
 
+<!-- css 파일 적용 -->
+<link rel="stylesheet" href="css/app.css">
+<link rel="stylesheet" href="css/header.css">
+<link rel="stylesheet" href="css/footer.css">
+<link rel="stylesheet" href="css/homeunderheader.css">
+<style>
+@font-face {
+    font-family: 'EF_Rebecca';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-EF@1.0/EF_Rebecca.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+.main-content{
+font-family: 'EF_Rebecca';
+}
+.bighome{
+margin-top: 60px;
+display: flex;
+
+}
+.cardbox{
+width: 25%;
+height: 35%;
+text-align: center;
+font-size: 30px;
+margin-right: 30px;
+}
+.page{
+text-align: left;
+font-size: 30px;
+}
+.more{
+text-align: right;
+font-size: 10px;
+}
+.a-more{
+color:black;
+}
+.card{
+margin-top:10px;
+}
+.market-img{
+width: 50%;
+height: 50%;
+margin-right: 20px;
+}
+.marketimg{
+width: 100%;
+height: 100%;
+}
+.market-images{
+display: flex;
+margin-top: 10px;
+}
+.marketzone{
+margin-left: 20px;
+}
+.artists{
+test-align: center;
+size: 60px;
+}
+.artist-img{
+width:100%;
+
+}
+.artistimg{
+width: 100%;
+height: 100%;
+}
+.enter{
+	margin:100px;
+}
+.artist{
+text-align: right;
+font-size: 60px;
+background-color: white;
+padding-top: 20px;
+
+color: black;
+}
+.artistzone-size{
+height: auto;
+background-color:white;
+padding-top: 20px;
+padding-left: 10px;
+}
+.artistzone{
+padding-bottom: 50px;
+}
+
+div#artist_container {
+	margin: 0 auto;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+	grid-column-gap: 30px;
+	grid-row-gap: 40px;
+}
+.card .card-img {
+    width: 100%; /* 이미지 너비 100%로 설정 */
+    height: 100%; /* 이미지 높이 100%로 설정 */
+    object-fit: cover; /* 이미지 비율 유지하면서 카드에 맞춰 잘립니다 */
+}
+
+.card .card-img-overlay {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.5s ease; /* 효과 부드럽게 전환 */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* 반투명한 검은 배경 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* 마우스 호버 시 오버레이 나타남 */
+.card:hover .card-img-overlay {
+    visibility: visible;
+    opacity: 1;
+}
+
+.card .card-img-overlay h5 {
+    color: white; /* 텍스트의 색상을 흰색으로 변경 */
+}
+
+</style>
 </head>
 
-<body>
+<!-- body 시작점 -->
+<body onload="showImage()">
     
     <!-- 헤더 파일 include -->
     <%@ include file="fragments/navigation.jspf"%>
     
+    <!-- 웹페이지 상단 헤더 아래 부분 -->
+    <div id="underheader-div">
+        <div class="container" id="underheadrcontainer">
+            <h2 class="commondesign">
+            <!-- 홈페이지 헤더와 캐로셀 사이의 여백 만들기 -->
+            </h2>
+        </div>
+    </div>
     
     <!-- Carousel 사진들 추가 -->
-    <div id="carousel" class="carousel slide w-75">
+    <div id="carousel" class="carousel slide w-100">
         <div class="carousel-indicators">
           <button type="button" data-bs-target="#carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
           <button type="button" data-bs-target="#carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -33,15 +170,18 @@
         </div>
         <div class="carousel-inner">
           <div class="carousel-item active img-size-control">
-            <img src="https://m.segye.com/content/image/2018/11/27/20181127003595.jpg"
+
+
+            <img src="picture/hand.png"
              class="d-block w-100 carousel-img-size" alt="...">
           </div>
           <div class="carousel-item img-size-control">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSc3zBDYtml5oZ3HMDqdE20b6FPsKPpZ1LkHg&usqp=CAU" 
+            <img src="picture/background.png"
             class="d-block w-100 carousel-img-size" alt="...">
           </div>
           <div class="carousel-item img-size-control">
-            <img src="https://tvstore-phinf.pstatic.net/20210914_191/1631614821883lmWOm_JPEG/00020.jpg"
+            <img src="picture/인간들.jpg"
+
              class="d-block w-100 carousel-img-size" alt="...">
           </div>
         </div>
@@ -55,145 +195,109 @@
         </button>
     </div>
     
-    <!-- 검색어 form -->
-    <form action="#" id="search-form">
-        <select>
-            <option value="title">제목</option>
-            <option value="content">내용</option>
-            <option value="title_content">제목 + 내용</option>
-            <option value="username">글쓴이</option>
-        </select>
-        <input id="search-keyword" type="text" name="keyword" placeholder="검색">
-        <button id="btnSearch">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
-            </svg>
-        </button>
-    </form>
+   
     
     <!-- 각 메뉴들의 내용을 간략하게 보여줌 -->
     <main class="main-content">
-
-        <!-- 훈련과정 간략하게 보여줌 -->
-        <div>
-            <h2 class="sample-trainings">전시회 정보</h2>
-            <div class="row row-col-xs-1 row-cols-sm-2 row-cols-md-3 g-3">
-                <div class="col">
-                    <div class="card">
-                        <img src="https://t1.daumcdn.net/cfile/tistory/9906804C5FB7337315" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title"><a href="#">Card title</a></h5>
-                            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card">
-                        <img src="https://t1.daumcdn.net/cfile/tistory/9906804C5FB7337315" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title"><a href="#">Card title</a></h5>
-                            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card">
-                        <img src="https://t1.daumcdn.net/cfile/tistory/9906804C5FB7337315" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title"><a href="#">Card title</a></h5>
-                            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card">
-                        <img src="https://t1.daumcdn.net/cfile/tistory/9906804C5FB7337315" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title"><a href="#">Card title</a></h5>
-                            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card">
-                        <img src="https://t1.daumcdn.net/cfile/tistory/9906804C5FB7337315" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title"><a href="#">Card title</a></h5>
-                            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card">
-                        <img src="https://t1.daumcdn.net/cfile/tistory/9906804C5FB7337315" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title"><a href="#">Card title</a></h5>
-                            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+			
+		<div class="bighome">
+		<div class="cardbox">
+		<p class="page">EXHIBITION</p>
+		<p class="more"><a class="a-more" href="exhibition">more</a><p>
+		<div class="card">
+        <img id="introImg" border="0">
         </div>
-
+        </div>
         
-        <div class="forum-container">
-            <!-- 자유게시판, 취업 후기 몇 개 보여줌 -->
-            <div class="forum-subcontainer">
-                <a class="link-to-board" href="#">
-                    <b><h2 class="forum-text">인기 포트폴리오</h2></b>
-                </a>
-                <ul class="forum-sample-list">
-                    <li>
-                        <a href="#">자유게시판 글 제목1</a>
-                    </li>
-                    <li>
-                        <a href="#">자유게시판 글 제목2</a>
-                    </li>
-                    <li>
-                        <a href="#">자유게시판 글 제목3</a>
-                    </li>
-                    <li>
-                        <a href="#">가나다라마바사아자차카타파ㅏㅏ하하쟈댜라쟈댜겨갸니니댜료펴퍄ㅕ재잳ㅈ벼ㅑ교소지냐야펴펴댜재지나어</a>
-                    </li>
-                    <li>
-                        <a href="#">자유게시판 글 제목5</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- 취업 후기 게시판 몇 개 보여줌 -->
-            <div class="forum-subcontainer">
-                <a class="link-to-board" href="#">
-                    <b><h2 class="forum-text">최신 포트폴리오</h2></b>
-                </a>
-                <ul class="forum-sample-list">
-                    <li>
-                        <a href="#">취업후기 게시판 글 제목 1</a>
-                    </li>
-                    <li>
-                        <a href="#">취업후기 게시판 글 제목 2</a>
-                    </li>
-                    <li>
-                        <a href="#">취업후기 게시판 글 제목 3</a>
-                    </li>
-                    <li>
-                        <a href="#">취업후기 게시판 글 제목 4</a>
-                    </li>
-                    <li>
-                        <a href="#">취업후기 게시판 글 제목 5</a>
-                    </li>
-                </ul>
-            </div>
+        <div class="marketzone">
+        <p class="page">MARKET</p>
+		<p class="more"><a class="a-more" href="market">more</a><p>
+		<div class="market-images">
+        <c:if test="${ market.size() ne 0 }">
+	        <c:forEach begin="0" end="${ market.size() - 1 ge 2 ? 2 : market.size() - 1}" step="1" var="index">
+	        		<div class="market-img"><img class="marketimg" src="/fourmen/uploads/${market[index].workImages[0].savedFileName}"/></div>
+	        </c:forEach>
+        </c:if>
         </div>
-    </main>
+        <div class="enter"></div>
+        <p class="artist">ARTISTS</p>
+       	<p class="more"><a class="a-more" href="artist">more</a><p>
+        </div>
+        
+        </div>
+        <div class="artistzone">
+        	<div class="artistzone-size">
+	        	<div id = "artist_container">
+				<c:forEach var="a" items="${artist}" varStatus = "loop">
+					<c:url var="artist_details" value="/artist/artist_details">
+						<c:param name="userid" value="${a.userid}"/>
+					</c:url>
+					
+					<a href="${artist_details}">
+						<div class="card text-bg-light">
+							<c:forEach var="img" items ="${artistImg}">
+								<c:if test="${a.userid eq img.userid}">
+									<div class="artist-img"><img class="artistimg" src="images/char/${img.artist_s_img}" onerror="this.src='images/char/default_user.png'" class="card-img" alt="test_user"/></div>
+								</c:if>
+							</c:forEach>
+									
+							<div class="card-img-overlay">
+								<h5 class="card-title fs-2">${a.nickname}</h5>
+							</div>
+						</div>
+					</a>
+				</c:forEach>
+				</div>
+        	</div>
+        </div>
+    </main>  
+        
+</body>
+			
+	
+       
     
+    
+    
+    
+    
+    
+    <!-- 푸터 파일 include -->
     <%@ include file="fragments/footer.jspf" %>
-
+	 <script type="text/javascript">
+        var imgArray = new Array();
+        imgArray[0] = "image/exhibition1.jpg";
+        imgArray[1] = "image/exhibition2.jpg";
+        imgArray[2] = "image/exhibition3.png";
+        imgArray[3] = "image/exhibition4.jpg";
+        imgArray[4] = "image/exhibition5.png";
+        imgArray[5] = "image/exhibition6.png";
+        imgArray[6] = "image/exhibition7.jpg";
+        imgArray[7] = "image/exhibition8.jpg";
+        imgArray[8] = "image/exhibition9.png";
+        imgArray[9] = "image/exhibition10.jpg";
+        imgArray[10] = "image/exhibition11.png";
+        imgArray[11] = "image/exhibition12.jpg";
+        imgArray[12] = "image/exhibition13.png";
+        imgArray[13] = "image/exhibition14.jpg";
+        imgArray[14] = "image/exhibition15.png";
+        imgArray[15] = "image/exhibition16.jpg";
+ 
+        function showImage() {
+            var imgNum = Math.round(Math.random() * 9);
+            var objImg = document.getElementById("introImg");
+            objImg.src = imgArray[imgNum];
+ 
+            setTimeout("showImage()", 4000);
+        }
+ 
+        
+    </script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
 		crossorigin="anonymous"></script>
-    <script src="js/header.js"></script>      
-       
-
+    <script src="js/header.js"></script>
+	
 </body>
 </html>

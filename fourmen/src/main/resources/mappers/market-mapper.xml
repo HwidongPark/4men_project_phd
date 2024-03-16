@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.itwill.fourmen.repository.MarketDao">
+    <insert id="insertMarketPost" parameterType="Market">
+        insert into market (userid, title, description_kor, price, year_created, painting_size)
+        values (#{userId}, #{title}, #{descriptionKor}, #{price}, #{yearCreated, jdbcType=INTEGER}, #{paintingSize, jdbcType=VARCHAR})
+    </insert>
+    <select id="getWorkId" resultType="long">
+        SELECT max(worksid) FROM market
+    </select>
+    
+    <select id="readPagedMarketPosts" resultType="Market">
+        SELECT *
+        FROM market
+        ORDER BY worksid DESC
+        OFFSET #{ startingPost } ROWS FETCH NEXT #{ postsPerPage } ROWS ONLY
+    </select>
+    
+    <select id="countTotNumber" resultType="Integer">
+        SELECT count(*)
+        FROM market
+    </select>
+    
+    <select id="getTotPopularNum" resultType="Integer">
+        SELECT count(*)
+        FROM (
+                SELECT *
+                FROM market
+                WHERE is_sold != 'Y' OR is_sold IS NULL
+                ORDER BY (views + 10 * likes) DESC
+            )
+        WHERE ROWNUM &lt;= 20
+    </select>
+    
+    
+    <insert id="insertWorkImage">
+        INSERT INTO images (worksid, category, original_file, saved_file) VALUES (#{workId}, 'market', #{originalFileName}, #{savedFileName})
+    </insert>
+    
+    <select id="readMarketPosts" resultType="Market">
+        SELECT * FROM market ORDER BY worksid DESC
+    </select>
+    
+    <select id="readMarketPost" resultType="Market">
+        SELECT * FROM market WHERE worksid = #{ workId }
+    </select>
+    
+    <select id="readPopularMarketPosts" resultType="Market">
+        SELECT *
+        FROM (
+            SELECT *
+            FROM market
+            WHERE is_sold != 'Y' OR is_sold IS NULL
+            ORDER BY (views + 10 * likes) DESC
+        )
+        WHERE ROWNUM &lt;= 20
+    </select>
+    
+    
+    <select id="readWorkImagesofPost" resultType="WorkImage">
+        SELECT * FROM images WHERE worksid= #{workId} AND category = 'market'
+    </select>
+    
+    
+    <update id="addView">
+        UPDATE market SET views = views + 1 WHERE worksid = #{ workId }
+    </update>
+    
+    <update id="addLikes">
+        UPDATE market SET likes = likes + 1 WHERE worksid = #{workId}
+    </update>
+    
+    <update id="subtractLikes">
+        UPDATE market SET likes = likes - 1 WHERE worksid = #{workId}
+    </update>
+    
+    <select id="searchPosts" resultType="Market">
+        SELECT *
+        FROM market
+        <where>
+            <if test="!keyword.equals('') and keyword != null">
+                <choose>
+                    <when test="searchCategory.equals('title')">
+                        title LIKE '%'||#{ keyword }||'%'
+                    </when>
+                    <when test="searchCategory.equals('content')">
+                        description_kor LIKE '%'||#{ keyword }||'%'
+                    </when>
+                    <when test="searchCategory.equals('userId')">
+                        userid LIKE '%'||#{ keyword }||'%'
+                    </when>
+                    <when test="searchCategory.equals('titleContent')">
+                        (title LIKE '%'||#{ keyword }||'%'
+                        OR description_kor LIKE '%'||#{ keyword }||'%')
+                    </when>
+                    <when test="searchCategory.equals('titleContentUserId')">
+                        (title LIKE '%'||#{ keyword }||'%'
+                        OR description_kor LIKE '%'||#{ keyword }||'%'
+                        OR userid LIKE '%'||#{ keyword }||'%')
+                    </when>
+                    <otherwise>
+                        title LIKE '%'||#{ keyword }||'%'
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="!minPrice.equals('') and minPrice != null">
+                AND PRICE &gt;= #{ minPrice } 
+            </if>
+            <if test="!maxPrice.equals('') and maxPrice != null">
+                AND PRICE &lt;= #{ maxPrice }
+            </if>
+        </where>
+        ORDER BY worksid DESC
+        OFFSET #{ startingPost } ROWS FETCH NEXT #{ postsPerPage } ROWS ONLY
+    </select>
+    
+    
+    <select id="searchCountTotNumber" resultType="Integer">
+        SELECT count(*)
+        FROM market
+        <where>
+            <if test="!keyword.equals('')">
+                <choose>
+                    <when test="searchCategory.equals('title')">
+                        title LIKE '%'||#{ keyword }||'%'
+                    </when>
+                    <when test="searchCategory.equals('content')">
+                        description_kor LIKE '%'||#{ keyword }||'%'
+                    </when>
+                    <when test="searchCategory.equals('userId')">
+                        userid LIKE '%'||#{ keyword }||'%'
+                    </when>
+                    <when test="searchCategory.equals('titleContent')">
+                        (title LIKE '%'||#{ keyword }||'%'
+                        OR description_kor LIKE '%'||#{ keyword }||'%')
+                    </when>
+                    <when test="searchCategory.equals('titleContentUserId')">
+                        (title LIKE '%'||#{ keyword }||'%'
+                        OR description_kor LIKE '%'||#{ keyword }||'%'
+                        OR userid LIKE '%'||#{ keyword }||'%')
+                    </when>
+                    <otherwise>
+                        title LIKE '%'||#{ keyword }||'%'
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="!minPrice.equals('')">
+                AND PRICE &gt;= #{ minPrice } 
+            </if>
+            <if test="!maxPrice.equals('')">
+                AND PRICE &lt;= #{ maxPrice }
+            </if>
+        </where>
+    </select>
+    
+    
+    <select id="readMyMarketPosts" resultType="Market">
+        SELECT *
+        FROM market
+        WHERE userid = #{signedInUser}
+        ORDER BY worksid DESC
+        OFFSET #{ startingPost } ROWS FETCH NEXT #{ postsPerPage } ROWS ONLY
+    </select>
+    
+    
+    <delete id="deleteMarketPost">
+        DELETE FROM market WHERE worksid = #{ workId }
+    </delete>
+    
+    <delete id="deleteWorkImages">
+        DELETE FROM images WHERE worksid = #{ workId } AND category = 'market'
+    </delete>
+    
+    <delete id="deleteImage">
+        DELETE FROM images WHERE imgid = #{ imgId } AND category = 'market'
+    </delete>
+    
+    <select id="readImage" resultType="WorkImage">
+        SELECT * FROM images WHERE imgid = #{ imgId } AND category = 'market'
+    </select>
+    
+    <update id="updateMarketPost">
+        UPDATE market
+            SET
+        title = #{title},
+        description_kor = #{descriptionKor},
+        price = #{price},
+        year_created = #{yearCreated},
+        painting_size = #{paintingSize}
+            WHERE
+        worksid = #{workId}
+    </update>
+    
+    
+    <insert id="addWishList">
+        insert into wishlist (userid, category, workid) values (#{ userId }, 'market', #{ workId })
+    </insert>
+    
+    <delete id="removeWishList">
+        DELETE FROM wishlist WHERE userid = #{userId} AND workid = #{workId}
+    </delete>
+    
+    <select id="readWishList" resultType="Integer">
+        SELECT count(*)
+        FROM wishlist
+        WHERE userid = #{userId} AND workid = #{workId}
+    </select>
+    
+    <select id="readWishListOfUser" resultType="WishList">
+        SELECT *
+        FROM wishlist
+        WHERE userid = #{ signedInUser }
+        ORDER BY id DESC
+    </select>
+    
+    <update id="confirmDeal">
+        UPDATE market SET is_sold = 'Y', buyerid=#{buyerId} WHERE worksid = #{ workId }
+    </update>
+    
+    
+</mapper>

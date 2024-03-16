@@ -1,0 +1,342 @@
+@charset "UTF-8";
+
+h1 {
+	font-size: 2rem;
+	font-weight: 600;
+}
+
+h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+b {
+    font-weight: 700;
+}
+
+
+em {
+    font-style: italic;
+}
+
+
+/* 가장 상단의 미술작품과 대략적 설명 부분 */
+section.product-container {
+    width: 85%;
+    /* min-width: 1016px; */
+	margin: 3em auto 2em auto;
+	display: grid;
+	grid-template-columns: 3fr 2fr;
+}
+
+
+/* 캐러샐 */
+#market-photo-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 16px;
+
+    max-width: 100%;
+    /* overflow-x: hidden; */
+}
+
+.carousel-outer-container {
+    width: 100%;
+    padding: 0;
+    font-size: 0;
+    margin: 0;
+    position: relative;
+}
+
+.carousel-images-container {
+    width: 100%;
+    font-size: 0;
+    overflow-x: hidden;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    scrollbar-width: none;
+}
+
+.carousel-images-container::-webkit-scrollbar {
+    display: none;
+}
+
+.carousel-images-wrapper {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+.carousel-each-image {
+    width: 100%;
+}
+
+.carousel-each-image img {
+    width: 100%;
+}
+
+.slide-button {
+    position: absolute;
+    transform: translateY(-50%);
+    top: 50%;
+
+    border: none;
+    border-radius: 50%;
+    background-color: black;
+    color: white;
+    height: 50px;
+    width: 50px;
+    font-size: 2.2rem !important;
+}
+
+#prev-slide {
+    left: 0;
+    display: none;
+    z-index: 1;
+}
+
+#next-slide {
+    right: 0;
+    z-index: 1;
+}
+
+
+
+/* 밑에 슬라이더 추가 */
+.image-slider-container {
+    width: 100%;
+    font-size: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.image-slide-wrapper {
+
+    /* overflow-x: auto; */
+    /* white-space: nowrap; */
+    font-size: 0;
+    width: 100%;
+    gap: 16px;
+
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+}
+
+.image-slide-item {
+    display: inline-block;
+    /* margin-right: 16px; */
+    /* width: 80px;
+    height: 100px; */
+    width: 100%;
+    object-fit: cover;
+}
+
+.image-slide-item:first-child {
+    border: 4px solid black;
+}
+
+/* 간단한 설명 부분 */
+.product-description {
+    text-align: right;
+    width: 85%;
+    margin: 0 0 2em auto;
+}
+
+#product-title {
+    text-align: left;
+    margin-top: 0;
+}
+
+.year-dimension-description {
+    font-weight: 300;
+    font-size: 0.8em;
+    color: darkgray;
+}
+
+.product-description hr {
+    margin: 2em auto;
+    width: 100%;
+}
+
+
+#product-price {
+    font-size: 1.5em;
+    margin-bottom: 2em;
+}
+
+/* 판매자(예술가) 간략 설명 */
+#artist {
+    margin: 2em 0 1em 0;
+}
+
+#artist-name {
+    text-decoration: none;
+    display: inline-block;
+    color: darkgray;
+    font-size: 1.5em;
+    margin-bottom: 0.5em;
+}
+
+#artist-bio {
+    text-align: left;
+    line-height: 20px;
+    font-size: 0.9em;
+    overflow: hidden;
+    
+    
+}
+
+.btn-read-more {
+    border: none;
+    background: none;
+    color: blue;
+    padding: 0;
+    display: none;
+    
+}
+
+/* 버튼 둥글게 만드는 CSS */
+.btn-rounded {
+    width: 100%;
+    height: 40px;
+    border-radius: 20px;
+}
+
+
+/* 아래 설명부분 */
+.product-detail-description {    
+    width: 85%;
+    /* min-width:1016px; */
+    margin: 0 auto 0 auto;
+}
+
+
+
+.product-detail-description h2 {
+    margin-bottom: 1em;
+}
+
+.product-detail-description > div > p {
+    line-height: 24px;
+}
+
+
+/* 삭제, 수정 버튼관련  */
+.market-btn-container {
+    width: 85%;
+    text-align: right;
+}
+
+
+@media (max-width: 1040px) {
+    
+    
+    body {
+        font-size: 14px;
+    }
+    
+    h1 {
+        font-size: 1.5rem;
+    }
+    
+    h2 {
+        font-size: 1.2rem;
+    }
+    
+    section.product-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-width: unset;
+    }
+    
+    #market-photo-container {
+        width: 100%;
+        
+    }
+    
+    #artworks img {
+        width: 100%;
+    }
+    
+    /* 슬라이드 사진 */
+    /* .image-slide-item {
+        width: 60px;
+        height: 80px;
+    } */
+
+    
+    /* 간략한 설명, 가격 등 */
+    .product-description {
+        width: 100%;
+        text-align: center;
+        margin: 1em auto;
+    }
+    
+    
+    
+    #product-title {
+        text-align: center;
+        margin-top: 0;
+    }
+    
+    .year-dimension-description {
+        margin-top: 0.3em;
+        text-align: right;
+        font-weight: 300;
+        font-size: 0.8em;
+        color: darkgray;
+    }
+    
+    .product-description hr {
+        margin: 1em auto;
+        width: 100%;
+    }
+    
+    
+    #product-price {
+        font-size: 1.2em;
+        margin-bottom: 1em;
+        text-align: right;
+    }
+    
+    
+    /* 판매자(예술가) 간략 설명 */
+    #artist {
+        margin: 1.5em 0 1em 0;
+    }
+    
+    #artist-name {
+        display: block;
+        font-size: 1.2em;
+        text-align: left;
+        margin-bottom: 1em;
+        gap: 0;
+    }
+    
+    /* 버튼 둥글게 만드는 CSS */
+    .btn-rounded {
+        height: 30px;
+        border-radius: 15px;
+        font-size: 0.9em;
+        width: 60%;
+    }
+    
+    
+    /* 아래 설명 부분 */
+    .product-detail-description {    
+    min-width: unset;
+    margin: 0 auto 0 auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .image-slide-wrapper {
+        grid-template-columns: repeat(7, 1fr);
+        gap: 8px;
+    }
+}

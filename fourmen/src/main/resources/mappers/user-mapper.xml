@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- POSTS 테이블에서 CRUD에 필요한 SQL 문장들을 선언 -->
+<mapper namespace="com.itwill.fourmen.repository.UserDao">
+ 	
+ 	<insert id="insert">
+ 	insert into USERS(USERID, PASSWORD, NAME, NICKNAME, PHONE, EMAIL)
+ 	values(#{userid}, #{password}, #{name}, #{nickname}, #{phone}, #{email})
+ 	</insert>
+	
+	<select id="selectByUserid">
+		select * from USERS where USERID = #{userid}
+	</select>
+	
+	<select id="selectByNickname">
+	 select * from USERS where NICKNAME = #{nickname}
+	</select>
+	
+	<select id="selectByUseridAndPassword">
+		select * from USERS
+		where USERID = #{userid} and PASSWORD = #{password}
+	</select>
+    
+    <update id="updateUserInfo">
+        UPDATE users
+            SET
+        nickname = #{nickname},
+        phone = #{phone},
+        email = #{email}
+        <if test="profile_o_img != null">,profile_o_img = #{profile_o_img, jdbcType=VARCHAR}</if>
+        <if test="profile_s_img != null">,profile_s_img = #{profile_s_img, jdbcType=VARCHAR}</if>        
+            WHERE
+        userid = #{userid}
+    </update>
+</mapper>

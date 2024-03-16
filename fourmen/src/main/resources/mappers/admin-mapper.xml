@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- POSTS 테이블에서 CRUD에 필요한 SQL 문장들을 선언 -->
+<mapper namespace = "com.itwill.fourmen.repository.AdminUserDao">
+	
+	<select id="adminuserlist" resultType="User" parameterType="com.itwill.fourmen.board.Criteria">
+
+        SELECT  USERID, PASSWORD, NAME, NICKNAME, PHONE, EMAIL, GRADE, PROFILE_O_IMG, PROFILE_S_IMG
+
+         FROM ( 
+
+                SELECT USERID, 
+
+                       PASSWORD, 
+
+                       NAME, 
+
+                       NICKNAME, 
+
+                       PHONE, 
+
+                       EMAIL,
+                       
+                       GRADE,
+                       
+                       PROFILE_O_IMG,
+                       
+                       PROFILE_S_IMG,
+
+                       ROW_NUMBER() OVER(ORDER BY USERID) AS RNUM
+
+                 from USERS 
+                 
+                 where 1=1
+                 <include refid="search"></include>
+
+                               ) MP
+
+        WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
+
+        ORDER BY USERID
+
+    </select>
+
+
+    
+
+    <select id="listCount" resultType="int">
+  
+
+        SELECT COUNT(USERID)
+
+          FROM USERS
+		where 1=1
+         <include refid="search"></include>
+
+    </select>
+    
+    <sql id="search">
+		<if test="category != null">
+			<if test="category == 'userid'.toString()">AND USERID LIKE '%' || #{keyword} || '%'</if>
+			<if test="category == 'name'.toString()">AND NAME LIKE '%' || #{keyword} || '%'</if>
+			<if test="category == 'nickname'.toString()">AND NICKNAME LIKE '%' || #{keyword} || '%'</if>
+			<if test="category == 'phone'.toString()">AND PHONE LIKE '%' || #{keyword} || '%'</if>
+			<if test="category == 'email'.toString()">AND EMAIL LIKE '%' || #{keyword} || '%'</if>
+			<if test="category == 'grade'.toString()">AND GRADE LIKE '%' || #{keyword} || '%'</if>
+		</if>
+
+		
+	</sql>
+	
+	<insert id="userUpdate">
+		update USERS set NAME = #{name}, NICKNAME = #{nickname}, PHONE = #{phone}, EMAIL = #{email}, GRADE = #{grade}
+		where USERID = #{userid} 
+	</insert>
+	
+	<select id="selectById" resultType="USER">
+		select * from USERS where USERID = #{userid}
+	</select>
+	
+	<delete id="userdelete">
+		delete from USERS where USERID = #{userid}
+	</delete>
+	
+	<select id="Exhibitonadmin" resultType="Exhibition" parameterType="com.itwill.fourmen.board.Criteria">
+
+        SELECT  ID, NAME, LOCATION, STARTDATE, ENDDATE, PHOTO, SITE
+
+         FROM ( 
+
+                SELECT ID, 
+
+                       NAME, 
+
+                       LOCATION, 
+
+                       STARTDATE, 
+
+                       ENDDATE, 
+
+                       PHOTO,
+                       
+                       SITE,
+
+                       ROW_NUMBER() OVER(ORDER BY STARTDATE) AS RNUM
+
+                 from TEST 
+                 
+                 where 1=1
+                 <include refid="ExhibitionadminSearch"></include>
+
+                               ) MP
+
+        WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
+
+        ORDER BY ID
+
+    </select>
+
+
+    
+
+    <select id="ExhibitionadminlistCount" resultType="int">
+  
+
+        SELECT COUNT(ID)
+
+          FROM TEST
+		where 1=1
+         <include refid="ExhibitionadminSearch"></include>
+
+    </select>
+    
+    <sql id="ExhibitionadminSearch">
+		<if test="category != null">
+			<if test="category == 'name'.toString()">AND NAME LIKE '%' || #{keyword} || '%'</if>
+			<if test="category == 'location'.toString()">AND LOCATION LIKE '%' || #{keyword} || '%'</if>
+		</if>
+		<if test="startdate != '' and enddate != ''">
+		 and STARTDATE between #{startdate} and #{enddate} or #{startdate} between STARTDATE and ENDDATE
+		</if>
+		<if test="category != null and startdate != '' and enddate != ''">
+		 and STARTDATE between #{startdate} and #{enddate} or #{startdate} between STARTDATE and ENDDATE
+		 <if test="category == 'name'.toString()">AND NAME LIKE '%' || #{keyword} || '%'</if>
+		 <if test="category == 'location'.toString()">AND LOCATION LIKE '%' || #{keyword} || '%'</if>
+		</if>
+		
+	</sql>
+	
+	<delete id="Exhibitiondelete">
+		delete from TEST where NAME = #{name}
+	</delete>
+	
+
+	
+    <insert id = "Exhibitionplus">
+		insert into TEST (NAME, LOCATION, STARTDATE, ENDDATE, PHOTO, SITE) values (#{name}, #{location}, #{startdate}, #{enddate}, #{photo}, #{site})
+	</insert>
+  
+   <!-- marketadmin -->
+    <select id="getWorkId" resultType="long">
+        SELECT max(worksid) FROM market
+    </select>
+    
+    <select id="readPagedMarketPosts" resultType="Market">
+        SELECT *
+        FROM market
+        ORDER BY worksid DESC
+        OFFSET #{ startingPost } ROWS FETCH NEXT #{ postsPerPage } ROWS ONLY
+    </select>
+    
+    <select id="countTotNumber" resultType="Integer">
+        SELECT count(*)
+        FROM market
+    </select>
+    
+        <select id="readMarketPosts" resultType="Market">
+        SELECT * FROM market ORDER BY worksid DESC
+    </select>
+    
+    <select id="readMarketPost" resultType="Market">
+        SELECT * FROM market WHERE worksid = #{ workId }
+    </select>
+    
+    <select id="readPopularMarketPosts" resultType="Market">
+        SELECT *
+        FROM (
+            SELECT *
+            FROM market
+            ORDER BY (views + 10 * likes) DESC
+        )
+        
+    </select>
+    
+    
+    <select id="readWorkImagesofPost" resultType="WorkImage">
+        SELECT * FROM images WHERE worksid= #{workId} AND category = 'market'
+    </select>
+    
+     <select id="searchPosts" resultType="Market">
+        SELECT *
+        FROM market
+        <where>
+            <if test="!keyword.equals('') and keyword != null">
+                <choose>
+                    <when test="searchCategory.equals('title')">
+                        title LIKE '%'||#{ keyword }||'%'
+                    </when>
+                    <when test="searchCategory.equals('content')">
+                        description_kor LIKE '%'||#{ keyword }||'%'
+                    </when>
+                    <when test="searchCategory.equals('userId')">
+                        userid LIKE '%'||#{ keyword }||'%'
+                    </when>
+                    <when test="searchCategory.equals('titleContent')">
+                        (title LIKE '%'||#{ keyword }||'%'
+                        OR description_kor LIKE '%'||#{ keyword }||'%')
+                    </when>
+                    <when test="searchCategory.equals('titleContentUserId')">
+                        (title LIKE '%'||#{ keyword }||'%'
+                        OR description_kor LIKE '%'||#{ keyword }||'%'
+                        OR userid LIKE '%'||#{ keyword }||'%')
+                    </when>
+                    <otherwise>
+                        title LIKE '%'||#{ keyword }||'%'
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="!minPrice.equals('') and minPrice != null">
+                AND PRICE &gt;= #{ minPrice } 
+            </if>
+            <if test="!maxPrice.equals('') and maxPrice != null">
+                AND PRICE &lt;= #{ maxPrice }
+            </if>
+        </where>
+        ORDER BY worksid DESC
+        OFFSET #{ startingPost } ROWS FETCH NEXT #{ postsPerPage } ROWS ONLY
+    </select>
+    
+    
+    <select id="searchCountTotNumber" resultType="Integer">
+        SELECT count(*)
+        FROM market
+        <where>
+            <if test="!keyword.equals('')">
+                <choose>
+                    <when test="searchCategory.equals('title')">
+                        title LIKE '%'||#{ keyword }||'%'
+                    </when>
+                    <when test="searchCategory.equals('content')">
+                        description_kor LIKE '%'||#{ keyword }||'%'
+                    </when>
+                    <when test="searchCategory.equals('userId')">
+                        userid LIKE '%'||#{ keyword }||'%'
+                    </when>
+                    <when test="searchCategory.equals('titleContent')">
+                        (title LIKE '%'||#{ keyword }||'%'
+                        OR description_kor LIKE '%'||#{ keyword }||'%')
+                    </when>
+                    <when test="searchCategory.equals('titleContentUserId')">
+                        (title LIKE '%'||#{ keyword }||'%'
+                        OR description_kor LIKE '%'||#{ keyword }||'%'
+                        OR userid LIKE '%'||#{ keyword }||'%')
+                    </when>
+                    <otherwise>
+                        title LIKE '%'||#{ keyword }||'%'
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="!minPrice.equals('')">
+                AND PRICE &gt;= #{ minPrice } 
+            </if>
+            <if test="!maxPrice.equals('')">
+                AND PRICE &lt;= #{ maxPrice }
+            </if>
+        </where>
+    </select>
+    
+       <select id="readImage" resultType="WorkImage">
+        SELECT * FROM images WHERE imgid = #{ imgId }
+    </select>
+    
+       <select id="readWishList" resultType="Integer">
+        SELECT count(*)
+        FROM wishlist
+        WHERE userid = #{userId} AND workid = #{workId}
+    </select>
+    
+    <select id="readWishListOfUser" resultType="WishList">
+        SELECT *
+        FROM wishlist
+        WHERE userid = #{ signedInUser }
+        ORDER BY id DESC
+    </select>
+    
+    <delete id="Marketdelete">
+        DELETE FROM market WHERE title = #{ title }
+    </delete>
+	
+</mapper>

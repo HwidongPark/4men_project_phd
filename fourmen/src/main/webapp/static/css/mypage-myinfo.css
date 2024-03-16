@@ -1,0 +1,31 @@
+@charset "UTF-8";
+
+.myinfo-info-photo-container{    
+    margin: 2rem auto;
+    padding: 2rem;    
+}
+
+.myinfo-not-modifiable {
+    background-color: #ced4da;
+}
+
+
+.myinfo-profile-image-container {
+    width: 75%;
+    margin: auto auto;   
+}
+
+.myinfo-profile-image {
+    width: 100%;
+}
+
+.mypage-info-buttons-container {
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+b {
+    font-weight: 700;
+    font-size: 1.3rem;
+}
