@@ -63,6 +63,12 @@ document.addEventListener('DOMContentLoaded', function() {
         
         limitNumberLength(15, myInfoPhone, event);
         
+        if (isNaN(event.data)) {
+            if (isNaN(myInfoPhone.value.slice(-1))) {                
+                myInfoPhone.value = myInfoPhone.value.slice(0, (myInfoPhone.value.length - 1));
+            }
+        }
+        
     });
     
     

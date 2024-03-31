@@ -12,7 +12,7 @@ public class MyInfoUpdateDto {
 
 	private String userid;
 	private String nickname;
-	private Long phone;
+	private String phone;
 	private String email;
 	private String password;
 	private String newPassword;

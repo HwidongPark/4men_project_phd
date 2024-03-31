@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const extension = files.value.substring(files.value.lastIndexOf('.'));
         
         // 이미지 파일이 아닌 경우 파일입력 못하도록 막음
-        if (extension != '.apng' && extension != '.gif' && extension != '.ico' && extension != '.cur' && extension != '.jpg'
+        if (extension != '.avif' && extension != '.apng' && extension != '.gif' && extension != '.ico' && extension != '.cur' && extension != '.jpg'
             && extension != '.jpeg' && extension != '.jfif' && extension != '.pjpeg' && extension != '.pjp' && extension != '.png' && extension != '.svg' && extension != '') {
                 
             alert('이미지 파일만 추가할 수 있습니다.');
@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const extension = newFileInput.value.substring(newFileInput.value.lastIndexOf('.'));
                 
                 // 이미지 파일이 아닌 경우 파일입력 못하도록 막음
-                if (extension != '.apng' && extension != '.gif' && extension != '.ico' && extension != '.cur' && extension != '.jpg'
+                if (extension != '.avif' && extension != '.apng' && extension != '.gif' && extension != '.ico' && extension != '.cur' && extension != '.jpg'
                     && extension != '.jpeg' && extension != '.jfif' && extension != '.pjpeg' && extension != '.pjp' && extension != '.png' && extension != '.svg' && extension != '' ) {
                         
                     alert('이미지 파일만 추가할 수 있습니다.');

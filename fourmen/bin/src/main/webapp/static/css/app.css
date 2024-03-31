@@ -1,0 +1,184 @@
+/* CSS초기화 */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+
+/* 내가 원하는 설정들 설정하기 */
+h1 {
+    font-size: 3rem;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+
+/* 이 밑부터 진짜 CSS시작 */
+/* 캐로셀에 관한 css */
+#carousel {
+    margin: 0 auto;
+    max-height: 40rem;
+    background-size: cover;
+}
+
+.carousel-img-size {
+    max-height: 40rem;
+}
+
+
+/* 검색에 관한 css */
+#search-form {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    margin: 3rem auto;
+}
+
+#search-form select {
+    width: 10%;
+    border-radius: 0.5em;
+}
+
+#search-keyword {
+    width: 35%;
+    margin: 0 0.5em;
+    margin-right: 0.8em;
+    height: 100%;
+    border-radius: 0.5em;
+}
+
+#btnSearch {
+    background-color: transparent;
+    border: none
+}
+
+
+/* 메인 바디 CSS */
+.main-content {
+    width: 75%;
+    margin: 0 auto;
+}
+
+
+/* 훈련과정 */
+.sample-trainings {
+    margin-bottom: 1em;
+}
+
+/* 간략 자유게시판 취업게시판*/
+.forum-container {
+    margin: 3rem 0 0 0;
+    width: 100%;
+    display:flex;
+    justify-content: space-evenly;
+    flex-wrap: nowrap;
+    border: 0.8px solid lightgrey;
+    border-radius: 1em;
+}
+
+.forum-subcontainer {
+    width: 45%;
+    margin: 1em 0;
+    overflow: hidden;
+}
+
+.link-to-board {
+    color: black;
+    text-decoration: none;
+}
+
+.forum-sample-list {
+    overflow: hidden;
+    list-style-type: circle;
+}
+
+.forum-sample-list a {
+    display: inline-block;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.forum-text {
+    margin-bottom: 1rem;
+    width: 70%;
+    padding-bottom: 0.3em;
+    border-bottom: 0.5px solid #003459;
+}
+
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+
+    /* 서치버튼과 캐러샐 간격 조정 */
+    #search-form select {
+        width: auto;
+        font-size: 0.5em;
+    }
+    
+    #search-form {
+        margin: 2rem;
+        font-size:0.8em;
+    }
+
+    /* 훈련과정 h2폰트 사이즈 줄임 */
+    .sample-trainings {
+        font-size: 1.5em;
+    }
+    
+
+    /* 게시물들 한 행당 한 칼럼으로 정리 */
+    .forum-container {
+        flex-direction: column;
+    }
+
+    .forum-subcontainer {
+        width: 100%;
+    }
+
+    .forum-text {
+        font-size: 1.5em;
+    }
+}

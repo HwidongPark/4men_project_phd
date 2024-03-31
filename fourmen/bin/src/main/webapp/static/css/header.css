@@ -1,0 +1,378 @@
+/* CSS 초기화 */
+
+.fontnav{
+	font-family:'EF_Rebecca';
+}
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+}
+
+/* HTML5 display-role reset for older browsers (CSS 초기화) */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* 이 밑부터 진짜 CSS */
+/* ***** nav를 포함한 해더. (부트스트랩X)***** */
+body {
+    overflow-x: hidden;
+}
+
+
+.header-nav {
+    display: flex;
+    align-items: center;
+    background-color: rgb(255, 255, 255);
+    border-bottom: 2px #BDBDBD solid;
+    border-top: 2px #BDBDBD solid;
+    padding-top: 0.4rem;
+    padding-bottom: 0.3rem;
+}
+
+/* nav 아이템들 중앙 정렬 시킴 */
+.header-right-container {
+    flex: 1;
+}
+
+/* collapse 버튼 */
+.nav-collapse-btn {
+    display: none;
+    border: none;
+    background-color: transparent;
+}
+
+/* 로고 이미지 */
+.logo {
+    text-decoration: none;
+    color: black;
+    width: 250px;
+    height: 55px;
+    padding-left: 17px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    margin-top: 1px;
+    margin-bottom: 1px;
+}
+
+/* nav 메뉴 관련 클래스 */
+.nav-btn-lists {
+    display: flex;  
+    justify-content: center;
+    flex-wrap: nowrap;
+}
+
+/* 메뉴 관련 */
+/* 헤더 메뉴 부분 */
+.nav-each-btn-list {
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+}
+
+.nav-each-btn-list a {
+    display: inline-block;
+    font-size: 1.225rem;
+    padding-left: 0.7rem;
+    padding-right: 0.7rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    text-decoration: none;
+    color: #424242;
+    margin-left: 12px;
+    margin-right: 12px;
+}
+
+.nav-each-btn-list a:hover {
+    display: inline-block;
+    font-weight: bold;
+    font-size: 117%;
+    padding-left: 0.7rem;
+    padding-right: 0.7rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    text-decoration: none;
+    color: black;
+    margin-left: 12px;
+    margin-right: 12px;
+}
+
+.nav-each-btn-list a:focus {
+    display: inline-block;
+    font-weight: bold;
+    font-size: 117%;
+    padding-left: 0.7rem;
+    padding-right: 0.7rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    text-decoration: none;
+    color: black;
+    margin-left: 12px;
+    margin-right: 12px;
+}
+
+.nav-each-btn-list a:active {
+    display: inline-block;
+    font-weight: bold;
+    font-size: 117%;
+    padding-left: 0.7rem;
+    padding-right: 0.7rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    text-decoration: none;
+    color: black;
+    margin-left: 12px;
+    margin-right: 12px;
+}
+
+/*
+.nav-each-btn-list a:hover {
+    display: inline-block;
+    font-size: 1.205rem;
+    padding-left: 0.7rem;
+    padding-right: 0.7rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    text-decoration: none;
+    color: black;
+    margin-left: 12px;
+    margin-right: 12px;
+    text-decoration: underline solid 2.85px;
+    text-underline-offset: 1.495rem;
+    font-weight: bold;
+}
+
+.nav-each-btn-list a:focus {
+    display: inline-block;
+    font-size: 1.205rem;
+    padding-left: 0.7rem;
+    padding-right: 0.7rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    text-decoration: none;
+    color: black;
+    margin-left: 12px;
+    margin-right: 12px;
+    text-decoration: underline solid 2.85px;
+    text-underline-offset: 1.495rem;
+    font-weight: bold;
+}
+
+.nav-each-btn-list a:active {
+    display: inline-block;
+    font-size: 1.205rem;
+    padding-left: 0.7rem;
+    padding-right: 0.7rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    text-decoration: none;
+    color: black;
+    margin-left: 12px;
+    margin-right: 12px;
+    text-decoration: underline solid 2.85px;
+    text-underline-offset: 1.495rem;
+    font-weight: bold;
+}
+*/
+
+/* ** 가상 요소 사용 **
+.nav-each-btn-list a:hover::after {
+    height: 0.17rem;
+    position: absolute;
+    left: 0;
+    bottom: -0.65rem;
+    width: 100%;
+    background: black;
+    content: '';
+}
+
+.nav-each-btn-list a:focus::after {
+    height: 0.17rem;
+    position: absolute;
+    left: 0;
+    bottom: -0.65rem;
+    width: 100%;
+    background: black;
+    content: '';
+}
+
+.nav-each-btn-list a:active::after {
+    height: 0.17rem;
+    position: absolute;
+    left: 0;
+    bottom: -0.65rem;
+    width: 100%;
+    background: black;
+    content: '';
+}
+*/
+
+/* 회원 정보 관련 부분(로그인, 회원가입, 로그아웃, 마이페이지, 공지사항) */
+.nav-btn-users {
+    display: flex;
+    justify-content: right;
+    flex-wrap: nowrap;
+    padding-right: 20px;
+}
+
+
+.nav-each-btn-user a {
+    display: inline-block;
+    font-size: 0.875rem;
+    padding: 0.7rem;
+    text-decoration: none;
+    color: #424242;
+}
+
+.nav-button-user:hover {
+    font-size: 0.845rem;
+    font-weight: bold;
+    color: black;
+}
+
+
+/* 내정보 사이드바 관련 */
+#my-page-username {
+    padding: 16px;
+}
+
+.my-page-close {
+    visibility: hidden;
+    position: absolute;
+    /* width: 0px; */
+    text-align: right;
+    right: 0;
+    transform: translateX(100%);
+    height: 100%;
+    transition: all 1s;
+    z-index: 999; /* 다른 요소들보다 위에 표시 */
+}
+
+.my-page-open {
+    visibility: visible;
+    position: absolute;
+    
+    right: 0;
+    text-align: right;
+    font-weight: 800;
+    transform: translateX(0);
+    transition: all 1s;
+    color: white;
+    width: auto;
+    height: 100%;
+    transition: all 1s;    
+    background-color: rgb(0, 0, 0);
+    z-index: 999; /* 다른 요소들보다 위에 표시 */
+}
+
+.my-page-list-item {
+    padding: 20px;
+    border: 2px solid white;
+    text-align: center;
+}
+
+.my-page-list-item a {
+    text-decoration: none;
+    color: white;
+}
+
+/* 미디어 쿼리 */
+@media only screen and (max-width: 768px) {
+    /* 여기에 반응형 스타일 추가 */
+    .header-nav {
+        flex-direction: column;
+        align-items: start;
+        height: auto;
+    }
+
+	
+	.logo {
+		display:inline-block;
+		height: 3.5rem;
+		display: block;
+		position: relative;
+		left: -16px;
+	}
+	
+    .logo img{
+		object-fit: contain;
+		display: block;
+	}
+    
+    .nav-collapse-btn {
+        display: block;
+        position: absolute;
+        right: 10px;
+        top: 3.7rem;
+        
+    }
+    
+    .header-list-container {
+		width: 100%;
+	}
+    
+    .nav-btn-lists {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+    
+    /* 토글버튼 누를 시 nav-items 보여줌 */
+    .nav-lists-hide {
+		display: none;
+	}
+    
+    .nav-each-btn-list a {
+        padding: 0.5rem;
+        font-size: 0.8rem;
+    }
+    
+    .nav-each-btn-list a:hover {
+        font-size: 1rem;
+
+    }
+
+    .nav-btn-users {
+        justify-content: center;
+    }
+    
+    .nav-each-btn-user {
+		font-size: 0.8rem;
+	}
+    
+}

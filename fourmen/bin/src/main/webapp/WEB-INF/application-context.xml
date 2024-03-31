@@ -40,5 +40,10 @@
             value="classpath:mybatis-config.xml" />
         <!-- '/**' 는 하위 폴더가 몇 개 인지 상관 안한다 -->
     </bean>
+    
+    
+
+	<context:component-scan base-package="com.itwill.fourmen.service"/>
+	<mybatis:scan base-package="com.itwill.fourmen.repository"/>
 
 </beans>

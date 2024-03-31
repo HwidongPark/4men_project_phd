@@ -1,0 +1,69 @@
+@charset "UTF-8";
+/* forum-kategorie-area.css */
+/* 게시판 카테고리에 관한 css (자유게시판, QNA, FAQ, NOTICE) */
+
+.forum-kategorie .forum-kategorie-board-lists .forum-kategorie-board {
+    display: inline-block;
+}
+
+.forum-kategorie .forum-kategorie-board-lists .forum-kategorie-board a {
+    position: relative;
+    text-decoration: none;
+    font-size: 1.175rem;
+    padding: 0.8rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    color: black;
+}
+
+.forum-kategorie .forum-kategorie-board-lists .forum-kategorie-board a:hover {
+    font-size: 1.175rem;
+    color: black;
+    font-weight: bold;
+}
+
+.forum-kategorie .forum-kategorie-board-lists .forum-kategorie-board a:focus {
+    font-size: 1.175rem;
+    color: black;
+    font-weight: bold;
+}
+
+.forum-kategorie .forum-kategorie-board-lists .forum-kategorie-board a:active {
+    font-size: 1.175rem;
+    color: black;
+    font-weight: bold;
+}
+
+/* ** 가상 요소 사용 **
+.forum-kategorie .forum-kategorie-board-lists .forum-kategorie-board a:focus::after {
+    position: absolute;
+    align-items: center;
+    bottom: -0.01rem;
+    left: 0;
+    width: 100%;
+    height: 0.15rem;
+    background: black;
+    content: '';
+}
+
+.forum-kategorie .forum-kategorie-board-lists .forum-kategorie-board a:hover::after {
+    position: absolute;
+    align-items: center;
+    bottom: -0.08rem;
+    left: 0;
+    width: 100%;
+    height: 0.15rem;
+    background: black;
+    content: '';
+}
+*/
+
+.forum-kategorie .forum-kategorie-board-lists {
+    position: relative;
+    display: table;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    padding-top: 3rem;
+    padding-bottom: 1rem;
+}

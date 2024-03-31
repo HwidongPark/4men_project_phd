@@ -37,15 +37,17 @@
                     <li class="forum-kategorie-board">
                         <b><a href="/fourmen/mypage/myinfo">내 정보 보기/수정</a></b>
                     </li>
-                    <li class="forum-kategorie-board">
-                        <a href="/fourmen/mypage/mywork">내 작품 보기</a>
-                    </li>
-                    <li class="forum-kategorie-board">
-                        <a href="/fourmen/mypage/mymarket">마켓 작성글 보기</a>
-                    </li>
-                    <!--  <li class="forum-kategorie-board">
-                        <a href="#">게시판 작성글 보기</a>
-                    </li>-->
+                    <c:if test="${ user.grade == '아티스트' }">
+                        <li class="forum-kategorie-board">
+                            <a href="/fourmen/mypage/mywork">내 작품 보기</a>
+                        </li>
+                        <li class="forum-kategorie-board">
+                            <a href="/fourmen/mypage/mymarket">마켓 작성글 보기</a>
+                        </li>
+                        <!--  <li class="forum-kategorie-board">
+                            <a href="#">게시판 작성글 보기</a>
+                        </li>-->
+                    </c:if>
                 </ul>
             </div>
         </section>
@@ -65,7 +67,7 @@
                                 <label class="mb-1">닉네임</label>
                                 <input name="nickname" value="${ user.nickname }" class="form-control mb-2" maxlength="50">
                                 <label class="mb-1">전화번호</label>
-                                <input id="myinfo-phone" name="phone" type="number" value="${ user.phone }" class="form-control mb-2">
+                                <input id="myinfo-phone" name="phone" type="text" value="${ user.phone }" class="form-control mb-2">
                                 <label class="mb-1">이메일</label>
                                 <input name="email" type="email" value="${ user.email }" class="form-control mb-2" maxlength="33">
                                 <label class="mb-1">비밀번호</label>

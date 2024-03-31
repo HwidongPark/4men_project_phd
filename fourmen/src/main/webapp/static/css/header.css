@@ -249,6 +249,10 @@ body {
     padding-right: 20px;
 }
 
+.nav-each-btn-user {
+    display: flex;
+    align-items: center;
+}
 
 .nav-each-btn-user a {
     display: inline-block;
@@ -374,5 +378,18 @@ body {
     .nav-each-btn-user {
 		font-size: 0.8rem;
 	}
+    
+}
+
+
+@media only screen and (max-width: 380px) {
+    
+    .nav-btn-users {
+        font-size: 0.3rem;
+    }
+    
+    .nav-each-btn-user a {
+        font-size: 0.6rem;
+    }
     
 }

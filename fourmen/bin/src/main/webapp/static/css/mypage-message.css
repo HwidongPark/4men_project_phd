@@ -1,0 +1,35 @@
+@charset "UTF-8";
+
+.mymessage-image-container {
+    width: auto;
+    height: 56px;
+    margin: 0;
+}
+
+.mymessage-image-container img {
+    height: 100%;
+    
+}
+
+
+.mymessage-title:hover {
+    color: #adb5bd;
+    cursor: pointer;
+}
+
+.deal-completed {
+    color: red;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.deal-sold-by-another {
+    color: blue;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+b {
+  font-weight: 700;
+  font-size: 1.3rem;
+}

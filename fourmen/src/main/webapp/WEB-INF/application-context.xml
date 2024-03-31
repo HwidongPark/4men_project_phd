@@ -17,8 +17,8 @@
             value="oracle.jdbc.OracleDriver" />
         <property name="jdbcUrl"
             value="jdbc:oracle:thin:@localhost:1521:xe" />
-        <property name="username" value="scott" />
-        <property name="password" value="tiger" />
+        <property name="username" value="artistArchive" />
+        <property name="password" value="artistArchive" />
     </bean>
 
     <!-- HikariDataSource 객체(bean) 생성을 위한 설정 -->

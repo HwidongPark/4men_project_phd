@@ -1,0 +1,39 @@
+@charset "UTF-8";
+/* underheader.css */
+/* header 아래에 각 페이지들에 공통으로 들어가는 부분의 스타일을 작성한 css */
+
+h2.commondesign {
+    position: absolute;
+    font-weight: 300;
+    font-size: 3.0rem;
+    color: #6E6E6E;
+    margin-left: 5rem;
+    padding: 0;
+}
+
+h2.commondesign::before {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: -19.5in;
+    margin-top: 0.0625rem;
+    width: 19.125in;
+    height: 2.7px;
+    background: #848484;
+    content: '';
+}
+
+#underheader-div {
+    padding: 3.75rem 0 3.75rem 0;
+}
+
+@font-face {
+    font-family: 'EF_Rebecca';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-EF@1.0/EF_Rebecca.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.commondesign, .bigname{
+	font-family: 'EF_Rebecca';
+}
